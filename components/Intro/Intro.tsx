@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 
-import Background from "./Background";
 import WelcomeBox from "./WelcomeBox";
 
 export default function Intro() {
@@ -10,6 +9,7 @@ export default function Intro() {
   const [showWelcomeBox, setShowWelcomeBox] = useState(false);
   const [showThisSpace, setShowThisSpace] = useState(false);
   const [hideWelcomeBox, setHideWelcomeBox] = useState(false);
+  const [hideThisSpace, setHideThisSpace] = useState(false);
 
   const WelcomeBoxMessage = [
     { message: "Welcome", left: "28%", top: "32%" },
@@ -26,26 +26,41 @@ export default function Intro() {
   ];
 
   useEffect(() => {
+    // Show 'Hello!'
     const showHelloTimer = setTimeout(() => {
       setShowHello(true);
     }, 1000);
 
+    // Show Welcome Box messages
     const showWelcomeBoxTimer = setTimeout(() => {
       setShowWelcomeBox(true);
     }, 2500);
 
+    // Fix Welcome Box positions and transform
     const hideWelcomeBox = setTimeout(() => {
       setHideWelcomeBox(true);
     }, 5000);
 
+    // Hide 'Hello!' and Welcome Box
     const hideHelloWelcomeBoxTimer = setTimeout(() => {
       setShowHello(false);
       setShowWelcomeBox(false);
     }, 5300);
 
+    // Show 'This is my space.'
     const showThisSpaceTimer = setTimeout(() => {
       setShowThisSpace(true);
     }, 5500);
+
+    // Fix 'This is my space.' position
+    const hideThisSpaceTimer1 = setTimeout(() => {
+      setHideThisSpace(true);
+    }, 7700);
+
+    // Hide 'This is my space.'
+    const hideThisSpaceTimer2 = setTimeout(() => {
+      setShowThisSpace(false);
+    }, 8000);
 
     return () => {
       clearTimeout(showHelloTimer);
@@ -53,12 +68,13 @@ export default function Intro() {
       clearTimeout(hideWelcomeBox);
       clearTimeout(hideHelloWelcomeBoxTimer);
       clearTimeout(showThisSpaceTimer);
+      clearTimeout(hideThisSpaceTimer1);
+      clearTimeout(hideThisSpaceTimer2);
     };
   }, []);
 
   return (
-    <div className="w-screen h-screen relative">
-      <Background />
+    <div className="w-screen h-screen absolute top-0 left-0">
       <h1 className={`introText ${showHello ? "opacity-100" : "opacity-0"}`}>
         HELLO!
       </h1>
@@ -84,7 +100,7 @@ export default function Intro() {
       <h1
         className={`introText`}
         style={{
-          top: showThisSpace ? "50%" : "45%",
+          top: showThisSpace || hideThisSpace ? "50%" : "45%",
           transition: "top 0.5s ease-in-out, opacity 0.5s ease-in-out",
           opacity: showThisSpace ? 1 : 0,
         }}
