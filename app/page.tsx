@@ -38,7 +38,7 @@ export default function MainPage() {
           opacity: showContents ? 1 : 0,
         }}
       >
-        <div className="h-full w-full absolute top-0 items-center flex gap-6 justify-center xl:gap-8">
+        <div className="h-full w-full absolute top-0 items-center flex gap-5 justify-center xl:gap-8">
           <ProjectCard project={project} />
           <ProjectCard project={project} />
           <ProjectCard project={project} focus={true} />
