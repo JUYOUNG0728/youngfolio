@@ -45,7 +45,9 @@ export default function MainPage() {
           <ProjectCard project={project} />
           <ProjectCard project={project} />
         </div>
-        <SoundButton soundOn={soundOn} setSoundOn={setSoundOn} />
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
+          <SoundButton soundOn={soundOn} setSoundOn={setSoundOn} />
+        </div>
       </div>
     </div>
   );
