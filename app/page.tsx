@@ -3,11 +3,13 @@
 import Intro from "@/components/Intro/Intro";
 import Background from "@/components/Intro/Background";
 import ProjectCard from "@/components/Main/ProjectCard";
+import SoundButton from "@/components/Main/SoundButton";
 
 import { useEffect, useState } from "react";
 
 export default function MainPage() {
   const [showContents, setShowContents] = useState(false);
+  const [soundOn, setSoundOn] = useState(true);
 
   const project = {
     name: "제목이 들어갑니다.",
@@ -43,6 +45,7 @@ export default function MainPage() {
           <ProjectCard project={project} />
           <ProjectCard project={project} />
         </div>
+        <SoundButton soundOn={soundOn} setSoundOn={setSoundOn} />
       </div>
     </div>
   );

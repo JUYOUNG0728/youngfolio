@@ -13,8 +13,8 @@ export default function ProjectCard({
     : "w-[17%] h-[40%] px-8 py-8 opacity-40 xl:px-10 xl:py-10";
 
   const textClass = focus
-    ? { title: "h4 mb-4 xl:mb-6", body: "body4" }
-    : { title: "h5 mb-3 xl:mb-4", body: "body5" };
+    ? { title: "h4 mb-4 xl:mb-6", body: "body5" }
+    : { title: "h5 mb-3 xl:mb-4", body: "body6" };
 
   const backgroundStyle = focus
     ? undefined
