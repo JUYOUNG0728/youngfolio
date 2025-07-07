@@ -107,11 +107,24 @@
   }
 
   .h4 {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     font-weight: 700;
+
+    @media (max-width: 1920px) {
+      font-size: 1.875rem;
+    }
   }
 
   .h5 {
+    font-size: 1.875rem;
+    font-weight: 700;
+
+    @media (max-width: 1920px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .h6 {
     font-size: 1.25rem;
     font-weight: 600;
   }
@@ -136,16 +149,20 @@
   }
 
   .body4 {
-    font-size: 1.3rem;
+    font-size: 1rem;
 
     @media (max-width: 1920px) {
-      font-size: 1rem;
+      font-size: 0.75rem;
     }
   }
 
   .body5 {
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 400;
+
+    @media (max-width: 1920px) {
+      font-size: 0.625rem;
+    }
   }
 
   .footer {
