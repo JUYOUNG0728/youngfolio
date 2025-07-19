@@ -10,7 +10,7 @@ export default function SoundButton({
   soundOn: boolean;
   setSoundOn: (soundOn: boolean) => void;
 }) {
-  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState<number>(0);
 
   useEffect(() => {
     const handleResize = () => {
