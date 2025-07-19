@@ -48,7 +48,7 @@ export default function Menu({
         </div>
       </div>
       <div
-        className="absolute bottom-12 left-[60px] flex fade-up gap-6 xl:gap-8"
+        className="absolute bottom-12 left-[60px] flex fade-up gap-7 xl:gap-8"
         style={{ animationDelay: "0.6s" }}
       >
         <Image
