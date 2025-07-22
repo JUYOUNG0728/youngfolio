@@ -1,26 +1,50 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Menu({
   setIsMenuOpen,
 }: {
   setIsMenuOpen: (open: boolean) => void;
 }) {
+  const router = useRouter();
+
   const menuItems = [
-    { id: "01", label: "Home" },
-    { id: "02", label: "About", submenu: ["Youngfolio", "About Creator"] },
-    { id: "03", label: "Contact", submenu: ["Information", "Inquiry"] },
+    { id: "01", label: "Home", href: "/" },
+    {
+      id: "02",
+      label: "About",
+      href: "/about/youngfolio",
+      submenu: [
+        { label: "Youngfolio", href: "/about/youngfolio" },
+        { label: "About Creator", href: "/about/creator" },
+      ],
+    },
+    {
+      id: "03",
+      label: "Contact",
+      href: "/contact",
+      submenu: [
+        { label: "Information", href: "/contact" },
+        { label: "Inquiry", href: "/contact#inquiry" },
+      ],
+    },
   ];
+
+  const handleNavigate = (href: string) => {
+    setIsMenuOpen(false);
+    router.push(href);
+  };
 
   return (
     <div className="bg-fade-in fixed inset-0">
       <div className="flex items-center justify-center h-full w-full">
-        <div className="flex gap-[300px] xl:gap-[420px]">
+        <div className="flex gap-[280px] xl:gap-[420px]">
           {menuItems.map((item, index) => (
             <div
               key={item.id}
               className="cursor-pointer fade-up"
               style={{ animationDelay: `${0.6 + index * 0.15}s` }}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => handleNavigate(item.href)}
             >
               <div className="flex gap-4 xl:gap-6">
                 <p className="body4 text-white opacity-40">{item.id}</p>
@@ -38,7 +62,7 @@ export default function Menu({
                         }s`,
                       }}
                     >
-                      {subItem}
+                      {subItem.label}
                     </p>
                   ))}
                 </div>
