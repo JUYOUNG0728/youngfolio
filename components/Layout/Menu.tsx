@@ -30,9 +30,19 @@ export default function Menu({
     },
   ];
 
+  const snsItems = [
+    { label: "GitHub", href: "https://github.com/JUYOUNG0728" },
+    { label: "Behance", href: "https://www.behance.net" },
+    { label: "Mail", href: "mailto: vilioite@naver.com" },
+  ];
+
   const handleNavigate = (href: string) => {
     setIsMenuOpen(false);
     router.push(href);
+  };
+
+  const handleSnsNavigate = (href: string) => {
+    window.open(href, "_blank");
   };
 
   return (
@@ -48,7 +58,9 @@ export default function Menu({
             >
               <div className="flex gap-4 xl:gap-6">
                 <p className="body4 text-white opacity-40">{item.id}</p>
-                <h1 className="menu relative top-[-14px]">{item.label}</h1>
+                <h1 className="menu relative top-[-10px] xl:top-[-12px]">
+                  {item.label}
+                </h1>
               </div>
               {item.submenu && (
                 <div className="flex flex-col gap-3 mt-8 relative opacity-70 xl:gap-5 left-[36px] xl:left-[48px]">
@@ -81,7 +93,8 @@ export default function Menu({
           width={20}
           height={20}
           className="cursor-pointer"
-          onClick={() => setIsMenuOpen(false)}
+          onClick={() => handleSnsNavigate(snsItems[0].href)}
+          priority
         />
         <Image
           src="/images/icon-behance.png"
@@ -89,7 +102,8 @@ export default function Menu({
           width={20}
           height={20}
           className="cursor-pointer"
-          onClick={() => setIsMenuOpen(false)}
+          onClick={() => handleSnsNavigate(snsItems[1].href)}
+          priority
         />
         <Image
           src="/images/icon-mail.png"
@@ -97,7 +111,8 @@ export default function Menu({
           width={20}
           height={20}
           className="cursor-pointer"
-          onClick={() => setIsMenuOpen(false)}
+          onClick={() => handleSnsNavigate(snsItems[2].href)}
+          priority
         />
       </div>
     </div>

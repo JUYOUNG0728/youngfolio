@@ -15,7 +15,13 @@ export default function Header() {
     <div>
       <div className="absolute z-50 top-0 px-[60px] w-full h-[110px]">
         <div className="flex items-center justify-between w-full h-full">
-          <Image src="/images/logo.svg" alt="Logo" width={158} height={25} />
+          <Image
+            src="/images/logo.svg"
+            alt="Logo"
+            width={158}
+            height={25}
+            priority
+          />
           {!isMenuOpen ? (
             <Image
               src="/images/icon-hamburger.png"
@@ -24,6 +30,7 @@ export default function Header() {
               height={28}
               className="cursor-pointer"
               onClick={toggleMenu}
+              priority
             />
           ) : (
             <Image
@@ -33,13 +40,16 @@ export default function Header() {
               height={28}
               className="cursor-pointer"
               onClick={() => setIsMenuOpen(false)}
+              priority
             />
           )}
         </div>
       </div>
-      <div className="fixed inset-0 z-40">
-        {isMenuOpen && <Menu setIsMenuOpen={setIsMenuOpen} />}
-      </div>
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-40">
+          <Menu setIsMenuOpen={setIsMenuOpen} />
+        </div>
+      )}
     </div>
   );
 }

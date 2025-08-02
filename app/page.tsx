@@ -5,12 +5,50 @@ import Background from "@/components/Intro/Background";
 import ProjectCard from "@/components/Main/ProjectCard";
 import SoundButton from "@/components/Main/SoundButton";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function MainPage() {
   const [showContents, setShowContents] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
   const [screenWidth, setScreenWidth] = useState<number>(0);
+  const [focusProject, setFocusProject] = useState<number>(2);
+
+  const project = {
+    name: "제목이 들어갑니다.",
+    description:
+      "간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다.",
+    image: "none",
+  };
+
+  const projects = Array(5).fill(project);
+
+  const dragStartX = useRef<number | null>(null);
+
+  const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    dragStartX.current = e.clientX; // 드래그 시작 위치 저장
+  };
+
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (dragStartX.current === null) return; // 드래그 시작 안 했으면 무시
+
+    const deltaX = e.clientX - dragStartX.current;
+
+    const threshold = 200; // 감도 조절: 200px 이상 이동 시에만 반응
+
+    if (deltaX > threshold) {
+      // 오른쪽으로 드래그
+      setFocusProject((prev) => (prev < projects.length - 1 ? prev + 1 : 0));
+      dragStartX.current = e.clientX; // 기준점 갱신해서 연속 드래그 시 덜 민감하게
+    } else if (deltaX < -threshold) {
+      // 왼쪽으로 드래그
+      setFocusProject((prev) => (prev > 0 ? prev - 1 : projects.length - 1));
+      dragStartX.current = e.clientX;
+    }
+  };
+
+  const onMouseUp = () => {
+    dragStartX.current = null; // 드래그 종료 시 초기화
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,13 +60,6 @@ export default function MainPage() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const project = {
-    name: "제목이 들어갑니다.",
-    description:
-      "간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다.",
-    image: "none",
-  };
 
   useEffect(() => {
     const showContentsTimer = setTimeout(() => {
@@ -48,17 +79,24 @@ export default function MainPage() {
         style={{
           transition: "opacity 0.5s ease-in-out",
           opacity: showContents ? 1 : 0,
+          pointerEvents: showContents ? "auto" : "none",
         }}
       >
         <p className="text-center body4 absolute top-[44px] left-1/2 -translate-x-1/2 text-white font-medium">
           2025 · Flexible, Creative, Innovative
         </p>
         <div className="h-full w-full absolute top-0 items-center flex gap-5 justify-center xl:gap-8">
-          <ProjectCard project={project} />
-          <ProjectCard project={project} />
-          <ProjectCard project={project} focus={true} />
-          <ProjectCard project={project} />
-          <ProjectCard project={project} />
+          {projects.map((_, index) => (
+            <ProjectCard
+              key={index}
+              project={project}
+              focus={focusProject === index}
+              onMouseDown={onMouseDown}
+              onMouseMove={onMouseMove}
+              onMouseUp={onMouseUp}
+              onClick={() => console.log("click")}
+            />
+          ))}
         </div>
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
           <SoundButton soundOn={soundOn} setSoundOn={setSoundOn} />

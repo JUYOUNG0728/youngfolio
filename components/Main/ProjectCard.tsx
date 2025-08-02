@@ -1,9 +1,17 @@
 export default function ProjectCard({
   project,
   focus = false,
+  onMouseDown,
+  onMouseMove,
+  onMouseUp,
+  onClick,
 }: {
   project: { name: string; description: string; image: string };
   focus?: boolean;
+  onMouseDown: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onMouseMove: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onMouseUp: () => void;
+  onClick?: () => void;
 }) {
   const baseClass =
     "bg-black shadow-lg rounded-xl flex flex-col justify-end text-white text-center";
@@ -16,6 +24,8 @@ export default function ProjectCard({
     ? { title: "h4 mb-4 xl:mb-6", body: "body5" }
     : { title: "h5 mb-3 xl:mb-4", body: "body6" };
 
+  const pointerClass = focus ? "cursor-pointer" : "cursor-default";
+
   const backgroundStyle = focus
     ? undefined
     : {
@@ -24,7 +34,14 @@ export default function ProjectCard({
       };
 
   return (
-    <div className={`${baseClass} ${sizeClass}`} style={backgroundStyle}>
+    <div
+      className={`${baseClass} ${sizeClass} ${pointerClass} select-none`}
+      style={backgroundStyle}
+      onMouseDown={onMouseDown}
+      onMouseMove={onMouseMove}
+      onMouseUp={onMouseUp}
+      onClick={focus ? onClick : undefined}
+    >
       <div>
         <h1 className={textClass.title}>{project.name}</h1>
         <p className={textClass.body}>{project.description}</p>
