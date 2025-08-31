@@ -25,29 +25,27 @@ export default function MainPage() {
   const dragStartX = useRef<number | null>(null);
 
   const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    dragStartX.current = e.clientX; // 드래그 시작 위치 저장
+    dragStartX.current = e.clientX;
   };
 
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (dragStartX.current === null) return; // 드래그 시작 안 했으면 무시
+    if (dragStartX.current === null) return;
 
     const deltaX = e.clientX - dragStartX.current;
 
-    const threshold = 200; // 감도 조절: 200px 이상 이동 시에만 반응
+    const threshold = 240;
 
     if (deltaX > threshold) {
-      // 오른쪽으로 드래그
       setFocusProject((prev) => (prev < projects.length - 1 ? prev + 1 : 0));
-      dragStartX.current = e.clientX; // 기준점 갱신해서 연속 드래그 시 덜 민감하게
+      dragStartX.current = e.clientX;
     } else if (deltaX < -threshold) {
-      // 왼쪽으로 드래그
       setFocusProject((prev) => (prev > 0 ? prev - 1 : projects.length - 1));
       dragStartX.current = e.clientX;
     }
   };
 
   const onMouseUp = () => {
-    dragStartX.current = null; // 드래그 종료 시 초기화
+    dragStartX.current = null;
   };
 
   useEffect(() => {

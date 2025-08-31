@@ -67,6 +67,10 @@ export default function Menu({
                   {item.submenu.map((subItem, subIndex) => (
                     <p
                       key={subIndex}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleNavigate(subItem.href);
+                      }}
                       className="subMenu text-white opacity-80 fade-up"
                       style={{
                         animationDelay: `${

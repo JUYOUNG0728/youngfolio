@@ -14,7 +14,7 @@ export default function ProjectCard({
   onClick?: () => void;
 }) {
   const baseClass =
-    "bg-black shadow-lg rounded-xl flex flex-col justify-end text-white text-center";
+    "bg-black shadow-lg rounded-xl flex flex-col justify-end text-white text-center transition-all ease-in-out duration-500";
 
   const sizeClass = focus
     ? "w-[21%] h-[50%] px-11 py-11 xl:px-14 xl:py-14"
