@@ -10,14 +10,21 @@ gsap.registerPlugin(ScrollTrigger);
 export default function CreatorPage() {
   const [screenWidth, setScreenWidth] = useState<number>(0);
 
-  const titleFontSize =
-    screenWidth > 740
-      ? `${(screenWidth - 120) / 7.65}px`
-      : screenWidth > 660
-      ? `${(screenWidth - 120) / 7.7}px`
-      : screenWidth > 540
-      ? `${(screenWidth - 120) / 7.8}px`
-      : `${(screenWidth - 120) / 7.9}px`;
+  const getNameFontSize = () => {
+    const baseSize = (screenWidth - 120) / 7.65;
+
+    if (screenWidth > 1200) {
+      return `${baseSize}px`;
+    } else if (screenWidth > 740) {
+      return `${baseSize * 0.995}px`;
+    } else if (screenWidth > 620) {
+      return `${baseSize * 0.99}px`;
+    } else if (screenWidth > 540) {
+      return `${baseSize * 0.98}px`;
+    } else {
+      return `${baseSize * 0.97}px`;
+    }
+  };
 
   const creatorImageSize =
     screenWidth < 1920
@@ -71,7 +78,7 @@ export default function CreatorPage() {
         >
           <h1
             className="font-extrabold whitespace-nowrap text-center"
-            style={{ fontSize: `${titleFontSize}` }}
+            style={{ fontSize: `${getNameFontSize()}` }}
           >
             CHOI JUYOUNG{" "}
           </h1>
