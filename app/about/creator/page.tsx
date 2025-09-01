@@ -10,6 +10,15 @@ gsap.registerPlugin(ScrollTrigger);
 export default function CreatorPage() {
   const [screenWidth, setScreenWidth] = useState<number>(0);
 
+  const titleFontSize =
+    screenWidth > 740
+      ? `${(screenWidth - 120) / 7.65}px`
+      : screenWidth > 660
+      ? `${(screenWidth - 120) / 7.7}px`
+      : screenWidth > 540
+      ? `${(screenWidth - 120) / 7.8}px`
+      : `${(screenWidth - 120) / 7.9}px`;
+
   const creatorImageSize =
     screenWidth < 1920
       ? { width: 1200, height: 1644 }
@@ -55,9 +64,16 @@ export default function CreatorPage() {
   return (
     <div className="w-full h-full">
       <div className="bg-gray-50 w-full h-full flex flex-col items-center justify-end text-white relative">
-        <div className="absolute top-8 h-[100%] xl:top-6">
-          <h1 className="text-[12.2vw] font-extrabold xl:text-[12.4vw]">
-            CHOI JUYOUNG
+        <div
+          className={`w-[${
+            screenWidth - 120
+          }px] absolute top-8 h-[100%] xl:top-6`}
+        >
+          <h1
+            className="font-extrabold whitespace-nowrap text-center"
+            style={{ fontSize: `${titleFontSize}` }}
+          >
+            CHOI JUYOUNG{" "}
           </h1>
           <div className="mx-2">
             <h2 className="body2 flex justify-end mt-[-10px]">
