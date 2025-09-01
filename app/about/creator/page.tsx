@@ -12,18 +12,10 @@ export default function CreatorPage() {
 
   const getNameFontSize = () => {
     const baseSize = (screenWidth - 120) / 7.65;
+    const currentWidth = screenWidth - 1;
+    const fontSize = baseSize * ((currentWidth / screenWidth) * 10 - 9);
 
-    if (screenWidth > 1200) {
-      return `${baseSize}px`;
-    } else if (screenWidth > 740) {
-      return `${baseSize * 0.995}px`;
-    } else if (screenWidth > 620) {
-      return `${baseSize * 0.99}px`;
-    } else if (screenWidth > 540) {
-      return `${baseSize * 0.98}px`;
-    } else {
-      return `${baseSize * 0.97}px`;
-    }
+    return `${fontSize}px`;
   };
 
   const creatorImageSize =
