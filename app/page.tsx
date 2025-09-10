@@ -16,7 +16,7 @@ export default function MainPage() {
   const project = {
     name: "제목이 들어갑니다.",
     description:
-      "간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다.",
+      "간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다.",
     image: "none",
   };
 
@@ -80,10 +80,10 @@ export default function MainPage() {
           pointerEvents: showContents ? "auto" : "none",
         }}
       >
-        <p className="text-center body4 absolute top-[44px] left-1/2 -translate-x-1/2 text-white font-medium">
+        <p className="text-center body4 absolute top-[48px] left-1/2 -translate-x-1/2 text-white font-medium xl:top-[54px]">
           2025 · Flexible, Creative, Innovative
         </p>
-        <div className="h-full w-full absolute top-0 items-center flex gap-5 justify-center xl:gap-8">
+        <div className="h-full w-full absolute top-0 items-center flex justify-between p-[70px]">
           {projects.map((_, index) => (
             <ProjectCard
               key={index}

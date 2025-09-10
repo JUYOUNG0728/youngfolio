@@ -1,17 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import SnsItems from "@/components/SnsItems";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function CreatorPage() {
   const [screenWidth, setScreenWidth] = useState<number>(0);
 
+  const grayDivRef = useRef<HTMLDivElement>(null);
+
   const getNameFontSize = () => {
-    const baseSize = (screenWidth - 120) / 7.65;
+    const baseSize = (screenWidth - 140) / 7.65;
     const currentWidth = screenWidth - 1;
     const fontSize = baseSize * ((currentWidth / screenWidth) * 10 - 9);
 
@@ -22,30 +26,6 @@ export default function CreatorPage() {
     screenWidth < 1920
       ? { width: 1200, height: 1644 }
       : { width: 1640, height: 2248 };
-
-  const snsItemsSize = screenWidth < 1920 ? 20 : 30;
-
-  const snsItems = [
-    {
-      label: "GitHub",
-      href: "https://github.com/JUYOUNG0728",
-      size: snsItemsSize,
-    },
-    {
-      label: "Behance",
-      href: "https://www.behance.net",
-      size: snsItemsSize,
-    },
-    {
-      label: "Mail",
-      href: "mailto: vilioite@naver.com",
-      size: snsItemsSize,
-    },
-  ];
-
-  const handleSnsNavigate = (href: string) => {
-    window.open(href, "_blank");
-  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -60,9 +40,28 @@ export default function CreatorPage() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!grayDivRef.current) return;
+
+    gsap.fromTo(
+      grayDivRef.current,
+      { y: 0 },
+      {
+        y: "-100%",
+        scrollTrigger: {
+          trigger: grayDivRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        },
+        ease: "power4.out",
+      }
+    );
+  }, []);
+
   return (
     <div className="w-full h-full">
-      <div className="bg-gray-50 w-full h-full flex flex-col items-center justify-end text-white relative">
+      <div className="bg-gray-50 w-full h-[calc(100vh+160px)] flex flex-col items-center justify-end text-white relative overflow-hidden">
         <div
           className={`w-[${
             screenWidth - 120
@@ -78,7 +77,7 @@ export default function CreatorPage() {
             <h2 className="body2 flex justify-end mt-[-10px]">
               Igniting value in design!
             </h2>
-            <div className="body3 absolute bottom-[120px] flex justify-between items-end w-full xl:bottom-[140px]">
+            <div className="body3 absolute bottom-[280px] flex justify-between items-end w-full xl:bottom-[300px]">
               <div className="flex justify-end w-full flex-col gap-6 xl:gap-8">
                 <h2 className="body2">More than just visuals.</h2>
                 <p>
@@ -90,37 +89,8 @@ export default function CreatorPage() {
                   <br />더 나은 경험을 만들기 위한 끊임없는 고민이 필요합니다.
                 </p>
               </div>
-              <div
-                className="flex mr-10 gap-8
-               xl:gap-10"
-              >
-                <Image
-                  src="/images/icon-github.png"
-                  alt="GitHub"
-                  width={snsItems[0].size}
-                  height={snsItems[0].size}
-                  className="cursor-pointer"
-                  onClick={() => handleSnsNavigate(snsItems[0].href)}
-                  priority
-                />
-                <Image
-                  src="/images/icon-behance.png"
-                  alt="Behance"
-                  width={snsItems[1].size}
-                  height={snsItems[1].size}
-                  className="cursor-pointer"
-                  onClick={() => handleSnsNavigate(snsItems[1].href)}
-                  priority
-                />
-                <Image
-                  src="/images/icon-mail.png"
-                  alt="Mail"
-                  width={snsItems[2].size}
-                  height={snsItems[2].size}
-                  className="cursor-pointer"
-                  onClick={() => handleSnsNavigate(snsItems[2].href)}
-                  priority
-                />
+              <div className="mr-10">
+                <SnsItems screenWidth={screenWidth} />
               </div>
             </div>
           </div>
@@ -134,7 +104,10 @@ export default function CreatorPage() {
           priority
         />
       </div>
-      <div className="bg-gray-30 w-full h-full text-white relative z-20"></div>
+      <div
+        className="bg-gray-30 w-full h-[100vh] text-white relative z-10"
+        ref={grayDivRef}
+      ></div>
     </div>
   );
 }

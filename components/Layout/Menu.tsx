@@ -1,10 +1,15 @@
-import Image from "next/image";
+"use client";
+
 import { useRouter } from "next/navigation";
+
+import SnsItems from "@/components/SnsItems";
 
 export default function Menu({
   setIsMenuOpen,
+  screenWidth,
 }: {
   setIsMenuOpen: (open: boolean) => void;
+  screenWidth: number;
 }) {
   const router = useRouter();
 
@@ -30,19 +35,9 @@ export default function Menu({
     },
   ];
 
-  const snsItems = [
-    { label: "GitHub", href: "https://github.com/JUYOUNG0728" },
-    { label: "Behance", href: "https://www.behance.net" },
-    { label: "Mail", href: "mailto: vilioite@naver.com" },
-  ];
-
   const handleNavigate = (href: string) => {
     setIsMenuOpen(false);
     router.push(href);
-  };
-
-  const handleSnsNavigate = (href: string) => {
-    window.open(href, "_blank");
   };
 
   return (
@@ -50,20 +45,26 @@ export default function Menu({
       <div className="flex items-center justify-center h-full w-full">
         <div className="flex gap-[280px] xl:gap-[420px]">
           {menuItems.map((item, index) => (
-            <div
-              key={item.id}
-              className="cursor-pointer fade-up"
-              style={{ animationDelay: `${0.6 + index * 0.15}s` }}
-              onClick={() => handleNavigate(item.href)}
-            >
-              <div className="flex gap-4 xl:gap-6">
-                <p className="body4 text-white opacity-40">{item.id}</p>
-                <h1 className="menu relative top-[-10px] xl:top-[-12px]">
+            <div key={item.id}>
+              <div
+                className="flex gap-4 xl:gap-6 cursor-pointer"
+                onClick={() => handleNavigate(item.href)}
+              >
+                <p
+                  className="body4 text-gray-30 fade-up"
+                  style={{ animationDelay: `${0.6 + index * 0.15}s` }}
+                >
+                  {item.id}
+                </p>
+                <h1
+                  className="menu relative top-[-10px] fade-up xl:top-[-12px]"
+                  style={{ animationDelay: `${0.6 + index * 0.15}s` }}
+                >
                   {item.label}
                 </h1>
               </div>
               {item.submenu && (
-                <div className="flex flex-col gap-3 mt-8 relative opacity-70 xl:gap-5 left-[36px] xl:left-[48px]">
+                <div className="flex flex-col gap-4 mt-8 relative opacity-70 xl:gap-6 left-[36px] xl:left-[48px] xl:mt-10">
                   {item.submenu.map((subItem, subIndex) => (
                     <p
                       key={subIndex}
@@ -71,7 +72,7 @@ export default function Menu({
                         e.stopPropagation();
                         handleNavigate(subItem.href);
                       }}
-                      className="subMenu text-white opacity-80 fade-up"
+                      className="subMenu text-gray-10 fade-up"
                       style={{
                         animationDelay: `${
                           0.6 + (index + subIndex + 1) * 0.15
@@ -86,38 +87,6 @@ export default function Menu({
             </div>
           ))}
         </div>
-      </div>
-      <div
-        className="absolute bottom-12 left-[60px] flex fade-up gap-7 xl:gap-8"
-        style={{ animationDelay: "0.6s" }}
-      >
-        <Image
-          src="/images/icon-github.png"
-          alt="GitHub"
-          width={20}
-          height={20}
-          className="cursor-pointer"
-          onClick={() => handleSnsNavigate(snsItems[0].href)}
-          priority
-        />
-        <Image
-          src="/images/icon-behance.png"
-          alt="Behance"
-          width={20}
-          height={20}
-          className="cursor-pointer"
-          onClick={() => handleSnsNavigate(snsItems[1].href)}
-          priority
-        />
-        <Image
-          src="/images/icon-mail.png"
-          alt="Mail"
-          width={20}
-          height={20}
-          className="cursor-pointer"
-          onClick={() => handleSnsNavigate(snsItems[2].href)}
-          priority
-        />
       </div>
     </div>
   );
