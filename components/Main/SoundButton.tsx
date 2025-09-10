@@ -1,7 +1,8 @@
 'use client";';
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+
+import getScreenWidth from "@/utils/useScreenWidth";
 
 export default function SoundButton({
   soundOn,
@@ -10,17 +11,7 @@ export default function SoundButton({
   soundOn: boolean;
   setSoundOn: (soundOn: boolean) => void;
 }) {
-  const [screenWidth, setScreenWidth] = useState<number>(0);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screenWidth = getScreenWidth();
 
   return (
     <div className="w-[60px] h-[60px] rounded-full bg-white flex items-center justify-center xl:w-[70px] xl:h-[70px] cursor-pointer">

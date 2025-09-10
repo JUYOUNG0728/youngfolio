@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Menu from "./Menu";
 
+import getScreenWidth from "@/utils/useScreenWidth";
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [screenWidth, setScreenWidth] = useState<number>(0);
 
   const router = useRouter();
+
+  const screenWidth = getScreenWidth();
 
   const handleLogoClick = () => {
     router.push("/");
@@ -23,18 +26,6 @@ export default function Header() {
     screenWidth < 1920
       ? { width: 150, height: 24 }
       : { width: 180, height: 28 };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <div>
@@ -74,7 +65,7 @@ export default function Header() {
       </div>
       {isMenuOpen && (
         <div className="fixed inset-0 z-40">
-          <Menu setIsMenuOpen={setIsMenuOpen} screenWidth={screenWidth} />
+          <Menu setIsMenuOpen={setIsMenuOpen} />
         </div>
       )}
     </div>

@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 
+import getScreenWidth from "@/utils/useScreenWidth";
+
 export default function Background() {
-  const [screenWidth, setScreenWidth] = useState(0);
   const [screenHeight, setScreenHeight] = useState(0);
+
+  const screenWidth = getScreenWidth();
 
   const BOUNDARY = 500;
 
@@ -22,7 +25,6 @@ export default function Background() {
   const [circle3Velocity, setCircle3Velocity] = useState(initialVelocity);
 
   const handleResize = () => {
-    setScreenWidth(window.innerWidth);
     setScreenHeight(window.innerHeight);
   };
 
@@ -48,7 +50,7 @@ export default function Background() {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [screenWidth, screenHeight]);
+  }, [screenHeight]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -73,13 +75,7 @@ export default function Background() {
     }, 16);
 
     return () => clearInterval(interval);
-  }, [
-    screenWidth,
-    screenHeight,
-    circle1Position,
-    circle2Position,
-    circle3Position,
-  ]);
+  }, [screenHeight, circle1Position, circle2Position, circle3Position]);
 
   return (
     <div className="bg-dark-blue h-screen w-screen relative overflow-hidden">

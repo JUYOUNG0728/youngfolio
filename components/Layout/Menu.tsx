@@ -2,14 +2,10 @@
 
 import { useRouter } from "next/navigation";
 
-import SnsItems from "@/components/SnsItems";
-
 export default function Menu({
   setIsMenuOpen,
-  screenWidth,
 }: {
   setIsMenuOpen: (open: boolean) => void;
-  screenWidth: number;
 }) {
   const router = useRouter();
 

@@ -95,18 +95,20 @@
 @layer utilities {
   /* Font Sizes */
   .h1 {
-    font-size: 200px;
-    font-weight: 700;
+    /* 공란 */
   }
 
   .h2 {
-    font-size: 200px;
-    font-weight: 600;
+    /* 공란 */
   }
 
   .h3 {
-    font-size: 120px;
-    font-weight: 500;
+    font-size: 3rem;
+    font-weight: 700;
+
+    @media (max-width: 1920px) {
+      font-size: 2.5rem;
+    }
   }
 
   .h4 {
@@ -114,7 +116,7 @@
     font-weight: 700;
 
     @media (max-width: 1920px) {
-      font-size: 1.875rem;
+      font-size: 1.75rem;
     }
   }
 
@@ -127,27 +129,12 @@
     }
   }
 
-  .h6 {
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
-
   .body1 {
-    font-size: 70px;
-    font-weight: 700;
-
-    @media (max-width: 1920px) {
-      font-size: 60px;
-    }
+    /* 공란 */
   }
 
   .body2 {
-    font-size: 2.25rem;
-    font-weight: 600;
-
-    @media (max-width: 1920px) {
-      font-size: 1.75rem;
-    }
+    /* 공란 */
   }
 
   .body3 {

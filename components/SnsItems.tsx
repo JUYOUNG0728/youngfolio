@@ -1,6 +1,9 @@
 import Image from "next/image";
 
-export default function SnsItems({ screenWidth }: { screenWidth: number }) {
+import getScreenWidth from "@/utils/useScreenWidth";
+
+export default function SnsItems() {
+  const screenWidth = getScreenWidth();
   const snsItemSize = screenWidth < 1920 ? 24 : 30;
 
   const snsItems = [
@@ -23,10 +26,7 @@ export default function SnsItems({ screenWidth }: { screenWidth: number }) {
   };
 
   return (
-    <div
-      className="flex gap-8
-                   xl:gap-10"
-    >
+    <div className="flex gap-8 xl:gap-10">
       <Image
         src="/images/icon-github.png"
         alt="GitHub"

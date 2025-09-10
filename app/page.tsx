@@ -10,7 +10,6 @@ import { useEffect, useState, useRef } from "react";
 export default function MainPage() {
   const [showContents, setShowContents] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
-  const [screenWidth, setScreenWidth] = useState<number>(0);
   const [focusProject, setFocusProject] = useState<number>(2);
 
   const project = {
@@ -47,17 +46,6 @@ export default function MainPage() {
   const onMouseUp = () => {
     dragStartX.current = null;
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     const showContentsTimer = setTimeout(() => {
