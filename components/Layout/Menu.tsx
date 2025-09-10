@@ -72,7 +72,7 @@ export default function Menu({
                         e.stopPropagation();
                         handleNavigate(subItem.href);
                       }}
-                      className="subMenu text-gray-10 fade-up"
+                      className="subMenu text-gray-10 cursor-pointer fade-up"
                       style={{
                         animationDelay: `${
                           0.6 + (index + subIndex + 1) * 0.15
