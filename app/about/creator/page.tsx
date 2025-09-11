@@ -28,6 +28,10 @@ export default function CreatorPage() {
       ? { width: 1200, height: 1644 }
       : { width: 1640, height: 2248 };
 
+  const handleResize = () => {
+    ScrollTrigger.refresh();
+  };
+
   useEffect(() => {
     if (!grayDivRef.current) return;
 
@@ -46,6 +50,14 @@ export default function CreatorPage() {
       }
     );
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      ScrollTrigger.killAll();
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [getScreenWidth]);
 
   return (
     <div className="w-full h-full">
