@@ -80,7 +80,6 @@ export default function MainPage() {
               onMouseDown={onMouseDown}
               onMouseMove={onMouseMove}
               onMouseUp={onMouseUp}
-              onClick={() => console.log("click")}
             />
           ))}
         </div>

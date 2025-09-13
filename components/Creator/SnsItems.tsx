@@ -28,21 +28,21 @@ export default function SnsItems() {
   return (
     <div className="flex gap-8 xl:gap-10">
       <Image
-        src="/images/icon-github.png"
-        alt="GitHub"
-        width={snsItemSize}
-        height={snsItemSize}
-        className="cursor-pointer"
-        onClick={() => handleSnsNavigate(snsItems[0].href)}
-        priority
-      />
-      <Image
         src="/images/icon-behance.png"
         alt="Behance"
         width={snsItemSize}
         height={snsItemSize}
         className="cursor-pointer"
         onClick={() => handleSnsNavigate(snsItems[1].href)}
+        priority
+      />
+      <Image
+        src="/images/icon-github.png"
+        alt="GitHub"
+        width={snsItemSize}
+        height={snsItemSize}
+        className="cursor-pointer"
+        onClick={() => handleSnsNavigate(snsItems[0].href)}
         priority
       />
       <Image

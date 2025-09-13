@@ -8,10 +8,9 @@
   --gray-20: #ddd;
   --gray-30: #aaa;
   --gray-40: #555;
-  --gray-50: #242424;
 
   --white: #fff;
-  --black: #000;
+  --black: #242424;
 
   --blue: #0033ff;
   --dark-blue: #1e253a;
@@ -31,8 +30,9 @@
   }
 
   html {
-    font-family: "Pretendard Variable", sans-serif;
+    font-family: "Pretendard", sans-serif;
     font-size: 16px;
+    letter-spacing: -0.3px;
   }
   body {
     background-color: var(--black);
@@ -105,6 +105,7 @@
   .h3 {
     font-size: 3rem;
     font-weight: 700;
+    line-height: 1.45;
 
     @media (max-width: 1920px) {
       font-size: 2.5rem;
@@ -134,22 +135,25 @@
   }
 
   .body2 {
-    /* 공란 */
+    font-size: 1.5rem;
+    line-height: 1.6;
+
+    @media (max-width: 1920px) {
+      font-size: 1.25rem;
+    }
   }
 
   .body3 {
-    font-size: 1.5rem;
-    font-weight: 400;
-    line-height: 1.65;
-
+    font-size: 1.375rem;
+    line-height: 1.7;
     @media (max-width: 1920px) {
       font-size: 1.125rem;
     }
   }
 
-  /* no change */
   .body4 {
     font-size: 1.25rem;
+    line-height: 1.7;
 
     @media (max-width: 1920px) {
       font-size: 1rem;
@@ -158,8 +162,7 @@
 
   .body5 {
     font-size: 1.125rem;
-    font-weight: 400;
-    line-height: 1.7;
+    line-height: 1.6;
 
     @media (max-width: 1920px) {
       font-size: 0.875rem;
@@ -168,8 +171,7 @@
 
   .body6 {
     font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.5;
 
     @media (max-width: 1920px) {
       font-size: 0.75rem;
@@ -193,9 +195,6 @@
   }
   .text-gray-40 {
     color: var(--gray-40);
-  }
-  .text-gray-50 {
-    color: var(--gray-50);
   }
   .text-white {
     color: var(--white);
@@ -223,9 +222,6 @@
   .bg-gray-40 {
     background-color: var(--gray-40);
   }
-  .bg-gray-50 {
-    background-color: var(--gray-50);
-  }
   .bg-white {
     background-color: var(--white);
   }
@@ -251,9 +247,6 @@
   }
   .border-gray-40 {
     border-color: var(--gray-40);
-  }
-  .border-gray-50 {
-    border-color: var(--gray-50);
   }
   .border-white {
     border-color: var(--white);
@@ -284,6 +277,12 @@
 
   .blur-2 {
     filter: var(--blur-2);
+  }
+
+  /* Text Outline */
+  .text-outline {
+    color: transparent; /* 안쪽은 투명 */
+    -webkit-text-stroke: 1px black; /* 외곽선 두께와 색상 */
   }
 
   /* Animations */
