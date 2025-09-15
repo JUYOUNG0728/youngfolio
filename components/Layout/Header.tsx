@@ -22,11 +22,6 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const logoSize =
-    screenWidth < 1920
-      ? { width: 150, height: 24 }
-      : { width: 180, height: 28 };
-
   return (
     <div>
       <div className="absolute z-50 top-0 px-[70px] w-full h-[120px] xl:h-[140px]">
@@ -34,8 +29,8 @@ export default function Header() {
           <Image
             src="/images/img-logo.svg"
             alt="Logo"
-            width={logoSize.width}
-            height={logoSize.height}
+            width={screenWidth < 1920 ? 150 : 180}
+            height={screenWidth < 1920 ? 24 : 28}
             priority
             onClick={handleLogoClick}
             className="cursor-pointer"

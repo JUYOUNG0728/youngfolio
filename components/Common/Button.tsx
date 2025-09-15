@@ -21,7 +21,7 @@ export default function Button({
   };
   const buttonSize = {
     xl: "",
-    lg: "body3 px-[70px] py-[24px] xl:px-[84px] xl:py-[32px]",
+    lg: "body3 px-[70px] py-[20px] xl:px-[84px] xl:py-[26px]",
     md: "",
     sm: "",
   };
