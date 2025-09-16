@@ -32,7 +32,9 @@ export default function ExperienceBox({
     <div className="w-full border-b border-gray-30 mb-6 pb-6 xl:pb-8 xl:mb-8 transition-all duration-500">
       <div className="flex justify-between items-center w-full">
         <div
-          className="flex items-center gap-5 cursor-pointer"
+          className={`flex items-center cursor-pointer ${
+            number === "01" ? "gap-[26px] xl:gap-9" : "gap-5 xl:gap-7"
+          }`}
           onClick={onToggle}
         >
           <h3 className="h3 font-semibold text-gray-10 text-outline">
