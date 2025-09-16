@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import getScreenWidth from "@/utils/useScreenWidth";
 
 export default function SnsItems() {

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
 import ExperienceBox from "./ExperienceBox";
 
 export default function ExperienceList() {

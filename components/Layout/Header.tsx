@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Menu from "./Menu";
 
+import Menu from "@/components/Layout/Menu";
 import getScreenWidth from "@/utils/useScreenWidth";
 
 export default function Header() {

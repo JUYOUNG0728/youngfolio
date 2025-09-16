@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import SnsItems from "@/components/Creator/SnsItems";
 import getScreenWidth from "@/utils/useScreenWidth";
 

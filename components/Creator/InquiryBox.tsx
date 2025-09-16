@@ -1,5 +1,7 @@
-import Button from "@/components/Common/Button";
+"use client";
+
 import { useRouter } from "next/navigation";
+import Button from "@/components/Common/Button";
 
 export default function InquiryBox() {
   const router = useRouter();

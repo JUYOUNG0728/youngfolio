@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
 import WelcomeBox from "./WelcomeBox";
 
 export default function Intro() {

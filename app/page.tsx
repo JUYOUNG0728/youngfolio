@@ -1,11 +1,11 @@
 "use client";
 
+import { useEffect, useState, useRef } from "react";
+
 import Intro from "@/components/Intro/Intro";
 import Background from "@/components/Intro/Background";
 import ProjectCard from "@/components/Main/ProjectCard";
 import SoundButton from "@/components/Main/SoundButton";
-
-import { useEffect, useState, useRef } from "react";
 
 export default function MainPage() {
   const [showContents, setShowContents] = useState(false);

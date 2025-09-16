@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import getScreenWidth from "@/utils/useScreenWidth";
 
 export default function Background() {
