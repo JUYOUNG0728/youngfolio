@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+
 import Header from "@/components/Layout/Header";
+import { LenisProvider } from "@/utils/LenisProvider";
 
 export const metadata: Metadata = {
   title: "YOUNGFOLIO",
@@ -14,9 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
-        <Header />
-        {children}
+      <body className="select-none">
+        <LenisProvider>
+          <Header />
+          {children}
+        </LenisProvider>
       </body>
     </html>
   );

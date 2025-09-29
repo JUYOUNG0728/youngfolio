@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import getScreenWidth from "@/utils/useScreenWidth";
+import useScreenWidth from "@/utils/useScreenWidth";
 
 export default function Background() {
   const [screenHeight, setScreenHeight] = useState(0);
 
-  const screenWidth = getScreenWidth();
+  const screenWidth = useScreenWidth();
 
   const BOUNDARY = 500;
 

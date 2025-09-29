@@ -69,7 +69,7 @@ export default function MainPage() {
         }}
       >
         <p className="text-center body4 absolute top-[48px] left-1/2 -translate-x-1/2 text-white font-medium xl:top-[54px]">
-          2025 · Flexible, Creative, Innovative
+          2025 : Branding Myself Beyond Words
         </p>
         <div className="h-full w-full absolute top-0 items-center flex justify-between p-[70px]">
           {projects.map((_, index) => (

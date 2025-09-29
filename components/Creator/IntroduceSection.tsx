@@ -1,3 +1,5 @@
+'use client";';
+
 import InquiryBox from "@/components/Creator/InquiryBox";
 import ExperienceList from "@/components/Creator/ExperienceList";
 
@@ -8,10 +10,13 @@ export default function IntroduceSection({
 }) {
   return (
     <div
-      className="bg-gray-10 w-full relative z-10 flex justify-center text-black min-h-[100vh]"
+      className="bg-gray-10 w-full relative z-10 flex justify-center text-black"
       ref={grayDivRef}
+      style={{
+        minHeight: "calc(100vh + 10px)",
+      }}
     >
-      <div className="w-[calc(100%-140px)] h-full py-[90px]">
+      <div className="w-[calc(100%-140px)] h-full py-[100px]">
         <div className="flex justify-between w-full h-full">
           <div className="flex flex-col gap-[80px] xl:gap-[100px]">
             <div className="flex flex-col gap-8 xl:gap-10">

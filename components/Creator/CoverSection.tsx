@@ -1,9 +1,9 @@
 import Image from "next/image";
 import SnsItems from "@/components/Creator/SnsItems";
-import getScreenWidth from "@/utils/useScreenWidth";
+import useScreenWidth from "@/utils/useScreenWidth";
 
 export default function CoverSection() {
-  const screenWidth = getScreenWidth();
+  const screenWidth = useScreenWidth();
 
   const getNameFontSize = () => {
     const baseSize = (screenWidth - 140) / 7.45;

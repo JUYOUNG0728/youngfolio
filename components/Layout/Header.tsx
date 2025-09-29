@@ -2,17 +2,20 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import Menu from "@/components/Layout/Menu";
-import getScreenWidth from "@/utils/useScreenWidth";
+import useScreenWidth from "@/utils/useScreenWidth";
+import Logo from "@/components/Common/Logo";
+import Hamburger from "@/components/Common/Hamburger";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const router = useRouter();
+  const pathname = usePathname();
 
-  const screenWidth = getScreenWidth();
+  const screenWidth = useScreenWidth();
 
   const handleLogoClick = () => {
     router.push("/");
@@ -22,28 +25,35 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const isWhiteMode = pathname === "/about/youngfolio";
+
   return (
     <div>
       <div className="absolute z-50 top-0 px-[70px] w-full h-[120px] xl:h-[140px]">
         <div className="flex items-center justify-between w-full h-full">
-          <Image
-            src="/images/img-logo.svg"
-            alt="Logo"
-            width={screenWidth < 1920 ? 150 : 180}
-            height={screenWidth < 1920 ? 24 : 28}
-            priority
+          <Logo
             onClick={handleLogoClick}
             className="cursor-pointer"
+            fill={isWhiteMode ? "#000000" : "#FFFFFF"}
+            width={screenWidth < 1920 ? 150 : 180}
+            height={screenWidth < 1920 ? 24 : 28}
           />
           {!isMenuOpen ? (
-            <Image
-              src="/images/icon-hamburger.png"
-              alt="Menu"
-              width={28}
-              height={28}
+            // <Image
+            //   src="/images/icon-hamburger.png"
+            //   alt="Menu"
+            //   width={28}
+            //   height={28}
+            //   className="cursor-pointer"
+            //   onClick={toggleMenu}
+            //   priority
+            // />
+            <Hamburger
+              width={screenWidth < 1920 ? 28 : 32}
+              height={screenWidth < 1920 ? 28 : 32}
               className="cursor-pointer"
               onClick={toggleMenu}
-              priority
+              fill={isWhiteMode ? "#000000" : "#FFFFFF"}
             />
           ) : (
             <Image

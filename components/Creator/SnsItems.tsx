@@ -1,8 +1,8 @@
 import Image from "next/image";
-import getScreenWidth from "@/utils/useScreenWidth";
+import useScreenWidth from "@/utils/useScreenWidth";
 
 export default function SnsItems() {
-  const screenWidth = getScreenWidth();
+  const screenWidth = useScreenWidth();
   const snsItemSize = screenWidth < 1920 ? 24 : 30;
 
   const snsItems = [

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
-import getScreenWidth from "@/utils/useScreenWidth";
+import useScreenWidth from "@/utils/useScreenWidth";
 
 export default function ExperienceBox({
   number,
@@ -17,7 +17,7 @@ export default function ExperienceBox({
   isOpen: boolean;
   onToggle: () => void;
 }) {
-  const screenWidth = getScreenWidth();
+  const screenWidth = useScreenWidth();
   const [maxHeight, setMaxHeight] = useState<string | number>("0px");
 
   const contentRef = useRef<HTMLDivElement>(null);
