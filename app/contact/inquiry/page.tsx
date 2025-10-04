@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { db } from "@/firebaseConfig";
 import {
@@ -21,6 +21,7 @@ interface Message {
   id: string;
   uid: string;
   text: string;
+  imageUrl?: string;
   timestamp: Timestamp;
   sender?: "admin" | "user";
 }
@@ -32,6 +33,8 @@ export default function InquiryPage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   const screenWidth = useScreenWidth();
+
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const iconSize = {
     plus: screenWidth < 1920 ? 14 : 16,
@@ -73,16 +76,31 @@ export default function InquiryPage() {
   };
 
   const handleSendMessage = async () => {
-    if (!message.trim()) return;
+    if (!message.trim() && !imageFile) return;
     if (!userUid) return alert("사용자 정보가 없습니다.");
+
+    let imageUrl = null;
+
+    if (imageFile) {
+      try {
+        imageUrl = await uploadImage(imageFile);
+      } catch (error) {
+        console.error("이미지 업로드 실패:", error);
+        alert("이미지 업로드에 실패했습니다.");
+        return;
+      }
+    }
 
     await addDoc(collection(db, "messages"), {
       sender: "user",
       uid: userUid,
       text: message,
-      timestamp: new Date(),
+      imageUrl,
+      timestamp: Timestamp.now(),
     });
+
     setMessage("");
+    setImageFile(null);
   };
 
   useEffect(() => {
@@ -109,6 +127,47 @@ export default function InquiryPage() {
     return () => unsubscribe();
   }, []);
 
+  useEffect(() => {
+    const scrollToBottom = () => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTop =
+          scrollContainerRef.current.scrollHeight;
+      }
+    };
+
+    const images = scrollContainerRef.current?.querySelectorAll("img") ?? [];
+    if (images.length === 0) {
+      scrollToBottom();
+    } else {
+      let loadedCount = 0;
+      images.forEach((img) => {
+        if (img.complete) {
+          loadedCount++;
+          if (loadedCount === images.length) scrollToBottom();
+        } else {
+          img.onload = () => {
+            loadedCount++;
+            if (loadedCount === images.length) scrollToBottom();
+          };
+        }
+      });
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    const handleWheelOutside = (e: WheelEvent) => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTop += e.deltaY;
+      }
+    };
+
+    window.addEventListener("wheel", handleWheelOutside, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheelOutside);
+    };
+  }, []);
+
   return (
     <div
       className="w-full h-full"
@@ -117,8 +176,8 @@ export default function InquiryPage() {
       }}
     >
       {!userUid && <div>Loading...</div>}
-      <div className="relative w-[calc(100%-140px)] left-1/2 -translate-x-1/2 top-60 xl:top-80">
-        <div className="absolute">
+      <div className="w-[calc(100%-140px)] h-full absolute left-1/2 -translate-x-1/2">
+        <div className="absolute top-60 xl:top-80">
           <p className="h4">
             궁금한 점이 있으신가요?
             <br />
@@ -128,69 +187,81 @@ export default function InquiryPage() {
             다른 방법으로 문의하기
           </p>
         </div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-6 xl:gap-8">
-          <div className="bg-white p-4 rounded-lg w-[600px] max-h-[300px] overflow-y-auto xl:w-[800px]">
-            {messages.map((msg) => (
-              <div key={msg.id} className="mb-2">
-                <strong>{msg.sender === "admin" ? "관리자" : "나"}:</strong>{" "}
-                {msg.text}
-                <span className="text-gray-400 text-xs ml-2">
-                  {formatTime(msg.timestamp)}
-                </span>
-              </div>
-            ))}
-          </div>
-          <div className="absolute top-[300px]">
-            {imageFile && (
-              <div className="mb-8">
-                <img
-                  src={URL.createObjectURL(imageFile)}
-                  alt="첨부 이미지 미리보기"
-                  className="max-w-[600px] max-h-[200px] rounded-lg object-contain"
-                />
-              </div>
-            )}
-            <div className="flex gap-3">
-              <div className="flex items-center gap-4 relative">
-                <input
-                  className="w-[600px] bg-gray-20 rounded-full placeholder-white body4 pl-7 pr-24 py-3 text-gray-40 xl:w-[800px] xl:px-9 focus:outline-none"
-                  placeholder="메시지를 입력해주세요."
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") handleSendMessage();
-                  }}
-                />
-                <div className="h-[calc(100%-16px)] absolute right-5 top-1/2 -translate-y-1/2 flex items-center gap-2 xl:gap-3">
-                  <label className="bg-gray-30 rounded-full aspect-square h-full overflow-hidden cursor-pointer flex justify-center items-center">
-                    <input
-                      className="w-full h-full hidden"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileChange}
-                    />
-                    <Plus
-                      width={iconSize.plus}
-                      height={iconSize.plus}
-                      fill="#ffffff"
-                      stroke="3"
-                    />
-                  </label>
-                  <button
-                    className={`w-[64px] h-full bg-black  rounded-full text-white text-lg font-semibold flex items-center justify-center gap-2 xl:w-[80px] ${
-                      message.trim() ? "" : "opacity-15 cursor-not-allowed"
-                    }`}
-                    onClick={handleSendMessage}
-                    disabled={!message.trim()}
-                  >
-                    <Image
-                      src="/images/icon-send.png"
-                      alt="send"
-                      width={iconSize.send}
-                      height={iconSize.send}
-                    />
-                  </button>
+        <div
+          className="absolute h-[calc(100%-96px)] overflow-y-auto top-12 left-1/2 -translate-x-1/2 bg-white p-10 rounded-3xl w-[800px] xl:w-[1000px]"
+          ref={scrollContainerRef}
+        >
+          {messages.map((msg) => (
+            <div key={msg.id} className="mb-4">
+              <div className="flex flex-col">
+                <div>
+                  <strong>{msg.sender === "admin" ? "관리자" : "나"}:</strong>
+                  {msg.text}
+                  <span className="text-gray-400 text-xs ml-2">
+                    {formatTime(msg.timestamp)}
+                  </span>
                 </div>
+                {msg.imageUrl && (
+                  <img
+                    src={msg.imageUrl}
+                    alt="이미지"
+                    className="max-w-[600px] max-h-[200px] rounded-lg object-contain mt-4"
+                  />
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="absolute bottom-[100px] left-1/2 -translate-x-1/2 z-20">
+          {imageFile && (
+            <div className="mb-8">
+              <img
+                src={URL.createObjectURL(imageFile)}
+                alt="첨부 이미지 미리보기"
+                className="max-w-[600px] max-h-[200px] rounded-lg object-contain"
+              />
+            </div>
+          )}
+          <div className="flex gap-3">
+            <div className="flex items-center gap-4 relative">
+              <input
+                className="w-[600px] bg-gray-20 rounded-full placeholder-white body4 pl-7 pr-24 py-3 text-gray-40 xl:w-[800px] xl:px-9 focus:outline-none"
+                placeholder="메시지를 입력해주세요."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleSendMessage();
+                }}
+              />
+              <div className="h-[calc(100%-16px)] absolute right-5 top-1/2 -translate-y-1/2 flex items-center gap-2 xl:gap-3">
+                <label className="bg-gray-30 rounded-full aspect-square h-full overflow-hidden cursor-pointer flex justify-center items-center">
+                  <input
+                    className="w-full h-full hidden"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                  <Plus
+                    width={iconSize.plus}
+                    height={iconSize.plus}
+                    fill="#ffffff"
+                    stroke="3"
+                  />
+                </label>
+                <button
+                  className={`w-[64px] h-full bg-black  rounded-full text-white text-lg font-semibold flex items-center justify-center gap-2 xl:w-[80px] ${
+                    message.trim() ? "" : "opacity-15 cursor-not-allowed"
+                  }`}
+                  onClick={handleSendMessage}
+                  disabled={!message.trim() && !imageFile}
+                >
+                  <Image
+                    src="/images/icon-send.png"
+                    alt="send"
+                    width={iconSize.send}
+                    height={iconSize.send}
+                  />
+                </button>
               </div>
             </div>
           </div>
