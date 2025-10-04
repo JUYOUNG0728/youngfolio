@@ -66,12 +66,15 @@ export default function InquiryPage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+
       if (!file.type.startsWith("image/")) {
         alert("이미지 파일만 첨부할 수 있습니다.");
         e.target.value = "";
         return;
       }
+
       setImageFile(file);
+      e.target.value = "";
     }
   };
 
@@ -214,12 +217,23 @@ export default function InquiryPage() {
         </div>
         <div className="absolute bottom-[100px] left-1/2 -translate-x-1/2 z-20">
           {imageFile && (
-            <div className="mb-8">
+            <div className="mb-8 relative inline-block">
               <img
                 src={URL.createObjectURL(imageFile)}
                 alt="첨부 이미지 미리보기"
                 className="max-w-[600px] max-h-[200px] rounded-lg object-contain"
               />
+              <button
+                className="absolute top-2 right-2 bg-black w-7 h-7 rounded-full flex justify-center items-center"
+                onClick={() => setImageFile(null)}
+              >
+                <Image
+                  src="/images/icon-close.png"
+                  alt="close"
+                  width={14}
+                  height={14}
+                />
+              </button>
             </div>
           )}
           <div className="flex gap-3">
@@ -250,7 +264,9 @@ export default function InquiryPage() {
                 </label>
                 <button
                   className={`w-[64px] h-full bg-black  rounded-full text-white text-lg font-semibold flex items-center justify-center gap-2 xl:w-[80px] ${
-                    message.trim() ? "" : "opacity-15 cursor-not-allowed"
+                    !message.trim() && !imageFile
+                      ? "opacity-15 cursor-not-allowed"
+                      : ""
                   }`}
                   onClick={handleSendMessage}
                   disabled={!message.trim() && !imageFile}
