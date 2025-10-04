@@ -5,8 +5,8 @@
 :root {
   /* Colors */
   --gray-10: #f0f0f0;
-  --gray-20: #ddd;
-  --gray-30: #aaa;
+  --gray-20: #c1c1c1;
+  --gray-30: #999;
   --gray-40: #555;
 
   --white: #fff;
@@ -137,7 +137,6 @@
   }
 
   .body1 {
-    /* 공란 */
   }
 
   .body2 {

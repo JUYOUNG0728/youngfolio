@@ -25,7 +25,7 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const isWhiteMode = pathname === "/about/youngfolio";
+  const isWhiteMode = pathname === "/contact/inquiry";
 
   return (
     <div>

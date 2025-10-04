@@ -25,8 +25,8 @@ export default function Menu({
       label: "Contact",
       href: "/contact",
       submenu: [
-        { label: "Information", href: "/contact" },
-        { label: "Inquiry", href: "/contact#inquiry" },
+        { label: "Information", href: "/contact/information" },
+        { label: "Inquiry", href: "/contact/inquiry" },
       ],
     },
   ];

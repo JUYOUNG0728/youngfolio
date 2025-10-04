@@ -20,6 +20,7 @@ export default function hamburger({
       xmlns="http://www.w3.org/2000/svg"
       onClick={onClick}
       className={className}
+      aria-label="Menu"
     >
       <line y1="6" x2="28" y2="6" stroke={fill} strokeWidth="2" />
       <line y1="14" x2="28" y2="14" stroke={fill} strokeWidth="2" />

@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import useScreenWidth from "@/utils/useScreenWidth";
 
+import Plus from "@/components/Common/Plus";
+
 export default function ExperienceBox({
   number,
   title,
@@ -43,12 +45,16 @@ export default function ExperienceBox({
           <h3 className="h4">{title}</h3>
         </div>
         <div className="mr-3 cursor-pointer" onClick={onToggle}>
-          <Image
-            src={isOpen ? "/images/icon-minus.png" : "/images/icon-plus.png"}
-            alt={isOpen ? "minus" : "plus"}
-            width={screenWidth < 1920 ? 20 : 24}
-            height={screenWidth < 1920 ? 20 : 24}
-          />
+          {!isOpen ? (
+            <Plus />
+          ) : (
+            <Image
+              src={"/images/icon-minus.png"}
+              alt={"minus"}
+              width={screenWidth < 1920 ? 20 : 24}
+              height={screenWidth < 1920 ? 20 : 24}
+            />
+          )}
         </div>
       </div>
 
