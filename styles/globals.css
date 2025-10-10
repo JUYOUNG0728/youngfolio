@@ -323,8 +323,17 @@
 
   .scrollbar::-webkit-scrollbar-thumb {
     background: var(--gray-20);
-    border-radius: 9999px;
-    border: 8px solid transparent;
+    border-top: 20px solid transparent;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    background-clip: content-box;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-30);
+    border-top: 20px solid transparent;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
     background-clip: content-box;
   }
 

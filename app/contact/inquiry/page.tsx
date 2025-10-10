@@ -41,17 +41,17 @@ export default function InquiryPage() {
     send: screenWidth < 1920 ? 18 : 20,
   };
 
-  const formatTime = (timestamp: Timestamp) => {
-    if (!timestamp) return "";
-    const date = timestamp.toDate();
-    return date.toLocaleString("ko-KR", {
-      year: "2-digit",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
+  // const formatTime = (timestamp: Timestamp) => {
+  //   if (!timestamp) return "";
+  //   const date = timestamp.toDate();
+  //   return date.toLocaleString("ko-KR", {
+  //     year: "2-digit",
+  //     month: "2-digit",
+  //     day: "2-digit",
+  //     hour: "2-digit",
+  //     minute: "2-digit",
+  //   });
+  // };
 
   const uploadImage = async (file: File) => {
     const imageRef = ref(
@@ -171,6 +171,46 @@ export default function InquiryPage() {
     };
   }, []);
 
+  // utils/messageUtils.ts에 추후 옮길 예정
+  const formatDateHeader = (timestamp: Timestamp) => {
+    const date = timestamp.toDate();
+    return date.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  const formatTime = (timestamp: Timestamp) => {
+    const date = timestamp.toDate();
+    return date.toLocaleTimeString("ko-KR", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const isSameMinute = (a: Timestamp, b: Timestamp) => {
+    const aDate = a.toDate();
+    const bDate = b.toDate();
+    return (
+      aDate.getFullYear() === bDate.getFullYear() &&
+      aDate.getMonth() === bDate.getMonth() &&
+      aDate.getDate() === bDate.getDate() &&
+      aDate.getHours() === bDate.getHours() &&
+      aDate.getMinutes() === bDate.getMinutes()
+    );
+  };
+
+  const isSameDay = (a: Timestamp, b: Timestamp) => {
+    const aDate = a.toDate();
+    const bDate = b.toDate();
+    return (
+      aDate.getFullYear() === bDate.getFullYear() &&
+      aDate.getMonth() === bDate.getMonth() &&
+      aDate.getDate() === bDate.getDate()
+    );
+  };
+
   return (
     <div
       className="w-full h-full"
@@ -192,51 +232,71 @@ export default function InquiryPage() {
         </div>
         <div className="absolute h-[calc(100%-96px)] top-12 left-1/2 -translate-x-1/2 bg-white/80 rounded-3xl w-[800px] xl:w-[1000px]">
           <div
-            className="h-[calc(100%-160px)] overflow-y-auto scrollbar px-10 pt-10"
+            className="h-[calc(100%-160px)] overflow-y-auto scrollbar px-10 pt-2"
             ref={scrollContainerRef}
           >
-            {messages.map((msg) => (
-              <div key={msg.id} className="flex flex-col mt-4">
-                {msg.sender === "admin" ? (
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-black" />
-                      <span className="text-black text-sm mt-[-6px]">
-                        관리자
-                      </span>
+            {messages.map((msg, index) => {
+              const prevMsg = messages[index - 1];
+              const nextMsg = messages[index + 1];
+              const showDateHeader =
+                index === 0 || !isSameDay(msg.timestamp, prevMsg.timestamp);
+              const showTime =
+                !nextMsg ||
+                !isSameMinute(msg.timestamp, nextMsg.timestamp) ||
+                msg.sender !== nextMsg.sender;
+              return (
+                <div key={msg.id} className="flex flex-col mt-4">
+                  {showDateHeader && (
+                    <div className="text-center text-sm text-gray-30 my-4">
+                      {formatDateHeader(msg.timestamp)}
                     </div>
-                    <div className="w-fit flex items-end">
-                      <span className="break-words py-3 px-6 rounded-3xl bg-gray-10 text-black ml-8 max-w-[400px] block">
-                        {msg.text}
-                      </span>
-                      <span className="text-gray-400 text-xs ml-3">
-                        {formatTime(msg.timestamp)}
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex justify-end">
-                    <div className="flex flex-col gap-4 items-end">
-                      {msg.imageUrl && (
-                        <img
-                          src={msg.imageUrl}
-                          alt="이미지"
-                          className="max-w-[600px] max-h-[200px] rounded-lg object-contain mt-6"
-                        />
-                      )}
-                      <div className="w-fit flex items-end">
-                        <span className="text-gray-400 text-xs mr-3">
-                          {formatTime(msg.timestamp)}
-                        </span>
-                        <span className="break-words py-3 px-6 rounded-3xl bg-gray-10 text-black max-w-[400px] block">
-                          {msg.text}
+                  )}
+
+                  {msg.sender === "admin" ? (
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-full bg-black" />
+                        <span className="text-black text-sm mt-[-6px]">
+                          관리자
                         </span>
                       </div>
+                      <div className="w-fit flex items-end">
+                        <span className="break-words py-2 px-6 rounded-3xl bg-gray-10 text-black ml-8 max-w-[400px] block">
+                          {msg.text}
+                        </span>
+                        {showTime && (
+                          <span className="text-gray-30 text-xs ml-3">
+                            {formatTime(msg.timestamp)}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  ) : (
+                    <div className="flex justify-end">
+                      <div className="flex flex-col gap-4 items-end">
+                        {msg.imageUrl && (
+                          <img
+                            src={msg.imageUrl}
+                            alt="이미지"
+                            className="max-w-[600px] max-h-[200px] rounded-lg object-contain mt-6"
+                          />
+                        )}
+                        <div className="w-fit flex items-end">
+                          {showTime && (
+                            <span className="text-gray-400 text-xs mr-3">
+                              {formatTime(msg.timestamp)}
+                            </span>
+                          )}
+                          <span className="break-words py-2 px-6 rounded-3xl bg-gray-10 text-black max-w-[400px] block">
+                            {msg.text}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="absolute bottom-[100px] left-1/2 -translate-x-1/2 z-20">
