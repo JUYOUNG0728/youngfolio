@@ -180,7 +180,7 @@ export default function InquiryPage() {
     >
       {!userUid && <div>Loading...</div>}
       <div className="w-[calc(100%-140px)] h-full absolute left-1/2 -translate-x-1/2">
-        <div className="absolute top-60 xl:top-80">
+        <div className="absolute top-48 xl:top-60">
           <p className="h4">
             궁금한 점이 있으신가요?
             <br />
@@ -190,30 +190,54 @@ export default function InquiryPage() {
             다른 방법으로 문의하기
           </p>
         </div>
-        <div
-          className="absolute h-[calc(100%-96px)] overflow-y-auto top-12 left-1/2 -translate-x-1/2 bg-white p-10 rounded-3xl w-[800px] xl:w-[1000px]"
-          ref={scrollContainerRef}
-        >
-          {messages.map((msg) => (
-            <div key={msg.id} className="mb-4">
-              <div className="flex flex-col">
-                <div>
-                  <strong>{msg.sender === "admin" ? "관리자" : "나"}:</strong>
-                  {msg.text}
-                  <span className="text-gray-400 text-xs ml-2">
-                    {formatTime(msg.timestamp)}
-                  </span>
-                </div>
-                {msg.imageUrl && (
-                  <img
-                    src={msg.imageUrl}
-                    alt="이미지"
-                    className="max-w-[600px] max-h-[200px] rounded-lg object-contain mt-4"
-                  />
+        <div className="absolute h-[calc(100%-96px)] top-12 left-1/2 -translate-x-1/2 bg-white/80 rounded-3xl w-[800px] xl:w-[1000px]">
+          <div
+            className="h-[calc(100%-160px)] overflow-y-auto scrollbar px-10 pt-10"
+            ref={scrollContainerRef}
+          >
+            {messages.map((msg) => (
+              <div key={msg.id} className="flex flex-col mt-4">
+                {msg.sender === "admin" ? (
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full bg-black" />
+                      <span className="text-black text-sm mt-[-6px]">
+                        관리자
+                      </span>
+                    </div>
+                    <div className="w-fit flex items-end">
+                      <span className="break-words py-3 px-6 rounded-3xl bg-gray-10 text-black ml-8 max-w-[400px] block">
+                        {msg.text}
+                      </span>
+                      <span className="text-gray-400 text-xs ml-3">
+                        {formatTime(msg.timestamp)}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex justify-end">
+                    <div className="flex flex-col gap-4 items-end">
+                      {msg.imageUrl && (
+                        <img
+                          src={msg.imageUrl}
+                          alt="이미지"
+                          className="max-w-[600px] max-h-[200px] rounded-lg object-contain mt-6"
+                        />
+                      )}
+                      <div className="w-fit flex items-end">
+                        <span className="text-gray-400 text-xs mr-3">
+                          {formatTime(msg.timestamp)}
+                        </span>
+                        <span className="break-words py-3 px-6 rounded-3xl bg-gray-10 text-black max-w-[400px] block">
+                          {msg.text}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
         <div className="absolute bottom-[100px] left-1/2 -translate-x-1/2 z-20">
           {imageFile && (
@@ -239,7 +263,7 @@ export default function InquiryPage() {
           <div className="flex gap-3">
             <div className="flex items-center gap-4 relative">
               <input
-                className="w-[600px] bg-gray-20 rounded-full placeholder-white body4 pl-7 pr-24 py-3 text-gray-40 xl:w-[800px] xl:px-9 focus:outline-none"
+                className="w-[600px] bg-gray-20 rounded-full placeholder-gray-40 font-light body4 pl-7 pr-24 py-3 text-black xl:w-[800px] xl:px-9 focus:outline-none"
                 placeholder="메시지를 입력해주세요."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
