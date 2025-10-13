@@ -232,7 +232,7 @@ export default function InquiryPage() {
         </div>
         <div className="absolute h-[calc(100%-96px)] top-12 left-1/2 -translate-x-1/2 bg-white/80 rounded-3xl w-[800px] xl:w-[1000px]">
           <div
-            className="h-[calc(100%-160px)] overflow-y-auto scrollbar px-10 pt-2"
+            className="h-[calc(100%-160px)] overflow-y-auto scrollbar px-10"
             ref={scrollContainerRef}
           >
             {messages.map((msg, index) => {
@@ -247,7 +247,7 @@ export default function InquiryPage() {
               return (
                 <div key={msg.id} className="flex flex-col mt-4">
                   {showDateHeader && (
-                    <div className="text-center text-sm text-gray-30 my-4">
+                    <div className="text-center text-sm text-gray-30 my-8">
                       {formatDateHeader(msg.timestamp)}
                     </div>
                   )}
