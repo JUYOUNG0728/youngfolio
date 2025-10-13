@@ -204,14 +204,19 @@ export default function InquiryPage() {
       {!userUid && <div>Loading...</div>}
       <div className="absolute ml-[70px] h-[calc(100%-272px)] flex flex-col justify-between top-48 xl:top-60">
         <div>
-          <p className="h5 text-white">
+          <p className="h5 text-white mb-8 xl:mb-10">
             궁금한 점이 있으신가요?
             <br />
             언제든지 편하게 문의 주세요!
           </p>
-          <p className="body4 underline text-gray-30 mt-8 cursor-pointer xl:mt-10">
+          <span
+            className="body4 underline text-gray-30 cursor-pointer"
+            onClick={() => {
+              window.location.href = "/contact";
+            }}
+          >
             다른 방법으로 문의하기
-          </p>
+          </span>
         </div>
         <div className="text-white">냐!</div>
       </div>
