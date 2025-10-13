@@ -25,7 +25,8 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const isWhiteMode = pathname === "/contact/inquiry";
+  const isWhiteMode = pathname === "";
+  const setHamburgerWhiteMode = pathname === "/contact/inquiry";
 
   return (
     <div>
@@ -39,21 +40,14 @@ export default function Header() {
             height={screenWidth < 1920 ? 24 : 28}
           />
           {!isMenuOpen ? (
-            // <Image
-            //   src="/images/icon-hamburger.png"
-            //   alt="Menu"
-            //   width={28}
-            //   height={28}
-            //   className="cursor-pointer"
-            //   onClick={toggleMenu}
-            //   priority
-            // />
             <Hamburger
               width={screenWidth < 1920 ? 28 : 32}
               height={screenWidth < 1920 ? 28 : 32}
               className="cursor-pointer"
               onClick={toggleMenu}
-              fill={isWhiteMode ? "#000000" : "#FFFFFF"}
+              fill={
+                isWhiteMode || setHamburgerWhiteMode ? "#000000" : "#FFFFFF"
+              }
             />
           ) : (
             <Image
