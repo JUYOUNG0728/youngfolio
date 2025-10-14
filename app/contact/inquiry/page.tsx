@@ -37,20 +37,8 @@ export default function InquiryPage() {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const iconSize = {
-    plus: screenWidth < 1920 ? 14 : 16,
-    send: screenWidth < 1920 ? 18 : 20,
-  };
-
-  const formatTime = (timestamp: Timestamp) => {
-    if (!timestamp) return "";
-    const date = timestamp.toDate();
-    return date.toLocaleString("ko-KR", {
-      year: "2-digit",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+    plus: screenWidth < 1920 ? 13 : 16,
+    send: screenWidth < 1920 ? 16 : 20,
   };
 
   const uploadImage = async (file: File) => {
@@ -171,113 +159,201 @@ export default function InquiryPage() {
     };
   }, []);
 
+  // utils/messageUtils.ts에 추후 옮길 예정
+  const formatDateHeader = (timestamp: Timestamp) => {
+    const date = timestamp.toDate();
+    return date.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  const formatTime = (timestamp: Timestamp) => {
+    const date = timestamp.toDate();
+    return date.toLocaleTimeString("ko-KR", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const isSameMinute = (a: Timestamp, b: Timestamp) => {
+    const aDate = a.toDate();
+    const bDate = b.toDate();
+    return (
+      aDate.getFullYear() === bDate.getFullYear() &&
+      aDate.getMonth() === bDate.getMonth() &&
+      aDate.getDate() === bDate.getDate() &&
+      aDate.getHours() === bDate.getHours() &&
+      aDate.getMinutes() === bDate.getMinutes()
+    );
+  };
+
+  const isSameDay = (a: Timestamp, b: Timestamp) => {
+    const aDate = a.toDate();
+    const bDate = b.toDate();
+    return (
+      aDate.getFullYear() === bDate.getFullYear() &&
+      aDate.getMonth() === bDate.getMonth() &&
+      aDate.getDate() === bDate.getDate()
+    );
+  };
+
   return (
-    <div
-      className="w-full h-full"
-      style={{
-        background: "linear-gradient(180deg, #EDEEED 0%, #CDE0F2 100%)",
-      }}
-    >
+    <div className="w-full h-full bg-black">
       {!userUid && <div>Loading...</div>}
-      <div className="w-[calc(100%-140px)] h-full absolute left-1/2 -translate-x-1/2">
-        <div className="absolute top-60 xl:top-80">
-          <p className="h4">
+      <div className="absolute ml-[70px] h-[calc(100%-272px)] flex flex-col justify-between top-48 xl:top-60">
+        <div>
+          <p className="h5 text-white mb-8 xl:mb-10">
             궁금한 점이 있으신가요?
             <br />
             언제든지 편하게 문의 주세요!
           </p>
-          <p className="body4 underline text-gray-40 mt-8 cursor-pointer xl:mt-10">
+          <span
+            className="body4 underline text-gray-30 cursor-pointer"
+            onClick={() => {
+              window.location.href = "/contact";
+            }}
+          >
             다른 방법으로 문의하기
-          </p>
+          </span>
         </div>
+        <div className="text-white">냐!</div>
+      </div>
+      <div className="absolute right-0 top-0 bg-white rounded-l-2xl h-full w-[75vw] xl:w-[77vw]">
         <div
-          className="absolute h-[calc(100%-96px)] overflow-y-auto top-12 left-1/2 -translate-x-1/2 bg-white p-10 rounded-3xl w-[800px] xl:w-[1000px]"
+          className="w-full h-[calc(100%-180px)] overflow-y-auto scrollbar pl-16 pr-32 pt-4 xl:pl-24 xl:pr-40 xl:h-[calc(100%-240px)]"
           ref={scrollContainerRef}
         >
-          {messages.map((msg) => (
-            <div key={msg.id} className="mb-4">
-              <div className="flex flex-col">
-                <div>
-                  <strong>{msg.sender === "admin" ? "관리자" : "나"}:</strong>
-                  {msg.text}
-                  <span className="text-gray-400 text-xs ml-2">
-                    {formatTime(msg.timestamp)}
-                  </span>
-                </div>
-                {msg.imageUrl && (
-                  <img
-                    src={msg.imageUrl}
-                    alt="이미지"
-                    className="max-w-[600px] max-h-[200px] rounded-lg object-contain mt-4"
-                  />
+          {messages.map((msg, index) => {
+            const prevMsg = messages[index - 1];
+            const nextMsg = messages[index + 1];
+            const showDateHeader =
+              index === 0 || !isSameDay(msg.timestamp, prevMsg.timestamp);
+            const showTime =
+              !nextMsg ||
+              !isSameMinute(msg.timestamp, nextMsg.timestamp) ||
+              msg.sender !== nextMsg.sender;
+            return (
+              <div key={msg.id} className="flex flex-col mt-4">
+                {showDateHeader && (
+                  <div className="text-center text-sm text-gray-30 my-8 xl:text-base">
+                    {formatDateHeader(msg.timestamp)}
+                  </div>
+                )}
+
+                {msg.sender === "admin" ? (
+                  <div className="flex flex-col gap-2 xl:gap-3">
+                    <div className="flex items-center gap-2 xl:gap-[10px]">
+                      <div className="w-[18px] h-[18px] rounded-full bg-black xl:w-6 xl:h-6" />
+                      <span className="text-black text-base xl:text-lg">
+                        관리자
+                      </span>
+                    </div>
+                    <div className="w-fit flex items-end">
+                      <span className="break-words py-3 px-5 rounded-3xl bg-gray-10 text-black max-w-[600px] block text-base xl:text-lg xl:px-6 xl:max-w-[840px] xl:rounded-[30px]">
+                        {msg.text}
+                      </span>
+                      {showTime && (
+                        <span className="text-gray-30 body6 ml-3">
+                          {formatTime(msg.timestamp)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex justify-end">
+                    <div className="flex flex-col gap-4 items-end">
+                      {msg.imageUrl && (
+                        <img
+                          src={msg.imageUrl}
+                          alt="이미지 미리보기"
+                          className="max-w-[600px] max-h-[200px] rounded-lg object-contain mt-6"
+                        />
+                      )}
+                      <div className="w-fit flex items-end">
+                        {showTime && (
+                          <span className="text-gray-30 body6 mr-3">
+                            {formatTime(msg.timestamp)}
+                          </span>
+                        )}
+                        <span className="break-words py-3 px-5 rounded-3xl bg-gray-40 text-white max-w-[600px] block text-base xl:text-lg xl:px-6 xl:max-w-[840px] xl:rounded-[30px]">
+                          {msg.text}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
-        <div className="absolute bottom-[100px] left-1/2 -translate-x-1/2 z-20">
-          {imageFile && (
-            <div className="mb-8 relative inline-block">
-              <img
-                src={URL.createObjectURL(imageFile)}
-                alt="첨부 이미지 미리보기"
-                className="max-w-[600px] max-h-[200px] rounded-lg object-contain"
-              />
-              <button
-                className="absolute top-2 right-2 bg-black w-7 h-7 rounded-full flex justify-center items-center"
-                onClick={() => setImageFile(null)}
-              >
-                <Image
-                  src="/images/icon-close.png"
-                  alt="close"
-                  width={14}
-                  height={14}
+        <div className="absolute flex justify-center w-[calc(100%-214px)] bottom-[80px] z-20 xl:bottom-[100px] ml-16 xl:w-[calc(100%-278px)] xl:ml-24">
+          <div>
+            {imageFile && (
+              <div className="mb-8 relative inline-block">
+                <img
+                  src={URL.createObjectURL(imageFile)}
+                  alt="첨부 이미지 미리보기"
+                  className="max-w-[600px] max-h-[200px] rounded-lg object-contain"
                 />
-              </button>
-            </div>
-          )}
-          <div className="flex gap-3">
-            <div className="flex items-center gap-4 relative">
-              <input
-                className="w-[600px] bg-gray-20 rounded-full placeholder-white body4 pl-7 pr-24 py-3 text-gray-40 xl:w-[800px] xl:px-9 focus:outline-none"
-                placeholder="메시지를 입력해주세요."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSendMessage();
-                }}
-              />
-              <div className="h-[calc(100%-16px)] absolute right-5 top-1/2 -translate-y-1/2 flex items-center gap-2 xl:gap-3">
-                <label className="bg-gray-30 rounded-full aspect-square h-full overflow-hidden cursor-pointer flex justify-center items-center">
-                  <input
-                    className="w-full h-full hidden"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                  />
-                  <Plus
-                    width={iconSize.plus}
-                    height={iconSize.plus}
-                    fill="#ffffff"
-                    stroke="3"
-                  />
-                </label>
                 <button
-                  className={`w-[64px] h-full bg-black  rounded-full text-white text-lg font-semibold flex items-center justify-center gap-2 xl:w-[80px] ${
-                    !message.trim() && !imageFile
-                      ? "opacity-15 cursor-not-allowed"
-                      : ""
-                  }`}
-                  onClick={handleSendMessage}
-                  disabled={!message.trim() && !imageFile}
+                  className="absolute top-2 right-2 bg-black w-7 h-7 rounded-full flex justify-center items-center"
+                  onClick={() => setImageFile(null)}
                 >
                   <Image
-                    src="/images/icon-send.png"
-                    alt="send"
-                    width={iconSize.send}
-                    height={iconSize.send}
+                    src="/images/icon-close.png"
+                    alt="close"
+                    width={14}
+                    height={14}
                   />
                 </button>
+              </div>
+            )}
+            <div className="flex gap-3">
+              <div className="flex items-center gap-4 relative">
+                <input
+                  className="w-[600px] bg-white border border-gray-20 rounded-full placeholder-gray-40 body4 pl-7 pr-40 py-3 text-black xl:w-[800px] xl:pl-[38px] xl:pr-[200px] focus:outline-none xl:py-4"
+                  style={{ boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)" }}
+                  placeholder="메시지를 입력해주세요."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSendMessage();
+                  }}
+                />
+                <div className="h-[calc(100%-18px)] absolute right-5 top-1/2 -translate-y-1/2 flex items-center gap-2 xl:gap-3 xl:h-[calc(100%-24px)] xl:right-8">
+                  <label className="bg-gray-30 rounded-full aspect-square h-full overflow-hidden cursor-pointer flex justify-center items-center">
+                    <input
+                      className="w-full h-full hidden"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                    />
+                    <Plus
+                      width={iconSize.plus}
+                      height={iconSize.plus}
+                      fill="#ffffff"
+                      stroke="3"
+                    />
+                  </label>
+                  <button
+                    className={`w-[64px] h-full bg-black  rounded-full text-white text-lg font-semibold flex items-center justify-center gap-2 xl:w-[80px] ${
+                      !message.trim() && !imageFile
+                        ? "opacity-15 cursor-not-allowed"
+                        : ""
+                    }`}
+                    onClick={handleSendMessage}
+                    disabled={!message.trim() && !imageFile}
+                  >
+                    <Image
+                      src="/images/icon-send.png"
+                      alt="send"
+                      width={iconSize.send}
+                      height={iconSize.send}
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

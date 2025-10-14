@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Menu({
   setIsMenuOpen,
@@ -8,6 +8,9 @@ export default function Menu({
   setIsMenuOpen: (open: boolean) => void;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
+
+  const setBackgroundToBlack = pathname === "/contact/inquiry";
 
   const menuItems = [
     { id: "01", label: "Home", href: "/" },
@@ -37,7 +40,11 @@ export default function Menu({
   };
 
   return (
-    <div className="bg-fade-in fixed inset-0">
+    <div
+      className={`bg-fade-in fixed inset-0 ${
+        setBackgroundToBlack ? "bg-black/40" : ""
+      }`}
+    >
       <div className="flex items-center justify-center h-full w-full">
         <div className="flex gap-[280px] xl:gap-[420px]">
           {menuItems.map((item, index) => (
