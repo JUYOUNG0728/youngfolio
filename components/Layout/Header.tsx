@@ -32,8 +32,8 @@ export default function Header() {
 
   return (
     <div>
-      <div className="absolute z-50 top-0 px-[70px] w-full h-[120px] xl:h-[140px]">
-        <div className="flex items-center justify-between w-full h-full">
+      <div className="absolute z-50 top-0 px-[70px] w-full pointer-events-none h-[120px] xl:h-[140px]">
+        <div className="flex items-center justify-between w-full h-full pointer-events-auto">
           <Logo
             onClick={handleLogoClick}
             className="cursor-pointer"
