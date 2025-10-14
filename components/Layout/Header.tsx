@@ -25,8 +25,10 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const isWhiteMode = pathname === "";
-  const setHamburgerWhiteMode = pathname === "/contact/inquiry";
+  const setHeaderElementsToBlack = pathname === "";
+
+  // 부분적으로 햄버거 아이콘 색상을 변경
+  const setHamburgerToBlack = pathname === "/contact/inquiry";
 
   return (
     <div>
@@ -35,7 +37,7 @@ export default function Header() {
           <Logo
             onClick={handleLogoClick}
             className="cursor-pointer"
-            fill={isWhiteMode ? "#000000" : "#FFFFFF"}
+            fill={setHeaderElementsToBlack ? "#000000" : "#FFFFFF"}
             width={screenWidth < 1920 ? 150 : 180}
             height={screenWidth < 1920 ? 24 : 28}
           />
@@ -46,7 +48,9 @@ export default function Header() {
               className="cursor-pointer"
               onClick={toggleMenu}
               fill={
-                isWhiteMode || setHamburgerWhiteMode ? "#000000" : "#FFFFFF"
+                setHeaderElementsToBlack || setHamburgerToBlack
+                  ? "#000000"
+                  : "#FFFFFF"
               }
             />
           ) : (
