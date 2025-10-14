@@ -9,7 +9,7 @@ type LenisContextType = {
 
 const LenisContext = createContext<LenisContextType>({ lenis: null });
 
-export function LenisProvider({ children }: { children: React.ReactNode }) {
+function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
@@ -41,6 +41,8 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function useLenis() {
+function useLenis() {
   return useContext(LenisContext);
 }
+
+export { LenisProvider, useLenis };
