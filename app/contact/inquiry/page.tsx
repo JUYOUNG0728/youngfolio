@@ -202,7 +202,7 @@ export default function InquiryPage() {
   return (
     <div className="w-full h-full bg-black">
       {!userUid && <div>Loading...</div>}
-      <div className="absolute ml-[70px] h-[calc(100%-272px)] flex flex-col justify-between top-48 xl:top-60">
+      <div className="absolute ml-[70px] h-[calc(100%-272px)] flex flex-col justify-between top-48 xl:top-60 xl:h-[calc(100%-340px)]">
         <div>
           <p className="h5 text-white mb-8 xl:mb-10">
             궁금한 점이 있으신가요?
@@ -218,7 +218,18 @@ export default function InquiryPage() {
             다른 방법으로 문의하기
           </span>
         </div>
-        <div className="text-white">냐!</div>
+        <div className="text-white body4 flex flex-col">
+          <div className="mb-6 bg-gray-10 w-12 h-12 rounded-full pt-[5px] overflow-hidden xl:w-14 xl:h-14 xl:mb-7">
+            <Image
+              src="/images/icon-admin-avatar.png"
+              alt="관리자 아바타"
+              width={60}
+              height={60}
+            />
+          </div>
+          <span>매일 AM 9:00 - PM 8:00 (평균 1시간 내 응답)</span>
+          <span>답변은 페이지에 실시간으로 반영됩니다.</span>
+        </div>
       </div>
       <div className="absolute right-0 top-0 bg-white rounded-l-2xl h-full w-[75vw] xl:w-[77vw]">
         <div
@@ -244,10 +255,10 @@ export default function InquiryPage() {
 
                 {msg.sender === "admin" ? (
                   <div className="flex flex-col gap-2 xl:gap-3">
-                    <div className="flex items-center gap-2 xl:gap-[10px]">
-                      <div className="w-[18px] h-[18px] rounded-full bg-black xl:w-6 xl:h-6" />
-                      <span className="text-black text-base xl:text-lg">
-                        관리자
+                    <div className="flex items-center gap-2">
+                      <div className="w-4 h-4 rounded-full bg-black xl:w-[18px] xl:h-[18px]" />
+                      <span className="text-black font-medium text-base xl:text-lg xl:font-semibold">
+                        YOUNG
                       </span>
                     </div>
                     <div className="w-fit flex items-end">
