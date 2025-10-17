@@ -6,19 +6,21 @@ import useScreenWidth from "@/utils/useScreenWidth";
 
 import Plus from "@/components/Common/Plus";
 
+interface ExperienceBoxProps {
+  number: string;
+  title: string;
+  description: React.ReactNode;
+  isOpen: boolean;
+  onToggle: () => void;
+}
+
 export default function ExperienceBox({
   number,
   title,
   description,
   isOpen,
   onToggle,
-}: {
-  number: string;
-  title: string;
-  description: React.ReactNode;
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
+}: ExperienceBoxProps) {
   const screenWidth = useScreenWidth();
   const [maxHeight, setMaxHeight] = useState<string | number>("0px");
 

@@ -4,14 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import { db } from "@/firebaseConfig";
 import {
   collection,
-  addDoc,
   query,
   orderBy,
   onSnapshot,
   Timestamp,
 } from "firebase/firestore";
-import useScreenWidth from "@/utils/useScreenWidth";
-import uploadImage from "@/utils/uploadImage";
+import { postMessageImage, postMessage } from "@/utils/postMessage";
 import {
   formatDateHeader,
   isSameDay,
@@ -26,7 +24,7 @@ interface Message {
   id: string;
   uid: string;
   text: string;
-  imageUrl?: string;
+  imageUrl: string | null;
   timestamp: Timestamp;
   sender: "admin" | "user";
 }
@@ -34,29 +32,50 @@ interface Message {
 export default function InquiryPage() {
   const [userUid, setUserUid] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
-  const screenWidth = useScreenWidth();
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleSend = async (text: string, imageFile: File | null) => {
-    if (!userUid) return alert("새로고침 후 다시 시도해주세요.");
+  const sendMessage = async ({
+    uid,
+    text,
+    imageUrl,
+  }: {
+    uid: string;
+    text: string;
+    imageUrl: string | null;
+  }) => {
+    try {
+      await postMessage({ uid, text, imageUrl });
+    } catch (error) {
+      console.error("메시지 전송 실패 : ", error);
+      alert("메시지 전송에 실패했습니다.");
+    }
+  };
 
-    let imageUrl = null;
-    if (imageFile) {
-      try {
-        imageUrl = await uploadImage(userUid, imageFile);
-      } catch {
-        alert("이미지 업로드에 실패했습니다.");
-        return;
-      }
+  const uploadImage = async (
+    uid: string,
+    file: File
+  ): Promise<string | null> => {
+    try {
+      return await postMessageImage({ uid, file });
+    } catch (error) {
+      console.error("이미지 업로드 실패 : ", error);
+      alert("이미지 업로드에 실패했습니다.");
+      return null;
+    }
+  };
+
+  const handleSend = async (text: string, imageFile: File | null) => {
+    if (!userUid) {
+      alert(
+        "새로고침 후 다시 시도해주시고, 계속해서 문제 발생 시 다른 방법으로 문의해주세요."
+      );
+      return;
     }
 
-    await addDoc(collection(db, "messages"), {
-      sender: "user",
-      uid: userUid,
-      text,
-      imageUrl,
-      timestamp: Timestamp.now(),
-    });
+    const imageUrl = imageFile ? await uploadImage(userUid, imageFile) : null;
+    if (imageFile && !imageUrl) return;
+
+    await sendMessage({ uid: userUid, text, imageUrl });
   };
 
   useEffect(() => {
@@ -122,6 +141,11 @@ export default function InquiryPage() {
               !next ||
               !isSameMinute(msg.timestamp, next.timestamp) ||
               msg.sender !== next.sender;
+            const showProfile =
+              msg.sender === "admin" &&
+              (!prev ||
+                prev.sender !== "admin" ||
+                !isSameMinute(msg.timestamp, prev.timestamp));
 
             return (
               <div key={msg.id} className="flex flex-col mt-4">
@@ -130,7 +154,11 @@ export default function InquiryPage() {
                     {formatDateHeader(msg.timestamp)}
                   </div>
                 )}
-                <MessageBubble {...msg} showTime={showTime} />
+                <MessageBubble
+                  {...msg}
+                  showTime={showTime}
+                  showProfile={showProfile}
+                />
               </div>
             );
           })}

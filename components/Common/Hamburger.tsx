@@ -1,16 +1,18 @@
-export default function hamburger({
-  width = 159,
-  height = 25,
-  onClick,
-  className = "",
-  fill = "#ffffff",
-}: {
+interface HamburgerProps {
   width?: number;
   height?: number;
   onClick?: () => void;
   className?: string;
   fill?: string;
-}) {
+}
+
+export default function Hamburger({
+  width = 159,
+  height = 25,
+  onClick,
+  className = "",
+  fill = "#ffffff",
+}: HamburgerProps) {
   return (
     <svg
       width={width}

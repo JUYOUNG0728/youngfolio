@@ -62,6 +62,7 @@ export default function InquiryInput({ onSend }: InquiryInputProps) {
             </button>
           </div>
         )}
+
         <div className="flex gap-3">
           <div className="flex items-center gap-4 relative">
             <input
@@ -88,9 +89,9 @@ export default function InquiryInput({ onSend }: InquiryInputProps) {
               </label>
               <button
                 className={`w-[64px] h-full bg-black rounded-full text-white text-lg font-semibold flex items-center justify-center gap-2 xl:w-[80px] ${
-                  !message.trim() && !imageFile
-                    ? "opacity-15 cursor-not-allowed"
-                    : ""
+                  !message.trim() &&
+                  !imageFile &&
+                  "opacity-15 cursor-not-allowed"
                 }`}
                 onClick={handleSend}
                 disabled={!message.trim() && !imageFile}
