@@ -1,23 +1,30 @@
 import { Timestamp } from "firebase/firestore";
+import { Message } from "@/types/inquiry";
 
-const formatDateHeader = (timestamp: Timestamp) => {
+interface messageDisplayMetaParams {
+  msg: Message;
+  messages: Message[];
+  index: number;
+}
+
+function formatDateHeader(timestamp: Timestamp) {
   const date = timestamp.toDate();
   return date.toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
-};
+}
 
-const formatTime = (timestamp: Timestamp) => {
+function formatTime(timestamp: Timestamp) {
   const date = timestamp.toDate();
   return date.toLocaleTimeString("ko-KR", {
     hour: "2-digit",
     minute: "2-digit",
   });
-};
+}
 
-const isSameMinute = (a: Timestamp, b: Timestamp) => {
+function isSameMinute(a: Timestamp, b: Timestamp) {
   const aDate = a.toDate();
   const bDate = b.toDate();
   return (
@@ -27,9 +34,9 @@ const isSameMinute = (a: Timestamp, b: Timestamp) => {
     aDate.getHours() === bDate.getHours() &&
     aDate.getMinutes() === bDate.getMinutes()
   );
-};
+}
 
-const isSameDay = (a: Timestamp, b: Timestamp) => {
+function isSameDay(a: Timestamp, b: Timestamp) {
   const aDate = a.toDate();
   const bDate = b.toDate();
   return (
@@ -37,6 +44,33 @@ const isSameDay = (a: Timestamp, b: Timestamp) => {
     aDate.getMonth() === bDate.getMonth() &&
     aDate.getDate() === bDate.getDate()
   );
-};
+}
 
-export { formatDateHeader, formatTime, isSameMinute, isSameDay };
+function messageDisplayMeta({
+  msg,
+  messages,
+  index,
+}: messageDisplayMetaParams) {
+  const prev = messages[index - 1];
+  const next = messages[index + 1];
+
+  const showDate = index === 0 || !isSameDay(msg.timestamp, prev.timestamp);
+  const showTime =
+    !next ||
+    !isSameMinute(msg.timestamp, next.timestamp) ||
+    msg.sender !== next.sender;
+  const showProfile =
+    msg.sender === "admin" &&
+    (!prev ||
+      prev.sender !== "admin" ||
+      !isSameMinute(msg.timestamp, prev.timestamp));
+  return { showDate, showTime, showProfile };
+}
+
+export {
+  formatDateHeader,
+  formatTime,
+  isSameMinute,
+  isSameDay,
+  messageDisplayMeta,
+};

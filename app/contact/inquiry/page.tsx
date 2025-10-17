@@ -2,32 +2,15 @@
 
 import { useState, useEffect, useRef } from "react";
 import { db } from "@/firebaseConfig";
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  Timestamp,
-} from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+
 import { postMessageImage, postMessage } from "@/utils/postMessage";
-import {
-  formatDateHeader,
-  isSameDay,
-  isSameMinute,
-} from "@/utils/messageUtils";
+import { formatDateHeader, messageDisplayMeta } from "@/utils/messageUtils";
+import { Message } from "@/types/inquiry";
 
 import InquiryHeader from "@/components/Inquiry/InquiryHeader";
 import MessageBubble from "@/components/Inquiry/MessageBubble";
 import InquiryInput from "@/components/Inquiry/InquiryInput";
-
-interface Message {
-  id: string;
-  uid: string;
-  text: string;
-  imageUrl: string | null;
-  timestamp: Timestamp;
-  sender: "admin" | "user";
-}
 
 export default function InquiryPage() {
   const [userUid, setUserUid] = useState<string | null>(null);
@@ -133,19 +116,11 @@ export default function InquiryPage() {
           ref={scrollContainerRef}
         >
           {messages.map((msg, index) => {
-            const prev = messages[index - 1];
-            const next = messages[index + 1];
-            const showDate =
-              index === 0 || !isSameDay(msg.timestamp, prev.timestamp);
-            const showTime =
-              !next ||
-              !isSameMinute(msg.timestamp, next.timestamp) ||
-              msg.sender !== next.sender;
-            const showProfile =
-              msg.sender === "admin" &&
-              (!prev ||
-                prev.sender !== "admin" ||
-                !isSameMinute(msg.timestamp, prev.timestamp));
+            const { showDate, showTime, showProfile } = messageDisplayMeta({
+              msg,
+              messages,
+              index,
+            });
 
             return (
               <div key={msg.id} className="flex flex-col mt-4">
