@@ -3,11 +3,13 @@
 import InquiryBox from "@/components/Creator/InquiryBox";
 import ExperienceList from "@/components/Creator/ExperienceList";
 
+interface IntroduceSectionProps {
+  grayDivRef: React.RefObject<HTMLDivElement>;
+}
+
 export default function IntroduceSection({
   grayDivRef,
-}: {
-  grayDivRef: React.RefObject<HTMLDivElement>;
-}) {
+}: IntroduceSectionProps) {
   return (
     <div
       className="bg-gray-10 w-full relative z-10 flex justify-center text-black"
