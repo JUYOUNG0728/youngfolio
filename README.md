@@ -7,22 +7,22 @@
 
 ## 🛠️ 구성
 
-- main (projects)
+- main (projects) 
 - about/ youngfolio
 - about/ creator
 - contact/ information
-- contact/ inquiry (chat)
+- contact/ inquiry (chat service)
 
 ---
 
 ## 🧰 기술 스택
 
-| 구분     | 기술                         |
-| -------- | ---------------------------- |
+| 구분 | 기술 |
+|------|------|
 | Frontend | React / Next.js / TypeScript |
-| 스타일링 | CSS / Tailwind CSS           |
-| 배포     | Vercel                       |
-| 기타     | firebase                     |
+| 스타일링 | CSS / Tailwind CSS / GSAP |
+| 배포 | Vercel |
+| 기타 | Supabase |
 
 ---
 
@@ -42,4 +42,3 @@ yarn install
 npm run dev
 # 또는
 yarn dev
-```
