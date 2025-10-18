@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabaseClient";
 
 import { fetchMessages, postMessage, postImage } from "@/utils/messageApi";
 import { formatDateHeader, messageDisplayMeta } from "@/utils/messageUtils";
-import { Message, SendMessageParams, UploadImageParams } from "@/types/inquiry";
+import { Message, SendMessageParams } from "@/types/inquiry";
 
 import InquiryHeader from "@/components/Inquiry/InquiryHeader";
 import MessageBubble from "@/components/Inquiry/MessageBubble";
@@ -59,7 +59,6 @@ export default function InquiryPage() {
   useEffect(() => {
     const loadMessages = async () => {
       const data = await fetchMessages();
-      console.log("Fetched messages:", data);
       if (data) setMessages(data);
     };
     loadMessages();
