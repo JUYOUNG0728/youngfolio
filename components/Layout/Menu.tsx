@@ -42,7 +42,7 @@ export default function Menu({
   return (
     <div
       className={`bg-fade-in fixed inset-0 ${
-        setBackgroundToBlack ? "bg-black/40" : ""
+        setBackgroundToBlack && "bg-black/60"
       }`}
     >
       <div className="flex items-center justify-center h-full w-full">

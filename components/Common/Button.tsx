@@ -1,16 +1,18 @@
+interface ButtonProps {
+  text: string;
+  variant?: "primary" | "secondary" | "primaryOutline" | "secondaryOutline";
+  size?: "xl" | "lg" | "md" | "sm";
+  onClick?: () => void;
+  className?: string;
+}
+
 export default function Button({
   text,
   variant = "primary",
   size = "lg",
   onClick,
   className = "",
-}: {
-  text: string;
-  variant?: "primary" | "secondary" | "primaryOutline" | "secondaryOutline";
-  size?: "xl" | "lg" | "md" | "sm";
-  onClick?: () => void;
-  className?: string;
-}) {
+}: ButtonProps) {
   const buttonColor = {
     primary: "bg-black text-white hover:bg-white hover:text-black",
     secondary: "bg-white text-black hover:bg-black hover:text-white",

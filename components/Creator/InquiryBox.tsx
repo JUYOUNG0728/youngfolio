@@ -7,7 +7,7 @@ export default function InquiryBox() {
   const router = useRouter();
 
   const handleClickInquiryButton = () => {
-    router.push("/contact");
+    router.push("/contact/inquiry");
   };
 
   return (
