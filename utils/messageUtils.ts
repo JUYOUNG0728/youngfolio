@@ -1,4 +1,3 @@
-import { Timestamp } from "firebase/firestore";
 import { Message } from "@/types/inquiry";
 
 interface messageDisplayMetaParams {
@@ -7,26 +6,22 @@ interface messageDisplayMetaParams {
   index: number;
 }
 
-function formatDateHeader(timestamp: Timestamp) {
-  const date = timestamp.toDate();
-  return date.toLocaleDateString("ko-KR", {
+function formatDateHeader(timestamp: Date) {
+  return timestamp.toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 }
 
-function formatTime(timestamp: Timestamp) {
-  const date = timestamp.toDate();
-  return date.toLocaleTimeString("ko-KR", {
+function formatTime(timestamp: Date) {
+  return timestamp.toLocaleTimeString("ko-KR", {
     hour: "2-digit",
     minute: "2-digit",
   });
 }
 
-function isSameMinute(a: Timestamp, b: Timestamp) {
-  const aDate = a.toDate();
-  const bDate = b.toDate();
+function isSameMinute(aDate: Date, bDate: Date) {
   return (
     aDate.getFullYear() === bDate.getFullYear() &&
     aDate.getMonth() === bDate.getMonth() &&
@@ -36,9 +31,7 @@ function isSameMinute(a: Timestamp, b: Timestamp) {
   );
 }
 
-function isSameDay(a: Timestamp, b: Timestamp) {
-  const aDate = a.toDate();
-  const bDate = b.toDate();
+function isSameDay(aDate: Date, bDate: Date) {
   return (
     aDate.getFullYear() === bDate.getFullYear() &&
     aDate.getMonth() === bDate.getMonth() &&
@@ -54,16 +47,18 @@ function messageDisplayMeta({
   const prev = messages[index - 1];
   const next = messages[index + 1];
 
-  const showDate = index === 0 || !isSameDay(msg.timestamp, prev.timestamp);
+  const showDate =
+    index === 0 ||
+    !isSameDay(new Date(msg.timestamp), new Date(prev.timestamp));
   const showTime =
     !next ||
-    !isSameMinute(msg.timestamp, next.timestamp) ||
+    !isSameMinute(new Date(msg.timestamp), new Date(next.timestamp)) ||
     msg.sender !== next.sender;
   const showProfile =
     msg.sender === "admin" &&
     (!prev ||
       prev.sender !== "admin" ||
-      !isSameMinute(msg.timestamp, prev.timestamp));
+      !isSameMinute(new Date(msg.timestamp), new Date(prev.timestamp)));
   return { showDate, showTime, showProfile };
 }
 

@@ -1,53 +1,38 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { db } from "@/firebaseConfig";
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { supabase } from "@/lib/supabaseClient";
 
-import { postMessageImage, postMessage } from "@/utils/postMessage";
+import { fetchMessages, postMessage, postImage } from "@/utils/messageApi";
 import { formatDateHeader, messageDisplayMeta } from "@/utils/messageUtils";
-import { Message } from "@/types/inquiry";
+import { Message, SendMessageParams, UploadImageParams } from "@/types/inquiry";
 
 import InquiryHeader from "@/components/Inquiry/InquiryHeader";
 import MessageBubble from "@/components/Inquiry/MessageBubble";
 import InquiryInput from "@/components/Inquiry/InquiryInput";
+
+interface HandleSendParams {
+  text: string;
+  imageFile: File | null;
+}
 
 export default function InquiryPage() {
   const [userUid, setUserUid] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const sendMessage = async ({
-    uid,
-    text,
-    imageUrl,
-  }: {
-    uid: string;
-    text: string;
-    imageUrl: string | null;
-  }) => {
-    try {
-      await postMessage({ uid, text, imageUrl });
-    } catch (error) {
-      console.error("메시지 전송 실패 : ", error);
-      alert("메시지 전송에 실패했습니다.");
-    }
+  const sendMessage = async ({ uid, text, imageUrl }: SendMessageParams) => {
+    await postMessage({ uid, text, imageUrl });
   };
 
   const uploadImage = async (
     uid: string,
     file: File
   ): Promise<string | null> => {
-    try {
-      return await postMessageImage({ uid, file });
-    } catch (error) {
-      console.error("이미지 업로드 실패 : ", error);
-      alert("이미지 업로드에 실패했습니다.");
-      return null;
-    }
+    return await postImage({ uid, file });
   };
 
-  const handleSend = async (text: string, imageFile: File | null) => {
+  const handleSend = async ({ text, imageFile }: HandleSendParams) => {
     if (!userUid) {
       alert(
         "새로고침 후 다시 시도해주시고, 계속해서 문제 발생 시 다른 방법으로 문의해주세요."
@@ -72,21 +57,30 @@ export default function InquiryPage() {
   }, []);
 
   useEffect(() => {
-    const q = query(collection(db, "messages"), orderBy("timestamp"));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setMessages(
-        snapshot.docs.map((doc) => {
-          const data = doc.data() as Omit<Message, "id">;
+    const loadMessages = async () => {
+      const data = await fetchMessages();
+      console.log("Fetched messages:", data);
+      if (data) setMessages(data);
+    };
+    loadMessages();
+  }, []);
 
-          return {
-            id: doc.id,
-            ...data,
-            sender: data.sender ?? "user",
-          };
-        })
-      );
-    });
-    return () => unsubscribe();
+  useEffect(() => {
+    const channel = supabase
+      .channel("realtime:messages")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "messages" },
+        (payload) => {
+          const newMessage = payload.new as Message;
+          setMessages((prev) => [...prev, newMessage]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   useEffect(() => {
@@ -126,7 +120,7 @@ export default function InquiryPage() {
               <div key={msg.id} className="flex flex-col mt-4">
                 {showDate && (
                   <div className="text-center text-sm text-gray-30 my-8 xl:text-base">
-                    {formatDateHeader(msg.timestamp)}
+                    {formatDateHeader(new Date(msg.timestamp))}
                   </div>
                 )}
                 <MessageBubble

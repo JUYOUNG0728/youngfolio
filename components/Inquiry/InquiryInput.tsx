@@ -7,7 +7,13 @@ import useScreenWidth from "@/utils/useScreenWidth";
 import Plus from "@/components/Common/Plus";
 
 interface InquiryInputProps {
-  onSend: (message: string, imageFile: File | null) => void;
+  onSend: ({
+    text,
+    imageFile,
+  }: {
+    text: string;
+    imageFile: File | null;
+  }) => void;
 }
 
 export default function InquiryInput({ onSend }: InquiryInputProps) {
@@ -34,7 +40,7 @@ export default function InquiryInput({ onSend }: InquiryInputProps) {
 
   const handleSend = () => {
     if (!message.trim() && !imageFile) return;
-    onSend(message, imageFile);
+    onSend({ text: message, imageFile });
     setMessage("");
     setImageFile(null);
   };

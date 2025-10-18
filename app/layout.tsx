@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 
 import Header from "@/components/Layout/Header";
-import { LenisProvider } from "@/utils/LenisProvider";
+import { LenisProvider } from "@/lib/LenisProvider";
 
 export const metadata: Metadata = {
   title: "YOUNGFOLIO",

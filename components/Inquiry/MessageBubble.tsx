@@ -1,27 +1,26 @@
 "use client";
 
-import { Timestamp } from "firebase/firestore";
 import { formatTime } from "@/utils/messageUtils";
 
 interface MessageBubbleProps {
   text: string;
-  imageUrl: string | null;
+  image_url: string | null;
   sender: "admin" | "user";
-  timestamp: Timestamp;
+  timestamp: string;
   showTime: boolean;
   showProfile?: boolean;
 }
 
 export default function MessageBubble({
   text,
-  imageUrl,
+  image_url,
   sender,
   timestamp,
   showTime,
   showProfile = true,
 }: MessageBubbleProps) {
   const isAdmin = sender === "admin";
-  const isOnlyImageWithTimeStamp = !text && imageUrl && showTime;
+  const isOnlyImageWithTimeStamp = !text && image_url && showTime;
 
   const baseStyle = "flex flex-col gap-4";
   const baseClass = {
@@ -61,21 +60,23 @@ export default function MessageBubble({
               : ""
           }`}
         >
-          {imageUrl && (
+          {image_url && (
             <img
-              src={imageUrl}
+              src={image_url}
               alt={isAdmin ? "관리자 첨부 이미지" : "사용자 첨부 이미지"}
               className={`${imageStyle}`}
             />
           )}
           {!text && showTime && (
-            <span className={`${timestampStyle}`}>{formatTime(timestamp)}</span>
+            <span className={`${timestampStyle}`}>
+              {formatTime(new Date(timestamp))}
+            </span>
           )}
           {text && (
             <div className="w-fit flex items-end">
               {!isAdmin && showTime && (
                 <span className={`${timestampStyle} mr-3`}>
-                  {formatTime(timestamp)}
+                  {formatTime(new Date(timestamp))}
                 </span>
               )}
               <span
@@ -87,7 +88,7 @@ export default function MessageBubble({
               </span>
               {isAdmin && showTime && (
                 <span className={`${timestampStyle} ml-3`}>
-                  {formatTime(timestamp)}
+                  {formatTime(new Date(timestamp))}
                 </span>
               )}
             </div>
