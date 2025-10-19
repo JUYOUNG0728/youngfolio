@@ -1,5 +1,3 @@
-'use client";';
-
 import InquiryBox from "@/components/Creator/InquiryBox";
 import ExperienceList from "@/components/Creator/ExperienceList";
 

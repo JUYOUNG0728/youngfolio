@@ -1,5 +1,3 @@
-"use client";
-
 import { formatTime } from "@/utils/messageUtils";
 
 interface MessageBubbleProps {
