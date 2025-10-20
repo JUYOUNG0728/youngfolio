@@ -17,12 +17,11 @@ export default function BgmPlayer() {
       playerRef.current = new (window as any).YT.Player("bgm-player", {
         height: "0",
         width: "0",
-        videoId: "LlN8MPS7KQs",
+        videoId: "waz0YopWY28",
         playerVars: {
           autoplay: 0,
-          start: 8,
           loop: 1,
-          playlist: "LlN8MPS7KQs",
+          playlist: "waz0YopWY28",
         },
         events: {
           onReady: (event: any) => {
