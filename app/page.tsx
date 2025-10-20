@@ -9,8 +9,11 @@ import SoundButton from "@/components/Main/SoundButton";
 
 export default function MainPage() {
   const [showContents, setShowContents] = useState(false);
-  const [soundOn, setSoundOn] = useState(true);
+  const [soundOn, setSoundOn] = useState(false);
   const [focusProject, setFocusProject] = useState<number>(2);
+
+  const playerRef = useRef<any>(null);
+  const dragStartX = useRef<number | null>(null);
 
   const project = {
     name: "제목이 들어갑니다.",
@@ -20,8 +23,6 @@ export default function MainPage() {
   };
 
   const projects = Array(5).fill(project);
-
-  const dragStartX = useRef<number | null>(null);
 
   const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     dragStartX.current = e.clientX;
@@ -57,6 +58,41 @@ export default function MainPage() {
     };
   }, []);
 
+  useEffect(() => {
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
+
+    (window as any).onYouTubeIframeAPIReady = () => {
+      playerRef.current = new (window as any).YT.Player("bgm-player", {
+        height: "0",
+        width: "0",
+        videoId: "LlN8MPS7KQs",
+        playerVars: {
+          autoplay: 0,
+          start: 8,
+          loop: 1,
+        },
+        events: {
+          onReady: (event: any) => {
+            event.target.setVolume(30);
+          },
+        },
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    const player = playerRef.current;
+    if (player) {
+      if (soundOn) {
+        player.playVideo();
+      } else {
+        player.pauseVideo();
+      }
+    }
+  }, [soundOn]);
+
   return (
     <div className="h-full">
       <Background />
@@ -85,6 +121,7 @@ export default function MainPage() {
         </div>
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
           <SoundButton soundOn={soundOn} setSoundOn={setSoundOn} />
+          <div id="bgm-player" className="hidden" />
         </div>
       </div>
     </div>
