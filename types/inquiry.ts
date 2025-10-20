@@ -18,4 +18,9 @@ interface UploadImageParams {
   file: File;
 }
 
-export type { SendMessageParams, UploadImageParams, Message };
+interface HandleSendParams {
+  text: string;
+  imageFile: File | null;
+}
+
+export type { SendMessageParams, UploadImageParams, Message, HandleSendParams };
