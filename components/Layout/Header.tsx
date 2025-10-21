@@ -18,6 +18,7 @@ export default function Header() {
   const screenWidth = useScreenWidth();
 
   const handleLogoClick = () => {
+    setIsMenuOpen(false);
     router.push("/");
   };
 
@@ -26,8 +27,6 @@ export default function Header() {
   };
 
   const setHeaderElementsToBlack = pathname === "";
-
-  // 부분적으로 햄버거 아이콘 색상을 변경
   const setHamburgerToBlack = pathname === "/contact/inquiry";
 
   return (
