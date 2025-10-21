@@ -19,7 +19,11 @@ export default function Header() {
 
   const handleLogoClick = () => {
     setIsMenuOpen(false);
-    router.push("/");
+    if (pathname === "/") {
+      window.location.reload();
+    } else {
+      router.push("/");
+    }
   };
 
   const toggleMenu = () => {
