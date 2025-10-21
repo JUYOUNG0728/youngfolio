@@ -5,6 +5,7 @@ import SoundButton from "@/components/Main/SoundButton";
 
 export default function BgmPlayer() {
   const [soundOn, setSoundOn] = useState(false);
+  const [mouseOver, setMouseOver] = useState(true);
 
   const playerRef = useRef<any>(null);
 
@@ -15,13 +16,12 @@ export default function BgmPlayer() {
 
     (window as any).onYouTubeIframeAPIReady = () => {
       playerRef.current = new (window as any).YT.Player("bgm-player", {
-        height: "0",
-        width: "0",
-        videoId: "waz0YopWY28",
+        videoId: "LlN8MPS7KQs",
         playerVars: {
           autoplay: 0,
+          start: 4,
           loop: 1,
-          playlist: "waz0YopWY28",
+          playlist: "LlN8MPS7KQs",
         },
         events: {
           onReady: (event: any) => {
@@ -43,10 +43,31 @@ export default function BgmPlayer() {
     }
   }, [soundOn]);
 
+  const onMouseEnter = () => {
+    setMouseOver(true);
+    console.log("Mouse entered");
+  };
+  const onMouseLeave = () => {
+    setMouseOver(false);
+    console.log("Mouse left");
+  };
+
   return (
-    <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
+    <div
+      className={`absolute bottom-12 left-1/2 -translate-x-1/2 flex items-end justify-center ${
+        mouseOver && "h-[100px] w-[180px]"
+      }`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <SoundButton soundOn={soundOn} setSoundOn={setSoundOn} />
-      <div id="bgm-player" className="hidden" />
+      <div
+        className={`absolute bottom-24 left-1/2 -translate-x-1/2 ${
+          mouseOver ? "block" : "hidden"
+        }`}
+      >
+        <div id="bgm-player" className="w-[200px] h-[200px]" />
+      </div>
     </div>
   );
 }
