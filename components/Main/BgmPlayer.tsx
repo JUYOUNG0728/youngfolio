@@ -5,7 +5,7 @@ import SoundButton from "@/components/Main/SoundButton";
 
 export default function BgmPlayer() {
   const [soundOn, setSoundOn] = useState(false);
-  const [mouseOver, setMouseOver] = useState(true);
+  const [mouseOver, setMouseOver] = useState(false);
 
   const playerRef = useRef<any>(null);
 
