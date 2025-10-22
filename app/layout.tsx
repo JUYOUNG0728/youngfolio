@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 
 import Header from "@/components/Layout/Header";
 import { LenisProvider } from "@/lib/LenisProvider";
+import FollowCursor from "@/components/Common/FollowCursor";
 
 export const metadata: Metadata = {
   title: "YOUNGFOLIO",
@@ -20,6 +21,7 @@ export default function RootLayout({
         <LenisProvider>
           <Header />
           {children}
+          <FollowCursor />
         </LenisProvider>
       </body>
     </html>
