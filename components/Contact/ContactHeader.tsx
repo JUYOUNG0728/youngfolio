@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import ActivityStatus from "@/components/Contact/ActivityStatus";
 
 type ContactHeaderProps = {
   pageType: "inquiry" | "information";
@@ -29,7 +29,7 @@ export default function ContactHeader({ pageType }: ContactHeaderProps) {
   }, []);
 
   return (
-    <div className="absolute ml-[70px] h-[calc(100%-272px)] flex flex-col justify-between top-48 xl:top-60 xl:h-[calc(100%-340px)]">
+    <div className="absolute ml-[70px] h-[calc(100%-272px)] flex flex-col justify-between top-48 xl:top-64 xl:h-[calc(100%-372px)]">
       <div>
         <p className="h5 text-white mb-8 xl:mb-10">
           궁금한 점이 있으신가요?
@@ -49,21 +49,7 @@ export default function ContactHeader({ pageType }: ContactHeaderProps) {
         </span>
       </div>
       <div className="relative text-white body4 flex flex-col">
-        <div
-          className={`${
-            isWorkingHour ? "bg-green-600" : "bg-gray-40"
-          } px-2 py-[2px] rounded-xl absolute top-[-8px] left-8 text-white text-xs font-medium xl:left-9 xl:text-sm xl:top-[-10px]`}
-        >
-          <span>{isWorkingHour ? "ON" : "OFF"}</span>
-        </div>
-        <div className="mb-6 bg-gray-10 w-12 h-12 rounded-full pt-[5px] overflow-hidden xl:w-14 xl:h-14 xl:mb-7">
-          <Image
-            src="/images/icon-admin-avatar.png"
-            alt="관리자 아바타"
-            width={60}
-            height={60}
-          />
-        </div>
+        <ActivityStatus isWorkingHour={isWorkingHour} />
         <span>매일 AM 9:00 - PM 8:00 (평균 1시간 내 응답)</span>
         <span>
           {pageType === "inquiry"

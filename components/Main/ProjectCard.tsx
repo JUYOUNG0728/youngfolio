@@ -13,9 +13,6 @@ export default function ProjectCard({
   onMouseUp: () => void;
   onClick?: () => void;
 }) {
-  const baseClass =
-    "bg-black shadow-lg rounded-xl flex flex-col justify-end text-white text-center transition-all ease-in-out duration-500";
-
   const sizeClass = focus
     ? "w-[23%] h-[64%] px-11 py-11 xl:px-14 xl:py-14 xl:h-[60%]"
     : "w-[18%] h-[50%] px-8 py-8 opacity-40 xl:px-10 xl:py-10 xl:h-[46%]";
@@ -35,7 +32,7 @@ export default function ProjectCard({
 
   return (
     <div
-      className={`${baseClass} ${sizeClass} ${pointerClass} select-none`}
+      className={`bg-black shadow-lg rounded-xl flex flex-col justify-end text-white text-center transition-all ease-in-out duration-500 select-none ${sizeClass} ${pointerClass}`}
       style={backgroundStyle}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}

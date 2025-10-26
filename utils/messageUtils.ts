@@ -1,10 +1,10 @@
 import { Message } from "@/types/inquiry";
 
-interface messageDisplayMetaParams {
+type messageDisplayMetaParams = {
   msg: Message;
   messages: Message[];
   index: number;
-}
+};
 
 function formatDateHeader(timestamp: Date) {
   return timestamp.toLocaleDateString("ko-KR", {

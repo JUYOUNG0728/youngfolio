@@ -30,7 +30,7 @@ export default function MainPage() {
   }, []);
 
   return (
-    <div className="h-full">
+    <div className="h-full relative">
       <Background />
       <Intro />
       <div
@@ -44,7 +44,9 @@ export default function MainPage() {
           2025 : Branding Myself Beyond Words
         </p>
         <ProjectList projects={projects} />
-        <BgmPlayer />
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 xl:bottom-20">
+          <BgmPlayer />
+        </div>
       </div>
     </div>
   );

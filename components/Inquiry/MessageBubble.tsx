@@ -1,13 +1,13 @@
 import { formatTime } from "@/utils/messageUtils";
 
-interface MessageBubbleProps {
+type MessageBubbleProps = {
   text: string;
   image_url: string | null;
   sender: "admin" | "user";
   timestamp: string;
   showTime: boolean;
   showProfile?: boolean;
-}
+};
 
 export default function MessageBubble({
   text,

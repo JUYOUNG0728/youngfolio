@@ -8,10 +8,10 @@ import { Message, HandleSendParams } from "@/types/inquiry";
 import MessageBubble from "@/components/Inquiry/MessageBubble";
 import InquiryInput from "@/components/Inquiry/InquiryInput";
 
-interface InquiryChatProps {
+type InquiryChatProps = {
   messages: Message[];
   handleSend: ({ text, imageFile }: HandleSendParams) => Promise<void>;
-}
+};
 
 export default function InquiryChat({
   messages,
@@ -66,7 +66,9 @@ export default function InquiryChat({
           );
         })}
       </div>
-      <InquiryInput onSend={handleSend} />
+      <div className="absolute flex justify-center w-[calc(100%-214px)] bottom-[80px] z-20 xl:bottom-[100px] ml-16 xl:w-[calc(100%-278px)] xl:ml-24">
+        <InquiryInput onSend={handleSend} />
+      </div>
     </div>
   );
 }

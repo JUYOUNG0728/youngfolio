@@ -1,9 +1,9 @@
 import InquiryBox from "@/components/Creator/InquiryBox";
 import ExperienceList from "@/components/Creator/ExperienceList";
 
-interface IntroduceSectionProps {
+type IntroduceSectionProps = {
   grayDivRef: React.RefObject<HTMLDivElement>;
-}
+};
 
 export default function IntroduceSection({
   grayDivRef,

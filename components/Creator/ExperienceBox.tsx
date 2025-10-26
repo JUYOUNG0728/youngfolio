@@ -6,13 +6,13 @@ import useScreenWidth from "@/utils/useScreenWidth";
 
 import Plus from "@/components/Common/Plus";
 
-interface ExperienceBoxProps {
+type ExperienceBoxProps = {
   number: string;
   title: string;
   description: React.ReactNode;
   isOpen: boolean;
   onToggle: () => void;
-}
+};
 
 export default function ExperienceBox({
   number,

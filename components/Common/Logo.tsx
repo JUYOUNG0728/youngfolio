@@ -1,10 +1,10 @@
-interface LogoProps {
+type LogoProps = {
   width?: number;
   height?: number;
   onClick?: () => void;
   className?: string;
   fill?: string;
-}
+};
 
 export default function Logo({
   width = 159,
