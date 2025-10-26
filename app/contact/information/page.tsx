@@ -10,7 +10,7 @@ export default function InformationPage() {
       <ContactHeader pageType="information" />
       <div className="h-full absolute top-0 right-0 border-l border-gray-50 text-white w-[75vw] pl-24 pt-48 xl:w-[77vw] xl:pl-32 xl:pt-64">
         <ProfileInfo />
-        <div className="w-full pt-40 xl:pt-52">
+        <div className="w-full pt-40 xl:pt-64">
           <ContactInfo />
         </div>
       </div>
