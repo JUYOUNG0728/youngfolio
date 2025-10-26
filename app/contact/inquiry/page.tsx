@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { fetchMessages, postMessage, postImage } from "@/utils/messageApi";
 import { Message, SendMessageParams, HandleSendParams } from "@/types/inquiry";
 
-import InquiryHeader from "@/components/Inquiry/InquiryHeader";
+import ContactHeader from "@/components/Contact/ContactHeader";
 import InquiryChat from "@/components/Inquiry/InquiryChat";
 
 export default function InquiryPage() {
@@ -76,7 +76,7 @@ export default function InquiryPage() {
 
   return (
     <div className="w-full h-full bg-black relative">
-      <InquiryHeader />
+      <ContactHeader pageType="inquiry" />
       <InquiryChat messages={messages} handleSend={handleSend} />
     </div>
   );
