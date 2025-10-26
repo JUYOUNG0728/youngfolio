@@ -1,11 +1,11 @@
-interface PlusProps {
+type PlusProps = {
   width?: number;
   height?: number;
   onClick?: () => void;
   className?: string;
   fill?: string;
   stroke?: string;
-}
+};
 
 export default function Plus({
   width = 24,

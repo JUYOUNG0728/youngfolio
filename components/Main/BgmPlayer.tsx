@@ -54,19 +54,22 @@ export default function BgmPlayer() {
 
   return (
     <div
-      className={`absolute bottom-12 left-1/2 -translate-x-1/2 flex items-end justify-center ${
-        mouseOver && "h-[100px] w-[180px]"
+      className={`flex items-end justify-center ${
+        mouseOver && "h-[100px] w-[180px] xl:h-[140px] xl:w-[260px]"
       }`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       <SoundButton soundOn={soundOn} setSoundOn={setSoundOn} />
       <div
-        className={`absolute bottom-24 left-1/2 -translate-x-1/2 ${
+        className={`absolute bottom-24 left-1/2 -translate-x-1/2 xl:bottom-32 ${
           mouseOver ? "block" : "hidden"
         }`}
       >
-        <div id="bgm-player" className="w-[200px] h-[200px]" />
+        <div
+          id="bgm-player"
+          className="w-[200px] h-[200px] xl:w-[240px] xl:h-[240px]"
+        />
       </div>
     </div>
   );

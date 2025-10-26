@@ -1,10 +1,10 @@
-interface HamburgerProps {
+type HamburgerProps = {
   width?: number;
   height?: number;
   onClick?: () => void;
   className?: string;
   fill?: string;
-}
+};
 
 export default function Hamburger({
   width = 159,

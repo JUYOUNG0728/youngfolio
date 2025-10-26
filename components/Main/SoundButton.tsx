@@ -14,7 +14,7 @@ export default function SoundButton({
 
   return (
     <div
-      className="w-[60px] h-[60px] rounded-full bg-white flex items-center justify-center xl:w-[70px] xl:h-[70px] cursor-pointer"
+      className="w-[60px] h-[60px] rounded-full bg-white flex items-center justify-center cursor-pointer xl:w-[70px] xl:h-[70px]"
       onClick={() => setSoundOn(!soundOn)}
     >
       <Image

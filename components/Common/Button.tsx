@@ -1,10 +1,10 @@
-interface ButtonProps {
+type ButtonProps = {
   text: string;
   variant?: "primary" | "secondary" | "primaryOutline" | "secondaryOutline";
   size?: "xl" | "lg" | "md" | "sm";
   onClick?: () => void;
   className?: string;
-}
+};
 
 export default function Button({
   text,
