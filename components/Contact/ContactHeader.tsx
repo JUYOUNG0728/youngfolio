@@ -3,7 +3,11 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function InquiryHeader() {
+type ContactHeaderProps = {
+  pageType: "inquiry" | "information";
+};
+
+export default function ContactHeader({ pageType }: ContactHeaderProps) {
   const [isWorkingHour, setIsWorkingHour] = useState(false);
 
   useEffect(() => {
@@ -34,7 +38,12 @@ export default function InquiryHeader() {
         </p>
         <span
           className="body4 underline text-gray-30 cursor-pointer"
-          onClick={() => (window.location.href = "/contact")}
+          onClick={() =>
+            (window.location.href =
+              pageType === "inquiry"
+                ? "/contact/information"
+                : "/contact/inquiry")
+          }
         >
           다른 방법으로 문의하기
         </span>
@@ -56,7 +65,11 @@ export default function InquiryHeader() {
           />
         </div>
         <span>매일 AM 9:00 - PM 8:00 (평균 1시간 내 응답)</span>
-        <span>답변은 페이지에 실시간으로 반영됩니다.</span>
+        <span>
+          {pageType === "inquiry"
+            ? "답변은 페이지에 실시간으로 반영됩니다."
+            : "최대한 빠르게 확인 후 연락드리겠습니다."}
+        </span>
       </div>
     </div>
   );

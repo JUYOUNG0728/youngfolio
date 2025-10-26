@@ -26,7 +26,7 @@ export default function Menu({
     {
       id: "03",
       label: "Contact",
-      href: "/contact",
+      href: "/contact/information",
       submenu: [
         { label: "Information", href: "/contact/information" },
         { label: "Inquiry", href: "/contact/inquiry" },

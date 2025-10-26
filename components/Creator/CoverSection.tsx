@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import SnsItems from "@/components/Creator/SnsItems";
+import SnsItems from "@/components/Common/SnsItems";
 import useScreenWidth from "@/utils/useScreenWidth";
 
 export default function CoverSection() {
