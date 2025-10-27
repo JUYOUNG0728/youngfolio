@@ -35,6 +35,7 @@ export default function CreatorPage() {
     }, grayDivRef);
 
     ScrollTrigger.refresh();
+    ScrollTrigger.clearScrollMemory();
 
     return () => {
       ctx.revert();
