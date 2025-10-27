@@ -10,7 +10,7 @@ export default function IntroduceSection({
 }: IntroduceSectionProps) {
   return (
     <div
-      className="bg-gray-10 w-full relative z-10 flex justify-center text-black"
+      className="bg-gray-10 w-full absolute top-0 left-0 z-10 flex justify-center text-black"
       ref={grayDivRef}
       style={{
         minHeight: "calc(100vh + 10px)",

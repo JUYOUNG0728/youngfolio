@@ -29,8 +29,8 @@ export default function CreatorPage() {
 
       timeline.fromTo(
         grayDivRef.current,
-        { y: "0%" },
-        { y: "-100%", ease: "power4.out" }
+        { y: "100%" },
+        { y: "0%", ease: "power4.out" }
       );
     }, grayDivRef);
 
