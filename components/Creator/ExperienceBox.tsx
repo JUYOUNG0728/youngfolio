@@ -31,20 +31,15 @@ export default function ExperienceBox({
   }, [isOpen, description]);
 
   return (
-    <div className="w-full border-b border-gray-30 mb-6 pb-6 xl:pb-8 xl:mb-8 transition-all duration-500">
+    <div className="w-full border-b border-gray-20 mb-7 pb-7 xl:pb-8 xl:mb-8 transition-all duration-500">
       <div className="flex justify-between items-center w-full">
-        <div
-          className={`flex items-center cursor-pointer ${
-            number === "01" ? "gap-[30px] xl:gap-10" : "gap-6 xl:gap-8"
-          }`}
+        <h3
+          className="h5 !font-semibold cursor-pointer ml-8"
           onClick={onToggle}
         >
-          <h3 className="h3 font-semibold text-gray-10 text-outline">
-            {number}
-          </h3>
-          <h3 className="h4 !font-semibold">{title}</h3>
-        </div>
-        <div className="mr-3 cursor-pointer" onClick={onToggle}>
+          {title}
+        </h3>
+        <div className="mr-8 cursor-pointer" onClick={onToggle}>
           {!isOpen ? (
             <Image
               src={"/images/icon-arrow-down.png"}
@@ -62,18 +57,15 @@ export default function ExperienceBox({
           )}
         </div>
       </div>
-
       <div
         ref={contentRef}
         style={{
           maxHeight: maxHeight,
           overflow: "hidden",
-          transition: "max-height 0.4s ease",
+          transition: "max-height 0.8s ease",
         }}
       >
-        <p className="body4 text-gray-50 ml-[78px] mt-5 xl:mt-7 xl:ml-[96px]">
-          {description}
-        </p>
+        <p className="body4 text-gray-50 ml-8 mt-8 xl:mt-10]">{description}</p>
       </div>
     </div>
   );

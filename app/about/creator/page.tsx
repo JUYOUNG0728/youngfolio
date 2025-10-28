@@ -29,7 +29,7 @@ export default function CreatorPage() {
 
       timeline.fromTo(
         grayDivRef.current,
-        { y: "110%" },
+        { y: "105vh" },
         { y: "0%", ease: "power4.out" }
       );
     }, grayDivRef);

@@ -20,7 +20,6 @@ export default function MessageBubble({
   const isAdmin = sender === "admin";
   const isOnlyImageWithTimeStamp = !text && image_url && showTime;
 
-  const baseStyle = "flex flex-col gap-4";
   const baseClass = {
     admin: {
       base: "items-start",
@@ -48,7 +47,7 @@ export default function MessageBubble({
           </div>
         )}
         <div
-          className={`${baseStyle} ${
+          className={`flex flex-col gap-4 ${
             isAdmin ? baseClass.admin.base : baseClass.user.base
           } ${
             isOnlyImageWithTimeStamp
