@@ -29,7 +29,7 @@ export default function ContactHeader({ pageType }: ContactHeaderProps) {
   }, []);
 
   return (
-    <div className="absolute ml-[70px] h-[calc(100%-272px)] flex flex-col justify-between top-48 xl:top-64 xl:h-[calc(100%-372px)]">
+    <div className="absolute ml-[70px] h-[calc(100%-298px)] flex flex-col justify-between top-48 xl:top-60 xl:h-[calc(100%-364px)]">
       <div>
         <p className="h5 text-white mb-8 xl:mb-10">
           궁금한 점이 있으신가요?
