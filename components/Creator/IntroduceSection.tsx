@@ -10,13 +10,10 @@ export default function IntroduceSection({
 }: IntroduceSectionProps) {
   return (
     <div
-      className="bg-gray-10 w-full absolute top-0 left-0 z-10 flex justify-center text-black"
+      className="bg-gray-10 w-full min-h-full absolute top-0 left-0 z-10 flex justify-center text-black"
       ref={grayDivRef}
-      style={{
-        minHeight: "calc(100vh + 10px)",
-      }}
     >
-      <div className="w-[calc(100%-140px)] h-full py-[100px]">
+      <div className="absolute top-0 left-0 w-full bg-gray-10 px-[70px] py-[100px]">
         <div className="flex justify-between w-full h-full">
           <div className="flex flex-col gap-[80px] xl:gap-[100px]">
             <div className="flex flex-col gap-8 xl:gap-10">
@@ -39,7 +36,7 @@ export default function IntroduceSection({
             </div>
             <InquiryBox />
           </div>
-          <div className="w-full pl-[220px] mt-16 xl:pl-[340px]">
+          <div className="w-full pl-[220px] mt-16 xl:pl-[340px] xl:mt-20">
             <ExperienceList />
           </div>
         </div>

@@ -29,7 +29,7 @@ export default function CreatorPage() {
 
       timeline.fromTo(
         grayDivRef.current,
-        { y: "100%" },
+        { y: "110%" },
         { y: "0%", ease: "power4.out" }
       );
     }, grayDivRef);
@@ -43,7 +43,7 @@ export default function CreatorPage() {
   }, [screenWidth]);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full overflow-y-auto">
       <CoverSection />
       <IntroduceSection grayDivRef={grayDivRef} />
     </div>

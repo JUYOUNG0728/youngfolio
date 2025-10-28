@@ -4,8 +4,6 @@ import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import useScreenWidth from "@/utils/useScreenWidth";
 
-import Plus from "@/components/Common/Plus";
-
 type ExperienceBoxProps = {
   number: string;
   title: string;
@@ -37,24 +35,29 @@ export default function ExperienceBox({
       <div className="flex justify-between items-center w-full">
         <div
           className={`flex items-center cursor-pointer ${
-            number === "01" ? "gap-[26px] xl:gap-9" : "gap-5 xl:gap-7"
+            number === "01" ? "gap-[30px] xl:gap-10" : "gap-6 xl:gap-8"
           }`}
           onClick={onToggle}
         >
           <h3 className="h3 font-semibold text-gray-10 text-outline">
             {number}
           </h3>
-          <h3 className="h4">{title}</h3>
+          <h3 className="h4 !font-semibold">{title}</h3>
         </div>
         <div className="mr-3 cursor-pointer" onClick={onToggle}>
           {!isOpen ? (
-            <Plus />
+            <Image
+              src={"/images/icon-arrow-down.png"}
+              alt={"펼치기"}
+              width={screenWidth < 1920 ? 32 : 40}
+              height={screenWidth < 1920 ? 32 : 40}
+            />
           ) : (
             <Image
-              src={"/images/icon-minus.png"}
-              alt={"minus"}
-              width={screenWidth < 1920 ? 20 : 24}
-              height={screenWidth < 1920 ? 20 : 24}
+              src={"/images/icon-arrow-up.png"}
+              alt={"접기"}
+              width={screenWidth < 1920 ? 32 : 40}
+              height={screenWidth < 1920 ? 32 : 40}
             />
           )}
         </div>
@@ -68,7 +71,7 @@ export default function ExperienceBox({
           transition: "max-height 0.4s ease",
         }}
       >
-        <p className="body4 ml-[72px] mt-7 xl:mt-9 xl:ml-[84px]">
+        <p className="body4 text-gray-50 ml-[78px] mt-5 xl:mt-7 xl:ml-[96px]">
           {description}
         </p>
       </div>
