@@ -3,7 +3,11 @@
 import { useState, useRef, useEffect } from "react";
 import Photo from "@/components/Main/Photo";
 
-export default function PhotoList({ photos }: { photos: any[] }) {
+type PhotoListProps = {
+  photos: string[];
+};
+
+export default function PhotoList({ photos }: PhotoListProps) {
   const [focusPhoto, setFocusPhoto] = useState<number>(0);
 
   const dragStartX = useRef<number | null>(null);
@@ -45,7 +49,7 @@ export default function PhotoList({ photos }: { photos: any[] }) {
       {photos.map((photo, index) => (
         <Photo
           key={index}
-          image={photo.image}
+          image={photo}
           focus={focusPhoto === index}
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
