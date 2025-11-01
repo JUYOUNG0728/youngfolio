@@ -77,7 +77,7 @@ export default function Background() {
   }, [screenHeight, circle1Position, circle2Position, circle3Position]);
 
   return (
-    <div className="bg-dark-blue w-screen h-screen relative overflow-hidden">
+    <div className="bg-dark-blue w-full h-full relative overflow-hidden">
       <div className="h-full w-full blur-1 relative">
         {/* Circle 1 */}
         <div

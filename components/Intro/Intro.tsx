@@ -66,7 +66,7 @@ export default function Intro() {
   }, []);
 
   return (
-    <div className="w-screen h-screen absolute top-0 left-0">
+    <div className="w-full h-full absolute top-0 left-0">
       <h1 className={`introText ${showHello ? "opacity-100" : "opacity-0"}`}>
         HELLO!
       </h1>
