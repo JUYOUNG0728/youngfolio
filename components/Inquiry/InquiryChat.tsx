@@ -38,9 +38,9 @@ export default function InquiryChat({
   }, []);
 
   return (
-    <div className="absolute right-0 top-0 bg-white rounded-l-2xl h-full w-[75vw] xl:w-[77vw]">
+    <div className="bg-white/10 rounded-3xl h-[90vh] w-[67vw] border-2 border-white/20">
       <div
-        className="w-full h-[calc(100%-180px)] overflow-y-auto scrollbar pl-16 pr-32 pt-4 xl:pl-24 xl:pr-40 xl:h-[calc(100%-240px)]"
+        className="w-full h-[calc(100%-180px)] overflow-y-auto scrollbar px-20 pt-4 xl:px-24 xl:h-[calc(100%-240px)]"
         ref={scrollContainerRef}
       >
         {messages.map((msg, index) => {
@@ -66,7 +66,7 @@ export default function InquiryChat({
           );
         })}
       </div>
-      <div className="absolute flex justify-center w-[calc(100%-214px)] bottom-[80px] z-20 xl:bottom-[100px] ml-16 xl:w-[calc(100%-278px)] xl:ml-24">
+      <div className="absolute flex justify-center w-[calc(100%-214px)] bottom-16 z-20 xl:bottom-20 ml-16 xl:w-[calc(100%-278px)] xl:ml-24">
         <InquiryInput onSend={handleSend} />
       </div>
     </div>

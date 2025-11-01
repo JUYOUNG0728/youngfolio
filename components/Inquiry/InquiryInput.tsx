@@ -24,7 +24,7 @@ export default function InquiryInput({ onSend }: InquiryInputProps) {
 
   const iconSize = {
     plus: screenWidth < 1920 ? 13 : 16,
-    send: screenWidth < 1920 ? 16 : 20,
+    send: screenWidth < 1920 ? 18 : 20,
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,17 +67,17 @@ export default function InquiryInput({ onSend }: InquiryInputProps) {
           </button>
         </div>
       )}
-      <div className="flex gap-3">
+      <div className="flex gap-3 ml-8 xl:ml-4">
         <div className="flex items-center gap-4 relative">
           <input
-            className="w-[600px] bg-white border border-gray-20 rounded-full placeholder-gray-40 body4 pl-7 pr-40 py-3 text-black xl:w-[800px] xl:pl-[38px] xl:pr-[200px] focus:outline-none xl:py-4"
+            className="w-[600px] bg-gray-10 rounded-full placeholder-gray-50 body4 pl-7 pr-40 py-3 text-black xl:w-[800px] xl:pl-[38px] xl:pr-[200px] focus:outline-none xl:py-4"
             placeholder="메시지를 입력해주세요."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
           />
           <div className="h-[calc(100%-18px)] absolute right-5 top-1/2 -translate-y-1/2 flex items-center gap-2 xl:gap-3 xl:h-[calc(100%-24px)] xl:right-8">
-            <label className="bg-gray-30 rounded-full aspect-square h-full overflow-hidden cursor-pointer flex justify-center items-center">
+            <label className="bg-gray-40 rounded-full aspect-square h-full overflow-hidden cursor-pointer flex justify-center items-center">
               <input
                 className="hidden"
                 type="file"
@@ -92,7 +92,7 @@ export default function InquiryInput({ onSend }: InquiryInputProps) {
               />
             </label>
             <button
-              className={`w-[64px] h-full bg-black rounded-full text-white text-lg font-semibold flex items-center justify-center gap-2 xl:w-[80px] ${
+              className={`w-[64px] h-full bg-black rounded-full flex items-center justify-center gap-2 xl:w-[80px] ${
                 !message.trim() && !imageFile && "opacity-15 cursor-not-allowed"
               }`}
               onClick={handleSend}

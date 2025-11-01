@@ -30,17 +30,16 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const setHeaderElementsToBlack = pathname === "";
-  const setHamburgerToBlack = pathname === "/contact/inquiry";
+  const whiteMode = pathname === "";
 
   return (
     <div>
-      <div className="absolute z-50 top-0 px-[70px] w-full pointer-events-none h-[120px] xl:h-[140px]">
+      <div className="absolute z-50 top-0 px-[70px] w-full pointer-events-none h-[120px] xl:h-[140px] xl:px-[100px]">
         <div className="flex items-center justify-between w-full h-full pointer-events-auto">
           <Logo
             onClick={handleLogoClick}
             className="cursor-pointer"
-            fill={setHeaderElementsToBlack ? "#000000" : "#FFFFFF"}
+            fill={whiteMode ? "#000000" : "#ffffff"}
             width={screenWidth < 1920 ? 150 : 180}
             height={screenWidth < 1920 ? 24 : 28}
           />
@@ -50,11 +49,7 @@ export default function Header() {
               height={screenWidth < 1920 ? 28 : 32}
               className="cursor-pointer"
               onClick={toggleMenu}
-              fill={
-                setHeaderElementsToBlack || setHamburgerToBlack
-                  ? "#000000"
-                  : "#FFFFFF"
-              }
+              fill={whiteMode ? "#000000" : "#ffffff"}
             />
           ) : (
             <Image

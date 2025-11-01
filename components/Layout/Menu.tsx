@@ -17,11 +17,7 @@ export default function Menu({
     {
       id: "02",
       label: "About",
-      href: "/about/youngfolio",
-      submenu: [
-        { label: "Youngfolio", href: "/about/youngfolio" },
-        { label: "About Creator", href: "/about/creator" },
-      ],
+      href: "/about",
     },
     {
       id: "03",

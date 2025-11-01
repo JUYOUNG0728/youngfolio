@@ -29,7 +29,7 @@ export default function ContactHeader({ pageType }: ContactHeaderProps) {
   }, []);
 
   return (
-    <div className="absolute ml-[70px] h-[calc(100%-298px)] flex flex-col justify-between top-48 xl:top-64 xl:h-[calc(100%-380px)]">
+    <div className="w-full h-full bg-black absolute left-0 top-0 pl-[70px] pt-48 xl:pt-60 xl:pl-[100px]">
       <div>
         <p className="h5 text-white mb-8 xl:mb-10">
           궁금한 점이 있으신가요?
@@ -48,7 +48,7 @@ export default function ContactHeader({ pageType }: ContactHeaderProps) {
           다른 방법으로 문의하기
         </span>
       </div>
-      <div className="relative text-white body4 flex flex-col">
+      <div className="absolute left-[70px] bottom-28 text-white body4 flex flex-col xl:bottom-36 xl:left-[100px]">
         <ActivityStatus isWorkingHour={isWorkingHour} />
         <span>매일 AM 9:00 - PM 8:00 (평균 1시간 내 응답)</span>
         <span>

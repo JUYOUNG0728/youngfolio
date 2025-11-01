@@ -39,9 +39,9 @@ export default function MessageBubble({
     return (
       <div className={`${isAdmin ? "flex flex-col" : "flex justify-end"}`}>
         {isAdmin && showProfile && (
-          <div className="flex items-center gap-2 my-4">
-            <div className="w-4 h-4 rounded-full bg-black xl:w-[18px] xl:h-[18px]" />
-            <span className="text-black font-medium text-base xl:text-lg xl:font-semibold">
+          <div className="flex items-center gap-2 my-3">
+            <div className="w-3 h-3 rounded-full bg-gray-10 xl:w-[14px] xl:h-[14px]" />
+            <span className="text-gray-10 font-medium text-base xl:text-lg xl:font-semibold">
               YOUNG
             </span>
           </div>
@@ -78,7 +78,9 @@ export default function MessageBubble({
               )}
               <span
                 className={`${bubbleStyle} ${
-                  isAdmin ? "bg-gray-10 text-black" : "bg-gray-40 text-white"
+                  isAdmin
+                    ? "bg-cool-gray-30 text-white"
+                    : "bg-cool-gray-10 text-black"
                 }`}
               >
                 {text}
