@@ -75,7 +75,7 @@ export default function InquiryPage() {
   }, []);
 
   return (
-    <div className="w-screen h-screen relative">
+    <div className="w-full h-full relative">
       <ContactHeader pageType="inquiry" />
       <div className="absolute right-[160px] top-[5vh] xl:right-[220px]">
         <InquiryChat messages={messages} handleSend={handleSend} />
