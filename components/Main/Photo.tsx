@@ -15,14 +15,15 @@ export default function Photo({
 }) {
   return (
     <div
-      className={`h-full w-full bg-black shadow-lg rounded-xl flex flex-col justify-end text-white text-center ${
+      className={`h-full w-full bg-black shadow-lg flex flex-col justify-end text-white text-center ${
         focus ? "opacity-100" : "opacity-40"
       }`}
       style={{
         backgroundImage: `url(${image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        transition: "all 0.3s ease-in-out",
+        borderRadius: focus ? "999px" : "60px 0 60px 0",
+        transition: "border-radius 2s ease-in-out, opacity 0.3s ease-in-out",
       }}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
