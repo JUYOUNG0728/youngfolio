@@ -103,7 +103,13 @@
 @layer utilities {
   /* Font Sizes */
   .h1 {
-    /* 공란 */
+    font-size: 10rem;
+    font-weight: 700;
+    line-height: 1.2;
+
+    @media (max-width: 1920px) {
+      font-size: 8rem;
+    }
   }
 
   .h2 {
