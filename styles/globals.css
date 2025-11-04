@@ -17,6 +17,8 @@
   --white: #fff;
   --black: #000;
 
+  --sky-blue: #e2f1ff;
+  --blue: #0530d0;
   --dark-blue: #1e253a;
 
   --text-black: #242424;
@@ -107,10 +109,10 @@
   .h2 {
     font-size: 5.5rem;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.3;
 
     @media (max-width: 1920px) {
-      font-size: 5rem;
+      font-size: 4.5rem;
     }
   }
 
@@ -143,11 +145,17 @@
   }
 
   .body1 {
+    font-size: 9rem;
+    line-height: 1.2;
+
+    @media (max-width: 1920px) {
+      font-size: 6rem;
+    }
   }
 
   .body2 {
     font-size: 1.5rem;
-    line-height: 1.6;
+    line-height: 1.7;
 
     @media (max-width: 1920px) {
       font-size: 1.25rem;
@@ -225,6 +233,12 @@
   .text-cool-gray-30 {
     color: var(--cool-gray-30);
   }
+  .text-sky-blue {
+    color: var(--sky-blue);
+  }
+  .text-blue {
+    color: var(--blue);
+  }
   .text-dark-blue {
     color: var(--dark-blue);
   }
@@ -259,6 +273,12 @@
   }
   .bg-cool-gray-30 {
     background-color: var(--cool-gray-30);
+  }
+  .bg-sky-blue {
+    background-color: var(--sky-blue);
+  }
+  .bg-blue {
+    background-color: var(--blue);
   }
   .bg-dark-blue {
     background-color: var(--dark-blue);
@@ -295,6 +315,12 @@
   .border-cool-gray-30 {
     border-color: var(--cool-gray-30);
   }
+  .border-sky-blue {
+    border-color: var(--sky-blue);
+  }
+  .border-blue {
+    border-color: var(--blue);
+  }
   .border-dark-blue {
     border-color: var(--dark-blue);
   }
@@ -330,6 +356,12 @@
   .placeholder-cool-gray-30::placeholder {
     color: var(--cool-gray-30);
   }
+  .placeholder-sky-blue::placeholder {
+    color: var(--sky-blue);
+  }
+  .placeholder-blue::placeholder {
+    color: var(--blue);
+  }
   .placeholder-dark-blue::placeholder {
     color: var(--dark-blue);
   }
@@ -354,8 +386,13 @@
 
   /* Text Outline */
   .text-outline {
-    color: transparent; /* 안쪽은 투명 */
-    -webkit-text-stroke: 1px black; /* 외곽선 두께와 색상 */
+    color: transparent;
+    -webkit-text-stroke: 1px black;
+  }
+
+  .text-outline-white {
+    color: transparent;
+    -webkit-text-stroke: 1px white;
   }
 
   /* Cursor */
