@@ -17,12 +17,12 @@
 
 ## 🧰 기술 스택
 
-| 구분     | 기술                              |
-| -------- | --------------------------------- |
-| Frontend | React / Next.js / TypeScript      |
-| 스타일링 | CSS / Tailwind CSS / GSAP / Lenis |
-| 배포     | Vercel                            |
-| 기타     | Supabase                          |
+| 구분     | 기술                                    |
+| -------- | --------------------------------------- |
+| Frontend | React / Next.js / TypeScript / Three.js |
+| 스타일링 | CSS / Tailwind CSS / GSAP / Lenis       |
+| 배포     | Vercel                                  |
+| 기타     | Supabase                                |
 
 ---
 
