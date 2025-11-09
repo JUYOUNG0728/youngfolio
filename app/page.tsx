@@ -17,14 +17,13 @@ export default function MainPage() {
   const screenWidth = useScreenWidth();
 
   const [showContents, setShowContents] = useState(true);
-  const [zoomIn, setZoomIn] = useState(false);
-  const [showWords, setShowWords] = useState(false);
 
   const contentRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const photoRef = useRef<HTMLDivElement | null>(null);
   const photoBackgroundRef = useRef<HTMLDivElement | null>(null);
+  const projectRef = useRef<HTMLDivElement | null>(null);
 
   const iconScrollArrowSize = screenWidth > 1920 ? 52 : 36;
 
@@ -64,37 +63,45 @@ export default function MainPage() {
 
   /* 사진 줌인 애니메이션 */
   useEffect(() => {
-    if (!scrollRef.current) return;
+    if (!scrollRef.current || !photoRef.current) return;
+
+    const photo = photoRef.current.querySelector(".zoom-photo");
 
     const ctx = gsap.context(() => {
+      gsap.set(photo, { width: "70vw" });
+
       ScrollTrigger.create({
         trigger: scrollRef.current,
         start: "center center",
-        onEnter: () => setZoomIn(true),
-        onLeaveBack: () => setZoomIn(false),
+        onEnter: () => gsap.to(photo, { width: "100vw", duration: 0.5 }),
+        onLeaveBack: () => gsap.to(photo, { width: "70vw", duration: 0.5 }),
       });
     }, scrollRef);
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    return () => ctx.revert();
   }, []);
 
   /* 사진 글자 나타나는 애니메이션 */
   useEffect(() => {
     if (!photoRef.current) return;
 
+    const words = photoRef.current.querySelector(".photo-words");
+
     const ctx = gsap.context(() => {
+      gsap.set(words, { opacity: 0 });
+
       ScrollTrigger.create({
         trigger: photoRef.current,
-        start: "top 99%",
-        onEnter: () => setShowWords(true),
-        onLeaveBack: () => setShowWords(false),
+        start: "top bottom",
+        onEnter: () => gsap.to(words, { opacity: 1, duration: 0.5 }),
+        onLeaveBack: () => gsap.to(words, { opacity: 0, duration: 0.5 }),
       });
     }, photoRef);
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    return () => ctx.revert();
   }, []);
 
-  /* 파란 배경 슬라이드 되는 애니메이션 */
+  /* 검은 배경 슬라이드 되는 애니메이션 */
   useEffect(() => {
     if (!photoRef.current || !photoBackgroundRef.current) return;
 
@@ -115,6 +122,88 @@ export default function MainPage() {
     }, photoBackgroundRef);
 
     return () => ctx.revert();
+  }, []);
+
+  /* 프로젝트 글자 나타나는 애니메이션 */
+  useEffect(() => {
+    if (!photoRef.current) return;
+
+    const mainTextDiv = photoRef.current.querySelector(".photo-words");
+    const mainText = mainTextDiv?.querySelector("span") as HTMLSpanElement;
+    const subTextDiv = mainTextDiv?.querySelector("div") as HTMLDivElement;
+
+    const ctx = gsap.context(() => {
+      gsap.set(mainText, { opacity: 1 });
+      gsap.set(subTextDiv, { opacity: 0, maxHeight: 0 });
+
+      if (!mainTextDiv || !mainText || !subTextDiv) return;
+
+      ScrollTrigger.create({
+        trigger: photoRef.current,
+        start: "top top-=800",
+        onEnter: () => {
+          mainTextDiv.classList.remove("h1"), mainTextDiv.classList.add("h2");
+          gsap.to(mainText, {
+            opacity: "40%",
+            duration: 0.1,
+            ease: "cubic-bezier(0.65,0,0.35,1)",
+          });
+          gsap.to(subTextDiv, {
+            opacity: 1,
+            maxHeight: 500,
+            duration: 0.1,
+            ease: "cubic-bezier(0.65,0,0.35,1)",
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to(mainText, {
+            opacity: "100%",
+            duration: 0.1,
+            ease: "cubic-bezier(0.65,0,0.35,1)",
+          });
+          gsap.to(subTextDiv, {
+            opacity: 0,
+            maxHeight: 0,
+            duration: 0.1,
+            ease: "cubic-bezier(0.65,0,0.35,1)",
+          });
+
+          gsap.delayedCall(0.5, () => {
+            mainTextDiv.classList.remove("h2");
+            mainTextDiv.classList.add("h1");
+          });
+        },
+      });
+    }, photoRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  /* 프로젝트 스케일 업 애니메이션 */
+  useEffect(() => {
+    if (!projectRef.current) return;
+
+    const projects = Array.from(
+      projectRef.current.querySelectorAll(".project-item")
+    ) as HTMLDivElement[];
+
+    const ctx = gsap.context(() => {
+      projects.forEach((project, i) => {
+        gsap.set(project, { scale: 0.8 });
+
+        ScrollTrigger.create({
+          trigger: projectRef.current,
+          start: `top+=${i * 1000} center`,
+          onEnter: () => gsap.to(project, { scale: 1, duration: 0.2 }),
+          onLeaveBack: () => gsap.to(project, { scale: 0.8, duration: 0.2 }),
+          scrub: true,
+        });
+      });
+    }, projectRef);
+
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -160,7 +249,7 @@ export default function MainPage() {
                   YOUNG'S PORTFOLIO
                 </h1>
                 <button
-                  className="px-8 py-2.5 bg-white rounded-full text-black body3 font-semibold flex items-center justify-center gap-3 xl:gap-4 hover:scale-110"
+                  className="px-8 py-2.5 bg-white rounded-full text-black body3 font-semibold flex items-center justify-center gap-3 xl:gap-4 hover:s`ca`le-110"
                   onClick={() => {
                     window.location.href = "/about";
                   }}
@@ -181,7 +270,7 @@ export default function MainPage() {
               className="absolute top-0 left-0 w-full h-full"
               ref={contentRef}
             >
-              <div className="bg-black w-full h-[400vh]">
+              <div className="bg-black w-full h-[500vh] xl:h-[460vh]">
                 <div className="w-full h-[200vh]">
                   <div className="w-full h-screen flex flex-col items-center justify-center sticky top-0">
                     <p
@@ -216,40 +305,114 @@ export default function MainPage() {
                     </div>
                   </div>
                 </div>
-                <div className="w-full h-full" ref={photoRef}>
+                <div className="w-full h-[160%]" ref={photoRef}>
                   <div className="w-full h-screen sticky top-0 flex items-center justify-center overflow-x-hidden">
-                    <div
-                      className={`h-full relative flex flex-col items-center justify-center ${
-                        zoomIn ? "w-full" : "w-[70vw]"
-                      } `}
-                      style={{ transition: "width 0.5s ease-in-out" }}
-                    >
+                    <div className="h-full relative flex flex-col items-center justify-center zoom-photo">
                       <Image
                         src="/images/img-main-background.jpg"
                         alt="배경 이미지"
                         fill
-                        objectFit="cover"
+                        className="object-cover brightness-75"
                       />
-                      <div className="absolute top-0 left-0 w-full h-full bg-black/30 z-10" />
                       <div
-                        className="absolute top-0 left-0 bg-blue w-full h-full"
+                        className="absolute top-0 left-0 bg-black w-full h-screen"
                         ref={photoBackgroundRef}
                       />
-                      <h2
-                        className={`h1 text-center text-white font-semibold relative z-10 ${
-                          showWords ? "opacity-100" : "opacity-0"
-                        }`}
-                        style={{ transition: "opacity 0.5s ease-in-out" }}
-                      >
-                        IMAGINE BEYOND
+                      <h2 className="text-gray-10 text-center font-semibold relative z-10 flex flex-col items-center justify-center photo-words h1">
+                        <span className="transition-all duration-700">
+                          IMAGINE BEYOND
+                        </span>
+                        <div className="flex flex-col items-center transition-all duration-700">
+                          <div
+                            className="flex relative bottom-[34px] my-8 xl:my-12 xl:bottom-[50px]"
+                            style={{
+                              clipPath:
+                                "polygon(0 0, 100% 0, 100% 200%, 0 200%)",
+                            }}
+                          >
+                            <span className="bouncing-loop h-10">x</span>
+                          </div>
+                          <span>SOME PROJECTS</span>
+                        </div>
                       </h2>
                     </div>
                   </div>
                 </div>
               </div>
+              <div className="bg-black pt-[1000px] w-full" ref={projectRef}>
+                <div className="w-full sticky">
+                  <div className="relative w-full">
+                    <div className="absolute top-0 left-0 w-[40vw] h-[60vh] bg-black text-white project-item">
+                      <div className="w-full h-full">
+                        <Image
+                          src="/images/img-project-thumbnail-youngfolio.jpg"
+                          alt="YOUNGFOLIO 썸네일"
+                          fill
+                          className="object-cover border border-gray-40"
+                        />
+                      </div>
+                      <div className="relative mt-8 flex flex-col gap-2 ml-4">
+                        <h3 className="h5">YOUNGFOLIO</h3>
+                        <p className="body5">
+                          2025. WEB / UX JUYOUNG'S PORTFOLIO
+                        </p>
+                      </div>
+                    </div>
+                    <div className="absolute top-[100vh] right-0 w-[40vw] h-[60vh] bg-black text-white project-item">
+                      <div className="w-full h-full">
+                        <Image
+                          src="/images/img-project-thumbnail-youngfolio.jpg"
+                          alt="YOUNGFOLIO 썸네일"
+                          fill
+                          className="object-cover border border-gray-40"
+                        />
+                      </div>
+                      <div className="relative mt-8 flex flex-col gap-2 ml-4">
+                        <h3 className="h5">YOUNGFOLIO</h3>
+                        <p className="body5">
+                          2025. WEB / UX JUYOUNG'S PORTFOLIO
+                        </p>
+                      </div>
+                    </div>
+                    <div className="absolute top-[200vh] left-0 w-[40vw] h-[60vh] bg-black text-white project-item">
+                      <div className="w-full h-full">
+                        <Image
+                          src="/images/img-project-thumbnail-youngfolio.jpg"
+                          alt="YOUNGFOLIO 썸네일"
+                          fill
+                          className="object-cover border border-gray-40"
+                        />
+                      </div>
+                      <div className="relative mt-8 flex flex-col gap-2 ml-4">
+                        <h3 className="h5">YOUNGFOLIO</h3>
+                        <p className="body5">
+                          2025. WEB / UX JUYOUNG'S PORTFOLIO
+                        </p>
+                      </div>
+                    </div>
+                    <div className="absolute top-[300vh] left-0 right-0 mx-auto w-[40vw] h-[60vh] bg-black text-white project-item">
+                      <div className="w-full h-full">
+                        <Image
+                          src="/images/img-project-thumbnail-youngfolio.jpg"
+                          alt="YOUNGFOLIO 썸네일"
+                          fill
+                          className="object-cover border border-gray-40"
+                        />
+                      </div>
+                      <div className="relative pt-8 flex flex-col gap-2 ml-4 bg-black">
+                        <h3 className="h5">YOUNGFOLIO</h3>
+                        <p className="body5">
+                          2025. WEB / UX JUYOUNG'S PORTFOLIO
+                        </p>
+                      </div>
+                      <div className="w-full h-[20vh] bg-black" />
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full h-[360vh] bg-black" />
+                <div className="w-full h-[400vh] bg-white" />
+              </div>
             </div>
-            <div className="bg-black w-full h-full" />
-            <div className="bg-white w-full h-full" />
           </>
         )}
       </div>

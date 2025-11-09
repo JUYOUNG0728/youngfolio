@@ -18,7 +18,7 @@
   --black: #000;
 
   --sky-blue: #e2f1ff;
-  --blue: #0530d0;
+  --blue: #032291;
   --dark-blue: #1e253a;
 
   --text-black: #242424;
@@ -473,4 +473,23 @@
     animation-timing-function: ease-out;
     animation-delay: 0.6s;
   }
+}
+
+@keyframes bouncingLoop {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(60px);
+  }
+  50.01% {
+    transform: translateY(-60px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.bouncing-loop {
+  animation: bouncingLoop 1.5s ease-in-out infinite;
 }
