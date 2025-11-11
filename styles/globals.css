@@ -81,11 +81,24 @@
 
   .menu {
     color: var(--white);
-    font-size: 3rem;
-    font-weight: 600;
+    font-size: 4rem;
+    font-weight: 500;
 
     @media (max-width: 1920px) {
-      font-size: 2.5rem;
+      font-size: 3rem;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
     }
   }
 
@@ -106,7 +119,6 @@
     font-size: 10rem;
     font-weight: 700;
     line-height: 1.2;
-
     @media (max-width: 1920px) {
       font-size: 8rem;
     }
@@ -440,10 +452,10 @@
   /* Animations */
   @keyframes bgFadeIn {
     0% {
-      backdrop-filter: blur(0);
+      background-color: rgba(0, 0, 0, 0);
     }
     100% {
-      backdrop-filter: blur(12px);
+      background-color: rgba(0, 0, 0, 1);
     }
   }
 
@@ -492,4 +504,19 @@
 
 .bouncing-loop {
   animation: bouncingLoop 1.5s ease-in-out infinite;
+}
+
+@keyframes bouncing {
+  0%,
+  100% {
+    transform: translateY(-60%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+.bouncing {
+  animation: bouncing 1s ease-in-out infinite;
 }

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
-import { useEffect } from "react";
 
 import Header from "@/components/Layout/Header";
 import { LenisProvider } from "@/lib/LenisProvider";
