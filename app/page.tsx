@@ -19,23 +19,23 @@ export default function MainPage() {
   const [showContents, setShowContents] = useState(true);
 
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const photoRef = useRef<HTMLDivElement | null>(null);
-  const photoBackgroundRef = useRef<HTMLDivElement | null>(null);
   const projectRef = useRef<HTMLDivElement | null>(null);
 
   const iconScrollArrowSize = screenWidth > 1920 ? 52 : 36;
+  const iconInquirySendSize = screenWidth > 1920 ? 40 : 32;
 
-  // useEffect(() => {
-  //   const showContentsTimer = setTimeout(() => {
-  //     setShowContents(true);
-  //   }, 8500);
+  /* 인트로 후 contents 등장 */
+  useEffect(() => {
+    const showContentsTimer = setTimeout(() => {
+      setShowContents(true);
+    }, 8500);
 
-  //   return () => {
-  //     clearTimeout(showContentsTimer);
-  //   };
-  // }, []);)
+    return () => {
+      clearTimeout(showContentsTimer);
+    };
+  }, []);
 
   /* contents 위로 올라오는 애니메이션 */
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function MainPage() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         contentRef.current,
-        { y: "100%" },
+        { y: "92%" },
         {
           y: "0%",
           ease: "power4.out",
@@ -65,21 +65,29 @@ export default function MainPage() {
   useEffect(() => {
     if (!scrollRef.current || !photoRef.current) return;
 
-    const photo = photoRef.current.querySelector(".zoom-photo");
+    const photoDiv = photoRef.current.querySelector(".zoom-photo");
+    const photo = photoRef.current.querySelector(".zoom-photo-img");
 
     const ctx = gsap.context(() => {
-      gsap.set(photo, { width: "70vw" });
+      gsap.set(photoDiv, { width: "60vw" });
+      gsap.set(photo, { filter: "brightness(1)" });
 
       ScrollTrigger.create({
         trigger: scrollRef.current,
-        start: "center center",
-        onEnter: () => gsap.to(photo, { width: "100vw", duration: 0.5 }),
-        onLeaveBack: () => gsap.to(photo, { width: "70vw", duration: 0.5 }),
+        start: "center top-=500",
+        onEnter: () => {
+          gsap.to(photoDiv, { width: "100vw", duration: 0.5 }),
+            gsap.to(photo, { filter: "brightness(0.5)", duration: 0.5 });
+        },
+        onLeaveBack: () => {
+          gsap.to(photoDiv, { width: "60vw", duration: 0.5 }),
+            gsap.to(photo, { filter: "brightness(1)", duration: 0.5 });
+        },
       });
     }, scrollRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [screenWidth, showContents]);
 
   /* 사진 글자 나타나는 애니메이션 */
   useEffect(() => {
@@ -99,30 +107,7 @@ export default function MainPage() {
     }, photoRef);
 
     return () => ctx.revert();
-  }, []);
-
-  /* 검은 배경 슬라이드 되는 애니메이션 */
-  useEffect(() => {
-    if (!photoRef.current || !photoBackgroundRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        photoBackgroundRef.current,
-        { x: "100vw" },
-        {
-          x: 0,
-          scrollTrigger: {
-            trigger: photoRef.current,
-            start: "top top",
-            end: "+=800",
-            scrub: true,
-          },
-        }
-      );
-    }, photoBackgroundRef);
-
-    return () => ctx.revert();
-  }, []);
+  }, [screenWidth, showContents]);
 
   /* 프로젝트 글자 나타나는 애니메이션 */
   useEffect(() => {
@@ -140,7 +125,7 @@ export default function MainPage() {
 
       ScrollTrigger.create({
         trigger: photoRef.current,
-        start: "top top-=800",
+        start: "top top-=500",
         onEnter: () => {
           mainTextDiv.classList.remove("h1"), mainTextDiv.classList.add("h2");
           gsap.to(mainText, {
@@ -177,7 +162,7 @@ export default function MainPage() {
     }, photoRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [screenWidth, showContents]);
 
   /* 프로젝트 스케일 업 애니메이션 */
   useEffect(() => {
@@ -193,9 +178,9 @@ export default function MainPage() {
 
         ScrollTrigger.create({
           trigger: projectRef.current,
-          start: `top+=${i * 1000} bottom+=700`,
-          onEnter: () => gsap.to(project, { scale: 1, duration: 0.2 }),
-          onLeaveBack: () => gsap.to(project, { scale: 0.8, duration: 0.2 }),
+          start: `top+=${i * 1000} bottom+=600`,
+          onEnter: () => gsap.to(project, { scale: 1, duration: 0.3 }),
+          onLeaveBack: () => gsap.to(project, { scale: 0.8, duration: 0.3 }),
           scrub: true,
         });
       });
@@ -204,7 +189,7 @@ export default function MainPage() {
     return () => {
       ctx.revert();
     };
-  }, []);
+  }, [screenWidth, showContents]);
 
   return (
     <div
@@ -218,61 +203,79 @@ export default function MainPage() {
       </div>
       <div
         style={{
-          transition: "opacity 0.5s ease-in-out",
+          transition: "opacity 1s ease-in-out",
           opacity: showContents ? 1 : 0,
           pointerEvents: showContents ? "auto" : "none",
         }}
       >
         {showContents && (
           <>
-            <div className="absolute top-0 left-0 w-full h-full pt-28 px-[70px] xl:px-[100px] xl:pt-32">
-              <video
-                src="/images/video-youngfolio.mp4"
-                autoPlay
-                loop
-                muted
-                className="w-full h-full absolute bottom-0 left-0 object-cover object-top"
-                ref={videoRef}
-              />
+            <div className="absolute top-0 left-0 w-full h-[150vh] bg-white overflow-x-hidden pt-32 px-[70px] xl:px-[100px] xl:pt-40">
               <div
-                className="w-full h-[70vh] absolute top-0 left-0"
+                className="absolute top-0 left-0 w-full h-[70vh]"
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(0, 0, 0, 0.45) 40%, rgba(0, 0, 0, 0) 100%)",
+                    "linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)",
                 }}
               />
-              <div className="w-full flex flex-col items-center relative">
-                <span className="body2 text-white mb-5 xl:mb-7">
+              <div className="text-black flex flex-col items-center gap-10 xl:gap-12">
+                <div className="w-28 h-28 bg-black rounded-full flex items-center justify-center relative overflow-hidden">
+                  <Image
+                    src="/images/img-character.png"
+                    alt="캐릭터 이미지"
+                    width={120}
+                    height={120}
+                    className="object-cover rounded-full absolute bottom-[-36px] scale-150"
+                  />
+                </div>
+                <h1 className="h1">YOUNG, PORTFOLIO</h1>
+                <span className="body3 font-semibold py-4 px-8 text-black border border-black rounded-full mt-2 xl:mt-4">
                   2025 : Imagine beyond words
                 </span>
-                <h1 className="h2 text-white !font-semibold text-center mb-10 xl:mb-12">
-                  YOUNG'S PORTFOLIO
-                </h1>
-                <button
-                  className="px-8 py-2.5 bg-white rounded-full text-black body3 font-semibold flex items-center justify-center gap-3 xl:gap-4 hover:scale-110"
-                  onClick={() => {
-                    window.location.href = "/about";
-                  }}
-                  style={{ transition: "transform 0.3s ease-in-out" }}
-                >
-                  View about
-                  <Image
-                    src="/images/icon-arrow-down.png"
-                    alt="화살표"
-                    width={28}
-                    height={28}
-                    className="-rotate-90"
-                  />
-                </button>
               </div>
+              <div className="absolute left-10 bottom-[58vh] flex flex-col items-center gap-11 xl:gap-14">
+                <div className="-rotate-90">
+                  <span className="text-black font-semibold body5">
+                    SCROLL TO
+                  </span>
+                </div>
+                <Image
+                  src="/images/icon-mouse-scroll.png"
+                  alt="마우스 스크롤"
+                  width={16}
+                  height={16}
+                />
+              </div>
+              <button
+                className="absolute flex justify-center items-center right-[70px] bottom-[58vh] bg-black rounded-full w-32 h-32 xl:w-40 xl:h-40"
+                onClick={() => (window.location.href = "/contact")}
+              >
+                <Image
+                  src="/images/icon-inquiry-button.png"
+                  alt="문의하기 버튼 텍스트"
+                  fill
+                  className="absolute animate-spin"
+                  style={{ animationDuration: "12s" }}
+                />
+                <Image
+                  src="/images/icon-send.png"
+                  alt="문의하기 아이콘"
+                  width={iconInquirySendSize}
+                  height={iconInquirySendSize}
+                />
+              </button>
             </div>
-
             <div
-              className="absolute top-0 left-0 w-full h-full"
+              className="absolute top-0 left-0 w-full h-full select-none pointer-events-none"
               ref={contentRef}
             >
-              <div className="bg-black w-full h-[200vh]">
-                <div className="w-full h-screen flex flex-col items-center justify-center sticky top-0">
+              <div
+                className="bg-black w-full h-[250vh] rounded-t-full"
+                style={{
+                  clipPath: "inset(0 0 0 0 round 45% 45% 0 0)",
+                }}
+              >
+                <div className="w-full h-screen flex flex-col items-center justify-center sticky top-8 xl:top-16">
                   <p
                     className="absolute px-12 top-20 left-0 body1 font-semibold text-outline-white
                       text-justify xl:top-16"
@@ -299,15 +302,15 @@ export default function MainPage() {
                     <Arrow
                       width={iconScrollArrowSize}
                       height={iconScrollArrowSize}
-                      fill={"#fff"}
-                      className="animate-bounce"
+                      fill="#ffffff"
+                      className="bouncing"
                     />
                   </div>
                 </div>
               </div>
 
               <div
-                className="w-full bg-black relative h-[800vh] xl:h-[750vh]"
+                className="w-full bg-black relative h-[690vh] xl:h-[640vh]"
                 ref={photoRef}
               >
                 <div className="w-full h-screen sticky top-0 flex items-center justify-center overflow-x-hidden">
@@ -316,11 +319,7 @@ export default function MainPage() {
                       src="/images/img-main-background.jpg"
                       alt="배경 이미지"
                       fill
-                      className="object-cover brightness-75"
-                    />
-                    <div
-                      className="absolute top-0 left-0 bg-black w-full h-screen"
-                      ref={photoBackgroundRef}
+                      className="object-cover zoom-photo-img"
                     />
                     <h2 className="text-gray-10 text-center font-semibold relative z-10 flex flex-col items-center justify-center photo-words h1">
                       <span className="transition-all duration-700">
@@ -342,7 +341,7 @@ export default function MainPage() {
                 </div>
 
                 <div
-                  className="bg-black w-full absolute top-[400vh] xl:top-[350vh]"
+                  className="bg-black w-full absolute top-[300vh] xl:top-[250vh]"
                   ref={projectRef}
                 >
                   <div className="absolute top-0 left-0 w-[40vw] h-[60vh] bg-black text-white project-item">
@@ -402,18 +401,23 @@ export default function MainPage() {
                         className="object-cover border border-gray-40"
                       />
                     </div>
-                    <div className="relative pt-8 flex flex-col gap-2 ml-4 bg-black">
+                    <div className="relative pt-8 flex flex-col gap-2 ml-4">
                       <h3 className="h5">YOUNGFOLIO</h3>
                       <p className="body5">
                         2025. WEB / UX JUYOUNG'S PORTFOLIO
                       </p>
                     </div>
-                    <div className="w-full h-[20vh] bg-black" />
                   </div>
                 </div>
               </div>
 
-              <div className="w-full h-[400vh] bg-white"></div>
+              <div className="w-full h-[400vh] bg-gray-10 px-[70px] xl:px-[100px]">
+                <span className="text-black body2">(I create)</span>
+                <h2 className="text-black h1 !font-medium">
+                  <span className="block">CREATED THROUGH</span>
+                  <span className="block text-right">THIS PROCESS</span>
+                </h2>
+              </div>
             </div>
           </>
         )}
