@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -22,9 +22,29 @@ export default function MainPage() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const photoRef = useRef<HTMLDivElement | null>(null);
   const projectRef = useRef<HTMLDivElement | null>(null);
+  const processRef = useRef<HTMLDivElement | null>(null);
+  const processWordsRef = useRef<HTMLElement | null>(null);
 
   const iconScrollArrowSize = screenWidth > 1920 ? 52 : 36;
   const iconInquirySendSize = screenWidth > 1920 ? 40 : 32;
+
+  const process = [
+    { id: 1, title: "사용자 설문조사" },
+    { id: 2, title: "경쟁 서비스 분석" },
+    { id: 3, title: "데이터/사용자 행동 분석" },
+    { id: 4, title: "페르소나 작성" },
+    { id: 5, title: "사용자 여정지도 작성" },
+    { id: 6, title: "핵심 문제(HMW) 도출" },
+    { id: 7, title: "IA/사이트맵 작성" },
+    { id: 8, title: "와이어프레임 제작" },
+    { id: 9, title: "하이파이 디자인" },
+    { id: 10, title: "디자인 시스템 설계" },
+    { id: 11, title: "인터랙션/애니메이션 설계" },
+    { id: 12, title: "프로토타입 제작" },
+    { id: 13, title: "사용성 테스트 진행" },
+    { id: 14, title: "피드백 수집" },
+    { id: 15, title: "성과 측정(KPI, UX metrics)" },
+  ];
 
   /* 인트로 후 contents 등장 */
   useEffect(() => {
@@ -62,7 +82,7 @@ export default function MainPage() {
   }, [screenWidth, showContents]);
 
   /* 사진 줌인 애니메이션 */
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!scrollRef.current || !photoRef.current) return;
 
     const photoDiv = photoRef.current.querySelector(".zoom-photo");
@@ -77,7 +97,7 @@ export default function MainPage() {
         start: "center top-=500",
         onEnter: () => {
           gsap.to(photoDiv, { width: "100vw", duration: 0.5 }),
-            gsap.to(photo, { filter: "brightness(0.5)", duration: 0.5 });
+            gsap.to(photo, { filter: "brightness(0.6)", duration: 0.5 });
         },
         onLeaveBack: () => {
           gsap.to(photoDiv, { width: "60vw", duration: 0.5 }),
@@ -90,7 +110,7 @@ export default function MainPage() {
   }, [screenWidth, showContents]);
 
   /* 사진 글자 나타나는 애니메이션 */
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!photoRef.current) return;
 
     const words = photoRef.current.querySelector(".photo-words");
@@ -110,7 +130,7 @@ export default function MainPage() {
   }, [screenWidth, showContents]);
 
   /* 프로젝트 글자 나타나는 애니메이션 */
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!photoRef.current) return;
 
     const mainTextDiv = photoRef.current.querySelector(".photo-words");
@@ -165,7 +185,7 @@ export default function MainPage() {
   }, [screenWidth, showContents]);
 
   /* 프로젝트 스케일 업 애니메이션 */
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!projectRef.current) return;
 
     const projects = Array.from(
@@ -176,9 +196,11 @@ export default function MainPage() {
       projects.forEach((project, i) => {
         gsap.set(project, { scale: 0.8 });
 
+        const innerHeight = window.innerHeight;
+
         ScrollTrigger.create({
           trigger: projectRef.current,
-          start: `top+=${i * 1000} bottom+=600`,
+          start: `top+=${i * innerHeight} bottom+=400`,
           onEnter: () => gsap.to(project, { scale: 1, duration: 0.3 }),
           onLeaveBack: () => gsap.to(project, { scale: 0.8, duration: 0.3 }),
           scrub: true,
@@ -189,6 +211,32 @@ export default function MainPage() {
     return () => {
       ctx.revert();
     };
+  }, [screenWidth, showContents]);
+
+  /* 프로세스 타이틀 좌우 이동 애니메이션 */
+  useLayoutEffect(() => {
+    if (!processRef.current) return;
+
+    const leftTitle = processRef.current.querySelector(".left-title");
+    const rightTitle = processRef.current.querySelector(".right-title");
+
+    const ctx = gsap.context(() => {
+      gsap.set(leftTitle, { x: "0vw" });
+      gsap.set(rightTitle, { x: "0vw" });
+
+      ScrollTrigger.create({
+        trigger: processRef.current,
+        start: "top bottom",
+        end: "center top",
+        onUpdate: (self) => {
+          const progress = self.progress;
+          gsap.to(leftTitle, { x: `${-100 * progress}vw`, overwrite: "auto" });
+          gsap.to(rightTitle, { x: `${100 * progress}vw`, overwrite: "auto" });
+        },
+      });
+    }, processRef);
+
+    return () => ctx.revert();
   }, [screenWidth, showContents]);
 
   return (
@@ -210,7 +258,7 @@ export default function MainPage() {
       >
         {showContents && (
           <>
-            <div className="absolute top-0 left-0 w-full h-[150vh] bg-white overflow-x-hidden pt-32 px-[70px] xl:px-[100px] xl:pt-40">
+            <section className="absolute top-0 left-0 w-full h-[150vh] bg-white overflow-x-hidden pt-32 px-[70px] xl:px-[100px] xl:pt-40">
               <div
                 className="absolute top-0 left-0 w-full h-[70vh]"
                 style={{
@@ -264,12 +312,13 @@ export default function MainPage() {
                   height={iconInquirySendSize}
                 />
               </button>
-            </div>
+            </section>
+
             <div
               className="absolute top-0 left-0 w-full h-full select-none pointer-events-none"
               ref={contentRef}
             >
-              <div
+              <section
                 className="bg-black w-full h-[250vh] rounded-t-full"
                 style={{
                   clipPath: "inset(0 0 0 0 round 45% 45% 0 0)",
@@ -277,7 +326,7 @@ export default function MainPage() {
               >
                 <div className="w-full h-screen flex flex-col items-center justify-center sticky top-8 xl:top-16">
                   <p
-                    className="absolute px-12 top-20 left-0 body1 font-semibold text-outline-white
+                    className="absolute px-12 top-20 left-0 fullBody font-semibold text-outline-white
                       text-justify xl:top-16"
                   >
                     BLENDING TECHNOLOGY AND EMOTION, CREATING EXPERIENCES THAT
@@ -307,13 +356,13 @@ export default function MainPage() {
                     />
                   </div>
                 </div>
-              </div>
+              </section>
 
               <div
                 className="w-full bg-black relative h-[690vh] xl:h-[640vh]"
                 ref={photoRef}
               >
-                <div className="w-full h-screen sticky top-0 flex items-center justify-center overflow-x-hidden">
+                <section className="w-full h-screen sticky top-0 flex items-center justify-center overflow-x-hidden">
                   <div className="h-full relative flex flex-col items-center justify-center zoom-photo">
                     <Image
                       src="/images/img-main-background.jpg"
@@ -338,9 +387,9 @@ export default function MainPage() {
                       </div>
                     </h2>
                   </div>
-                </div>
+                </section>
 
-                <div
+                <section
                   className="bg-black w-full absolute top-[300vh] xl:top-[250vh]"
                   ref={projectRef}
                 >
@@ -408,16 +457,41 @@ export default function MainPage() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </section>
               </div>
 
-              <div className="w-full h-[400vh] bg-gray-10 px-[70px] xl:px-[100px]">
-                <span className="text-black body2">(I create)</span>
-                <h2 className="text-black h1 !font-medium">
-                  <span className="block">CREATED THROUGH</span>
-                  <span className="block text-right">THIS PROCESS</span>
+              <section
+                ref={processRef}
+                className="w-full overflow-x-hidden h-[400vh] bg-gray-10 px-[70px] pt-[20vh] xl:px-[100px]"
+              >
+                <h2 className="text-black h1 !font-medium flex flex-col items-center justify-center">
+                  <span className="body2 mb-8">(Built This Way)</span>
+                  <span className="left-title">CREATED THROUGH</span>
+                  <span className="right-title flex gap-4 items-center">
+                    THIS
+                    <div className="w-[130px] h-[100px] relative xl:h-[120px] xl:w-[160px]">
+                      <Image
+                        src="/images/img-process.jpg"
+                        alt="프로세스 이미지"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    PROCESS
+                  </span>
                 </h2>
-              </div>
+                <section ref={processWordsRef} className="themes-section">
+                  {process.map((words) => (
+                    <div key={words.id} className="theme-item">
+                      <div className="py-2 px-8 border border-black rounded-full w-fit">
+                        <h3 className="theme-title text-black body1 font-medium">
+                          {words.title}
+                        </h3>
+                      </div>
+                    </div>
+                  ))}
+                </section>
+              </section>
             </div>
           </>
         )}
