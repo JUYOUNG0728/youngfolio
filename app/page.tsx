@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Intro from "@/components/Intro/Intro";
 import Background from "@/components/Main/Background";
 import useScreenWidth from "@/utils/useScreenWidth";
-import Scene from "@/components/Main/Models/Scene";
+import Scene from "@/components/Main/Model/Scene";
 import Arrow from "@/components/Common/Arrow";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -23,28 +23,9 @@ export default function MainPage() {
   const photoRef = useRef<HTMLDivElement | null>(null);
   const projectRef = useRef<HTMLDivElement | null>(null);
   const processRef = useRef<HTMLDivElement | null>(null);
-  const processWordsRef = useRef<HTMLElement | null>(null);
 
   const iconScrollArrowSize = screenWidth > 1920 ? 52 : 36;
   const iconInquirySendSize = screenWidth > 1920 ? 40 : 32;
-
-  const process = [
-    { id: 1, title: "사용자 설문조사" },
-    { id: 2, title: "경쟁 서비스 분석" },
-    { id: 3, title: "데이터/사용자 행동 분석" },
-    { id: 4, title: "페르소나 작성" },
-    { id: 5, title: "사용자 여정지도 작성" },
-    { id: 6, title: "핵심 문제(HMW) 도출" },
-    { id: 7, title: "IA/사이트맵 작성" },
-    { id: 8, title: "와이어프레임 제작" },
-    { id: 9, title: "하이파이 디자인" },
-    { id: 10, title: "디자인 시스템 설계" },
-    { id: 11, title: "인터랙션/애니메이션 설계" },
-    { id: 12, title: "프로토타입 제작" },
-    { id: 13, title: "사용성 테스트 진행" },
-    { id: 14, title: "피드백 수집" },
-    { id: 15, title: "성과 측정(KPI, UX metrics)" },
-  ];
 
   /* 인트로 후 contents 등장 */
   useEffect(() => {
@@ -239,6 +220,69 @@ export default function MainPage() {
     return () => ctx.revert();
   }, [screenWidth, showContents]);
 
+  /* 프로세스 글자 흰색 체인지 애니메이션 */
+  useLayoutEffect(() => {
+    if (!processRef.current) return;
+
+    const processText = processRef.current.querySelector(".process-item");
+
+    const ctx = gsap.context(() => {
+      gsap.set(processText, { backgroundSize: "0% 100%" });
+
+      ScrollTrigger.create({
+        trigger: processRef.current,
+        start: "top center+=200",
+        end: "center bottom-=100",
+        onUpdate: (self) => {
+          const progress = self.progress;
+          gsap.to(processText, {
+            backgroundSize: `${progress * 100}% 100%`,
+          });
+        },
+      });
+    }, processRef);
+
+    return () => ctx.revert();
+  }, [screenWidth, showContents]);
+
+  /* 화이트 모드로 전환 */
+  useEffect(() => {
+    if (!processRef.current) return;
+
+    const processDiv = processRef.current;
+    const processTitle = processRef.current.querySelector("h2");
+    const processText = processRef.current.querySelector(".process-item");
+
+    const ctx = gsap.context(() => {
+      gsap.set(processDiv, { backgroundColor: "#000000" });
+      gsap.set(processTitle, { color: "#FFFFFF" });
+      gsap.set(processText, {
+        backgroundImage: "linear-gradient(90deg, #FFFFFF, #FFFFFF)",
+      });
+
+      ScrollTrigger.create({
+        trigger: processRef.current,
+        start: "center top-=200",
+        onEnter: () => {
+          gsap.to(processDiv, { backgroundColor: "#FFFFFF", duration: 0.5 });
+          gsap.to(processTitle, { color: "#000000", duration: 0.5 });
+          gsap.to(processText, {
+            backgroundImage: "linear-gradient(90deg, #000000, #000000)",
+            duration: 0.5,
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to(processDiv, { backgroundColor: "#000000", duration: 0.5 });
+          gsap.to(processTitle, { color: "#FFFFFF", duration: 0.5 });
+          gsap.to(processText, {
+            backgroundImage: "linear-gradient(90deg, #FFFFFF, #FFFFFF)",
+            duration: 0.5,
+          });
+        },
+      });
+    }, processRef);
+  }, [screenWidth, showContents]);
+
   return (
     <div
       className={`w-full ${
@@ -396,7 +440,7 @@ export default function MainPage() {
                   <div className="absolute top-0 left-0 w-[40vw] h-[60vh] bg-black text-white project-item">
                     <div className="w-full h-full">
                       <Image
-                        src="/images/img-project-thumbnail-youngfolio.jpg"
+                        src="/images/img-project-thumbnail-youngfolio.png"
                         alt="YOUNGFOLIO 썸네일"
                         fill
                         className="object-cover border border-gray-40"
@@ -412,7 +456,7 @@ export default function MainPage() {
                   <div className="absolute top-[100vh] right-0 w-[40vw] h-[60vh] bg-black text-white project-item">
                     <div className="w-full h-full">
                       <Image
-                        src="/images/img-project-thumbnail-youngfolio.jpg"
+                        src="/images/img-project-thumbnail-youngfolio.png"
                         alt="YOUNGFOLIO 썸네일"
                         fill
                         className="object-cover border border-gray-40"
@@ -428,7 +472,7 @@ export default function MainPage() {
                   <div className="absolute top-[200vh] left-0 w-[40vw] h-[60vh] bg-black text-white project-item">
                     <div className="w-full h-full">
                       <Image
-                        src="/images/img-project-thumbnail-youngfolio.jpg"
+                        src="/images/img-project-thumbnail-youngfolio.png"
                         alt="YOUNGFOLIO 썸네일"
                         fill
                         className="object-cover border border-gray-40"
@@ -444,7 +488,7 @@ export default function MainPage() {
                   <div className="absolute top-[300vh] left-0 right-0 mx-auto w-[40vw] h-[60vh] bg-black text-white project-item">
                     <div className="w-full h-full">
                       <Image
-                        src="/images/img-project-thumbnail-youngfolio.jpg"
+                        src="/images/img-project-thumbnail-youngfolio.png"
                         alt="YOUNGFOLIO 썸네일"
                         fill
                         className="object-cover border border-gray-40"
@@ -462,14 +506,14 @@ export default function MainPage() {
 
               <section
                 ref={processRef}
-                className="w-full overflow-x-hidden h-[400vh] bg-gray-10 px-[70px] pt-[20vh] xl:px-[100px]"
+                className="w-full overflow-x-hidden h-[400vh] bg-black px-[70px] pt-[20vh] xl:px-[100px]"
               >
-                <h2 className="text-black h1 !font-medium flex flex-col items-center justify-center">
+                <h2 className="h1 text-white !font-medium flex flex-col items-center justify-center">
                   <span className="body2 mb-8">(Built This Way)</span>
                   <span className="left-title">CREATED THROUGH</span>
                   <span className="right-title flex gap-4 items-center">
                     THIS
-                    <div className="w-[130px] h-[100px] relative xl:h-[120px] xl:w-[160px]">
+                    <div className="w-[140px] h-[130px] relative xl:h-[170px] xl:w-[190px]">
                       <Image
                         src="/images/img-process.jpg"
                         alt="프로세스 이미지"
@@ -480,17 +524,49 @@ export default function MainPage() {
                     PROCESS
                   </span>
                 </h2>
-                <section ref={processWordsRef} className="themes-section">
-                  {process.map((words) => (
-                    <div key={words.id} className="theme-item">
-                      <div className="py-2 px-8 border border-black rounded-full w-fit">
-                        <h3 className="theme-title text-black body1 font-medium">
-                          {words.title}
-                        </h3>
-                      </div>
-                    </div>
-                  ))}
-                </section>
+                <p className="body1 text-center mt-36 xl:mt-52">
+                  <span>
+                    <span
+                      style={{
+                        WebkitTextFillColor: "rgba(255, 255, 255, 0.2)",
+                        WebkitBackgroundClip: "text",
+                        backgroundImage:
+                          "linear-gradient(90deg, #FFFFFF, #FFFFFF)",
+                      }}
+                      className="process-item bg-no-repeat"
+                    >
+                      사용자 설문조사
+                      <br />
+                      경쟁 서비스 분석
+                      <br />
+                      데이터/사용자 행동 분석
+                      <br />
+                      페르소나 작성
+                      <br />
+                      사용자 여정지도 작성
+                      <br />
+                      핵심 문제(HMW) 도출
+                      <br />
+                      IA/사이트맵 작성
+                      <br />
+                      와이어프레임 제작
+                      <br />
+                      하이파이 디자인
+                      <br />
+                      디자인 시스템 설계
+                      <br />
+                      인터랙션/애니메이션 설계
+                      <br />
+                      프로토타입 제작
+                      <br />
+                      사용성 테스트 진행
+                      <br />
+                      피드백 수집
+                      <br />
+                      성과 측정(KPI, UX metrics)
+                    </span>
+                  </span>
+                </p>
               </section>
             </div>
           </>

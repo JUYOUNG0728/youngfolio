@@ -172,11 +172,11 @@
   }
 
   .body1 {
-    font-size: 4rem;
-    line-height: 1.2;
+    font-size: 6rem;
+    line-height: 1.5;
 
     @media (max-width: 1920px) {
-      font-size: 3rem;
+      font-size: 5rem;
     }
   }
 
