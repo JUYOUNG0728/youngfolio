@@ -32,15 +32,18 @@ export default function MainPage() {
   const iconFooterArrowSize = screenWidth > 1920 ? 30 : 24;
 
   const scrollTop = () => {
-    ScrollTrigger.getAll().forEach((st) => st.disable());
+    ScrollTrigger.refresh();
 
     gsap.to(window, {
       scrollTo: 0,
       duration: 1,
       overwrite: "auto",
       onComplete: () => {
-        ScrollTrigger.getAll().forEach((st) => st.enable());
         ScrollTrigger.refresh();
+
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 50);
       },
     });
   };
