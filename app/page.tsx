@@ -212,7 +212,7 @@ export default function MainPage() {
 
       ScrollTrigger.create({
         trigger: processRef.current,
-        start: "top bottom",
+        start: "top bottom+=200",
         end: "center top",
         onUpdate: (self) => {
           const progress = self.progress;
@@ -236,8 +236,8 @@ export default function MainPage() {
 
       ScrollTrigger.create({
         trigger: processRef.current,
-        start: "top 50%",
-        end: "center 25%",
+        start: "top 80%",
+        end: "center 50%",
         onUpdate: (self) => {
           const progress = self.progress;
           gsap.to(processText, {
