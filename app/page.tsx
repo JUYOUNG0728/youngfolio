@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 import Intro from "@/components/Intro/Intro";
 import Background from "@/components/Main/Background";
@@ -11,7 +12,7 @@ import useScreenWidth from "@/utils/useScreenWidth";
 import Scene from "@/components/Main/Model/Scene";
 import Arrow from "@/components/Common/Arrow";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function MainPage() {
   const screenWidth = useScreenWidth();
@@ -29,6 +30,20 @@ export default function MainPage() {
   const iconInquirySendSize = screenWidth > 1920 ? 40 : 32;
   const iconContactArrowSize = screenWidth > 1920 ? 64 : 52;
   const iconFooterArrowSize = screenWidth > 1920 ? 30 : 24;
+
+  const scrollTop = () => {
+    ScrollTrigger.getAll().forEach((st) => st.disable());
+
+    gsap.to(window, {
+      scrollTo: 0,
+      duration: 1,
+      overwrite: "auto",
+      onComplete: () => {
+        ScrollTrigger.getAll().forEach((st) => st.enable());
+        ScrollTrigger.refresh();
+      },
+    });
+  };
 
   /* 인트로 후 contents 등장 */
   useEffect(() => {
@@ -639,9 +654,9 @@ export default function MainPage() {
                       </div>
                       <button
                         className="rounded-full w-16 h-16 bg-gray-50 absolute top-0 right-0 flex justify-center items-center xl:w-20 xl:h-20"
-                        onClick={() =>
-                          window.scrollTo({ top: 0, behavior: "smooth" })
-                        }
+                        onClick={() => {
+                          scrollTop();
+                        }}
                       >
                         <Arrow
                           width={iconFooterArrowSize}
