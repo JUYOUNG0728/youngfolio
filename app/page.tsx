@@ -23,9 +23,12 @@ export default function MainPage() {
   const photoRef = useRef<HTMLDivElement | null>(null);
   const projectRef = useRef<HTMLDivElement | null>(null);
   const processRef = useRef<HTMLDivElement | null>(null);
+  const contactRef = useRef<HTMLDivElement | null>(null);
 
   const iconScrollArrowSize = screenWidth > 1920 ? 52 : 36;
   const iconInquirySendSize = screenWidth > 1920 ? 40 : 32;
+  const iconContactArrowSize = screenWidth > 1920 ? 64 : 52;
+  const iconFooterArrowSize = screenWidth > 1920 ? 30 : 24;
 
   /* 인트로 후 contents 등장 */
   useEffect(() => {
@@ -78,7 +81,7 @@ export default function MainPage() {
         start: "center top-=500",
         onEnter: () => {
           gsap.to(photoDiv, { width: "100vw", duration: 0.5 }),
-            gsap.to(photo, { filter: "brightness(0.6)", duration: 0.5 });
+            gsap.to(photo, { filter: "brightness(0.5)", duration: 0.5 });
         },
         onLeaveBack: () => {
           gsap.to(photoDiv, { width: "60vw", duration: 0.5 }),
@@ -231,8 +234,8 @@ export default function MainPage() {
 
       ScrollTrigger.create({
         trigger: processRef.current,
-        start: "top center+=200",
-        end: "center bottom-=100",
+        start: "top 50%",
+        end: "center 25%",
         onUpdate: (self) => {
           const progress = self.progress;
           gsap.to(processText, {
@@ -245,43 +248,37 @@ export default function MainPage() {
     return () => ctx.revert();
   }, [screenWidth, showContents]);
 
-  /* 화이트 모드로 전환 */
+  /* 컨택트 마퀴 애니메이션 */
   useEffect(() => {
-    if (!processRef.current) return;
+    if (!contactRef.current) return;
+    const marquee = contactRef.current?.querySelectorAll(".marquee");
+    let direction = 1;
 
-    const processDiv = processRef.current;
-    const processTitle = processRef.current.querySelector("h2");
-    const processText = processRef.current.querySelector(".process-item");
+    const tween = gsap.to(marquee, {
+      xPercent: -100,
+      ease: "linear",
+      repeat: -1,
+      duration: 40,
+    });
 
-    const ctx = gsap.context(() => {
-      gsap.set(processDiv, { backgroundColor: "#000000" });
-      gsap.set(processTitle, { color: "#FFFFFF" });
-      gsap.set(processText, {
-        backgroundImage: "linear-gradient(90deg, #FFFFFF, #FFFFFF)",
-      });
+    ScrollTrigger.create({
+      trigger: marquee,
+      start: "top bottom+=1000",
+      end: "bottom top",
+      onUpdate: (self) => {
+        const newDirection = self.direction;
+        if (newDirection !== direction) {
+          direction = newDirection;
+          tween.timeScale(direction);
+        }
+      },
+    });
 
-      ScrollTrigger.create({
-        trigger: processRef.current,
-        start: "center top-=200",
-        onEnter: () => {
-          gsap.to(processDiv, { backgroundColor: "#FFFFFF", duration: 0.5 });
-          gsap.to(processTitle, { color: "#000000", duration: 0.5 });
-          gsap.to(processText, {
-            backgroundImage: "linear-gradient(90deg, #000000, #000000)",
-            duration: 0.5,
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(processDiv, { backgroundColor: "#000000", duration: 0.5 });
-          gsap.to(processTitle, { color: "#FFFFFF", duration: 0.5 });
-          gsap.to(processText, {
-            backgroundImage: "linear-gradient(90deg, #FFFFFF, #FFFFFF)",
-            duration: 0.5,
-          });
-        },
-      });
-    }, processRef);
-  }, [screenWidth, showContents]);
+    return () => {
+      tween.kill();
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   return (
     <div
@@ -359,7 +356,7 @@ export default function MainPage() {
             </section>
 
             <div
-              className="absolute top-0 left-0 w-full h-full select-none pointer-events-none"
+              className="absolute top-0 left-0 w-full h-full pointer-events-none select-none"
               ref={contentRef}
             >
               <section
@@ -506,7 +503,7 @@ export default function MainPage() {
 
               <section
                 ref={processRef}
-                className="w-full overflow-x-hidden h-[400vh] bg-black px-[70px] pt-[20vh] xl:px-[100px]"
+                className="w-full overflow-x-hidden h-[330vh] bg-black px-[70px] pt-[20vh] xl:px-[100px] xl:h-[280vh]"
               >
                 <h2 className="h1 text-white !font-medium flex flex-col items-center justify-center">
                   <span className="body2 mb-8">(Built This Way)</span>
@@ -515,7 +512,7 @@ export default function MainPage() {
                     THIS
                     <div className="w-[140px] h-[130px] relative xl:h-[170px] xl:w-[190px]">
                       <Image
-                        src="/images/img-process.jpg"
+                        src="/images/img-process.png"
                         alt="프로세스 이미지"
                         fill
                         className="object-cover"
@@ -524,7 +521,7 @@ export default function MainPage() {
                     PROCESS
                   </span>
                 </h2>
-                <p className="body1 text-center mt-36 xl:mt-52">
+                <p className="body1 text-center mt-[24vh]">
                   <span>
                     <span
                       style={{
@@ -567,6 +564,95 @@ export default function MainPage() {
                     </span>
                   </span>
                 </p>
+              </section>
+              <section>
+                <div
+                  ref={contactRef}
+                  className="w-full h-[110vh] px-[70px] text-white relative bg-black overflow-x-hidden !pointer-events-auto !select-auto xl:px-[100px]"
+                >
+                  <h2 className="h1 !font-medium flex gap-12">
+                    <ul className="flex gap-12 whitespace-nowrap marquee">
+                      <li>FEEL FREE TO EXPLORE 😊</li>
+                      <li>FEEL FREE TO EXPLORE 😊</li>
+                      <li>FEEL FREE TO EXPLORE 😊</li>
+                      <li>FEEL FREE TO EXPLORE 😊</li>
+                    </ul>
+                    <ul
+                      aria-hidden="true"
+                      className="flex gap-12 whitespace-nowrap marquee"
+                    >
+                      <li>FEEL FREE TO EXPLORE 😊</li>
+                      <li>FEEL FREE TO EXPLORE 😊</li>
+                      <li>FEEL FREE TO EXPLORE 😊</li>
+                      <li>FEEL FREE TO EXPLORE 😊</li>
+                    </ul>
+                  </h2>
+                  <button
+                    className="fullSizeButton mt-28 gap-7 rounded-full xl:mt-36 xl:gap-9"
+                    onClick={() => (window.location.href = "/contact")}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.borderRadius = "1.5rem")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.borderRadius = "10rem")
+                    }
+                    style={{
+                      transition: "border-radius 0.3s ease-in-out",
+                    }}
+                  >
+                    <span>LET’S GET IN CONTACT</span>
+                    <Arrow
+                      width={iconContactArrowSize}
+                      height={iconContactArrowSize}
+                      fill="#ffffff"
+                      className="-rotate-[135deg]"
+                    />
+                  </button>
+                  <div className="w-full h-[36vh] absolute bottom-0 left-0 border-t border-gray-40 px-[70px] py-[70px] xl:px-[100px] xl:py-[100px]">
+                    <div className="flex w-full h-full relative gap-60 xl:gap-80">
+                      <div className="flex flex-col justify-between h-full">
+                        <div className="body2 flex flex-col text-gray-20">
+                          <span>2025 : IMAGINE BEYOND</span>
+                          <span className="font-bold">YOUNGFOLIO</span>
+                        </div>
+                        <span className="body4 text-gray-40">
+                          © 2025 YOUNGFOLIO. All rights reserved.
+                        </span>
+                      </div>
+                      <div className="flex flex-col justify-between h-full">
+                        <div className="h4 !font-semibold flex flex-col gap-1">
+                          <span className="text-gray-10">
+                            THIS IS MY SPACE.
+                          </span>
+                          <p className="flex justify-center gap-4 ml-[-44px]">
+                            <span className="text-gray-10">[</span>
+                            <span className="text-gray-30">
+                              JUYOUNG'S PORTFOLIO
+                            </span>
+                            <span className="text-gray-10">]</span>
+                          </p>
+                        </div>
+                        <div className="flex body4 text-gray-40 gap-16">
+                          <span>Email : vilioite@naver.com</span>
+                          <span>Mobile : 010-8297-7649</span>
+                        </div>
+                      </div>
+                      <button
+                        className="rounded-full w-16 h-16 bg-gray-50 absolute top-0 right-0 flex justify-center items-center xl:w-20 xl:h-20"
+                        onClick={() =>
+                          window.scrollTo({ top: 0, behavior: "smooth" })
+                        }
+                      >
+                        <Arrow
+                          width={iconFooterArrowSize}
+                          height={iconFooterArrowSize}
+                          fill="#ffffff"
+                          className="rotate-180"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </section>
             </div>
           </>
