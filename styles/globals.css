@@ -61,29 +61,21 @@
     opacity: 0.4;
   }
 
-  .introText {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 80px;
-    font-weight: 700;
-    color: var(--white);
-    transition: opacity 0.5s ease-in-out;
-    white-space: nowrap;
-
-    @media (max-width: 1920px) {
-      font-size: 60px;
-    }
-  }
-
   .menu {
     color: var(--white);
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 500;
 
     @media (max-width: 1920px) {
-      font-size: 3rem;
+      font-size: 2.75rem;
+    }
+
+    @media (max-width: 1280px) {
+      font-size: 2.25rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
     }
 
     &::after {
@@ -100,22 +92,36 @@
     }
   }
 
-  .subMenu {
-    color: var(--white);
-    font-size: 1.5rem;
-    font-weight: 400;
-
-    @media (max-width: 1920px) {
-      font-size: 1.25rem;
-    }
-  }
-
   .fullBody {
     font-size: 9rem;
     line-height: 1.2;
 
     @media (max-width: 1920px) {
       font-size: 6rem;
+    }
+
+    @media (max-width: 1680px) {
+      font-size: 5rem;
+    }
+
+    @media (max-width: 1400px) {
+      font-size: 4.5rem;
+    }
+
+    @media (max-width: 1280px) {
+      font-size: 4rem;
+    }
+
+    @media (max-width: 1024px) {
+      font-size: 3.5rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 3rem;
+    }
+
+    @media (max-width: 640px) {
+      font-size: 2.5rem;
     }
   }
 
@@ -132,9 +138,20 @@
     border: 1px solid var(--white);
     color: var(--white);
     transition: border-radius 0.3s ease;
+    padding: max(0px, 3rem);
 
     @media (max-width: 1920px) {
       font-size: 3.5rem;
+    }
+
+    @media (max-width: 1280px) {
+      font-size: 2.5rem;
+      height: 20vh;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1.875rem;
+      height: 16vh;
     }
   }
 }
@@ -144,9 +161,17 @@
   .h1 {
     font-size: 10rem;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.25;
     @media (max-width: 1920px) {
       font-size: 8rem;
+    }
+
+    @media (max-width: 1280px) {
+      font-size: 6rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 4.5rem;
     }
   }
 
@@ -158,6 +183,14 @@
     @media (max-width: 1920px) {
       font-size: 4.5rem;
     }
+
+    @media (max-width: 1280px) {
+      font-size: 3.5rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
   }
 
   .h3 {
@@ -168,6 +201,14 @@
     @media (max-width: 1920px) {
       font-size: 2.5rem;
     }
+
+    @media (max-width: 1280px) {
+      font-size: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1.75rem;
+    }
   }
 
   .h4 {
@@ -176,6 +217,14 @@
 
     @media (max-width: 1920px) {
       font-size: 1.75rem;
+    }
+
+    @media (max-width: 1280px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1.25rem;
     }
   }
 
@@ -186,6 +235,14 @@
     @media (max-width: 1920px) {
       font-size: 1.5rem;
     }
+
+    @media (max-width: 1280px) {
+      font-size: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1.125rem;
+    }
   }
 
   .body1 {
@@ -194,6 +251,14 @@
 
     @media (max-width: 1920px) {
       font-size: 4.5rem;
+    }
+
+    @media (max-width: 1280px) {
+      font-size: 3.5rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
     }
   }
 
@@ -204,13 +269,22 @@
     @media (max-width: 1920px) {
       font-size: 1.25rem;
     }
+
+    @media (max-width: 1280px) {
+      font-size: 1rem;
+    }
   }
 
   .body3 {
     font-size: 1.375rem;
     line-height: 1.7;
+
     @media (max-width: 1920px) {
       font-size: 1.125rem;
+    }
+
+    @media (max-width: 1280px) {
+      font-size: 1rem;
     }
   }
 
@@ -221,6 +295,10 @@
     @media (max-width: 1920px) {
       font-size: 1rem;
     }
+
+    @media (max-width: 1280px) {
+      font-size: 0.875rem;
+    }
   }
 
   .body5 {
@@ -229,6 +307,10 @@
 
     @media (max-width: 1920px) {
       font-size: 0.875rem;
+    }
+
+    @media (max-width: 1280px) {
+      font-size: 0.75rem;
     }
   }
 
@@ -239,11 +321,14 @@
     @media (max-width: 1920px) {
       font-size: 0.75rem;
     }
-  }
 
-  .footer {
-    font-size: 1rem;
-    font-weight: 500;
+    @media (max-width: 1280px) {
+      font-size: 0.625rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 0.5rem;
+    }
   }
 
   /* Text Colors */
