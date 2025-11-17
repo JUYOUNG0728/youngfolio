@@ -17,7 +17,11 @@ export default function Header() {
 
   const screenWidth = useScreenWidth();
 
-  const iconSize = screenWidth < 1920 ? 24 : 30;
+  const iconSize = screenWidth < 768 ? 20 : screenWidth < 1920 ? 24 : 30;
+  const logoSize = {
+    width: screenWidth < 768 ? 140 : screenWidth < 1920 ? 150 : 180,
+    height: screenWidth < 768 ? 22 : screenWidth < 1920 ? 24 : 28,
+  };
 
   const handleLogoClick = () => {
     setIsMenuOpen(false);
@@ -36,16 +40,16 @@ export default function Header() {
 
   return (
     <div>
-      <div className="absolute z-50 top-0 px-[70px] w-full pointer-events-none h-[120px] xl:h-[140px] xl:px-[100px]">
+      <div className="absolute z-50 top-0 px-[30px] w-full pointer-events-none h-[120px] xl:h-[140px] xl:px-[100px] md:px-[70px]">
         <div className="flex items-center justify-between w-full h-full pointer-events-auto">
           <Logo
             onClick={handleLogoClick}
             className="cursor-pointer"
             fill={whiteMode ? "#000000" : "#ffffff"}
-            width={screenWidth < 1920 ? 150 : 180}
-            height={screenWidth < 1920 ? 24 : 28}
+            width={logoSize.width}
+            height={logoSize.height}
           />
-          <div className="bg-white rounded-full p-5 flex justify-center items-center fixed top-7 right-[70px] xl:right-[100px] xl:p-6">
+          <div className="bg-white rounded-full p-4 flex justify-center items-center fixed top-7 right-[30px] xl:right-[100px] xl:p-6 md:right-[70px] md:p-5">
             {!isMenuOpen ? (
               <Hamburger
                 width={iconSize}

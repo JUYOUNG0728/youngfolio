@@ -1,12 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import useScreenWidth from "@/utils/useScreenWidth";
 
 export default function Menu({
   setIsMenuOpen,
 }: {
   setIsMenuOpen: (open: boolean) => void;
 }) {
+  const screenWidth = useScreenWidth();
+
   const router = useRouter();
 
   const menuItems = [
@@ -36,7 +39,13 @@ export default function Menu({
   return (
     <div className="bg-fade-in fixed inset-0">
       <div className="flex items-center justify-center h-full w-full">
-        <div className="flex gap-[180px] xl:gap-[220px]">
+        <div
+          className={`${
+            screenWidth > 1680
+              ? "w-full gap-[9vw]"
+              : "w-[calc(100%-1200px)] gap-[16vw] md:gap-[9vw] lg:gap-[7vw]"
+          } flex justify-center flex-wrap`}
+        >
           {menuItems.map((item, index) => (
             <div key={item.id}>
               <div
@@ -50,7 +59,7 @@ export default function Menu({
                   {item.id}
                 </p>
                 <h1
-                  className="menu relative top-[-10px] fade-up xl:top-[-12px]"
+                  className="menu text-nowrap relative top-[-10px] fade-up xl:top-[-12px]"
                   style={{
                     animationDelay: `${0.6 + index * 0.15}s`,
                   }}
