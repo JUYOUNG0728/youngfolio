@@ -12,7 +12,7 @@ export default function ProjectGallerySection({
 }: ProjectGallerySectionProps) {
   return (
     <div
-      className="w-full bg-black relative h-[610vh] xl:h-[640vh] md:h-[690vh]"
+      className="w-full bg-black relative h-[660vh] xl:h-[640vh] md:h-[740vh]"
       ref={photoRef}
     >
       <PhotoSection />

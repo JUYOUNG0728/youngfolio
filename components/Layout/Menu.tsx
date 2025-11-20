@@ -37,7 +37,7 @@ export default function Menu({
   };
 
   return (
-    <div className="bg-fade-in fixed inset-0">
+    <div className="bg-fade-in fixed inset-0 z-40">
       <div className="flex items-center justify-center h-full w-full">
         <div
           className={`${
@@ -49,7 +49,7 @@ export default function Menu({
           {menuItems.map((item, index) => (
             <div key={item.id}>
               <div
-                className="flex gap-4 xl:gap-6 cursor-pointer"
+                className="flex cursor-pointer gap-4 xl:gap-6"
                 onClick={() => handleNavigate(item.href)}
               >
                 <p
@@ -59,7 +59,7 @@ export default function Menu({
                   {item.id}
                 </p>
                 <h1
-                  className="menu text-nowrap relative top-[-10px] fade-up xl:top-[-12px]"
+                  className="menu text-nowrap relative fade-up top-[-10px] xl:top-[-12px]"
                   style={{
                     animationDelay: `${0.6 + index * 0.15}s`,
                   }}
