@@ -7,39 +7,60 @@ type ProcessSectionProps = {
 
 export default function ProcessSection({ processRef }: ProcessSectionProps) {
   const screenWidth = useScreenWidth();
+
+  const processText = [
+    "사용자 설문조사",
+    "경쟁 서비스 분석",
+    "데이터/사용자 행동 분석",
+    "페르소나 작성",
+    "사용자 여정지도 작성",
+    "핵심 문제(HMW) 도출",
+    "IA/사이트맵 작성",
+    "와이어프레임 제작",
+    "하이파이 디자인",
+    "디자인 시스템 설계",
+    "인터랙션/애니메이션 설계",
+    "프로토타입 제작",
+    "사용성 테스트 진행",
+    "피드백 수집",
+    "성과 측정(KPI, UX metrics)",
+  ];
+
   return (
     <section
       ref={processRef}
-      className="w-full h-[205vh] overflow-hidden bg-black pt-[24vh] xl:px-[100px] xl:h-[280vh] md:h-[270vh] lg:h-[330vh]"
+      className="w-full overflow-hidden bg-black pt-[30vh] pb-[40vh] text-white"
     >
-      <h2 className="h1 text-white !font-medium flex flex-col items-center justify-center px-[70px]">
-        <span className="body2 mb-8">(Built This Way)</span>
-        <span
-          className={`left-title ${
-            screenWidth > 1000 ? "text-nowrap" : "text-center"
-          }`}
-        >
-          CREATED THROUGH
-        </span>
-        <span
-          className={`right-title flex ${
-            screenWidth > 1000 ? "flex-row gap-4 items-center" : "flex-col"
-          }`}
-        >
-          <div className="flex items-center gap-4">
-            <span>THIS</span>
-            <div className="w-[140px] h-[130px] relative xl:h-[170px] xl:w-[190px]">
-              <Image
-                src="/images/img-process.png"
-                alt="프로세스 이미지"
-                fill
-                className="object-cover"
-              />
+      <div className="flex flex-col gap-8">
+        <span className="body2 text-center">(Built This Way)</span>
+        <h2 className="h1 !font-medium flex flex-col items-center justify-center px-[70px]">
+          <span
+            className={`left-title ${
+              screenWidth > 1000 ? "text-nowrap" : "text-center"
+            }`}
+          >
+            CREATED THROUGH
+          </span>
+          <span
+            className={`right-title flex ${
+              screenWidth > 1000 ? "flex-row gap-4 items-center" : "flex-col"
+            }`}
+          >
+            <div className="flex items-center gap-4">
+              <span>THIS</span>
+              <div className="relative w-[140px] h-[130px] xl:w-[190px] xl:h-[170px]">
+                <Image
+                  src="/images/img-process.png"
+                  alt="프로세스 이미지"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
-          </div>
-          <span>PROCESS</span>
-        </span>
-      </h2>
+            <span>PROCESS</span>
+          </span>
+        </h2>
+      </div>
       <p className="body1 text-center text-nowrap mt-[16vh] md:mt-[20vh]">
         <span>
           <span
@@ -50,35 +71,12 @@ export default function ProcessSection({ processRef }: ProcessSectionProps) {
             }}
             className="process-item bg-no-repeat"
           >
-            사용자 설문조사
-            <br />
-            경쟁 서비스 분석
-            <br />
-            데이터/사용자 행동 분석
-            <br />
-            페르소나 작성
-            <br />
-            사용자 여정지도 작성
-            <br />
-            핵심 문제(HMW) 도출
-            <br />
-            IA/사이트맵 작성
-            <br />
-            와이어프레임 제작
-            <br />
-            하이파이 디자인
-            <br />
-            디자인 시스템 설계
-            <br />
-            인터랙션/애니메이션 설계
-            <br />
-            프로토타입 제작
-            <br />
-            사용성 테스트 진행
-            <br />
-            피드백 수집
-            <br />
-            성과 측정(KPI, UX metrics)
+            {processText.map((item, index) => (
+              <span key={index}>
+                {item}
+                {index !== processText.length - 1 && <br />}
+              </span>
+            ))}
           </span>
         </span>
       </p>

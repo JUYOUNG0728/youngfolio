@@ -41,20 +41,21 @@ function upContents({ contentRef, screenWidth }: ContentsProps) {
     if (!contentRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        contentRef.current,
-        { y: "0" },
-        {
-          y: "0",
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        }
-      );
+      gsap.set(contentRef.current, { marginTop: "-30vh" });
+
+      const tween = gsap.to(contentRef.current, {
+        marginTop: "-100vh",
+        paused: true,
+      });
+
+      ScrollTrigger.create({
+        trigger: contentRef.current,
+        start: "top center",
+        end: "top -80%",
+        onUpdate: (self) => {
+          tween.progress(self.progress);
+        },
+      });
     }, contentRef);
 
     return () => ctx.revert();
@@ -75,7 +76,7 @@ function zoomPhoto({ scrollRef, photoRef, screenWidth }: ZoomPhotoProps) {
 
       ScrollTrigger.create({
         trigger: scrollRef.current,
-        start: "center top-=1200",
+        start: "bottom -50%",
         onEnter: () => {
           gsap.to(photoDiv, { width: "100vw", duration: 0.5 }),
             gsap.to(photo, { filter: "brightness(0.5)", duration: 0.5 });
@@ -103,7 +104,7 @@ function viewPhotoWords({ photoRef, screenWidth }: PhotoProps) {
 
       ScrollTrigger.create({
         trigger: photoRef.current,
-        start: "top top-=200",
+        start: "top bottom",
         onEnter: () => gsap.to(words, { opacity: 1, duration: 0.5 }),
         onLeaveBack: () => gsap.to(words, { opacity: 0, duration: 0.5 }),
       });
@@ -119,8 +120,10 @@ function viewProjectWords({ photoRef, screenWidth }: PhotoProps) {
     if (!photoRef.current) return;
 
     const mainTextDiv = photoRef.current.querySelector(".photo-words");
-    const mainText = mainTextDiv?.querySelector("span") as HTMLSpanElement;
-    const subTextDiv = mainTextDiv?.querySelector("div") as HTMLDivElement;
+    const mainText = mainTextDiv?.querySelector("span");
+    const subTextDiv = mainTextDiv?.querySelector("div");
+
+    if (!mainTextDiv || !mainText || !subTextDiv) return;
 
     const ctx = gsap.context(() => {
       gsap.set(mainText, { opacity: 1 });
@@ -130,7 +133,7 @@ function viewProjectWords({ photoRef, screenWidth }: PhotoProps) {
 
       ScrollTrigger.create({
         trigger: photoRef.current,
-        start: "top top-=1200",
+        start: "top -70%",
         onEnter: () => {
           mainTextDiv.classList.remove("h1", "text-wrap"),
             mainTextDiv.classList.add("h2", "text-nowrap");
@@ -178,7 +181,9 @@ function scaleUpProjects({ projectRef, screenWidth }: ProjectsProps) {
 
     const projects = Array.from(
       projectRef.current.querySelectorAll(".project-item")
-    ) as HTMLDivElement[];
+    );
+
+    if (projects.length === 0) return;
 
     const ctx = gsap.context(() => {
       projects.forEach((project, i) => {
@@ -190,8 +195,8 @@ function scaleUpProjects({ projectRef, screenWidth }: ProjectsProps) {
           trigger: projectRef.current,
           start:
             screenWidth > 768
-              ? `bottom+=${i * innerHeight} top+=400`
-              : `bottom+=${i * innerHeight} top+=700`,
+              ? `bottom+=${i * innerHeight} 130%`
+              : `bottom+=${i * innerHeight} 180%`,
           onEnter: () => gsap.to(project, { scale: 1, duration: 0.3 }),
           onLeaveBack: () => gsap.to(project, { scale: 0.8, duration: 0.3 }),
           scrub: true,
@@ -219,8 +224,8 @@ function moveProcessTitle({ processRef, screenWidth }: ProcessProps) {
 
       ScrollTrigger.create({
         trigger: processRef.current,
-        start: "top top",
-        end: "center top",
+        start: "top 90%",
+        end: "center bottom",
         onUpdate: (self) => {
           const progress = self.progress;
           gsap.to(leftTitle, { x: `${-100 * progress}vw`, overwrite: "auto" });
@@ -245,8 +250,8 @@ function changeProcessTextColor({ processRef, screenWidth }: ProcessProps) {
 
       ScrollTrigger.create({
         trigger: processRef.current,
-        start: "center bottom+=500",
-        end: "bottom 99%",
+        start: "top 90%",
+        end: "center 50%",
         onUpdate: (self) => {
           const progress = self.progress;
           gsap.to(processText, {
@@ -264,34 +269,35 @@ function changeProcessTextColor({ processRef, screenWidth }: ProcessProps) {
 function marqueeContactText({ contactRef, screenWidth }: ContactProps) {
   useEffect(() => {
     if (!contactRef.current) return;
-    const marquee = contactRef.current?.querySelectorAll(".marquee");
-    let direction = 1;
 
-    const tween = gsap.to(marquee, {
-      xPercent: -100,
-      ease: "linear",
-      repeat: -1,
-      duration: 40,
-    });
+    const marqueeText = contactRef.current.querySelectorAll(".marquee");
 
-    ScrollTrigger.create({
-      trigger: marquee,
-      start: "top bottom+=1000",
-      end: "bottom top",
-      onUpdate: (self) => {
-        const newDirection = self.direction;
-        if (newDirection !== direction) {
-          direction = newDirection;
-          tween.timeScale(direction);
-        }
-      },
-    });
+    const ctx = gsap.context(() => {
+      let direction = 1;
 
-    return () => {
-      tween.kill();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+      const tween = gsap.to(marqueeText, {
+        xPercent: -100,
+        ease: "linear",
+        repeat: -1,
+        duration: 40,
+      });
+
+      ScrollTrigger.create({
+        trigger: marqueeText,
+        start: "top bottom+=1000",
+        end: "bottom top",
+        onUpdate: (self) => {
+          const newDirection = self.direction;
+          if (newDirection !== direction) {
+            direction = newDirection;
+            tween.timeScale(direction);
+          }
+        },
+      });
+    }, contactRef);
+
+    return () => ctx.revert();
+  }, [screenWidth]);
 }
 
 export {

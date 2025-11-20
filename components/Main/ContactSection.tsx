@@ -8,6 +8,10 @@ type ContactSectionProps = {
 export default function ContactSection({ contactRef }: ContactSectionProps) {
   const screenWidth = useScreenWidth();
 
+  const marqueeText = Array(4).fill("FEEL FREE TO EXPLORE 😊");
+
+  const marqueeTextStyle = "flex gap-12 whitespace-nowrap marquee";
+
   const iconContactArrowSize =
     screenWidth > 1920
       ? 64
@@ -17,35 +21,40 @@ export default function ContactSection({ contactRef }: ContactSectionProps) {
       ? 38
       : 32;
 
+  const handleClickContact = () => {
+    window.location.href = "/contact";
+  };
+
+  const handleMouseEnterContact = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.style.borderRadius = "1.5rem";
+  };
+
+  const handleMouseLeaveContact = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.style.borderRadius = "10rem";
+  };
+
   return (
     <section
       ref={contactRef}
-      className={`w-full px-[70px] text-white relative bg-black overflow-hidden !pointer-events-auto !select-auto xl:px-[100px] ${
-        !(screenWidth > 1000) && "top-44"
-      }`}
+      className="w-full text-white relative bg-black overflow-hidden !pointer-events-auto !select-auto px-[70px] xl:px-[100px]"
     >
       <h2 className="h1 !font-medium flex gap-12">
-        <ul className="flex gap-12 whitespace-nowrap marquee">
-          <li>FEEL FREE TO EXPLORE 😊</li>
-          <li>FEEL FREE TO EXPLORE 😊</li>
-          <li>FEEL FREE TO EXPLORE 😊</li>
-          <li>FEEL FREE TO EXPLORE 😊</li>
+        <ul className={marqueeTextStyle}>
+          {marqueeText.map((text, index) => (
+            <li key={index}>{text}</li>
+          ))}
         </ul>
-        <ul
-          aria-hidden="true"
-          className="flex gap-12 whitespace-nowrap marquee"
-        >
-          <li>FEEL FREE TO EXPLORE 😊</li>
-          <li>FEEL FREE TO EXPLORE 😊</li>
-          <li>FEEL FREE TO EXPLORE 😊</li>
-          <li>FEEL FREE TO EXPLORE 😊</li>
+        <ul aria-hidden="true" className={marqueeTextStyle}>
+          {marqueeText.map((text, index) => (
+            <li key={index}>{text}</li>
+          ))}
         </ul>
       </h2>
       <button
-        className="fullSizeButton mt-16 gap-4 rounded-full xl:mt-36 xl:gap-9 lg:gap-7 md:mt-20"
-        onClick={() => (window.location.href = "/contact")}
-        onMouseEnter={(e) => (e.currentTarget.style.borderRadius = "1.5rem")}
-        onMouseLeave={(e) => (e.currentTarget.style.borderRadius = "10rem")}
+        className="fullSizeButton mt-16 gap-4 rounded-full md:mt-20 lg:gap-7 xl:mt-36 xl:gap-9"
+        onClick={handleClickContact}
+        onMouseEnter={handleMouseEnterContact}
+        onMouseLeave={handleMouseLeaveContact}
         style={{
           transition: "border-radius 0.3s ease-in-out",
         }}

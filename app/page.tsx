@@ -12,6 +12,7 @@ import ProcessSection from "@/components/Main/ProcessSection";
 import ContactSection from "@/components/Main/ContactSection";
 
 import {
+  upContents,
   zoomPhoto,
   viewPhotoWords,
   viewProjectWords,
@@ -33,6 +34,7 @@ export default function MainPage() {
   const processRef = useRef<HTMLDivElement | null>(null);
   const contactRef = useRef<HTMLDivElement | null>(null);
 
+  upContents({ contentRef, screenWidth });
   zoomPhoto({ scrollRef, photoRef, screenWidth });
   viewPhotoWords({ photoRef, screenWidth });
   viewProjectWords({ photoRef, screenWidth });
@@ -50,7 +52,7 @@ export default function MainPage() {
     >
       <VisualSection />
       <div
-        className="w-full h-full relative bottom-[30vh] pointer-events-none select-none"
+        className="w-full relative mb-[30vh] pointer-events-none select-none"
         ref={contentRef}
       >
         <IntroduceSection scrollRef={scrollRef} />
