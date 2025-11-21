@@ -61,7 +61,7 @@ export default function ProcessSection({ processRef }: ProcessSectionProps) {
           </span>
         </h2>
       </div>
-      <p className="body1 text-center text-nowrap mt-[16vh] md:mt-[20vh]">
+      <p className="body1 text-center px-[30px] mt-[16vh] md:mt-[20vh]">
         <span>
           <span
             style={{

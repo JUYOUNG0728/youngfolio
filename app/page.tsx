@@ -52,7 +52,7 @@ export default function MainPage() {
     >
       <VisualSection />
       <div
-        className="w-full relative mb-[30vh] pointer-events-none select-none"
+        className="w-full relative pointer-events-none select-none"
         ref={contentRef}
       >
         <IntroduceSection scrollRef={scrollRef} />

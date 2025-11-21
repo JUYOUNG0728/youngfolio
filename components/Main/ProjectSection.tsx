@@ -1,53 +1,40 @@
 import ProjectItem from "@/components/Main/ProjectItem";
+import { projects } from "@/data/projects";
 
 type ProjectSectionProps = {
   projectRef: React.RefObject<HTMLElement>;
 };
 
 export default function ProjectSection({ projectRef }: ProjectSectionProps) {
+  const someProjects = projects.slice(0, 4);
+
+  const baseStyle = "absolute left-0 right-0";
+
+  const itemStyle = [
+    { top: "top-0", md: "md:right-auto" },
+    { top: "top-[80vh]", md: "md:top-[100vh] md:left-auto" },
+    { top: "top-[160vh]", md: "md:top-[200vh] md:right-auto" },
+    { top: "top-[240vh]", md: "md:top-[300vh]" },
+  ];
+
   return (
     <section
       className="w-full text-white absolute top-[350vh] xl:top-[250vh]"
       ref={projectRef}
     >
-      <ProjectItem
-        imageSrc="/images/img-project-thumbnail-youngfolio.png"
-        imageAlt="YOUNGFOLIO 썸네일"
-        title="YOUNGFOLIO"
-        description="2025. WEB / UX JUYOUNG'S PORTFOLIO"
-        top="0"
-        mdTop="0"
-        align="left"
-      />
-
-      <ProjectItem
-        imageSrc="/images/img-project-thumbnail-youngfolio.png"
-        imageAlt="YOUNGFOLIO 썸네일"
-        title="YOUNGFOLIO"
-        description="2025. WEB / UX JUYOUNG'S PORTFOLIO"
-        top="80vh"
-        mdTop="100vh"
-        align="right"
-      />
-
-      <ProjectItem
-        imageSrc="/images/img-project-thumbnail-youngfolio.png"
-        imageAlt="YOUNGFOLIO 썸네일"
-        title="YOUNGFOLIO"
-        description="2025. WEB / UX JUYOUNG'S PORTFOLIO"
-        top="160vh"
-        mdTop="200vh"
-        align="left"
-      />
-
-      <ProjectItem
-        imageSrc="/images/img-project-thumbnail-youngfolio.png"
-        imageAlt="YOUNGFOLIO 썸네일"
-        title="YOUNGFOLIO"
-        description="2025. WEB / UX JUYOUNG'S PORTFOLIO"
-        top="240vh"
-        mdTop="300vh"
-      />
+      {someProjects.map((project, index) => (
+        <div
+          key={project.id}
+          className={`${baseStyle} ${itemStyle[index].top} ${itemStyle[index].md}`}
+        >
+          <ProjectItem
+            imageSrc={project.imageSrc}
+            imageAlt={project.title}
+            title={project.title}
+            description={project.description}
+          />
+        </div>
+      ))}
     </section>
   );
 }
