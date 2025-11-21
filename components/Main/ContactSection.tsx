@@ -36,7 +36,7 @@ export default function ContactSection({ contactRef }: ContactSectionProps) {
   return (
     <section
       ref={contactRef}
-      className="w-full text-white relative bg-black overflow-hidden !pointer-events-auto !select-auto px-[70px] xl:px-[100px]"
+      className="w-full text-white relative bg-black overflow-hidden !pointer-events-auto !select-auto px-[30px] md:px-[70px]"
     >
       <h2 className="h1 !font-medium flex gap-12">
         <ul className={marqueeTextStyle}>

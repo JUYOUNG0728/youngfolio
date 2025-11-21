@@ -23,7 +23,7 @@ export default function PhotoSection() {
           className="object-cover zoom-photo-img"
         />
         <h2 className="text-gray-10 text-center font-semibold relative flex flex-col items-center justify-center photo-words h1 text-wrap">
-          <span className="transition-all duration-700 px-[60px]">
+          <span className="transition-all duration-700 px-[70px]">
             IMAGINE BEYOND
           </span>
           <div className="flex flex-col items-center transition-all duration-700">

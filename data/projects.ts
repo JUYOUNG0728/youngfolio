@@ -1,0 +1,58 @@
+export const projects = [
+  {
+    id: 1,
+    title: "YOUNGFOLIO",
+    description: "2025. WEB / UX JUYOUNG'S PORTFOLIO",
+    imageSrc: "/images/img-project-thumbnail-youngfolio.png",
+    link: "youngfolio.com",
+  },
+  {
+    id: 2,
+    title: "YOUNGFOLIO",
+    description: "2025. WEB / UX JUYOUNG'S PORTFOLIO",
+    imageSrc: "/images/img-project-thumbnail-youngfolio.png",
+    link: "youngfolio.com",
+  },
+  {
+    id: 3,
+    title: "YOUNGFOLIO",
+    description: "2025. WEB / UX JUYOUNG'S PORTFOLIO",
+    imageSrc: "/images/img-project-thumbnail-youngfolio.png",
+    link: "youngfolio.com",
+  },
+  {
+    id: 4,
+    title: "YOUNGFOLIO",
+    description: "2025. WEB / UX JUYOUNG'S PORTFOLIO",
+    imageSrc: "/images/img-project-thumbnail-youngfolio.png",
+    link: "youngfolio.com",
+  },
+  {
+    id: 5,
+    title: "YOUNGFOLIO",
+    description: "2025. WEB / UX JUYOUNG'S PORTFOLIO",
+    imageSrc: "/images/img-project-thumbnail-youngfolio.png",
+    link: "youngfolio.com",
+  },
+  {
+    id: 6,
+    title: "YOUNGFOLIO",
+    description: "2025. WEB / UX JUYOUNG'S PORTFOLIO",
+    imageSrc: "/images/img-project-thumbnail-youngfolio.png",
+    link: "youngfolio.com",
+  },
+  {
+    id: 7,
+    title: "YOUNGFOLIO",
+    description: "2025. WEB / UX JUYOUNG'S PORTFOLIO",
+    imageSrc: "/images/img-project-thumbnail-youngfolio.png",
+    link: "youngfolio.com",
+  },
+  {
+    id: 8,
+    title: "YOUNGFOLIO",
+    description: "2025. WEB / UX JUYOUNG'S PORTFOLIO",
+    imageSrc: "/images/img-project-thumbnail-youngfolio.png",
+    link: "youngfolio.com",
+  },
+];

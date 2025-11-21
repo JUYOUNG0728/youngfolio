@@ -224,7 +224,7 @@ function moveProcessTitle({ processRef, screenWidth }: ProcessProps) {
 
       ScrollTrigger.create({
         trigger: processRef.current,
-        start: "top 90%",
+        start: "top 60%",
         end: "center bottom",
         onUpdate: (self) => {
           const progress = self.progress;
@@ -250,8 +250,8 @@ function changeProcessTextColor({ processRef, screenWidth }: ProcessProps) {
 
       ScrollTrigger.create({
         trigger: processRef.current,
-        start: "top 90%",
-        end: "center 50%",
+        start: "top center",
+        end: "center 30%",
         onUpdate: (self) => {
           const progress = self.progress;
           gsap.to(processText, {
