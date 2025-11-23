@@ -20,6 +20,7 @@ export default function ContactInfoSection() {
 
   const handleCopy = (value: string) => {
     navigator.clipboard.writeText(value);
+    alert("클립보드에 복사되었습니다.");
   };
 
   return (
