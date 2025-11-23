@@ -54,7 +54,7 @@ export default function InquiryChat({
           );
         })}
       </div>
-      <div className="my-12 mx-16">
+      <div className="my-7 mx-5 lg:my-12 lg:mx-16">
         <InquiryInput handleSend={handleSend} />
       </div>
     </div>

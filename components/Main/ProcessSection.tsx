@@ -23,7 +23,7 @@ export default function ProcessSection({ processRef }: ProcessSectionProps) {
     "프로토타입 제작",
     "사용성 테스트 진행",
     "피드백 수집",
-    "성과 측정(KPI, UX metrics)",
+    "성과 측정 (KPI, UX metrics)",
   ];
 
   return (
@@ -33,7 +33,7 @@ export default function ProcessSection({ processRef }: ProcessSectionProps) {
     >
       <div className="flex flex-col gap-8">
         <span className="body2 text-center">(Built This Way)</span>
-        <h2 className="h1 !font-medium flex flex-col items-center justify-center px-[70px]">
+        <h2 className="h1 !font-medium flex flex-col items-center justify-center px-[80px]">
           <span
             className={`left-title ${
               screenWidth >= 1000 ? "text-nowrap" : "text-center"
