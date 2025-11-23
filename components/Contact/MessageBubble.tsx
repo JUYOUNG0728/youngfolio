@@ -32,7 +32,8 @@ export default function MessageBubble({
   };
   const bubbleStyle =
     "break-words py-3 px-5 rounded-3xl max-w-[600px] block text-base xl:text-lg xl:px-6 xl:max-w-[840px] xl:rounded-[30px]";
-  const imageStyle = "max-w-[600px] max-h-[200px] rounded-lg object-contain";
+  const imageStyle =
+    "min-w-[100px] min-h-[100px] max-w-[600px] max-h-[200px] rounded-lg object-contain";
   const timestampStyle = "text-gray-30 body6";
 
   {
