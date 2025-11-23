@@ -22,7 +22,7 @@ export default function IntroduceSection({ scrollRef }: IntroduceSectionProps) {
         clipPath: contentsClipPath,
       }}
     >
-      <div className="w-full h-screen overflow-hidden flex flex-col items-center pt-20 pb-32 justify-between gap-12 sticky top-0 lg:top-10 xl:top-24 xl:pb-48">
+      <div className="w-full h-screen overflow-hidden flex flex-col items-center pt-14 pb-32 justify-between gap-12 sticky top-0 lg:pt-20 lg:top-10 xl:top-24 xl:pb-48">
         <p className="px-[30px] fullBody font-semibold text-outline-white text-justify md:px-[70px]">
           BLENDING TECHNOLOGY AND EMOTION, CREATING EXPERIENCES THAT GO BEYOND
           WORDS AND RESONATE WITH THE HEART.
