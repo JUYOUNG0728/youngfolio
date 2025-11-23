@@ -19,7 +19,7 @@ export default function VisualSection() {
             "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)",
         }}
       />
-      <div className="flex flex-col items-center gap-10 xl:gap-12">
+      <div className="flex flex-col items-center gap-7 lg:gap-10 xl:gap-12">
         <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center relative overflow-hidden md:w-24 md:h-24 lg:w-28 lg:h-28">
           <Image
             src="/images/img-character.png"

@@ -9,7 +9,8 @@ type IntroduceSectionProps = {
 export default function IntroduceSection({ scrollRef }: IntroduceSectionProps) {
   const screenWidth = useScreenWidth();
 
-  const iconScrollArrowSize = screenWidth >= 1920 ? 52 : 36;
+  const iconScrollArrowSize =
+    screenWidth >= 1920 ? 52 : screenWidth >= 768 ? 36 : 28;
 
   const contentsClipPath =
     screenWidth <= 768 ? undefined : "inset(0 0 0 0 round 50% 50% 0 0)";
@@ -21,12 +22,12 @@ export default function IntroduceSection({ scrollRef }: IntroduceSectionProps) {
         clipPath: contentsClipPath,
       }}
     >
-      <div className="w-full h-screen overflow-hidden flex flex-col items-center pt-20 pb-32 justify-between sticky top-14 xl:top-24 xl:pb-48">
+      <div className="w-full h-screen overflow-hidden flex flex-col items-center pt-20 pb-32 justify-between gap-16 sticky top-0 lg:top-10 xl:top-24 xl:pb-48">
         <p className="px-[30px] fullBody font-semibold text-outline-white text-justify md:px-[70px]">
           BLENDING TECHNOLOGY AND EMOTION, CREATING EXPERIENCES THAT GO BEYOND
           WORDS AND RESONATE WITH THE HEART.
         </p>
-        <div className="flex flex-col items-center gap-20">
+        <div className="flex flex-col items-center gap-10 lg:gap-20">
           <p className="body2 text-white text-center px-[40px] text-wrap">
             현실과 감성의 경계를 넘나들며 마음에 닿는 경험과 공간을
             디자인합니다.

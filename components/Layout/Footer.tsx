@@ -12,7 +12,8 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 export default function Footer() {
   const screenWidth = useScreenWidth();
 
-  const iconFooterArrowSize = screenWidth >= 1920 ? 30 : 24;
+  const iconFooterArrowSize =
+    screenWidth >= 1920 ? 30 : screenWidth >= 768 ? 24 : 20;
 
   const footerSectionDivStyle =
     "flex flex-col justify-between gap-4 lg:h-full lg:gap-0";
@@ -57,7 +58,7 @@ export default function Footer() {
           </div>
         </div>
         <button
-          className="rounded-full w-16 h-16 bg-gray-50 absolute top-0 right-0 flex justify-center items-center xl:w-20 xl:h-20"
+          className="rounded-full w-12 h-12 bg-gray-50 absolute top-0 right-0 flex justify-center items-center lg:w-16 lg:h-16 xl:w-20 xl:h-20"
           onClick={() => {
             scrollTop();
           }}
