@@ -1,5 +1,5 @@
 type ButtonProps = {
-  text: string;
+  children: React.ReactNode;
   variant?: "primary" | "secondary" | "primaryOutline" | "secondaryOutline";
   size?: "xl" | "lg" | "md" | "sm";
   onClick?: () => void;
@@ -7,7 +7,7 @@ type ButtonProps = {
 };
 
 export default function Button({
-  text,
+  children: text,
   variant = "primary",
   size = "lg",
   onClick,

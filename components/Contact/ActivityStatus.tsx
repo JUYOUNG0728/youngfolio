@@ -6,7 +6,7 @@ type ActivityStatusProps = {
 
 export default function ActivityStatus({ isWorkingHour }: ActivityStatusProps) {
   return (
-    <>
+    <div className="relative">
       <div
         className={`${
           isWorkingHour ? "bg-green-600" : "bg-gray-40"
@@ -14,7 +14,7 @@ export default function ActivityStatus({ isWorkingHour }: ActivityStatusProps) {
       >
         <span>{isWorkingHour ? "ON" : "OFF"}</span>
       </div>
-      <div className="mb-6 bg-gray-10 w-12 h-12 rounded-full pt-[5px] overflow-hidden xl:w-14 xl:h-14 xl:mb-7">
+      <div className="bg-gray-10 w-12 h-12 rounded-full pt-[5px] overflow-hidden xl:w-14 xl:h-14">
         <Image
           src="/images/icon-admin-avatar.png"
           alt="관리자 아바타"
@@ -22,6 +22,6 @@ export default function ActivityStatus({ isWorkingHour }: ActivityStatusProps) {
           height={60}
         />
       </div>
-    </>
+    </div>
   );
 }

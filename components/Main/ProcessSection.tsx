@@ -36,14 +36,14 @@ export default function ProcessSection({ processRef }: ProcessSectionProps) {
         <h2 className="h1 !font-medium flex flex-col items-center justify-center px-[70px]">
           <span
             className={`left-title ${
-              screenWidth > 1000 ? "text-nowrap" : "text-center"
+              screenWidth >= 1000 ? "text-nowrap" : "text-center"
             }`}
           >
             CREATED THROUGH
           </span>
           <span
             className={`right-title flex ${
-              screenWidth > 1000 ? "flex-row gap-4 items-center" : "flex-col"
+              screenWidth >= 1000 ? "flex-row gap-4 items-center" : "flex-col"
             }`}
           >
             <div className="flex items-center gap-4">

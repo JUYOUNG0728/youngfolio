@@ -5,8 +5,8 @@ import { useEffect, useRef } from "react";
 import { formatDateHeader, messageDisplayMeta } from "@/utils/messageUtils";
 import { Message, HandleSendParams } from "@/types/inquiry";
 
-import MessageBubble from "@/components/Inquiry/MessageBubble";
-import InquiryInput from "@/components/Inquiry/InquiryInput";
+import MessageBubble from "@/components/Contact/MessageBubble";
+import InquiryInput from "@/components/Contact/InquiryInput";
 
 type InquiryChatProps = {
   messages: Message[];
@@ -25,22 +25,10 @@ export default function InquiryChat({
     el.scrollTop = el.scrollHeight;
   }, [messages]);
 
-  useEffect(() => {
-    const handleWheelOutside = (e: WheelEvent) => {
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.scrollTop += e.deltaY;
-      }
-    };
-    window.addEventListener("wheel", handleWheelOutside, { passive: false });
-    return () => {
-      window.removeEventListener("wheel", handleWheelOutside);
-    };
-  }, []);
-
   return (
-    <div className="bg-white/10 rounded-3xl h-[90vh] w-[67vw] border-2 border-white/20">
+    <div className="w-full h-full flex flex-col bg-white/10 rounded-3xl border-2 border-white/20">
       <div
-        className="w-full h-[calc(100%-180px)] overflow-y-auto scrollbar px-20 pt-4 xl:px-24 xl:h-[calc(100%-240px)]"
+        className="w-full flex-1 overflow-y-auto scrollbar pr-8 mb-8"
         ref={scrollContainerRef}
       >
         {messages.map((msg, index) => {
@@ -53,7 +41,7 @@ export default function InquiryChat({
           return (
             <div key={msg.id} className="flex flex-col mt-4">
               {showDate && (
-                <div className="text-center text-sm text-gray-30 my-8 xl:text-base">
+                <div className="messageBubble">
                   {formatDateHeader(new Date(msg.timestamp))}
                 </div>
               )}
@@ -66,8 +54,8 @@ export default function InquiryChat({
           );
         })}
       </div>
-      <div className="absolute flex justify-center w-[calc(100%-214px)] bottom-16 z-20 xl:bottom-20 ml-16 xl:w-[calc(100%-278px)] xl:ml-24">
-        <InquiryInput onSend={handleSend} />
+      <div className="my-12 mx-16">
+        <InquiryInput handleSend={handleSend} />
       </div>
     </div>
   );

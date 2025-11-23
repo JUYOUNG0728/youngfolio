@@ -16,7 +16,7 @@ export default function CoverSection() {
   };
 
   const creatorImageSize =
-    screenWidth < 1920
+    screenWidth <= 1920
       ? { width: 1200, height: 1644 }
       : { width: 1640, height: 2248 };
 

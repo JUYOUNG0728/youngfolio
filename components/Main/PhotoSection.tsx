@@ -5,11 +5,11 @@ export default function PhotoSection() {
   const screenWidth = useScreenWidth();
 
   const xClipPath =
-    screenWidth > 1920
+    screenWidth >= 1920
       ? "polygon(0 0, 100% 0, 100% 240%, 0 240%)"
-      : screenWidth > 1280
+      : screenWidth >= 1280
       ? "polygon(0 0, 100% 0, 100% 200%, 0 200%)"
-      : screenWidth > 768
+      : screenWidth >= 768
       ? "polygon(0 0, 100% 0, 100% 180%, 0 180%)"
       : "polygon(0 0, 100% 0, 100% 140%, 0 140%)";
 

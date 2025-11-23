@@ -27,7 +27,7 @@ export default function Menu({
     {
       id: "04",
       label: "CONTACT",
-      href: "/contact/information",
+      href: "/contact",
     },
   ];
 
@@ -41,7 +41,7 @@ export default function Menu({
       <div className="flex items-center justify-center h-full w-full">
         <div
           className={`${
-            screenWidth > 1680
+            screenWidth >= 1680
               ? "w-full gap-[9vw]"
               : "w-[calc(100%-1200px)] gap-[16vw] md:gap-[9vw] lg:gap-[7vw]"
           } flex justify-center flex-wrap`}

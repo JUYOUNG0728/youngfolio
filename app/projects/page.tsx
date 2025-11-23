@@ -14,7 +14,7 @@ export default function ProjectsPage() {
   const [activePage, setActivePage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const itemsPerPage = screenWidth < 768 ? 2 : screenWidth < 1280 ? 4 : 6;
+  const itemsPerPage = screenWidth <= 768 ? 2 : screenWidth <= 1280 ? 4 : 6;
 
   const filteredProjects = useMemo(() => {
     return projects.filter(

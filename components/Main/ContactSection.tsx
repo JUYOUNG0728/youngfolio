@@ -13,11 +13,11 @@ export default function ContactSection({ contactRef }: ContactSectionProps) {
   const marqueeTextStyle = "flex gap-12 whitespace-nowrap marquee";
 
   const iconContactArrowSize =
-    screenWidth > 1920
+    screenWidth >= 1920
       ? 64
-      : screenWidth > 1280
+      : screenWidth >= 1280
       ? 52
-      : screenWidth > 768
+      : screenWidth >= 768
       ? 38
       : 32;
 

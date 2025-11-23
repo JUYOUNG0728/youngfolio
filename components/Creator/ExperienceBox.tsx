@@ -44,15 +44,15 @@ export default function ExperienceBox({
             <Image
               src={"/images/icon-arrow-down.png"}
               alt={"펼치기"}
-              width={screenWidth < 1920 ? 32 : 40}
-              height={screenWidth < 1920 ? 32 : 40}
+              width={screenWidth <= 1920 ? 32 : 40}
+              height={screenWidth <= 1920 ? 32 : 40}
             />
           ) : (
             <Image
               src={"/images/icon-arrow-up.png"}
               alt={"접기"}
-              width={screenWidth < 1920 ? 32 : 40}
-              height={screenWidth < 1920 ? 32 : 40}
+              width={screenWidth <= 1920 ? 32 : 40}
+              height={screenWidth <= 1920 ? 32 : 40}
             />
           )}
         </div>
