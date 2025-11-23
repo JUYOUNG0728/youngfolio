@@ -63,6 +63,10 @@ export default function MessageBubble({
               src={image_url}
               alt={isAdmin ? "관리자 첨부 이미지" : "사용자 첨부 이미지"}
               className={`${imageStyle}`}
+              onClick={(e) => {
+                const target = e.target as HTMLImageElement;
+                window.open(target.src, "_blank");
+              }}
             />
           )}
           {!text && showTime && (
