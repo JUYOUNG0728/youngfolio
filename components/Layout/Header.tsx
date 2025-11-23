@@ -17,10 +17,10 @@ export default function Header() {
 
   const screenWidth = useScreenWidth();
 
-  const iconSize = screenWidth < 768 ? 20 : screenWidth < 1920 ? 24 : 30;
+  const iconSize = screenWidth <= 768 ? 20 : screenWidth <= 1920 ? 24 : 30;
   const logoSize = {
-    width: screenWidth < 768 ? 140 : screenWidth < 1920 ? 150 : 180,
-    height: screenWidth < 768 ? 22 : screenWidth < 1920 ? 24 : 28,
+    width: screenWidth <= 768 ? 140 : screenWidth <= 1920 ? 150 : 180,
+    height: screenWidth <= 768 ? 22 : screenWidth <= 1920 ? 24 : 28,
   };
 
   const handleLogoClick = () => {

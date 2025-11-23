@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 export default function Footer() {
   const screenWidth = useScreenWidth();
 
-  const iconFooterArrowSize = screenWidth > 1920 ? 30 : 24;
+  const iconFooterArrowSize = screenWidth >= 1920 ? 30 : 24;
 
   const footerSectionDivStyle =
     "flex flex-col justify-between gap-4 lg:h-full lg:gap-0";
@@ -41,7 +41,7 @@ export default function Footer() {
           </span>
         </div>
         <div className={footerSectionDivStyle}>
-          {screenWidth > 768 && (
+          {screenWidth >= 768 && (
             <div className="h4 !font-semibold flex flex-col gap-1">
               <span className="text-gray-10">THIS IS MY SPACE.</span>
               <p className="flex gap-4 ml-[-44px] justify-center">

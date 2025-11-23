@@ -155,6 +155,20 @@
       height: 16vh;
     }
   }
+
+  .messageBubble {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--gray-30);
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    @media (max-width: 1920px) {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+  }
 }
 
 @layer utilities {
@@ -243,6 +257,23 @@
 
     @media (max-width: 768px) {
       font-size: 1.125rem;
+    }
+  }
+
+  .h6 {
+    font-size: 1.75rem;
+    font-weight: 700;
+
+    @media (max-width: 1920px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 1280px) {
+      font-size: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
     }
   }
 

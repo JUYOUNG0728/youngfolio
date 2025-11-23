@@ -34,7 +34,7 @@ export default function VisualSection() {
           2025 : Imagine beyond words
         </span>
       </div>
-      {screenWidth > 768 && (
+      {screenWidth >= 768 && (
         <div className="absolute w-full pl-10 pr-[60px] bottom-[10vh] left-0 flex justify-between items-end">
           <div className="flex flex-col items-center gap-9 lg:gap-11 xl:gap-14">
             <div className="-rotate-90">

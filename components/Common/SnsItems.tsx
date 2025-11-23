@@ -5,7 +5,7 @@ import useScreenWidth from "@/utils/useScreenWidth";
 
 export default function SnsItems() {
   const screenWidth = useScreenWidth();
-  const snsItemSize = screenWidth < 1920 ? 24 : 30;
+  const snsItemSize = screenWidth <= 1920 ? 24 : 30;
 
   const snsItems = [
     {

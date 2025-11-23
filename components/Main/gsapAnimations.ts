@@ -194,7 +194,7 @@ function scaleUpProjects({ projectRef, screenWidth }: ProjectsProps) {
         ScrollTrigger.create({
           trigger: projectRef.current,
           start:
-            screenWidth > 768
+            screenWidth >= 768
               ? `bottom+=${i * innerHeight} 130%`
               : `bottom+=${i * innerHeight} 180%`,
           onEnter: () => gsap.to(project, { scale: 1, duration: 0.3 }),

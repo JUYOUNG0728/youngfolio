@@ -9,10 +9,10 @@ type IntroduceSectionProps = {
 export default function IntroduceSection({ scrollRef }: IntroduceSectionProps) {
   const screenWidth = useScreenWidth();
 
-  const iconScrollArrowSize = screenWidth > 1920 ? 52 : 36;
+  const iconScrollArrowSize = screenWidth >= 1920 ? 52 : 36;
 
   const contentsClipPath =
-    screenWidth < 768 ? undefined : "inset(0 0 0 0 round 50% 50% 0 0)";
+    screenWidth <= 768 ? undefined : "inset(0 0 0 0 round 50% 50% 0 0)";
 
   return (
     <section

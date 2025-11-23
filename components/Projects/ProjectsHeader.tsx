@@ -11,7 +11,7 @@ export default function ProjectsHeader({
   handleSearch,
 }: ProjectsHeaderProps) {
   return (
-    <div className="w-full flex justify-between gap-10 flex-col md:gap-0 md:flex-row md:items-end">
+    <div className="w-full flex justify-between flex-col md:flex-row md:items-end">
       <SubHeader page="PROJECTS" />
       <div className="mb-14 md:mb-28 lg:mb-36">
         <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
