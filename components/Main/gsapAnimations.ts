@@ -76,7 +76,7 @@ function zoomPhoto({ scrollRef, photoRef, screenWidth }: ZoomPhotoProps) {
 
       ScrollTrigger.create({
         trigger: scrollRef.current,
-        start: "bottom -100%",
+        start: "bottom -80%",
         onEnter: () => {
           gsap.to(photoDiv, { width: "100vw", duration: 0.5 }),
             gsap.to(photo, { filter: "brightness(0.5)", duration: 0.5 });
@@ -116,7 +116,7 @@ function viewPhotoWords({ photoRef, screenWidth }: PhotoProps) {
 
 /* 프로젝트 글자 나타나는 애니메이션 */
 function viewProjectWords({ photoRef, screenWidth }: PhotoProps) {
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!photoRef.current) return;
 
     const mainTextDiv = photoRef.current.querySelector(".photo-words");
@@ -129,14 +129,11 @@ function viewProjectWords({ photoRef, screenWidth }: PhotoProps) {
       gsap.set(mainText, { opacity: 1 });
       gsap.set(subTextDiv, { opacity: 0, maxHeight: 0 });
 
-      if (!mainTextDiv || !mainText || !subTextDiv) return;
-
       ScrollTrigger.create({
         trigger: photoRef.current,
-        start: "top -70%",
+        start: "top -120%",
         onEnter: () => {
-          mainTextDiv.classList.remove("h1", "text-wrap"),
-            mainTextDiv.classList.add("h2", "text-nowrap");
+          mainTextDiv.classList.add("!h2", "!text-nowrap");
           gsap.to(mainText, {
             opacity: "40%",
             duration: 0.1,
@@ -163,8 +160,7 @@ function viewProjectWords({ photoRef, screenWidth }: PhotoProps) {
           });
 
           gsap.delayedCall(0.5, () => {
-            mainTextDiv.classList.remove("h2", "text-nowrap"),
-              mainTextDiv.classList.add("h1", "text-wrap");
+            mainTextDiv.classList.remove("!h2", "!text-nowrap");
           });
         },
       });

@@ -17,7 +17,7 @@ export default function PhotoSection() {
     <section className="w-full h-screen sticky top-0 flex items-center justify-center overflow-hidden">
       <div className="h-full relative flex items-center justify-center zoom-photo">
         <Image
-          src="/images/img-main-background2.jpg"
+          src="/images/img-main-background.jpg"
           alt="배경 이미지"
           fill
           className="object-cover zoom-photo-img"
