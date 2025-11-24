@@ -49,11 +49,12 @@ export default function ContactPage() {
   /* 초기 메시지 불러오기 */
   useEffect(() => {
     const loadMessages = async () => {
-      const data = await fetchMessages();
+      if (!userUid) return;
+      const data = await fetchMessages({ uid: userUid });
       if (data) setMessages(data);
     };
     loadMessages();
-  }, []);
+  }, [userUid]);
 
   /* 실시간 메시지 수신 */
   useEffect(() => {
@@ -61,7 +62,12 @@ export default function ContactPage() {
       .channel("realtime:messages")
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "messages" },
+        {
+          event: "*",
+          schema: "public",
+          table: "messages",
+          filter: `uid=eq.${userUid}`,
+        },
         (payload) => {
           const newMessage = payload.new as Message;
           setMessages((prev) => [...prev, newMessage]);
@@ -72,7 +78,7 @@ export default function ContactPage() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [userUid]);
 
   /* 활동 시간에 따른 상태 관리 (오전 9시 ~ 오후 8시) */
   useEffect(() => {
