@@ -7,18 +7,20 @@ import { LenisProvider } from "@/lib/LenisProvider";
 import FollowCursor from "@/components/Common/FollowCursor";
 import Reload from "@/lib/Reload";
 
-export const metadata: Metadata = {
-  title: "YOUNGFOLIO",
-  description: "YOUNGFOLIO | Juyoung's Space",
-  icons: {
-    icon: "/images/favicon.ico",
-  },
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  return {
     title: "YOUNGFOLIO",
     description: "YOUNGFOLIO | Juyoung's Space",
-    images: ["/images/img-project-thumbnail-youngfolio.png"],
-  },
-};
+    icons: {
+      icon: "/images/favicon.ico",
+    },
+    openGraph: {
+      title: "YOUNGFOLIO",
+      description: "YOUNGFOLIO | Juyoung's Space",
+      images: ["/images/img-project-thumbnail-youngfolio.png"],
+    },
+  };
+}
 
 export default function RootLayout({
   children,
