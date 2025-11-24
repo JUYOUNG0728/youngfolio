@@ -76,7 +76,7 @@ function zoomPhoto({ scrollRef, photoRef, screenWidth }: ZoomPhotoProps) {
 
       ScrollTrigger.create({
         trigger: scrollRef.current,
-        start: "bottom -50%",
+        start: "bottom -100%",
         onEnter: () => {
           gsap.to(photoDiv, { width: "100vw", duration: 0.5 }),
             gsap.to(photo, { filter: "brightness(0.5)", duration: 0.5 });
@@ -104,7 +104,7 @@ function viewPhotoWords({ photoRef, screenWidth }: PhotoProps) {
 
       ScrollTrigger.create({
         trigger: photoRef.current,
-        start: "top bottom",
+        start: "top center",
         onEnter: () => gsap.to(words, { opacity: 1, duration: 0.5 }),
         onLeaveBack: () => gsap.to(words, { opacity: 0, duration: 0.5 }),
       });
