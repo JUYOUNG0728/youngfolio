@@ -49,25 +49,16 @@ export default function Header() {
             width={logoSize.width}
             height={logoSize.height}
           />
-          <div className="bg-white rounded-full p-4 flex justify-center items-center fixed top-7 right-[30px] md:right-[70px] md:p-5 xl:p-6">
+          <button
+            className="bg-white rounded-full p-4 flex justify-center items-center fixed top-7 right-[30px] md:right-[70px] md:p-5 xl:p-6"
+            onClick={toggleMenu}
+          >
             {!isMenuOpen ? (
-              <Hamburger
-                width={iconSize}
-                height={iconSize}
-                className="cursor-pointer"
-                onClick={toggleMenu}
-                fill="#000000"
-              />
+              <Hamburger width={iconSize} height={iconSize} fill="#000000" />
             ) : (
-              <Close
-                width={iconSize}
-                height={iconSize}
-                className="cursor-pointer"
-                onClick={() => setIsMenuOpen(false)}
-                fill="#000000"
-              />
+              <Close width={iconSize} height={iconSize} fill="#000000" />
             )}
-          </div>
+          </button>
         </div>
       </div>
       {isMenuOpen && (

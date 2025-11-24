@@ -10,6 +10,14 @@ import Reload from "@/lib/Reload";
 export const metadata: Metadata = {
   title: "YOUNGFOLIO",
   description: "YOUNGFOLIO | Juyoung's Space",
+  icons: {
+    icon: "/favicon.ico",
+  },
+  openGraph: {
+    title: "YOUNGFOLIO",
+    description: "YOUNGFOLIO | Juyoung's Space",
+    images: ["/images/img-project-thumbnail-youngfolio.png"],
+  },
 };
 
 export default function RootLayout({
