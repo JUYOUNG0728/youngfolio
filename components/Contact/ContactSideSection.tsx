@@ -8,7 +8,7 @@ export default function ContactSideSection({
   isWorkingHour,
 }: ContactSideSectionProps) {
   return (
-    <section className="flex flex-col justify-between sticky top-[16vh] h-[73vh]">
+    <section className="flex flex-col justify-between sticky top-[14vh] h-[76vh]">
       <h1 className="h3 !font-semibold text-nowrap">
         궁금한 점이 있으신가요?
         <br />
