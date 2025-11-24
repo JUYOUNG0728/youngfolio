@@ -7,6 +7,10 @@ interface Message {
   sender: "admin" | "user";
 }
 
+interface FetchMessagesParams {
+  uid: string;
+}
+
 interface SendMessageParams {
   uid: string;
   text: string;
@@ -23,4 +27,10 @@ interface HandleSendParams {
   imageFile: File | null;
 }
 
-export type { Message, SendMessageParams, UploadImageParams, HandleSendParams };
+export type {
+  Message,
+  SendMessageParams,
+  UploadImageParams,
+  HandleSendParams,
+  FetchMessagesParams,
+};

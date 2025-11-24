@@ -28,7 +28,7 @@ export default function InquiryChat({
   return (
     <div className="w-full h-full flex flex-col bg-white/10 rounded-3xl border-2 border-white/20">
       <div
-        className="w-full flex-1 overflow-y-auto scrollbar pr-8 mb-8"
+        className="w-full flex-1 overflow-y-auto scrollbar px-5 mb-8 lg:px-16 "
         ref={scrollContainerRef}
       >
         {messages.map((msg, index) => {

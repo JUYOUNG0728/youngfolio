@@ -1,10 +1,15 @@
 import { supabase } from "@/lib/supabaseClient";
-import type { SendMessageParams, UploadImageParams } from "@/types/inquiry";
+import type {
+  SendMessageParams,
+  UploadImageParams,
+  FetchMessagesParams,
+} from "@/types/inquiry";
 
-async function fetchMessages() {
+async function fetchMessages({ uid }: FetchMessagesParams) {
   const { data, error } = await supabase
     .from("messages")
     .select("*")
+    .eq("uid", uid)
     .order("timestamp", { ascending: true });
 
   if (error) {
