@@ -19,7 +19,7 @@ export default function ProjectSection({ projectRef }: ProjectSectionProps) {
 
   return (
     <section
-      className="w-full text-white absolute top-[350vh] xl:top-[250vh]"
+      className="w-full text-white absolute top-[470vh] xl:top-[370vh]"
       ref={projectRef}
     >
       {someProjects.map((project, index) => (
