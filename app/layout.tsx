@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "YOUNGFOLIO",
   description: "YOUNGFOLIO | Juyoung's Space",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/images/favicon.ico",
   },
   openGraph: {
     title: "YOUNGFOLIO",
