@@ -14,7 +14,7 @@ export default function SubHeader({ page }: SubHeaderProps) {
           width={16}
           height={16}
         />
-        <span>HOME　&gt;　{page}</span>
+        <span>HOME　&gt;　{page.toUpperCase()}</span>
       </span>
       <h1 className="h2 !font-semibold">{page}</h1>
     </div>

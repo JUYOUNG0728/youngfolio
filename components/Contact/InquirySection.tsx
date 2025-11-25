@@ -23,7 +23,11 @@ export default function InquirySection({
         </span>
       </div>
       <div className="w-full h-[90vh]">
-        <InquiryChat messages={messages} handleSend={handleSend} />
+        <InquiryChat
+          messages={messages}
+          handleSend={handleSend}
+          isAdminPage={false}
+        />
       </div>
     </section>
   );
