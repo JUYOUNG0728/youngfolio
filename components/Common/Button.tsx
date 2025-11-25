@@ -24,8 +24,8 @@ export default function Button({
   const buttonSize = {
     xl: "body2 px-[90px] py-[26px] xl:px-[108px] xl:py-[32px]",
     lg: "body3 px-[70px] py-[20px] xl:px-[84px] xl:py-[26px]",
-    md: "body3 px-6 py-3",
-    sm: "body4 px-4 py-2",
+    md: "body4 px-4 py-2",
+    sm: "body4 px-3 py-1",
   };
   return (
     <button

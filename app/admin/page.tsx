@@ -21,7 +21,7 @@ export default function AdminPage() {
   return (
     <div className="w-full h-screen flex items-center justify-center bg-black text-white">
       <div className="flex flex-col gap-5 bg-white/10 p-10 rounded-2xl">
-        <h1 className="h4">관리자 로그인</h1>
+        <h1 className="h6">관리자 로그인</h1>
         <input
           type="password"
           value={inputPw}
