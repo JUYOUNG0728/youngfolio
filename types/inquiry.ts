@@ -15,6 +15,7 @@ interface SendMessageParams {
   uid: string;
   text: string;
   imageUrl: string | null;
+  sender: "admin" | "user";
 }
 
 interface UploadImageParams {

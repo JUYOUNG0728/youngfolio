@@ -11,11 +11,13 @@ import InquiryInput from "@/components/Contact/InquiryInput";
 type InquiryChatProps = {
   messages: Message[];
   handleSend: ({ text, imageFile }: HandleSendParams) => Promise<void>;
+  isAdminPage: boolean;
 };
 
 export default function InquiryChat({
   messages,
   handleSend,
+  isAdminPage,
 }: InquiryChatProps) {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -32,7 +34,7 @@ export default function InquiryChat({
         ref={scrollContainerRef}
       >
         {messages.map((msg, index) => {
-          const { showDate, showTime, showProfile } = messageDisplayMeta({
+          const { showDate, showTime } = messageDisplayMeta({
             msg,
             messages,
             index,
@@ -48,7 +50,7 @@ export default function InquiryChat({
               <MessageBubble
                 {...msg}
                 showTime={showTime}
-                showProfile={showProfile}
+                isAdminPage={isAdminPage}
               />
             </div>
           );

@@ -20,9 +20,9 @@ async function fetchMessages({ uid }: FetchMessagesParams) {
   return data;
 }
 
-async function postMessage({ uid, text, imageUrl }: SendMessageParams) {
+async function postMessage({ uid, text, imageUrl, sender }: SendMessageParams) {
   const { error } = await supabase.from("messages").insert({
-    sender: "user",
+    sender,
     uid,
     text,
     image_url: imageUrl,
@@ -38,10 +38,16 @@ async function postImage({
   uid,
   file,
 }: UploadImageParams): Promise<string | null> {
-  const filePath = `chatImages/${uid}/${Date.now()}_${file.name}`;
+  const safeFileName = file.name.replace(/[^\w.-]/g, "_").toLowerCase();
+
+  const filePath = `chatImages/${uid}/${Date.now()}_${safeFileName}`;
+
   const { error } = await supabase.storage
     .from("chat-images")
-    .upload(filePath, file);
+    .upload(filePath, file, {
+      contentType: file.type,
+      upsert: false,
+    });
 
   if (error) {
     console.error("이미지 업로드 실패 :", error);
@@ -49,11 +55,9 @@ async function postImage({
     return null;
   }
 
-  const { data: publicUrl } = supabase.storage
-    .from("chat-images")
-    .getPublicUrl(filePath);
+  const { data } = supabase.storage.from("chat-images").getPublicUrl(filePath);
 
-  return publicUrl.publicUrl;
+  return data.publicUrl;
 }
 
 export { fetchMessages, postMessage, postImage };

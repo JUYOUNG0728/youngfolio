@@ -19,6 +19,8 @@ export default function ContactPage() {
 
   const screenWidth = useScreenWidth();
 
+  const userIdName = process.env.NEXT_PUBLIC_USERID_NAME as string;
+
   const handleSendMessage = async ({ text, imageFile }: HandleSendParams) => {
     if (!userUid) {
       alert(
@@ -30,18 +32,17 @@ export default function ContactPage() {
     const imageUrl = imageFile
       ? await postImage({ uid: userUid, file: imageFile })
       : null;
-    if (imageFile && !imageUrl) return;
 
-    await postMessage({ uid: userUid, text, imageUrl });
+    await postMessage({ uid: userUid, text, imageUrl, sender: "user" });
   };
 
   /* 익명 사용자 UID 관리 */
   useEffect(() => {
-    const savedUid = localStorage.getItem("anonUid");
+    const savedUid = localStorage.getItem(userIdName);
     if (savedUid) setUserUid(savedUid);
     else {
       const newUid = crypto.randomUUID();
-      localStorage.setItem("anonUid", newUid);
+      localStorage.setItem(userIdName, newUid);
       setUserUid(newUid);
     }
   }, []);
