@@ -29,6 +29,26 @@ export default function InquiryInput({ handleSend }: InquiryInputProps) {
     send: screenWidth <= 1920 ? 18 : 20,
   };
 
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+
+    for (const item of Array.from(items)) {
+      if (item.type.startsWith("image/")) {
+        e.preventDefault();
+        const blob = item.getAsFile();
+        if (blob) {
+          const ext = blob.type.split("/")[1] || "png";
+          const file = new File([blob], `pasted-image.${ext}`, {
+            type: blob.type,
+          });
+          setImageFile(file);
+        }
+        break;
+      }
+    }
+  };
+
   const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files[0]) {
@@ -83,6 +103,7 @@ export default function InquiryInput({ handleSend }: InquiryInputProps) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
+          onPaste={handlePaste}
         />
         <div className="h-[calc(100%-18px)] absolute right-5 my-auto flex items-center gap-2 xl:gap-3 xl:h-[calc(100%-24px)] xl:right-8">
           <label className="bg-gray-40 rounded-full aspect-square h-full overflow-hidden cursor-pointer flex justify-center items-center">

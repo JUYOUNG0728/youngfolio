@@ -81,13 +81,12 @@ export default function AdminChatDashboard() {
   }, [activeUid]);
 
   return (
-    <div className="w-full h-screen flex bg-black text-white">
+    <div className="w-full h-screen flex bg-black text-white border-b border-gray-40">
       <UserListPanel
         uids={uids}
         activeUid={activeUid}
         setActiveUid={setActiveUid}
       />
-
       <div className="flex-1 p-10">
         {activeUid ? (
           <InquiryChat
