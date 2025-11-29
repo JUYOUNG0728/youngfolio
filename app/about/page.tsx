@@ -417,17 +417,17 @@ export default function AboutPage() {
                 </div>
                 <div className="flex gap-2">
                   <div className="w-[24vw] h-[50vh]">
-                    <video
-                      src="/videos/video-spring.mp4"
-                      className="w-full h-full object-cover"
-                      controls
+                    <iframe
+                      src="https://drive.google.com/file/d/1meJp1wpzAo8AzQw_LtK4P1ouSFF15a-l/preview"
+                      className="w-full h-full"
+                      allowFullScreen
                     />
                   </div>
                   <div className="w-[24vw] h-[50vh]">
-                    <video
-                      src="/videos/video-kiki.mp4"
-                      className="w-full h-full object-cover"
-                      controls
+                    <iframe
+                      src="https://drive.google.com/file/d/11NbkvEDfd0jlBZk3xZlXUkh2CP-vPn0C/preview"
+                      className="w-full h-full"
+                      allowFullScreen
                     />
                   </div>
                 </div>
@@ -568,17 +568,17 @@ export default function AboutPage() {
                 </div>
                 <div className="flex gap-2">
                   <div className="w-[24vw] h-[50vh]">
-                    <video
-                      src="/videos/video-game1.mp4"
-                      className="w-full h-full object-cover"
-                      controls
+                    <iframe
+                      src="https://drive.google.com/file/d/1KiTP33LhmlQSLSf5PVqr87Ds0DTVLE8s/preview"
+                      className="w-full h-full"
+                      allowFullScreen
                     />
                   </div>
                   <div className="w-[24vw] h-[50vh]">
-                    <video
-                      src="/videos/video-game2.mp4"
-                      className="w-full h-full object-cover"
-                      controls
+                    <iframe
+                      src="https://drive.google.com/file/d/1euyGoF1QYktTxQK8HQ3OStKn7JFX-iid/preview"
+                      className="w-full h-full"
+                      allowFullScreen
                     />
                   </div>
                 </div>
