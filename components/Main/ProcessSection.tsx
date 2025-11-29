@@ -31,9 +31,9 @@ export default function ProcessSection({ processRef }: ProcessSectionProps) {
       ref={processRef}
       className="w-full overflow-hidden bg-black pt-[30vh] pb-[40vh] text-white"
     >
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-16">
         <span className="body2 text-center">(Built This Way)</span>
-        <h2 className="h1 !font-medium flex flex-col items-center justify-center px-[70px]">
+        <h2 className="h1 leading-[1.2] !font-medium flex flex-col items-center justify-center px-[70px]">
           <span
             className={`left-title ${
               screenWidth >= 1000 ? "text-nowrap" : "text-center"

@@ -105,7 +105,10 @@ export default function ContactPage() {
       <SubHeader page="Contact" />
       <div className="relative lg:flex lg:gap-[16vw]">
         {screenWidth >= 1280 && (
-          <ContactSideSection isWorkingHour={isWorkingHour} />
+          <div>
+            <div />
+            <ContactSideSection isWorkingHour={isWorkingHour} />
+          </div>
         )}
         <div className="flex flex-col w-full gap-[16vh] lg:gap-[28vh]">
           <ContactInfoSection />

@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
         <div className={footerSectionDivStyle}>
           {screenWidth >= 768 && (
-            <div className="h4 !font-semibold flex flex-col gap-1">
+            <div className="h4 !font-semibold flex flex-col gap-5">
               <span className="text-gray-10">THIS IS MY SPACE.</span>
               <p className="flex gap-4 ml-[-44px] justify-center">
                 <span className="text-gray-10">[</span>

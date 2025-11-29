@@ -73,14 +73,44 @@ export default function AboutPage() {
     {
       name: "문제 정의 및 구조화 능력",
       eng: "Problem Definition & Structuring",
+      icon: "icon-structure.png",
     },
-    { name: "아이디어 창출 능력", eng: "Idea Generation" },
-    { name: "논리적 UX 설계", eng: "Logical UX Design" },
-    { name: "객관적인 판단과 사고", eng: "Objective Judgment and Thinking" },
-    { name: "빠른 학습 능력", eng: "Rapid Learning Ability" },
     {
-      name: "분석과 개선에 대한 몰입",
+      name: "아이디어 창출 능력",
+      eng: "Idea Generation",
+      icon: "icon-idea.png",
+    },
+    {
+      name: "협업 및 커뮤니케이션 능력",
+      eng: "Collaboration & Communication",
+      icon: "icon-collaboration.png",
+    },
+    { name: "논리적 UX 설계", eng: "Logical UX Design", icon: "icon-ux.png" },
+    {
+      name: "객관적인 판단과 사고",
+      eng: "Objective Judgment and Thinking",
+      icon: "icon-thinking.png",
+    },
+    {
+      name: "빠른 학습 능력",
+      eng: "Rapid Learning Ability",
+      icon: "icon-time.png",
+    },
+    {
+      name: "분석과 개선의 몰입",
       eng: "Immersion in Analysis and Improvement",
+      icon: "icon-analytics.png",
+    },
+    {
+      name: "창의적 문제 해결 능력",
+      eng: "Creative Problem Solving",
+      icon: "icon-creative.png",
+    },
+
+    {
+      name: "트렌드 이해 및 적용 능력",
+      eng: "Trend Awareness & Application",
+      icon: "icon-trend.png",
     },
   ];
 
@@ -149,12 +179,15 @@ export default function AboutPage() {
                 있습니다.
               </p>
             </div>
-            <h1 className="text-[220pt] font-bold text-white/5 absolute top-32 right-0">
+            <h1
+              className="font-bold text-white/10 absolute right-0 leading-[-3]"
+              style={{ fontSize: screenWidth / 8.7 }}
+            >
               I'M YOUNG
             </h1>
           </div>
-          <div className="mt-40 flex justify-between mr-28">
-            <div className="w-[24vw] h-[60vh] bg-white relative rounded-xl overflow-hidden">
+          <div className="mt-40 flex justify-between xl:mr-28">
+            <div className="w-[24vw] h-[70vh] bg-white relative rounded-xl overflow-hidden xl:w-[24vw] xl:h-[60vh]">
               <Image
                 src="/images/img-about-me.jpg"
                 alt="프로필 사진"
@@ -176,7 +209,7 @@ export default function AboutPage() {
 
               <div>
                 <h2 className="h6 text-gray-10 !font-semibold">EDUCATION</h2>
-                <ul className="body4 text-gray-30 mt-6">
+                <ul className="body4 text-gray-30 mt-6 flex flex-col gap-2">
                   {education.map((item, index) => (
                     <li key={index}>
                       {item.school} {item.major}
@@ -187,7 +220,7 @@ export default function AboutPage() {
 
               <div>
                 <h2 className="h6 text-gray-10 !font-semibold">CERTIFICATE</h2>
-                <ul className="body4 text-gray-30 mt-6">
+                <ul className="body4 text-gray-30 mt-6 flex flex-col gap-2">
                   {certificate.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -202,10 +235,11 @@ export default function AboutPage() {
                   {skills.map((skill, index) => (
                     <li
                       key={index}
-                      className="w-44 py-3 rounded-full text-center"
+                      className="py-3 rounded-full text-center"
                       style={{
                         color: skill.color,
-                        backgroundColor: `${skill.color}15`,
+                        backgroundColor: `${skill.color}30`,
+                        width: `${0.08 * screenWidth - 1.6}px`,
                       }}
                     >
                       {skill.name}
@@ -220,10 +254,11 @@ export default function AboutPage() {
                   {aiTools.map((tool, index) => (
                     <li
                       key={index}
-                      className="w-44 py-3 rounded-full text-center"
+                      className="py-3 rounded-full text-center"
                       style={{
                         color: tool.color,
-                        backgroundColor: `${tool.color}15`,
+                        backgroundColor: `${tool.color}30`,
+                        width: `${0.08 * screenWidth}px`,
                       }}
                     >
                       {tool.name}
@@ -266,42 +301,59 @@ export default function AboutPage() {
         </ul>
       </span>
 
-      <div className="w-screen overflow-x-hidden relative mt-24 ml-[-30px] md:ml-[-70px] ">
+      <div className="w-screen overflow-x-hidden relative mt-36 ml-[-30px] md:ml-[-70px]">
         <span className="bg-light-blue body2 !font-medium px-12 py-5 text-white inline-block relative z-10 rounded-t-3xl left-[200px] md:left-[360px]">
           PERSONALITY
         </span>
-        <div className="bg-light-blue w-full h-full py-48">
-          <div className="w-full relative">
-            <h2 className="text-center text-nowrap font-semibold text-[200pt]">
-              <span className="text-white/40">MY MBTI IS </span>
-              <span>INTP</span>
-            </h2>
-            <div className="w-[60vw] h-[60vh] absolute left-0 right-0 top-12 mx-auto">
-              <Scene />
-            </div>
-            <div className="flex gap-8 relative z-10 mt-20">
-              {strengths.map((strength, index) => (
-                <div
-                  key={index}
-                  className={`w-[16vw] h-[16vw] bg-black/20 border border-white/50 rounded-3xl flex flex-col justify-between p-12 ${
-                    index % 2 === 0 && "mt-12"
-                  }`}
+        <div className="bg-light-blue w-full h-full pt-28 pb-64 relative">
+          <h2 className="text-center text-nowrap font-semibold text-[220pt]">
+            <span className="text-white/15">MBTI IS? </span>
+            <span>INTP</span>
+          </h2>
+          <div className="w-[60vw] h-[60vh] absolute left-0 right-0 top-28 mx-auto">
+            <Scene />
+          </div>
+          <div className="grid grid-cols-3 gap-8 relative z-10 mt-64 px-[60px] md:px-[140px]">
+            {strengths.map((strength, index) => (
+              <div
+                key={index}
+                className="group bg-black/20 rounded-3xl flex justify-between w-full items-center gap-8 px-14 py-8 relative hover:scale-105 hover:bg-black/30"
+                style={{ transition: "transform 0.3s ease" }}
+              >
+                {index < 2 && (
+                  <Image
+                    src="/images/icon-crown.png"
+                    alt="왕관"
+                    width={60}
+                    height={60}
+                    className="absolute top-[-30px] left-0"
+                  />
+                )}
+                <span className="flex flex-col gap-2">
+                  <span className="h5 text-white">{strength.name}</span>
+                  <span className="body4 text-gray-20 font-medium">
+                    {strength.eng}
+                  </span>
+                </span>
+                <span
+                  className="h2 text-white/35 group-hover:text-white"
+                  style={{ transition: "color 0.3s ease" }}
                 >
-                  <span className="body2 text-gray-30 font-medium">
-                    0{index + 1}
-                  </span>
-                  <span className="flex flex-col gap-2">
-                    <span className="h5 font-semibold text-white">
-                      {strength.name}
-                    </span>
-                    <span className="body4 text-gray-20">{strength.eng}</span>
-                  </span>
-                </div>
-              ))}
-            </div>
+                  0{index + 1}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+
+      <div className="w-screen overflow-x-hidden relative mt-36 ml-[-30px] md:ml-[-70px]">
+        <span className="bg-yellow-green body2 !font-medium px-12 py-5 text-black inline-block relative z-10 rounded-t-3xl left-[400px] md:left-[720px]">
+          IN DAILY LIFE
+        </span>
+        <div className="bg-yellow-green w-full h-screen pt-28 pb-64"></div>
+      </div>
+      <div className="w-full h-[30vh] bg-white absolute left-0" />
     </div>
   );
 }

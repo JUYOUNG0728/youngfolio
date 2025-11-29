@@ -59,7 +59,7 @@ export default function ContactSection({ contactRef }: ContactSectionProps) {
           transition: "border-radius 0.3s ease-in-out",
         }}
       >
-        <span>LET’S GET IN CONTACT</span>
+        <span className="leading-[1.5]">LET’S GET IN CONTACT</span>
         <Arrow
           width={iconContactArrowSize}
           height={iconContactArrowSize}

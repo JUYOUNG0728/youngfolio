@@ -15,11 +15,11 @@ export default function ProjectItem({ project }: ProjectItemProps) {
   };
 
   return (
-    <div className="flex flex-col gap-8">
-      <div
-        className="w-full h-[40vh] relative cursor-pointer"
-        onClick={() => handleClick(project.link)}
-      >
+    <div
+      className="flex flex-col cursor-pointer gap-8 lg:gap-11"
+      onClick={() => handleClick(project.link)}
+    >
+      <div className="w-full h-[40vh] relative">
         <Image
           src={project.imageSrc}
           alt={`${project.title} 썸네일`}
@@ -27,7 +27,7 @@ export default function ProjectItem({ project }: ProjectItemProps) {
           className="object-cover border border-gray-40 rounded-xl"
         />
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4 lg:gap-5">
         <h2 className="h5">{project.title}</h2>
         <p className="body5">{project.description}</p>
       </div>

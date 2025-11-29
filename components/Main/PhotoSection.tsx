@@ -6,12 +6,12 @@ export default function PhotoSection() {
 
   const xClipPath =
     screenWidth >= 1920
-      ? "polygon(0 0, 100% 0, 100% 240%, 0 240%)"
-      : screenWidth >= 1280
       ? "polygon(0 0, 100% 0, 100% 200%, 0 200%)"
-      : screenWidth >= 768
+      : screenWidth >= 1280
       ? "polygon(0 0, 100% 0, 100% 180%, 0 180%)"
-      : "polygon(0 0, 100% 0, 100% 140%, 0 140%)";
+      : screenWidth >= 768
+      ? "polygon(0 0, 100% 0, 100% 140%, 0 140%)"
+      : "polygon(0 0, 100% 0, 100% 100%, 0 100%)";
 
   return (
     <section className="w-full h-screen sticky top-0 flex items-center justify-center overflow-hidden">
@@ -28,7 +28,7 @@ export default function PhotoSection() {
           </span>
           <div className="flex flex-col items-center transition-all duration-700">
             <div
-              className="flex relative my-3 bottom-[12px] md:bottom-[24px] md:my-6 lg:bottom-[36px] lg:my-10 xl:bottom-[48px] xl:my-12"
+              className="flex relative my-5 bottom-[8px] md:bottom-[18px] md:my-8 lg:bottom-[28px] lg:my-12 xl:bottom-[40px] xl:my-14"
               style={{
                 clipPath: xClipPath,
               }}

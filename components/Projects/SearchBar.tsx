@@ -1,4 +1,5 @@
 import Image from "next/image";
+import useScreenWidth from "@/utils/useScreenWidth";
 
 type SearchBarProps = {
   searchTerm: string;
@@ -9,10 +10,14 @@ export default function SearchBar({
   searchTerm,
   handleSearch,
 }: SearchBarProps) {
+  const screenWidth = useScreenWidth();
+
+  const iconSize = screenWidth >= 1920 ? 24 : 20;
+
   return (
     <div className="relative">
       <input
-        className="min-w-[300px] w-full h-[50px] bg-gray-10 rounded-full mb-4 px-8 text-black body4 placeholder-gray-40 md:w-[24vw] lg:h-14 focus:outline-none"
+        className="min-w-[300px] w-full h-[50px] bg-gray-10 rounded-full mb-4 px-8 text-black body4 placeholder-gray-40 md:w-[24vw] lg:h-14 focus:outline-none xl:h-16 xl:px-10"
         placeholder="프로젝트를 검색해보세요."
         value={searchTerm}
         onChange={handleSearch}
@@ -20,9 +25,9 @@ export default function SearchBar({
       <Image
         src="/images/icon-search.png"
         alt="검색 아이콘"
-        width={20}
-        height={20}
-        className="absolute right-8 top-3.5 lg:top-4"
+        width={iconSize}
+        height={iconSize}
+        className="absolute right-8 top-3.5 lg:top-[18px]"
       />
     </div>
   );

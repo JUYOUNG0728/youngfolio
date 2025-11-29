@@ -30,7 +30,7 @@ export default function VisualSection() {
           />
         </div>
         <h1 className="h1 text-center">YOUNG, PORTFOLIO</h1>
-        <span className="body3 font-semibold py-3 px-7 border border-black rounded-full lg:mt-2 xl:mt-4 lg:py-4 lg:px-8">
+        <span className="body3 font-semibold py-3 px-7 border border-black rounded-full lg:mt-2 xl:mt-4 lg:py-4 lg:px-8 xl:px-10">
           2025 : Imagine beyond words
         </span>
       </div>

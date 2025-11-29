@@ -44,7 +44,7 @@ export default function MessageBubble({
         className={`${isSendMessage ? "flex flex-col" : "flex justify-end"}`}
       >
         {isSendMessage && (
-          <div className="flex items-center gap-2 my-3">
+          <div className="flex items-center gap-2 my-4">
             <div className="w-3 h-3 rounded-full bg-gray-10 xl:w-[14px] xl:h-[14px]" />
             <span className="text-gray-10 body4 font-semibold">
               {isAdmin ? "YOUNG" : "USER"}

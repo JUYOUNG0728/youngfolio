@@ -29,9 +29,9 @@ export default function ProjectSection({ projectRef }: ProjectSectionProps) {
         >
           <ProjectItem
             imageSrc={project.imageSrc}
-            imageAlt={project.title}
             title={project.title}
             description={project.description}
+            link={project.link}
           />
         </div>
       ))}
