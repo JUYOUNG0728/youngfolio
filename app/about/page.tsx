@@ -8,6 +8,7 @@ import { useRef, useEffect } from "react";
 import SubHeader from "@/components/Common/SubHeader";
 import useScreenWidth from "@/utils/useScreenWidth";
 import Scene from "@/components/Main/Model/Scene";
+import Send from "@/components/Common/Send";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -153,10 +154,10 @@ export default function AboutPage() {
     <div className="w-full h-full bg-black text-white overflow-x-hidden px-[30px] md:px-[70px]">
       <SubHeader page="About" />
       <div className="w-screen ml-[-30px] md:ml-[-70px]">
-        <span className="bg-black border-t border-x border-gray-40 body2 !font-medium px-12 py-5 text-white inline-block relative top-[1px] z-10 rounded-t-3xl left-[30px] md:left-[70px]">
+        <span className="bg-black border-t border-x border-gray-40 body2 !font-medium px-12 py-5 inline-block relative top-[1px] z-10 rounded-t-3xl left-[30px] md:left-[70px]">
           WHO IS YOUNG?
         </span>
-        <div className="bg-black border-t border-gray-40 relative w-full h-full pt-48 pb-56 px-[60px] md:px-[140px]">
+        <div className="bg-black border-t border-gray-40 relative w-full h-full pt-36 pb-44 px-[60px] md:px-[140px] xl:pt-48 xl:pb-56">
           <div className="flex justify-between">
             <div className="flex flex-col gap-12">
               <h1 className="h3 flex flex-col gap-4 text-gray-40">
@@ -281,7 +282,7 @@ export default function AboutPage() {
         </div>
       </div>
       <span
-        className="w-screen bg-white text-blue overflow-x-hidden relative h2 !font-medium flex gap-12 py-8 ml-[-30px] md:ml-[-70px]"
+        className="w-screen bg-white text-navy-blue overflow-x-hidden relative h2 !font-medium flex gap-12 py-8 ml-[-30px] md:ml-[-70px]"
         ref={marquee1Ref}
       >
         <ul className={marqueeTextStyle}>
@@ -296,7 +297,7 @@ export default function AboutPage() {
         </ul>
       </span>
       <span
-        className="w-screen bg-blue text-white overflow-x-hidden relative h2 !font-medium flex gap-12 py-8 ml-[-30px] md:ml-[-70px]"
+        className="w-screen bg-navy-blue text-white overflow-x-hidden relative h2 !font-medium flex gap-12 py-8 ml-[-30px] md:ml-[-70px]"
         ref={marquee2Ref}
       >
         <ul className={marqueeTextStyle}>
@@ -312,22 +313,25 @@ export default function AboutPage() {
       </span>
 
       <div className="w-screen overflow-x-hidden relative mt-36 ml-[-30px] md:ml-[-70px]">
-        <span className="bg-light-blue body2 !font-medium px-12 py-5 text-white inline-block relative z-10 rounded-t-3xl left-[200px] md:left-[360px]">
+        <span className="bg-light-blue body2 !font-medium px-12 py-5 inline-block relative z-10 rounded-t-3xl left-[200px] md:left-[360px]">
           PERSONALITY
         </span>
-        <div className="bg-light-blue w-full h-full pt-48 pb-56 relative">
-          <h2 className="text-center text-nowrap font-semibold text-[220pt]">
-            <span className="text-white/15">MBTI IS? </span>
+        <div className="bg-light-blue w-full h-full relative pt-36 pb-44 px-[60px] md:px-[140px] xl:pt-48 xl:pb-56">
+          <h1
+            className="text-center text-nowrap font-semibold"
+            style={{ fontSize: screenWidth / 8.7 }}
+          >
+            <span className="text-white/20">MBTI IS? </span>
             <span>INTP</span>
-          </h2>
-          <div className="w-[60vw] h-[60vh] absolute left-0 right-0 top-28 mx-auto">
+          </h1>
+          <div className="w-[60vw] h-[60vh] absolute left-0 right-0 top-36 mx-auto">
             <Scene />
           </div>
-          <div className="grid grid-cols-3 gap-8 relative z-10 mt-64 px-[60px] md:px-[140px]">
+          <div className="grid grid-cols-3 gap-8 relative z-10 mt-56 xl:mt-64">
             {strengths.map((strength, index) => (
               <div
                 key={index}
-                className="group bg-black/20 rounded-3xl flex justify-between w-full items-center gap-8 px-14 py-8 relative hover:scale-105 hover:bg-black/30"
+                className="group bg-white rounded-xl flex w-full items-center gap-8 px-10 py-9 relative xl:gap-12 xl:px-12 xl:py-10 hover:scale-105 hover:bg-marine-blue hover:glow-1"
                 style={{ transition: "transform 0.3s ease" }}
               >
                 {index < 2 && (
@@ -339,34 +343,262 @@ export default function AboutPage() {
                     className="absolute top-[-30px] left-0"
                   />
                 )}
-                <span className="flex flex-col gap-5">
-                  <span className="h5 text-white">{strength.name}</span>
-                  <span
-                    className="body4 text-cool-gray-20 font-medium !leading-none group-hover:text-white"
-                    style={{ transition: "color 0.3s ease" }}
-                  >
-                    {strength.eng}
-                  </span>
-                </span>
-                <span
-                  className="h2 text-white/35 group-hover:text-white"
-                  style={{ transition: "color 0.3s ease" }}
-                >
+                <span className="h2 tracking-tight text-black !font-semibold group-hover:text-white">
                   0{index + 1}
                 </span>
+                <div className="flex flex-col gap-5">
+                  <h2 className="h4 text-black group-hover:text-white">
+                    {strength.name}
+                  </h2>
+                  <span className="body3 text-cool-gray-20 font-medium !leading-none group-hover:text-white">
+                    {strength.eng}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="w-screen overflow-x-hidden relative mt-36 ml-[-30px] md:ml-[-70px]">
-        <span className="bg-yellow-green body2 !font-medium px-12 py-5 text-black inline-block relative z-10 rounded-t-3xl left-[400px] md:left-[720px]">
+      <div className="w-screen overflow-x-hidden relative text-black mt-36 ml-[-30px] md:ml-[-70px]">
+        <span className="bg-yellow-green body2 !font-medium px-12 py-5 inline-block relative z-10 rounded-t-3xl left-[400px] md:left-[720px]">
           IN DAILY LIFE
         </span>
-        <div className="bg-yellow-green w-full h-screen pt-28 pb-64"></div>
+        <div className="bg-yellow-green w-full flex flex-col gap-44 pt-36 px-[60px] md:px-[140px] xl:pt-48">
+          <h1
+            className="text-center text-nowrap font-semibold"
+            style={{ fontSize: screenWidth / 8.7 }}
+          >
+            <span className="text-black/20">DAILY </span>
+            <span>HOBBY,</span>
+          </h1>
+          <div className="flex flex-col gap-20">
+            <div className="flex gap-16 justify-between">
+              <div className="flex flex-col gap-10 xl:gap-14">
+                <div className="flex flex-col gap-4">
+                  <span className="h3 text-green">#1</span>
+                  <div className="flex gap-6 items-center">
+                    <h2 className="h2 text-nowrap">PIANO</h2>
+                    <Image
+                      src="/images/icon-piano.png"
+                      alt="피아노"
+                      width={80}
+                      height={80}
+                      className="rounded-xl object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-4 w-[20vw]">
+                  <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
+                    # Spring
+                  </span>
+                  <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
+                    # Kiki's Delivery Service
+                  </span>
+                  <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
+                    # MapleStory
+                  </span>
+                  <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
+                    # Crazy Arcade
+                  </span>
+                </div>
+              </div>
+              <div className="bg-white rounded-3xl p-12 flex flex-col gap-4">
+                <div className="flex gap-3 items-center ml-2">
+                  <div className="w-10 h-10 rounded-full relative">
+                    <Image
+                      src="/images/img-about-me.jpg"
+                      alt="프로필 이미지"
+                      fill
+                      className="rounded-full object-cover"
+                    />
+                  </div>
+                  <span className="body3 font-semibold">undojinx</span>
+                </div>
+                <div className="flex gap-2">
+                  <div className="w-[24vw] h-[50vh]">
+                    <video
+                      src="/videos/video-spring.mp4"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="w-[24vw] h-[50vh]">
+                    <video
+                      src="/videos/video-kiki.mp4"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center ml-2">
+                  <Image
+                    src="/images/icon-heart.png"
+                    alt="하트 아이콘"
+                    width={24}
+                    height={24}
+                  />
+                  <Image
+                    src="/images/icon-bubble.png"
+                    alt="말풍선 아이콘"
+                    width={24}
+                    height={24}
+                  />
+                  <Send width={24} height={24} fill="#000000" />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-16 justify-between">
+              <div className="flex flex-col gap-10 xl:gap-14">
+                <div className="flex flex-col gap-4">
+                  <span className="h3 text-green">#2</span>
+                  <div className="flex gap-6 items-center">
+                    <h2 className="h2 text-nowrap">BOOKS</h2>
+                    <Image
+                      src="/images/icon-book.png"
+                      alt="책"
+                      width={80}
+                      height={80}
+                      className="rounded-xl object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-4 w-[20vw]">
+                  <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
+                    # Book Newbie
+                  </span>
+                  <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
+                    # Interactive Developer
+                  </span>
+                  <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
+                    # Nexus
+                  </span>
+                  <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
+                    # On Not Draining Myself
+                  </span>
+                </div>
+              </div>
+              <div className="bg-white rounded-3xl p-12 flex flex-col gap-4">
+                <div className="flex gap-3 items-center ml-2">
+                  <div className="w-10 h-10 rounded-full relative">
+                    <Image
+                      src="/images/img-about-me.jpg"
+                      alt="프로필 이미지"
+                      fill
+                      className="rounded-full object-cover"
+                    />
+                  </div>
+                  <span className="body3 font-semibold">undojinx</span>
+                </div>
+                <div className="flex gap-2">
+                  <div className="w-[24vw] h-[50vh] relative">
+                    <Image
+                      src="/images/img-book1.jpg"
+                      alt="책 이미지 1"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="w-[24vw] h-[50vh] relative">
+                    <Image
+                      src="/images/img-book2.jpg"
+                      alt="책 이미지 2"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center ml-2">
+                  <Image
+                    src="/images/icon-heart.png"
+                    alt="하트 아이콘"
+                    width={24}
+                    height={24}
+                  />
+                  <Image
+                    src="/images/icon-bubble.png"
+                    alt="말풍선 아이콘"
+                    width={24}
+                    height={24}
+                  />
+                  <Send width={24} height={24} fill="#000000" />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-16 justify-between">
+              <div className="flex flex-col gap-10 xl:gap-14">
+                <div className="flex flex-col gap-4">
+                  <span className="h3 text-green">#3</span>
+                  <div className="flex gap-6 items-center">
+                    <h2 className="h2 text-nowrap">GAMES</h2>
+                    <Image
+                      src="/images/icon-game.png"
+                      alt="게임"
+                      width={80}
+                      height={80}
+                      className="rounded-xl object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-4 w-[20vw]">
+                  <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
+                    # League of Legends
+                  </span>
+                  <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
+                    # Lost Ark
+                  </span>
+                  <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
+                    # Pocket Monsters
+                  </span>
+                </div>
+              </div>
+              <div className="bg-white rounded-3xl p-12 flex flex-col gap-4">
+                <div className="flex gap-3 items-center ml-2">
+                  <div className="w-10 h-10 rounded-full relative">
+                    <Image
+                      src="/images/img-about-me.jpg"
+                      alt="프로필 이미지"
+                      fill
+                      className="rounded-full object-cover"
+                    />
+                  </div>
+                  <span className="body3 font-semibold">undojinx</span>
+                </div>
+                <div className="flex gap-2">
+                  <div className="w-[24vw] h-[50vh]">
+                    <video
+                      src="/videos/video-game1.mp4"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="w-[24vw] h-[50vh]">
+                    <video
+                      src="/videos/video-game2.mp4"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center ml-2">
+                  <Image
+                    src="/images/icon-heart.png"
+                    alt="하트 아이콘"
+                    width={24}
+                    height={24}
+                  />
+                  <Image
+                    src="/images/icon-bubble.png"
+                    alt="말풍선 아이콘"
+                    width={24}
+                    height={24}
+                  />
+                  <Send width={24} height={24} fill="#000000" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="w-full h-[30vh] bg-white absolute left-0" />
+      <div className="w-full h-[30vh] bg-yellow-green absolute left-0" />
     </div>
   );
 }

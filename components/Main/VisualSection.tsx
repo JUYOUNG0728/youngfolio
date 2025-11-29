@@ -1,5 +1,7 @@
 import Image from "next/image";
+
 import useScreenWidth from "@/utils/useScreenWidth";
+import Send from "@/components/Common/Send";
 
 export default function VisualSection() {
   const screenWidth = useScreenWidth();
@@ -58,11 +60,10 @@ export default function VisualSection() {
               className="animate-spin"
               style={{ animationDuration: "12s" }}
             />
-            <Image
-              src="/images/icon-send.png"
-              alt="문의하기 아이콘"
+            <Send
               width={iconInquirySendSize}
               height={iconInquirySendSize}
+              fill="#ffffff"
             />
           </button>
         </div>

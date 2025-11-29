@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import useScreenWidth from "@/utils/useScreenWidth";
 import Plus from "@/components/Common/Plus";
+import Send from "@/components/Common/Send";
 
 type InquiryInputProps = {
   handleSend: ({
@@ -128,12 +129,7 @@ export default function InquiryInput({ handleSend }: InquiryInputProps) {
             onClick={handleSendMessage}
             disabled={!message.trim() && !imageFile}
           >
-            <Image
-              src="/images/icon-send.png"
-              alt="send"
-              width={iconSize.send}
-              height={iconSize.send}
-            />
+            <Send width={iconSize.send} height={iconSize.send} fill="#ffffff" />
           </button>
         </div>
       </div>
