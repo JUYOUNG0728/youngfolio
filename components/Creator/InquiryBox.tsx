@@ -7,7 +7,7 @@ export default function InquiryBox() {
   const router = useRouter();
 
   const handleClickInquiryButton = () => {
-    router.push("/contact");
+    router.push("/contact/inquiry");
   };
 
   return (
@@ -21,7 +21,7 @@ export default function InquiryBox() {
         </p>
       </div>
       <Button
-        text="문의하기"
+        children="문의하기"
         variant="secondaryOutline"
         onClick={handleClickInquiryButton}
         className="mr-2"

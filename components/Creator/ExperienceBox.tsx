@@ -4,7 +4,13 @@ import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import useScreenWidth from "@/utils/useScreenWidth";
 
-import Plus from "@/components/Common/Plus";
+type ExperienceBoxProps = {
+  number: string;
+  title: string;
+  description: React.ReactNode;
+  isOpen: boolean;
+  onToggle: () => void;
+};
 
 export default function ExperienceBox({
   number,
@@ -12,13 +18,7 @@ export default function ExperienceBox({
   description,
   isOpen,
   onToggle,
-}: {
-  number: string;
-  title: string;
-  description: React.ReactNode;
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
+}: ExperienceBoxProps) {
   const screenWidth = useScreenWidth();
   const [maxHeight, setMaxHeight] = useState<string | number>("0px");
 
@@ -31,44 +31,41 @@ export default function ExperienceBox({
   }, [isOpen, description]);
 
   return (
-    <div className="w-full border-b border-gray-30 mb-6 pb-6 xl:pb-8 xl:mb-8 transition-all duration-500">
+    <div className="w-full border-b border-gray-20 mb-7 pb-7 xl:pb-8 xl:mb-8 transition-all duration-500">
       <div className="flex justify-between items-center w-full">
-        <div
-          className={`flex items-center cursor-pointer ${
-            number === "01" ? "gap-[26px] xl:gap-9" : "gap-5 xl:gap-7"
-          }`}
+        <h3
+          className="h5 !font-semibold cursor-pointer ml-8"
           onClick={onToggle}
         >
-          <h3 className="h3 font-semibold text-gray-10 text-outline">
-            {number}
-          </h3>
-          <h3 className="h4">{title}</h3>
-        </div>
-        <div className="mr-3 cursor-pointer" onClick={onToggle}>
+          {title}
+        </h3>
+        <div className="mr-8 cursor-pointer" onClick={onToggle}>
           {!isOpen ? (
-            <Plus />
+            <Image
+              src={"/images/icon-arrow-down.png"}
+              alt={"펼치기"}
+              width={screenWidth <= 1920 ? 32 : 40}
+              height={screenWidth <= 1920 ? 32 : 40}
+            />
           ) : (
             <Image
-              src={"/images/icon-minus.png"}
-              alt={"minus"}
-              width={screenWidth < 1920 ? 20 : 24}
-              height={screenWidth < 1920 ? 20 : 24}
+              src={"/images/icon-arrow-up.png"}
+              alt={"접기"}
+              width={screenWidth <= 1920 ? 32 : 40}
+              height={screenWidth <= 1920 ? 32 : 40}
             />
           )}
         </div>
       </div>
-
       <div
         ref={contentRef}
         style={{
           maxHeight: maxHeight,
           overflow: "hidden",
-          transition: "max-height 0.4s ease",
+          transition: "max-height 0.8s ease",
         }}
       >
-        <p className="body4 ml-[72px] mt-7 xl:mt-9 xl:ml-[84px]">
-          {description}
-        </p>
+        <p className="body4 text-gray-50 ml-8 mt-8 xl:mt-10]">{description}</p>
       </div>
     </div>
   );

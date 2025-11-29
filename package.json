@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
     "@studio-freight/lenis": "^1.0.42",
-    "firebase": "^12.3.0",
+    "@supabase/supabase-js": "^2.75.1",
+    "@types/react-js-pagination": "^3.0.7",
     "gsap": "^3.13.0",
+    "leva": "^0.10.0",
     "next": "14.2.30",
     "react": "^18",
     "react-dom": "^18",
+    "react-js-pagination": "^3.0.3",
     "three": "^0.180.0"
   },
   "devDependencies": {

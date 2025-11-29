@@ -1,91 +1,64 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import Intro from "@/components/Intro/Intro";
-import Background from "@/components/Intro/Background";
-import ProjectCard from "@/components/Main/ProjectCard";
-import SoundButton from "@/components/Main/SoundButton";
+import useScreenWidth from "@/utils/useScreenWidth";
+import VisualSection from "@/components/Main/VisualSection";
+import IntroduceSection from "@/components/Main/IntroduceSection";
+import ProjectGallerySection from "@/components/Main/ProjectGallerySection";
+import ProcessSection from "@/components/Main/ProcessSection";
+import ContactSection from "@/components/Main/ContactSection";
+
+import {
+  upContents,
+  zoomPhoto,
+  viewPhotoWords,
+  viewProjectWords,
+  scaleUpProjects,
+  moveProcessTitle,
+  changeProcessTextColor,
+  marqueeContactText,
+} from "@/components/Main/gsapAnimations";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function MainPage() {
-  const [showContents, setShowContents] = useState(false);
-  const [soundOn, setSoundOn] = useState(true);
-  const [focusProject, setFocusProject] = useState<number>(2);
+  const screenWidth = useScreenWidth();
 
-  const project = {
-    name: "제목이 들어갑니다.",
-    description:
-      "간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다. 간단한 설명이 들어갑니다.",
-    image: "none",
-  };
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const photoRef = useRef<HTMLDivElement | null>(null);
+  const projectRef = useRef<HTMLDivElement | null>(null);
+  const processRef = useRef<HTMLDivElement | null>(null);
+  const contactRef = useRef<HTMLDivElement | null>(null);
 
-  const projects = Array(5).fill(project);
-
-  const dragStartX = useRef<number | null>(null);
-
-  const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    dragStartX.current = e.clientX;
-  };
-
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (dragStartX.current === null) return;
-
-    const deltaX = e.clientX - dragStartX.current;
-
-    const threshold = 240;
-
-    if (deltaX > threshold) {
-      setFocusProject((prev) => (prev < projects.length - 1 ? prev + 1 : 0));
-      dragStartX.current = e.clientX;
-    } else if (deltaX < -threshold) {
-      setFocusProject((prev) => (prev > 0 ? prev - 1 : projects.length - 1));
-      dragStartX.current = e.clientX;
-    }
-  };
-
-  const onMouseUp = () => {
-    dragStartX.current = null;
-  };
-
-  useEffect(() => {
-    const showContentsTimer = setTimeout(() => {
-      setShowContents(true);
-    }, 8500);
-
-    return () => {
-      clearTimeout(showContentsTimer);
-    };
-  }, []);
+  upContents({ contentRef, screenWidth });
+  zoomPhoto({ scrollRef, photoRef, screenWidth });
+  viewPhotoWords({ photoRef, screenWidth });
+  viewProjectWords({ photoRef, screenWidth });
+  scaleUpProjects({ projectRef, screenWidth });
+  moveProcessTitle({ processRef, screenWidth });
+  changeProcessTextColor({ processRef, screenWidth });
+  marqueeContactText({ contactRef, screenWidth });
 
   return (
-    <div className="h-full">
-      <Background />
-      <Intro />
+    <div
+      className="w-full"
+      style={{
+        backgroundImage: "linear-gradient(180deg, #ffffff 30%, #000000 100%)",
+      }}
+    >
+      <VisualSection />
       <div
-        style={{
-          transition: "opacity 0.5s ease-in-out",
-          opacity: showContents ? 1 : 0,
-          pointerEvents: showContents ? "auto" : "none",
-        }}
+        className="w-full relative pointer-events-none select-none"
+        ref={contentRef}
       >
-        <p className="text-center body4 absolute top-[48px] left-1/2 -translate-x-1/2 text-white font-medium xl:top-[54px]">
-          2025 : Branding Myself Beyond Words
-        </p>
-        <div className="h-full w-full absolute top-0 items-center flex justify-between p-[70px]">
-          {projects.map((_, index) => (
-            <ProjectCard
-              key={index}
-              project={project}
-              focus={focusProject === index}
-              onMouseDown={onMouseDown}
-              onMouseMove={onMouseMove}
-              onMouseUp={onMouseUp}
-            />
-          ))}
-        </div>
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
-          <SoundButton soundOn={soundOn} setSoundOn={setSoundOn} />
-        </div>
+        <IntroduceSection scrollRef={scrollRef} />
+        <ProjectGallerySection photoRef={photoRef} projectRef={projectRef} />
+        <ProcessSection processRef={processRef} />
+        <ContactSection contactRef={contactRef} />
       </div>
     </div>
   );

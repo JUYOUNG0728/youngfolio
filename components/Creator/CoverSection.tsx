@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import SnsItems from "@/components/Creator/SnsItems";
+import SnsItems from "@/components/Common/SnsItems";
 import useScreenWidth from "@/utils/useScreenWidth";
 
 export default function CoverSection() {
@@ -14,7 +16,7 @@ export default function CoverSection() {
   };
 
   const creatorImageSize =
-    screenWidth < 1920
+    screenWidth <= 1920
       ? { width: 1200, height: 1644 }
       : { width: 1640, height: 2248 };
 
@@ -27,7 +29,7 @@ export default function CoverSection() {
             "radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%)",
         }}
       />
-      <div className="relative w-[calc(100%-140px)] h-full top-12 xl:top-10">
+      <div className="relative w-[calc(100%-140px)] h-full top-14">
         <h1
           className="font-bold whitespace-nowrap !tracking-normal ml-[-5px] lg:ml-[-8px]"
           style={{ fontSize: `${getNameFontSize()}` }}
@@ -37,7 +39,7 @@ export default function CoverSection() {
         <h3 className="h4 mt-[-16px] text-right">
           디자인의 가치를 재점화하다.
         </h3>
-        <div className="body3 absolute w-full bottom-[300px] flex justify-between items-end xl:bottom-[320px]">
+        <div className="body3 absolute w-full bottom-[320px] flex justify-between items-end xl:bottom-[340px]">
           <div className="flex justify-end flex-col gap-5 xl:gap-7">
             <h3 className="h4">디자인이 지닌 본래의 의미는?</h3>
             <p>

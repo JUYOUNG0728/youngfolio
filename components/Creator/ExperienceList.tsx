@@ -11,9 +11,9 @@ export default function ExperienceList() {
   };
 
   return (
-    <>
+    <div className="border-t border-gray-20 pt-7 xl:pt-8">
       <ExperienceBox
-        number="01"
+        number="1"
         title="작지만 강한 디자이너의 성장 일기"
         description={
           <>
@@ -101,22 +101,20 @@ export default function ExperienceList() {
             성과도 이루었습니다.
             <br />
             <br />
-            하지만 그건 단지 조금 빨리 성장했다는 의미일 뿐, 아직 저는 많이
-            부족하고 배워야 할 점이 많은 디자이너입니다.
+            "뿌리 깊은 나무는 바람에 아니 흔들리나니, 꽃 좋고 열매 많으니라."
             <br />
-            훈민정음 서문의 "뿌리 깊은 나무는 바람에 아니 흔들리나니, 꽃 좋고
-            열매 많으니라."라는 구절처럼,
+            훈민정음 서문의 한 구절처럼,
             <br />
-            꿋꿋이 배우고 도전하며 성장해서, 큰 결실을 이루는 디자이너가
-            되겠습니다.
+            앞으로도 꿋꿋이 배우고 도전하며 성장해서, 큰 결실을 이루는
+            디자이너가 되겠습니다.
           </>
         }
-        isOpen={openBoxNumber === "01"}
-        onToggle={() => handleToggleBox("01")}
+        isOpen={openBoxNumber === "1"}
+        onToggle={() => handleToggleBox("1")}
       />
 
       <ExperienceBox
-        number="02"
+        number="2"
         title="효율적인 핸드오프 : 개발자가 칭찬한 디자이너"
         description={
           <>
@@ -215,12 +213,12 @@ export default function ExperienceList() {
             있었습니다.
           </>
         }
-        isOpen={openBoxNumber === "02"}
-        onToggle={() => handleToggleBox("02")}
+        isOpen={openBoxNumber === "2"}
+        onToggle={() => handleToggleBox("2")}
       />
 
       <ExperienceBox
-        number="03"
+        number="3"
         title="코드를 그리는 디자이너"
         description={
           <>
@@ -296,12 +294,12 @@ export default function ExperienceList() {
             방식도 탐색할 수 있는 디자이너가 되고자 합니다.
           </>
         }
-        isOpen={openBoxNumber === "03"}
-        onToggle={() => handleToggleBox("03")}
+        isOpen={openBoxNumber === "3"}
+        onToggle={() => handleToggleBox("3")}
       />
 
       <ExperienceBox
-        number="04"
+        number="4"
         title="유저가 묻다 : 그 디자인, 기능, 왜 바꾸셨나요?"
         description={
           <>
@@ -368,9 +366,9 @@ export default function ExperienceList() {
             그런 디자인을 해나가고자 합니다.
           </>
         }
-        isOpen={openBoxNumber === "04"}
-        onToggle={() => handleToggleBox("04")}
+        isOpen={openBoxNumber === "4"}
+        onToggle={() => handleToggleBox("4")}
       />
-    </>
+    </div>
   );
 }

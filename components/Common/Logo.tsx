@@ -1,16 +1,18 @@
+type LogoProps = {
+  width?: number;
+  height?: number;
+  onClick?: () => void;
+  className?: string;
+  fill?: string;
+};
+
 export default function Logo({
   width = 159,
   height = 25,
   onClick,
   className = "",
   fill = "#ffffff",
-}: {
-  width?: number;
-  height?: number;
-  onClick?: () => void;
-  className?: string;
-  fill?: string;
-}) {
+}: LogoProps) {
   return (
     <svg
       width={width}
