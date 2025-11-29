@@ -370,7 +370,7 @@ export default function AboutPage() {
             style={{ fontSize: screenWidth / 8.7 }}
           >
             <span className="text-black/20">DAILY </span>
-            <span>HOBBY,</span>
+            <span>HOBBY</span>
           </h1>
           <div className="flex flex-col gap-20">
             <div className="flex gap-16 justify-between">
@@ -418,14 +418,14 @@ export default function AboutPage() {
                 <div className="flex gap-2">
                   <div className="w-[24vw] h-[50vh]">
                     <iframe
-                      src="https://drive.google.com/file/d/1meJp1wpzAo8AzQw_LtK4P1ouSFF15a-l/preview"
+                      src="https://drive.google.com/file/d/1wGl9lp-LQDnAm_e6i418pA9j8BuJ8b1x/preview"
                       className="w-full h-full"
                       allowFullScreen
                     />
                   </div>
                   <div className="w-[24vw] h-[50vh]">
                     <iframe
-                      src="https://drive.google.com/file/d/11NbkvEDfd0jlBZk3xZlXUkh2CP-vPn0C/preview"
+                      src="https://drive.google.com/file/d/1HP_twSA-xEKqXX4LWpZNDja57RWC73UA/preview"
                       className="w-full h-full"
                       allowFullScreen
                     />
