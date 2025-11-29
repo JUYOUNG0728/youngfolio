@@ -420,12 +420,14 @@ export default function AboutPage() {
                     <video
                       src="/videos/video-spring.mp4"
                       className="w-full h-full object-cover"
+                      controls
                     />
                   </div>
                   <div className="w-[24vw] h-[50vh]">
                     <video
                       src="/videos/video-kiki.mp4"
                       className="w-full h-full object-cover"
+                      controls
                     />
                   </div>
                 </div>
@@ -569,12 +571,14 @@ export default function AboutPage() {
                     <video
                       src="/videos/video-game1.mp4"
                       className="w-full h-full object-cover"
+                      controls
                     />
                   </div>
                   <div className="w-[24vw] h-[50vh]">
                     <video
                       src="/videos/video-game2.mp4"
                       className="w-full h-full object-cover"
+                      controls
                     />
                   </div>
                 </div>
