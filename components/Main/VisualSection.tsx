@@ -29,7 +29,7 @@ export default function VisualSection() {
             className="object-cover rounded-full absolute bottom-[-30px] scale-[175%] md:bottom-[-34px] md:scale-[160%] lg:bottom-[-36px] lg:scale-150"
           />
         </div>
-        <h1 className="h1 text-center">YOUNG, PORTFOLIO</h1>
+        <h1 className="h1 text-center leading-[1.2] mb-4">YOUNG, PORTFOLIO</h1>
         <span className="body3 font-semibold py-3 px-7 border border-black rounded-full lg:mt-2 xl:mt-4 lg:py-4 lg:px-8 xl:px-10">
           2025 : Imagine beyond words
         </span>

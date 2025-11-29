@@ -156,10 +156,10 @@ export default function AboutPage() {
         <span className="bg-black border-t border-x border-gray-40 body2 !font-medium px-12 py-5 text-white inline-block relative top-[1px] z-10 rounded-t-3xl left-[30px] md:left-[70px]">
           WHO IS YOUNG?
         </span>
-        <div className="bg-black border-t border-gray-40 relative w-full h-full pt-36 pb-64 px-[60px] md:px-[140px]">
+        <div className="bg-black border-t border-gray-40 relative w-full h-full pt-48 pb-56 px-[60px] md:px-[140px]">
           <div className="flex justify-between">
             <div className="flex flex-col gap-12">
-              <h1 className="h3 flex flex-col text-gray-40">
+              <h1 className="h3 flex flex-col gap-4 text-gray-40">
                 <span>안녕하세요.</span>
                 <div className="flex">
                   <span className="text-white">디자이너 최주영</span>
@@ -186,7 +186,7 @@ export default function AboutPage() {
               I'M YOUNG
             </h1>
           </div>
-          <div className="mt-40 flex justify-between xl:mr-28">
+          <div className="mt-40 flex justify-between xl:mr-8">
             <div className="w-[24vw] h-[70vh] bg-white relative rounded-xl overflow-hidden xl:w-[24vw] xl:h-[60vh]">
               <Image
                 src="/images/img-about-me.jpg"
@@ -197,8 +197,10 @@ export default function AboutPage() {
             </div>
             <div className="flex flex-col gap-32">
               <div>
-                <h2 className="h6 text-gray-10 !font-semibold">EXPERIENCE</h2>
-                <ul className="body4 text-gray-30 mt-6">
+                <h2 className="h6 text-gray-10 !font-semibold mb-7 xl:mb-8">
+                  EXPERIENCE
+                </h2>
+                <ul className="body4 text-gray-30">
                   {experience.map((item, index) => (
                     <li key={index}>
                       {item.company} {item.role}
@@ -208,8 +210,10 @@ export default function AboutPage() {
               </div>
 
               <div>
-                <h2 className="h6 text-gray-10 !font-semibold">EDUCATION</h2>
-                <ul className="body4 text-gray-30 mt-6 flex flex-col gap-2">
+                <h2 className="h6 text-gray-10 !font-semibold mb-7 xl:mb-8">
+                  EDUCATION
+                </h2>
+                <ul className="body4 text-gray-30 flex flex-col gap-1">
                   {education.map((item, index) => (
                     <li key={index}>
                       {item.school} {item.major}
@@ -219,8 +223,10 @@ export default function AboutPage() {
               </div>
 
               <div>
-                <h2 className="h6 text-gray-10 !font-semibold">CERTIFICATE</h2>
-                <ul className="body4 text-gray-30 mt-6 flex flex-col gap-2">
+                <h2 className="h6 text-gray-10 !font-semibold mb-7 xl:mb-8">
+                  CERTIFICATE
+                </h2>
+                <ul className="body4 text-gray-30 flex flex-col gap-1">
                   {certificate.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -230,15 +236,17 @@ export default function AboutPage() {
 
             <div className="flex flex-col gap-32">
               <div>
-                <h2 className="h6 text-gray-10 !font-semibold">SKILLS</h2>
-                <ul className="body4 font-medium text-gray-30 mt-6 w-fit grid grid-cols-3 gap-4">
+                <h2 className="h6 text-gray-10 !font-semibold mb-7 xl:mb-8">
+                  SKILLS
+                </h2>
+                <ul className="body4 font-medium text-gray-30 w-fit grid grid-cols-3 gap-4">
                   {skills.map((skill, index) => (
                     <li
                       key={index}
                       className="py-3 rounded-full text-center"
                       style={{
                         color: skill.color,
-                        backgroundColor: `${skill.color}30`,
+                        backgroundColor: `${skill.color}25`,
                         width: `${0.08 * screenWidth - 1.6}px`,
                       }}
                     >
@@ -249,15 +257,17 @@ export default function AboutPage() {
               </div>
 
               <div>
-                <h2 className="h6 text-gray-10 !font-semibold">AI TOOLS</h2>
-                <ul className="body4 font-medium text-gray-30 mt-6 w-fit grid grid-cols-3 gap-4">
+                <h2 className="h6 text-gray-10 !font-semibold mb-7 xl:mb-8">
+                  AI TOOLS
+                </h2>
+                <ul className="body4 font-medium text-gray-30 w-fit grid grid-cols-3 gap-4">
                   {aiTools.map((tool, index) => (
                     <li
                       key={index}
                       className="py-3 rounded-full text-center"
                       style={{
                         color: tool.color,
-                        backgroundColor: `${tool.color}30`,
+                        backgroundColor: `${tool.color}25`,
                         width: `${0.08 * screenWidth}px`,
                       }}
                     >
@@ -305,7 +315,7 @@ export default function AboutPage() {
         <span className="bg-light-blue body2 !font-medium px-12 py-5 text-white inline-block relative z-10 rounded-t-3xl left-[200px] md:left-[360px]">
           PERSONALITY
         </span>
-        <div className="bg-light-blue w-full h-full pt-28 pb-64 relative">
+        <div className="bg-light-blue w-full h-full pt-48 pb-56 relative">
           <h2 className="text-center text-nowrap font-semibold text-[220pt]">
             <span className="text-white/15">MBTI IS? </span>
             <span>INTP</span>
@@ -329,9 +339,12 @@ export default function AboutPage() {
                     className="absolute top-[-30px] left-0"
                   />
                 )}
-                <span className="flex flex-col gap-2">
+                <span className="flex flex-col gap-5">
                   <span className="h5 text-white">{strength.name}</span>
-                  <span className="body4 text-gray-20 font-medium">
+                  <span
+                    className="body4 text-cool-gray-20 font-medium !leading-none group-hover:text-white"
+                    style={{ transition: "color 0.3s ease" }}
+                  >
                     {strength.eng}
                   </span>
                 </span>
