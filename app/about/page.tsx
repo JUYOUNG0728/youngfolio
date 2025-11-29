@@ -569,14 +569,14 @@ export default function AboutPage() {
                 <div className="flex gap-2">
                   <div className="w-[24vw] h-[50vh]">
                     <iframe
-                      src="https://drive.google.com/file/d/1KiTP33LhmlQSLSf5PVqr87Ds0DTVLE8s/preview"
+                      src="https://drive.google.com/file/d/1-8brZH2fylw2VZFf7Lhwh7JSZ_gi3hrb/preview"
                       className="w-full h-full"
                       allowFullScreen
                     />
                   </div>
                   <div className="w-[24vw] h-[50vh]">
                     <iframe
-                      src="https://drive.google.com/file/d/1euyGoF1QYktTxQK8HQ3OStKn7JFX-iid/preview"
+                      src="https://drive.google.com/file/d/1ay5i3_VCuCHTGZeSblnqYVwUnS3qWk7D/preview"
                       className="w-full h-full"
                       allowFullScreen
                     />
