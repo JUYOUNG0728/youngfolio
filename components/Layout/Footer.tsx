@@ -44,11 +44,11 @@ export default function Footer() {
         <div className={footerSectionDivStyle}>
           {screenWidth >= 768 && (
             <div className="h4 !font-semibold flex flex-col gap-5">
-              <span className="text-gray-10">THIS IS MY SPACE.</span>
-              <p className="flex gap-4 ml-[-44px] justify-center">
-                <span className="text-gray-10">[</span>
-                <span className="text-gray-30">JUYOUNG'S PORTFOLIO</span>
-                <span className="text-gray-10">]</span>
+              <span className="text-gray-30">THIS IS MY SPACE.</span>
+              <p className="flex gap-4 ml-[-44px] justify-center text-gray-10">
+                <span>[</span>
+                <span>JUYOUNG'S PORTFOLIO</span>
+                <span>]</span>
               </p>
             </div>
           )}
