@@ -1,27 +1,34 @@
-import ActivityStatus from "@/components/Contact/ActivityStatus";
+import Image from "next/image";
+import useScreenWidth from "@/utils/useScreenWidth";
 
-type ContactSideSectionProps = {
-  isWorkingHour: boolean;
-};
+export default function ContactSideSection() {
+  const screenWidth = useScreenWidth();
 
-export default function ContactSideSection({
-  isWorkingHour,
-}: ContactSideSectionProps) {
   return (
-    <section className="flex flex-col justify-between sticky top-[14vh] h-[76vh]">
-      <h1 className="h4 !font-semibold text-nowrap leading-[1.6]">
-        궁금한 점이 있으신가요?
-        <br />
-        언제든 편하게 문의해주세요!
-      </h1>
-      <div className="body4 flex flex-col gap-6">
-        <ActivityStatus isWorkingHour={isWorkingHour} />
-        <span className="leading-[1.7]">
-          매일 AM 9:00 - PM 8:00
-          <br />
-          최대한 빠르게 확인 후 연락드리겠습니다.
+    <section className="sticky top-[25vh]">
+      <h1 className="text-nowrap">
+        <div className="w-[5vw] h-[5vw] relative mb-[3vw]">
+          <Image src="/images/icon-door.png" alt="문" fill />
+        </div>
+        <span className="flex flex-col gap-[1.75vw]">
+          <span
+            className="font-semibold"
+            style={{
+              fontSize: screenWidth * 0.05,
+            }}
+          >
+            ANY 3 .
+          </span>
+          <span className="h4 !font-medium text-gray-40">
+            Anything, Anywhere, Anytime
+          </span>
         </span>
-      </div>
+      </h1>
+      <p className="body3 mt-[4.5vw]">
+        궁금한 점이 있으시면 언제든지 문의해주세요.
+        <br />
+        확인 후 최대한 빠르게 답변드리겠습니다.
+      </p>
     </section>
   );
 }
