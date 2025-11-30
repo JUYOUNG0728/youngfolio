@@ -115,6 +115,8 @@ export default function AboutPage() {
     },
   ];
 
+  const iconSize = screenWidth > 1920 ? 28 : 24;
+
   useEffect(() => {
     if (!marquee1Ref.current) return;
 
@@ -403,7 +405,7 @@ export default function AboutPage() {
                   </span>
                 </div>
               </div>
-              <div className="bg-white rounded-3xl p-12 flex flex-col gap-4">
+              <div className="bg-white rounded-3xl p-12 flex flex-col gap-4 xl:gap-5">
                 <div className="flex gap-3 items-center ml-2">
                   <div className="w-10 h-10 rounded-full relative">
                     <Image
@@ -431,20 +433,20 @@ export default function AboutPage() {
                     />
                   </div>
                 </div>
-                <div className="flex gap-4 items-center ml-2">
+                <div className="flex items-center ml-2 gap-4 xl:gap-5">
                   <Image
                     src="/images/icon-heart.png"
                     alt="하트 아이콘"
-                    width={24}
-                    height={24}
+                    width={iconSize}
+                    height={iconSize}
                   />
                   <Image
                     src="/images/icon-bubble.png"
                     alt="말풍선 아이콘"
-                    width={24}
-                    height={24}
+                    width={iconSize}
+                    height={iconSize}
                   />
-                  <Send width={24} height={24} fill="#000000" />
+                  <Send width={iconSize} height={iconSize} fill="#000000" />
                 </div>
               </div>
             </div>
@@ -479,7 +481,7 @@ export default function AboutPage() {
                   </span>
                 </div>
               </div>
-              <div className="bg-white rounded-3xl p-12 flex flex-col gap-4">
+              <div className="bg-white rounded-3xl p-12 flex flex-col gap-4 xl:gap-5">
                 <div className="flex gap-3 items-center ml-2">
                   <div className="w-10 h-10 rounded-full relative">
                     <Image
@@ -509,20 +511,20 @@ export default function AboutPage() {
                     />
                   </div>
                 </div>
-                <div className="flex gap-4 items-center ml-2">
+                <div className="flex items-center ml-2 gap-4 xl:gap-5">
                   <Image
                     src="/images/icon-heart.png"
                     alt="하트 아이콘"
-                    width={24}
-                    height={24}
+                    width={iconSize}
+                    height={iconSize}
                   />
                   <Image
                     src="/images/icon-bubble.png"
                     alt="말풍선 아이콘"
-                    width={24}
-                    height={24}
+                    width={iconSize}
+                    height={iconSize}
                   />
-                  <Send width={24} height={24} fill="#000000" />
+                  <Send width={iconSize} height={iconSize} fill="#000000" />
                 </div>
               </div>
             </div>
@@ -554,7 +556,7 @@ export default function AboutPage() {
                   </span>
                 </div>
               </div>
-              <div className="bg-white rounded-3xl p-12 flex flex-col gap-4">
+              <div className="bg-white rounded-3xl p-12 flex flex-col gap-4 xl:gap-5">
                 <div className="flex gap-3 items-center ml-2">
                   <div className="w-10 h-10 rounded-full relative">
                     <Image
@@ -582,20 +584,20 @@ export default function AboutPage() {
                     />
                   </div>
                 </div>
-                <div className="flex gap-4 items-center ml-2">
+                <div className="flex items-center ml-2 gap-4 xl:gap-5">
                   <Image
                     src="/images/icon-heart.png"
                     alt="하트 아이콘"
-                    width={24}
-                    height={24}
+                    width={iconSize}
+                    height={iconSize}
                   />
                   <Image
                     src="/images/icon-bubble.png"
                     alt="말풍선 아이콘"
-                    width={24}
-                    height={24}
+                    width={iconSize}
+                    height={iconSize}
                   />
-                  <Send width={24} height={24} fill="#000000" />
+                  <Send width={iconSize} height={iconSize} fill="#000000" />
                 </div>
               </div>
             </div>

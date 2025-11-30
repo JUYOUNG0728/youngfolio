@@ -15,7 +15,6 @@ import InquirySection from "@/components/Contact/InquirySection";
 export default function ContactPage() {
   const [userUid, setUserUid] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [isWorkingHour, setIsWorkingHour] = useState(false);
 
   const screenWidth = useScreenWidth();
 
@@ -81,33 +80,14 @@ export default function ContactPage() {
     };
   }, [userUid]);
 
-  /* 활동 시간에 따른 상태 관리 (오전 9시 ~ 오후 8시) */
-  useEffect(() => {
-    const checkWorkingHour = () => {
-      const now = new Date();
-      const hour = now.getHours();
-
-      if (hour >= 9 && hour < 20) {
-        setIsWorkingHour(true);
-      } else {
-        setIsWorkingHour(false);
-      }
-    };
-
-    checkWorkingHour();
-
-    const interval = setInterval(checkWorkingHour, 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="w-full h-full bg-black text-white px-[30px] md:px-[70px]">
       <SubHeader page="Contact" />
-      <div className="relative lg:flex lg:gap-[16vw]">
+      <div className="relative lg:flex lg:gap-[14vw]">
         {screenWidth >= 1280 && (
           <div>
             <div />
-            <ContactSideSection isWorkingHour={isWorkingHour} />
+            <ContactSideSection />
           </div>
         )}
         <div className="flex flex-col w-full gap-[16vh] lg:gap-[28vh]">
