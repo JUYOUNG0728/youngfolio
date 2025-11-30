@@ -31,9 +31,9 @@ export default function MessageBubble({
     },
   };
   const bubbleStyle =
-    "break-words py-3 px-5 rounded-3xl max-w-[600px] block text-base xl:text-lg xl:px-6 xl:max-w-[840px] xl:rounded-[30px]";
+    "break-words py-3 px-5 rounded-3xl max-w-[200px] block text-base md:max-w-[400px] lg:max-w-[600px] xl:text-lg xl:px-6 xl:max-w-[840px] xl:rounded-[30px]";
   const imageStyle =
-    "min-w-[100px] min-h-[100px] max-w-[600px] max-h-[200px] rounded-lg object-contain";
+    "min-w-[100px] min-h-[100px] max-w-[200px] max-h-[200px] mt-8 rounded-lg object-contain md:max-w-[400px] lg:max-w-[600px]";
   const timestampStyle = "text-gray-30 body6";
 
   const isSendMessage = isAdminPage ? !isAdmin : isAdmin;

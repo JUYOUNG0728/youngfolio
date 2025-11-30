@@ -27,7 +27,7 @@ export default function SnsItems() {
   };
 
   return (
-    <div className="flex gap-8 xl:gap-10">
+    <div className="flex gap-[10vw] md:gap-8 xl:gap-10">
       <Image
         src="/images/icon-behance.png"
         alt="Behance"

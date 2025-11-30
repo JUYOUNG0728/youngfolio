@@ -10,7 +10,7 @@ export default function ContactInfoSection() {
   const snsList = [
     {
       name: "Mobile",
-      value: "+82 10-8297-7649",
+      value: "010-8297-7649",
     },
     {
       name: "Email",
@@ -24,19 +24,8 @@ export default function ContactInfoSection() {
   };
 
   return (
-    <section className="flex flex-col gap-[72px] lg:gap-32">
-      <div>
-        <div className="w-full mb-12 xl:mb-16">
-          <h1 className="h3 mb-6 inline-block mr-3 xl:mb-8">최주영</h1>
-          <span className="inline-block h5">(CHOI JUYOUNG)</span>
-          <p className="body3 mb-1 xl:mb-2">📍 Seongnam, South Korea</p>
-          <p className="body3">💼 UI/UX Design | Front-end Dev</p>
-        </div>
-        <div className="rounded-full bg-gray-50/10 w-56 h-16 flex justify-center items-center xl:w-[270px] xl:h-20">
-          <SnsItems />
-        </div>
-      </div>
-      <ul className="flex text-nowrap gap-[10vw] lg:gap-28 xl:gap-40">
+    <section className="h-full text-nowrap flex items-center gap-x-24 gap-y-12 flex-wrap md:gap-y-16 lg:sticky lg:top-[30vh] lg:flex-col lg:gap-24">
+      <ul className="flex gap-[10vw] lg:gap-16 lg:flex-col">
         {snsList.map((sns) => (
           <li key={sns.name} className="flex flex-col gap-2 xl:gap-[10px]">
             <h3 className="body3 text-gray-30">{sns.name}</h3>
@@ -55,6 +44,9 @@ export default function ContactInfoSection() {
           </li>
         ))}
       </ul>
+      <div className="rounded-full bg-gray-50/10 w-full h-16 flex justify-center items-center md:w-56 xl:w-[270px] xl:h-20">
+        <SnsItems />
+      </div>
     </section>
   );
 }

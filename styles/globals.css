@@ -17,6 +17,7 @@
   --white: #fff;
   --black: #101010;
 
+  --blue: rgb(26, 75, 253);
   --light-blue: #1e40ff;
   --marine-blue: #002bc7;
   --navy-blue: #032291;
@@ -373,14 +374,6 @@
     @media (max-width: 1920px) {
       font-size: 0.75rem;
     }
-
-    @media (max-width: 1280px) {
-      font-size: 0.625rem;
-    }
-
-    @media (max-width: 768px) {
-      font-size: 0.5rem;
-    }
   }
 
   /* Text Colors */
@@ -419,6 +412,9 @@
   }
   .text-marine-blue {
     color: var(--marine-blue);
+  }
+  .text-blue {
+    color: var(--blue);
   }
   .text-navy-blue {
     color: var(--navy-blue);
@@ -467,6 +463,9 @@
   .bg-marine-blue {
     background-color: var(--marine-blue);
   }
+  .bg-blue {
+    background-color: var(--blue);
+  }
   .bg-navy-blue {
     background-color: var(--navy-blue);
   }
@@ -514,6 +513,9 @@
   .border-marine-blue {
     border-color: var(--marine-blue);
   }
+  .border-blue {
+    border-color: var(--blue);
+  }
   .border-navy-blue {
     border-color: var(--navy-blue);
   }
@@ -560,6 +562,9 @@
   }
   .placeholder-marine-blue::placeholder {
     color: var(--marine-blue);
+  }
+  .placeholder-blue::placeholder {
+    color: var(--blue);
   }
   .placeholder-navy-blue::placeholder {
     color: var(--navy-blue);

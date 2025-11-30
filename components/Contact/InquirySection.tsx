@@ -11,7 +11,7 @@ export default function InquirySection({
   handleSend,
 }: InquirySectionProps) {
   return (
-    <section className="flex flex-col gap-12 lg:gap-20">
+    <section className="w-full flex flex-col gap-12 lg:gap-20">
       <div className="flex flex-col gap-5 lg:gap-7">
         <h2 className="flex flex-col gap-4 lg:gap-5">
           <span className="h7 text-gray-40 !font-semibold">LIVE CHAT</span>
