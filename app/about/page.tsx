@@ -418,14 +418,14 @@ export default function AboutPage() {
                 <div className="flex gap-2">
                   <div className="w-[24vw] h-[50vh]">
                     <video
-                      src="/videos/video-spring.mp4"
+                      src="https://moygiia7bzcdvhjq.public.blob.vercel-storage.com/video-spring.mp4"
                       className="w-full h-full object-cover"
                       controls
                     />
                   </div>
                   <div className="w-[24vw] h-[50vh]">
                     <video
-                      src="/videos/video-kiki.mp4"
+                      src="https://moygiia7bzcdvhjq.public.blob.vercel-storage.com/video-kiki.mp4"
                       className="w-full h-full object-cover"
                       controls
                     />
@@ -569,14 +569,14 @@ export default function AboutPage() {
                 <div className="flex gap-2">
                   <div className="w-[24vw] h-[50vh]">
                     <video
-                      src="/videos/video-game1.mp4"
+                      src="https://moygiia7bzcdvhjq.public.blob.vercel-storage.com/video-game1.mp4"
                       className="w-full h-full object-cover"
                       controls
                     />
                   </div>
                   <div className="w-[24vw] h-[50vh]">
                     <video
-                      src="/videos/video-game2.mp4"
+                      src="https://moygiia7bzcdvhjq.public.blob.vercel-storage.com/video-game2.mp4"
                       className="w-full h-full object-cover"
                       controls
                     />
