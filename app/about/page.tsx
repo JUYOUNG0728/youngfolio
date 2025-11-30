@@ -417,17 +417,17 @@ export default function AboutPage() {
                 </div>
                 <div className="flex gap-2">
                   <div className="w-[24vw] h-[50vh]">
-                    <iframe
-                      src="https://drive.google.com/file/d/1wGl9lp-LQDnAm_e6i418pA9j8BuJ8b1x/preview"
-                      className="w-full h-full"
-                      allowFullScreen
+                    <video
+                      src="/videos/video-spring.mp4"
+                      className="w-full h-full object-cover"
+                      controls
                     />
                   </div>
                   <div className="w-[24vw] h-[50vh]">
-                    <iframe
-                      src="https://drive.google.com/file/d/1HP_twSA-xEKqXX4LWpZNDja57RWC73UA/preview"
-                      className="w-full h-full"
-                      allowFullScreen
+                    <video
+                      src="/videos/video-kiki.mp4"
+                      className="w-full h-full object-cover"
+                      controls
                     />
                   </div>
                 </div>
@@ -568,17 +568,17 @@ export default function AboutPage() {
                 </div>
                 <div className="flex gap-2">
                   <div className="w-[24vw] h-[50vh]">
-                    <iframe
-                      src="https://drive.google.com/file/d/1KiTP33LhmlQSLSf5PVqr87Ds0DTVLE8s/preview"
-                      className="w-full h-full"
-                      allowFullScreen
+                    <video
+                      src="/videos/video-game1.mp4"
+                      className="w-full h-full object-cover"
+                      controls
                     />
                   </div>
                   <div className="w-[24vw] h-[50vh]">
-                    <iframe
-                      src="https://drive.google.com/file/d/1euyGoF1QYktTxQK8HQ3OStKn7JFX-iid/preview"
-                      className="w-full h-full"
-                      allowFullScreen
+                    <video
+                      src="/videos/video-game2.mp4"
+                      className="w-full h-full object-cover"
+                      controls
                     />
                   </div>
                 </div>
