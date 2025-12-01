@@ -116,7 +116,7 @@ export default function IntroduceSection({
               className="w-full h-full object-cover object-[0%_30%] lg:object-center"
             />
           </div>
-          <div className="flex flex-col gap-16 mt-12 md:mt-16 md:gap-16 lg:mt-0 lg:gap-32">
+          <div className="flex flex-col gap-12 mt-12 md:mt-16 md:gap-16 lg:mt-0 lg:gap-32">
             {contents.slice(0, 3).map((content, contentIndex) => (
               <div key={contentIndex}>
                 <h2 className={`${titleStyle} mb-5 lg:mb-7`}>
@@ -137,7 +137,7 @@ export default function IntroduceSection({
             ))}
           </div>
 
-          <div className="flex flex-col mt-16 gap-16 md:gap-16 md:mt-16 lg:mt-0 lg:gap-32">
+          <div className="flex flex-col mt-12 gap-12 md:gap-16 md:mt-16 lg:mt-0 lg:gap-32">
             {contents.slice(3).map((content, contentIndex) => (
               <div key={contentIndex}>
                 <h2 className={`${titleStyle} mb-7`}>
