@@ -24,7 +24,7 @@ export default function ContactInfoSection() {
   };
 
   return (
-    <section className="h-full text-nowrap flex items-center gap-x-24 gap-y-12 flex-wrap md:gap-y-16 lg:sticky lg:top-[30vh] lg:flex-col lg:gap-24">
+    <section className="h-full text-nowrap flex gap-x-24 gap-y-12 flex-wrap md:gap-y-16 lg:sticky lg:top-[30vh] lg:flex-col lg:gap-24">
       <ul className="flex gap-[10vw] lg:gap-16 lg:flex-col">
         {snsList.map((sns) => (
           <li key={sns.name} className="flex flex-col gap-2 xl:gap-[10px]">

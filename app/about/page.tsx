@@ -153,10 +153,10 @@ export default function AboutPage() {
   }, [screenWidth]);
 
   return (
-    <div className="w-full h-full bg-black text-white overflow-x-hidden px-[30px] md:px-[70px]">
+    <div className="w-full h-full bg-black text-white overflow-x-hidden px-[60px] md:px-[140px]">
       <SubHeader page="About" />
-      <div className="w-screen ml-[-30px] md:ml-[-70px]">
-        <span className="bg-black border-t border-x border-gray-40 body2 !font-medium px-12 py-5 inline-block relative top-[1px] z-10 rounded-t-3xl left-[30px] md:left-[70px]">
+      <div className="w-screen ml-[-60px] md:ml-[-140px]">
+        <span className="bg-black border-t border-x border-gray-40 body2 !font-medium px-12 py-5 inline-block relative top-[1px] z-10 rounded-t-3xl left-[60px] md:left-[140px]">
           WHO IS YOUNG?
         </span>
         <div className="bg-black border-t border-gray-40 relative w-full h-full pt-36 pb-44 px-[60px] md:px-[140px] xl:pt-48 xl:pb-56">
@@ -284,7 +284,7 @@ export default function AboutPage() {
         </div>
       </div>
       <span
-        className="w-screen bg-white text-navy-blue overflow-x-hidden relative h2 !font-medium flex gap-12 py-8 ml-[-30px] md:ml-[-70px]"
+        className="w-screen bg-white text-navy-blue overflow-x-hidden relative h2 !font-medium flex gap-12 py-8 ml-[-60px] md:ml-[-140px]"
         ref={marquee1Ref}
       >
         <ul className={marqueeTextStyle}>
@@ -299,7 +299,7 @@ export default function AboutPage() {
         </ul>
       </span>
       <span
-        className="w-screen bg-navy-blue text-white overflow-x-hidden relative h2 !font-medium flex gap-12 py-8 ml-[-30px] md:ml-[-70px]"
+        className="w-screen bg-navy-blue text-white overflow-x-hidden relative h2 !font-medium flex gap-12 py-8 ml-[-60px] md:ml-[-140px]"
         ref={marquee2Ref}
       >
         <ul className={marqueeTextStyle}>
@@ -314,7 +314,7 @@ export default function AboutPage() {
         </ul>
       </span>
 
-      <div className="w-screen overflow-x-hidden relative mt-36 ml-[-30px] md:ml-[-70px]">
+      <div className="w-screen overflow-x-hidden relative mt-36 ml-[-60px] md:ml-[-140px]">
         <span className="bg-light-blue body2 !font-medium px-12 py-5 inline-block relative z-10 rounded-t-3xl left-[200px] md:left-[360px]">
           PERSONALITY
         </span>
@@ -352,7 +352,7 @@ export default function AboutPage() {
                   <h2 className="h4 text-black group-hover:text-white">
                     {strength.name}
                   </h2>
-                  <span className="body3 text-cool-gray-20 font-medium !leading-none group-hover:text-white">
+                  <span className="body3 text-gray-30 font-medium !leading-none group-hover:text-white">
                     {strength.eng}
                   </span>
                 </div>
@@ -362,7 +362,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="w-screen overflow-x-hidden relative text-black mt-36 ml-[-30px] md:ml-[-70px]">
+      <div className="w-screen overflow-x-hidden relative text-black mt-36 ml-[-60px] md:ml-[-140px]">
         <span className="bg-yellow-green body2 !font-medium px-12 py-5 inline-block relative z-10 rounded-t-3xl left-[400px] md:left-[720px]">
           IN DAILY LIFE
         </span>

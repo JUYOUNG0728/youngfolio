@@ -77,11 +77,11 @@ export default function ContactPage() {
   }, [userUid]);
 
   return (
-    <div className="w-full h-full bg-black text-white px-[30px] md:px-[70px]">
+    <div className="w-full h-full bg-black text-white px-[60px] md:px-[140px]">
       <SubHeader page="Contact" />
       <div className="relative flex flex-col gap-[16vw] w-full lg:flex-row lg:gap-0 lg:justify-between">
         <ContactInfoSection />
-        <div className="w-full lg:w-[68vw]">
+        <div className="w-full lg:w-[60vw]">
           <InquirySection messages={messages} handleSend={handleSendMessage} />
         </div>
       </div>

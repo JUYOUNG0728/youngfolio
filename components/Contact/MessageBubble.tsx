@@ -88,8 +88,8 @@ export default function MessageBubble({
               <span
                 className={`${bubbleStyle} ${
                   isSendMessage
-                    ? "bg-cool-gray-30 text-white"
-                    : "bg-cool-gray-10 text-black"
+                    ? "bg-cool-gray text-white"
+                    : "bg-gray-10 text-black"
                 }`}
               >
                 {text}
