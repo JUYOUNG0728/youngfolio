@@ -1,4 +1,4 @@
-import Scene from "@/components/Main/Model/Scene";
+import Scene from "@/components/About/Model/Scene";
 import Arrow from "@/components/Common/Arrow";
 import useScreenWidth from "@/utils/useScreenWidth";
 
