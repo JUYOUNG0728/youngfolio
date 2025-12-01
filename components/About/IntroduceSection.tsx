@@ -147,7 +147,7 @@ export default function IntroduceSection({
                   {content.items.map((item: any, index: number) => (
                     <li
                       key={index}
-                      className="py-3 rounded-full text-center min-w-[100px]"
+                      className="py-3 rounded-full text-center min-w-[120px]"
                       style={{
                         color: item.color,
                         backgroundColor: item.color

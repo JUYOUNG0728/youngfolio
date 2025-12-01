@@ -61,7 +61,7 @@ export default function Page() {
     <div className="w-full">
       <section className="w-full h-screen text-black bg-white pt-[120px] xl:pt-[150px]">
         <div className="h-full flex relative border-t border-gray-30">
-          <div className="w-1/2 h-full flex flex-col justify-between py-[40px] px-[60px] md:px-[140px] md:py-[80px] xl:py-[100px]">
+          <div className="w-1/2 h-full flex flex-col justify-between py-[40px] px-[30px] md:px-[140px] md:py-[80px] xl:py-[100px]">
             <div className="absolute bottom-[5vh] right-[51%] flex flex-col items-center animate-bounce gap-9 lg:gap-11 xl:gap-14">
               <div className="-rotate-90">
                 <span className="font-semibold body5">SCROLL TO</span>
@@ -132,7 +132,7 @@ export default function Page() {
         </div>
         <p
           ref={processRef}
-          className="body1 text-center mt-[12vh] px-[60px] md:px-[140px] md:mt-[16vh]"
+          className="body1 text-center mt-[12vh] px-[30px] md:px-[140px] md:mt-[16vh]"
         >
           <span
             style={{
