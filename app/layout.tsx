@@ -19,12 +19,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: "YOUNGFOLIO",
     description: "YOUNGFOLIO | Juyoung's Space",
-    images: ["/images/img-project-thumbnail-youngfolio.png"],
+    images: ["/images/img-project-thumbnail-youngfolio.png?v=2"],
   },
   twitter: {
     title: "YOUNGFOLIO",
     description: "YOUNGFOLIO | Juyoung's Space",
-    images: ["/images/img-project-thumbnail-youngfolio.png"],
+    images: ["/images/img-project-thumbnail-youngfolio.png?v=2"],
     card: "summary_large_image",
   },
 };
