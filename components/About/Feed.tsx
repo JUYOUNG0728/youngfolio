@@ -20,7 +20,7 @@ export default function Feed({ hobby }: FeedProps) {
   const snsIconSize = screenWidth > 1920 ? 28 : screenWidth > 1280 ? 24 : 20;
 
   return (
-    <div className="bg-white rounded-3xl p-8 flex flex-col gap-4 lg:p-12 xl:gap-5">
+    <div className="bg-white rounded-3xl p-4 flex flex-col gap-4 md:p-8 lg:p-12 xl:gap-5">
       <div className="flex gap-3 items-center ml-2">
         <div className="w-10 h-10 rounded-full relative">
           <Image
