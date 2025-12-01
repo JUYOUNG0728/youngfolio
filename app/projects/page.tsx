@@ -40,9 +40,9 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="w-full text-white px-[30px] md:px-[70px]">
+    <div className="w-full text-white">
       <ProjectsHeader searchTerm={searchTerm} handleSearch={handleSearch} />
-      <div className="w-full gap-x-12 gap-y-20 mb-40 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="w-full px-[60px] gap-x-12 gap-y-20 mb-40 grid grid-cols-1 md:grid-cols-2 md:px-[140px] lg:grid-cols-3">
         {filteredCurrentProjects.length > 0 ? (
           filteredCurrentProjects.map((project) => (
             <div key={project.id}>

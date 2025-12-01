@@ -5,18 +5,14 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { fetchMessages, postMessage, postImage } from "@/utils/messageApi";
 import { Message, HandleSendParams } from "@/types/inquiry";
-import useScreenWidth from "@/utils/useScreenWidth";
 
 import SubHeader from "@/components/Common/SubHeader";
 import ContactInfoSection from "@/components/Contact/ContactInfoSection";
-import ContactSideSection from "@/components/Contact/ContactSideSection";
 import InquirySection from "@/components/Contact/InquirySection";
 
 export default function ContactPage() {
   const [userUid, setUserUid] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
-
-  const screenWidth = useScreenWidth();
 
   const userIdName = process.env.NEXT_PUBLIC_USERID_NAME as string;
 
@@ -81,17 +77,11 @@ export default function ContactPage() {
   }, [userUid]);
 
   return (
-    <div className="w-full h-full bg-black text-white px-[30px] md:px-[70px]">
+    <div className="w-full h-full bg-black text-white px-[60px] md:px-[140px]">
       <SubHeader page="Contact" />
-      <div className="relative lg:flex lg:gap-[14vw]">
-        {screenWidth >= 1280 && (
-          <div>
-            <div />
-            <ContactSideSection />
-          </div>
-        )}
-        <div className="flex flex-col w-full gap-[16vh] lg:gap-[28vh]">
-          <ContactInfoSection />
+      <div className="relative flex flex-col gap-[16vw] w-full lg:flex-row lg:gap-0 lg:justify-between">
+        <ContactInfoSection />
+        <div className="w-full lg:w-[60vw]">
           <InquirySection messages={messages} handleSend={handleSendMessage} />
         </div>
       </div>

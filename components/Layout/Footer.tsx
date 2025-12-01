@@ -30,7 +30,7 @@ export default function Footer() {
   };
 
   return (
-    <div className="bg-black w-full max-h-[440px] h-[230px] relative z-30 border-t border-gray-40 px-[30px] py-[50px] mt-[30vh] md:p-[70px] md:h-[36vh]">
+    <div className="bg-black w-full max-h-[440px] h-[230px] relative z-30 border-t border-gray-40 px-[60px] py-[50px] mt-[30vh] md:px-[140px] md:py-[70px] md:h-[36vh]">
       <div className="flex w-full h-full relative flex-col gap-1 pr-20 md:flex-row md:gap-[12vw]">
         <div className={footerSectionDivStyle}>
           <div className="body2 flex flex-col text-gray-20">
@@ -44,11 +44,11 @@ export default function Footer() {
         <div className={footerSectionDivStyle}>
           {screenWidth >= 768 && (
             <div className="h4 !font-semibold flex flex-col gap-5">
-              <span className="text-gray-10">THIS IS MY SPACE.</span>
-              <p className="flex gap-4 ml-[-44px] justify-center">
-                <span className="text-gray-10">[</span>
-                <span className="text-gray-30">JUYOUNG'S PORTFOLIO</span>
-                <span className="text-gray-10">]</span>
+              <span className="text-gray-30">THIS IS MY SPACE.</span>
+              <p className="flex gap-4 ml-[-44px] justify-center text-gray-10">
+                <span>[</span>
+                <span>JUYOUNG'S PORTFOLIO</span>
+                <span>]</span>
               </p>
             </div>
           )}

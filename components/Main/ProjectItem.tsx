@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 type ProjectItemProps = {
   imageSrc: string;
@@ -13,27 +16,30 @@ export default function ProjectItem({
   description,
   link,
 }: ProjectItemProps) {
-  const projectDivStyle =
-    "project-item !pointer-events-auto !select-auto cursor-pointer mx-auto w-[calc(100%-60px)] h-[40vh] md:min-w-[580px] md:w-[40vw] md:h-[60vh]";
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
-      className={`${projectDivStyle}`}
+      className="project-item"
       onClick={() => {
         window.open(`https://${link}`, "_blank");
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="w-full h-full">
+      <div className="relative w-[calc(100%-120px)] h-[40vh] md:min-w-[340px] md:w-[24vw] md:h-[30vh]">
         <Image
           src={imageSrc}
           alt={title}
           fill
           className="object-cover border border-gray-40 rounded-xl"
         />
-      </div>
-      <div className="mt-7 flex flex-col gap-3 ml-4 md:mt-10 md:gap-4 xl:mt-11 xl:gap-5">
-        <h1 className="h5">{title}</h1>
-        <p className="body5">{description}</p>
+        {isHovered && (
+          <div className="relative z-10 bg-black/70 w-full h-full flex flex-col justify-center items-center gap-3 md:gap-4 xl:gap-5">
+            <h1 className="h6">{title}</h1>
+            <p className="body6">{description}</p>
+          </div>
+        )}
       </div>
     </div>
   );
