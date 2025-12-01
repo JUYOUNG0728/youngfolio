@@ -20,14 +20,14 @@ export default function ProjectItem({
 
   return (
     <div
-      className="project-item"
+      className="project-item w-full"
       onClick={() => {
         window.open(`https://${link}`, "_blank");
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative w-[calc(100%-120px)] h-[40vh] md:min-w-[340px] md:w-[24vw] md:h-[30vh]">
+      <div className="relative w-full h-[60vh]">
         <Image
           src={imageSrc}
           alt={title}

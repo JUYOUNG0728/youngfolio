@@ -10,11 +10,11 @@ export default function ProjectSection({ projectRef }: ProjectSectionProps) {
 
   return (
     <section
-      className="w-fit text-white flex flex-col lg:flex-row mx-auto gap-12"
+      className="w-full text-white grid grid-cols-3 gap-4"
       ref={projectRef}
     >
       {someProjects.map((project, index) => (
-        <div key={project.id}>
+        <div key={index} className="w-full">
           <ProjectItem
             imageSrc={project.imageSrc}
             title={project.title}
