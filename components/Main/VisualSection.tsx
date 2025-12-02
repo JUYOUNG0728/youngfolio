@@ -17,7 +17,7 @@ export default function VisualSection({ sectionStyle }: VisualSectionProps) {
     <section className="w-full h-screen text-black bg-white pt-[120px] xl:pt-[150px]">
       <div className="h-full flex flex-col relative border-t border-gray-30 md:flex-row">
         <div
-          className={`w-full h-full flex flex-col gap-12 py-[60px] md:gap-16 md:py-[80px] lg:w-1/2 lg:justify-between lg:h-full xl:py-[100px] ${horizontalPaddingStyle}`}
+          className={`w-full h-full flex flex-col gap-10 py-[60px] md:gap-14 md:py-[80px] lg:w-1/2 lg:justify-between lg:h-full xl:py-[100px] ${horizontalPaddingStyle}`}
         >
           {screenWidth >= 768 && (
             <div className="absolute bottom-[5vh] left-[36px] flex flex-col items-center animate-bounce gap-9 lg:gap-11 lg:right-[51%] lg:left-auto xl:gap-14">
