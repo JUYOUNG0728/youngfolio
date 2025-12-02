@@ -76,7 +76,7 @@ export default function ProcessSection({ sectionStyle }: ProcessSectionProps) {
         fill
         className="object-cover opacity-20 z-[-1]"
       />
-      <div className="w-full flex flex-col gap-[8vw] items-center justify-center lg:flex-row lg:gap-[12vw]">
+      <div className="w-full flex flex-col gap-[8vw] items-center justify-center md:gap-[6vw] lg:flex-row lg:gap-[12vw]">
         <TextCircle />
         <div className="flex flex-col gap-10 text-center text-wrap px-[30px] md:gap-14 lg:text-left lg:px-0 lg:gap-16">
           <h1 className="body1 font-medium">
