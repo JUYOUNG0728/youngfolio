@@ -66,7 +66,7 @@ export default function AboutMeSection({ sectionStyle }: AboutMeSectionProps) {
         </span>
       </h1>
       <p className="body3 text-center mt-10 xl:mt-12">
-        제가 궁금하지 않으신가요? 저에 대해 더 자세히 알려드릴게요!
+        저에 대해 더 자세히 알려드릴게요!
       </p>
       <Button
         variant="primary-outline"
