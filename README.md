@@ -7,11 +7,10 @@
 
 ## 🛠️ 구성
 
-- main (projects)
-- about/ youngfolio
-- about/ creator
-- contact/ information
-- contact/ inquiry (chat service)
+- main (home)
+- about me
+- projects
+- contact
 
 ---
 
