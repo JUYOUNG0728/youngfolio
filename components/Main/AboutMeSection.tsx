@@ -44,7 +44,7 @@ export default function AboutMeSection({ sectionStyle }: AboutMeSectionProps) {
           </span>
           E
         </span>
-        <span className="flex items-center justify-center gap-4 lg:gap-8">
+        <span className="flex items-center justify-center gap-4 md:gap-6 lg:gap-8">
           <span>
             <span
               className="text-gray-20 group-hover:text-black"
@@ -54,7 +54,7 @@ export default function AboutMeSection({ sectionStyle }: AboutMeSectionProps) {
             </span>
             T
           </span>
-          <div className="w-28 h-[60px] md:w-36 md:h-[72px] lg:w-[200px] lg:h-[94px] relative xl:w-[240px] xl:h-[120px]">
+          <div className="mb-[2px] w-28 h-14 md:w-36 md:h-[72px] md:mb-0 lg:w-[200px] lg:h-[94px] relative xl:w-[240px] xl:h-[120px]">
             <Image
               src="/images/img-about-me.jpg"
               alt="ABOUT ME 이미지"
