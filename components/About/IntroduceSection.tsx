@@ -108,8 +108,8 @@ export default function IntroduceSection({
             I'M YOUNG
           </h1>
         </div>
-        <div className="mt-20 flex flex-col lg:mt-40 lg:flex-row lg:justify-between xl:mr-8">
-          <div className="w-full h-[30vh] bg-white relative rounded-xl overflow-hidden lg:h-[70vh] lg:w-[24vw] xl:w-[24vw] xl:h-[60vh]">
+        <div className="mt-20 flex flex-col lg:mt-40 md:flex-row md:gap-x-20 md:flex-wrap lg:flex-nowrap lg:gap-0 lg:justify-between xl:mr-8">
+          <div className="w-full h-[30vh] bg-white relative rounded-xl overflow-hidden md:h-[70vh] md:w-[40vw] lg:w-[24vw] xl:h-[60vh]">
             <Image
               src="/images/img-about-me.jpg"
               alt="프로필 사진"
@@ -138,7 +138,7 @@ export default function IntroduceSection({
             ))}
           </div>
 
-          <div className="flex flex-col mt-12 gap-12 md:gap-16 md:mt-16 lg:mt-0 lg:gap-32">
+          <div className="flex flex-col mt-12 gap-12 md:flex-row md:gap-20 md:flex-wrap md:mt-16 lg:flex-nowrap lg:flex-col lg:mt-0 lg:gap-32">
             {contents.slice(3).map((content, contentIndex) => (
               <div key={contentIndex}>
                 <h2 className={`${titleStyle} mb-7`}>

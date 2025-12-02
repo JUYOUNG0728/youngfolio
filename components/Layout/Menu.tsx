@@ -13,20 +13,20 @@ export default function Menu({
   const router = useRouter();
 
   const menuItems = [
-    { id: "01", label: "HOME", href: "/" },
+    { id: "01", label: "Home", href: "/" },
     {
       id: "02",
-      label: "ABOUT ME",
-      href: "/about",
+      label: "About me",
+      href: "/about-me",
     },
     {
       id: "03",
-      label: "PROJECTS",
+      label: "Projects",
       href: "/projects",
     },
     {
       id: "04",
-      label: "CONTACT",
+      label: "Contact",
       href: "/contact",
     },
   ];

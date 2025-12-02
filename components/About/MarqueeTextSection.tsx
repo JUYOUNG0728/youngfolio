@@ -16,6 +16,7 @@ export default function MarqueeTextSection() {
 
   const marqueeText1 = Array(4).fill("GROWTH MINDSET 🚀");
   const marqueeText2 = Array(4).fill("A COMPLETE CREATOR ✨");
+
   const marqueeTextStyle = "flex gap-12 whitespace-nowrap marquee";
   const containerStyle =
     "overflow-x-hidden relative h2 !font-medium flex gap-12 py-8";
