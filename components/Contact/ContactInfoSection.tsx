@@ -1,6 +1,6 @@
 import Image from "next/image";
 import useScreenWidth from "@/utils/useScreenWidth";
-import SnsItems from "@/components/Common/SnsItems";
+import SnsItems from "@/components/Contact/SnsItems";
 
 export default function ContactInfoSection() {
   const screenWidth = useScreenWidth();

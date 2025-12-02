@@ -1,73 +1,58 @@
 import Image from "next/image";
-
 import useScreenWidth from "@/utils/useScreenWidth";
-import Send from "@/components/Common/Send";
 
-export default function VisualSection() {
+type VisualSectionProps = {
+  sectionStyle: {
+    horizontalPaddingStyle: string;
+    verticalPaddingStyle: string;
+  };
+};
+
+export default function VisualSection({ sectionStyle }: VisualSectionProps) {
+  const { horizontalPaddingStyle } = sectionStyle;
+
   const screenWidth = useScreenWidth();
 
-  const iconInquirySendSize = screenWidth > 1920 ? 40 : 32;
-
-  const handleClickInquiry = () => {
-    window.location.href = "/contact";
-  };
-
   return (
-    <section className="relative w-full h-screen bg-white text-black overflow-hidden pt-32 px-[40px] md:px-[70px] xl:px-[100px] xl:pt-40">
-      <div
-        className="absolute top-0 left-0 w-full h-[70vh]"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%)",
-        }}
-      />
-      <div className="flex flex-col items-center gap-7 lg:gap-10 xl:gap-12">
-        <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center relative overflow-hidden md:w-24 md:h-24 lg:w-28 lg:h-28">
+    <section className="w-full h-screen text-black bg-white pt-[120px] xl:pt-[150px]">
+      <div className="h-full flex flex-col relative border-t border-gray-30 md:flex-row">
+        <div
+          className={`w-full h-1/2 flex flex-col gap-8 py-[60px] md:gap-11 md:py-[80px] lg:w-1/2 lg:justify-between lg:h-full xl:py-[100px] ${horizontalPaddingStyle}`}
+        >
+          {screenWidth >= 768 && (
+            <div className="absolute bottom-[5vh] left-[36px] flex flex-col items-center animate-bounce gap-9 lg:gap-11 lg:right-[51%] lg:left-auto xl:gap-14">
+              <div className="-rotate-90">
+                <span className="font-semibold body5">SCROLL TO</span>
+              </div>
+              <Image
+                src="/images/icon-mouse-scroll.png"
+                alt="마우스 스크롤"
+                width={16}
+                height={16}
+              />
+            </div>
+          )}
+          <h1 className="h1 leading-[0.9] flex flex-col gap-2 md:gap-4 lg:gap-6">
+            <span>BEYOND</span>
+            <span>LIMITS</span>
+          </h1>
+          <p className="body3 font-medium ">
+            한계를 넘는 디자이너 최주영입니다.
+            <br />
+            디자이너의 감각, 개발자의 논리, 기획자의 구조를 함께 다루며,
+            <br />
+            경계를 넘는 경험과 더 나은 완성도를 추구하고 있습니다.
+          </p>
+        </div>
+        <div className="w-full h-1/2 relative md:h-full lg:w-1/2">
           <Image
-            src="/images/img-character.png"
-            alt="캐릭터 이미지"
-            width={120}
-            height={120}
-            className="object-cover rounded-full absolute bottom-[-30px] scale-[175%] md:bottom-[-34px] md:scale-[160%] lg:bottom-[-36px] lg:scale-150"
+            src="/images/img-visual.jpg"
+            alt="비주얼 이미지"
+            fill
+            className="object-cover"
           />
         </div>
-        <h1 className="h1 text-center leading-[1.2] mb-4">YOUNG, PORTFOLIO</h1>
-        <span className="body3 font-semibold py-3 px-7 border border-black rounded-full lg:mt-2 xl:mt-4 lg:py-4 lg:px-8 xl:px-10">
-          2025 : Imagine beyond words
-        </span>
       </div>
-      {screenWidth >= 768 && (
-        <div className="absolute w-full pl-10 pr-[60px] bottom-[10vh] left-0 flex justify-between items-end">
-          <div className="flex flex-col items-center gap-9 lg:gap-11 xl:gap-14">
-            <div className="-rotate-90">
-              <span className="font-semibold body5">SCROLL TO</span>
-            </div>
-            <Image
-              src="/images/icon-mouse-scroll.png"
-              alt="마우스 스크롤"
-              width={16}
-              height={16}
-            />
-          </div>
-          <button
-            className="relative flex justify-center items-center bg-black rounded-full w-28 h-28 lg:w-32 lg:h-32 xl:w-40 xl:h-40"
-            onClick={handleClickInquiry}
-          >
-            <Image
-              src="/images/icon-inquiry-button.png"
-              alt="문의하기 버튼 텍스트"
-              fill
-              className="animate-spin"
-              style={{ animationDuration: "12s" }}
-            />
-            <Send
-              width={iconInquirySendSize}
-              height={iconInquirySendSize}
-              fill="#ffffff"
-            />
-          </button>
-        </div>
-      )}
     </section>
   );
 }

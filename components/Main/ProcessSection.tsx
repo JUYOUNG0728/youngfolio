@@ -1,11 +1,27 @@
+"use client";
+
 import Image from "next/image";
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import TextCircle from "@/components/Main/TextCircle";
 import useScreenWidth from "@/utils/useScreenWidth";
 
+gsap.registerPlugin(ScrollTrigger);
+
 type ProcessSectionProps = {
-  processRef: React.RefObject<HTMLDivElement>;
+  sectionStyle: {
+    horizontalPaddingStyle: string;
+    verticalPaddingStyle: string;
+  };
 };
 
-export default function ProcessSection({ processRef }: ProcessSectionProps) {
+export default function ProcessSection({ sectionStyle }: ProcessSectionProps) {
+  const processRef = useRef<HTMLDivElement | null>(null);
+
+  const { horizontalPaddingStyle, verticalPaddingStyle } = sectionStyle;
+
   const screenWidth = useScreenWidth();
 
   const processText = [
@@ -26,58 +42,74 @@ export default function ProcessSection({ processRef }: ProcessSectionProps) {
     "성과 측정 (KPI, UX metrics)",
   ];
 
+  useLayoutEffect(() => {
+    if (!processRef.current) return;
+
+    const processText = processRef.current.querySelector(".process-item");
+
+    const ctx = gsap.context(() => {
+      gsap.set(processText, { backgroundSize: "0% 100%" });
+
+      ScrollTrigger.create({
+        trigger: processRef.current,
+        start: "top 60%",
+        end: "bottom 80%",
+        onUpdate: (self) => {
+          const progress = self.progress;
+          gsap.to(processText, {
+            backgroundSize: `${progress * 100}% 100%`,
+          });
+        },
+      });
+    }, processRef);
+
+    return () => ctx.revert();
+  }, [screenWidth]);
+
   return (
     <section
-      ref={processRef}
-      className="w-full overflow-hidden bg-black pt-[30vh] pb-[40vh] text-white"
+      className={`w-full relative text-white ${verticalPaddingStyle} ${horizontalPaddingStyle}`}
     >
-      <div className="flex flex-col gap-16">
-        <span className="body2 text-center">(Built This Way)</span>
-        <h2 className="h1 leading-[1.2] !font-medium flex flex-col items-center justify-center px-[70px]">
-          <span
-            className={`left-title ${
-              screenWidth >= 1000 ? "text-nowrap" : "text-center"
-            }`}
-          >
-            CREATED THROUGH
-          </span>
-          <span
-            className={`right-title flex ${
-              screenWidth >= 1000 ? "flex-row gap-4 items-center" : "flex-col"
-            }`}
-          >
-            <div className="flex items-center gap-4">
-              <span>THIS</span>
-              <div className="relative w-[140px] h-[130px] xl:w-[190px] xl:h-[170px]">
-                <Image
-                  src="/images/img-process.png"
-                  alt="프로세스 이미지"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-            <span>PROCESS</span>
-          </span>
-        </h2>
+      <Image
+        src="/images/img-process-background.jpg"
+        alt="배경 이미지"
+        fill
+        className="object-cover opacity-20 z-[-1]"
+      />
+      <div className="w-full flex flex-col gap-[8vw] items-center justify-center lg:flex-row lg:gap-[12vw]">
+        <TextCircle />
+        <div className="flex flex-col gap-10 text-center text-wrap px-[30px] md:gap-14 lg:text-left lg:px-0 lg:gap-16">
+          <h1 className="body1 font-medium">
+            Experiences beyond technology,
+            <br />
+            resonating with the heart.
+          </h1>
+          <p className="body3">
+            체계적인 UX 프로세스를 기반으로 사용자 조사부터 디자인, 검증까지의
+            전 과정을 통해,
+            <br />
+            기술과 감성을 넘어 마음에 닿는 경험을 만듭니다.
+          </p>
+        </div>
       </div>
-      <p className="body1 text-center px-[30px] mt-[16vh] md:mt-[20vh]">
-        <span>
-          <span
-            style={{
-              WebkitTextFillColor: "rgba(255, 255, 255, 0.2)",
-              WebkitBackgroundClip: "text",
-              backgroundImage: "linear-gradient(90deg, #FFFFFF, #FFFFFF)",
-            }}
-            className="process-item bg-no-repeat"
-          >
-            {processText.map((item, index) => (
-              <span key={index}>
-                {item}
-                {index !== processText.length - 1 && <br />}
-              </span>
-            ))}
-          </span>
+      <p
+        ref={processRef}
+        className="body1 text-center mt-[12vh] px-[30px] md:px-[60px] md:mt-[16vh] lg::px-[140px]"
+      >
+        <span
+          style={{
+            WebkitTextFillColor: "rgba(255, 255, 255, 0.2)",
+            WebkitBackgroundClip: "text",
+            backgroundImage: "linear-gradient(90deg, #FFFFFF, #FFFFFF)",
+          }}
+          className="process-item bg-no-repeat"
+        >
+          {processText.map((item, index) => (
+            <span key={index} className="leading-[1.8]">
+              {item}
+              {index !== processText.length - 1 && <br />}
+            </span>
+          ))}
         </span>
       </p>
     </section>
