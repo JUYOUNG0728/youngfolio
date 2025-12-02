@@ -17,7 +17,7 @@ export default function VisualSection({ sectionStyle }: VisualSectionProps) {
     <section className="w-full h-screen text-black bg-white pt-[120px] xl:pt-[150px]">
       <div className="h-full flex flex-col relative border-t border-gray-30 md:flex-row">
         <div
-          className={`w-full h-1/2 flex flex-col gap-8 py-[60px] md:gap-11 md:py-[80px] lg:w-1/2 lg:justify-between lg:h-full xl:py-[100px] ${horizontalPaddingStyle}`}
+          className={`w-full h-full flex flex-col gap-8 py-[60px] md:gap-11 md:py-[80px] lg:w-1/2 lg:justify-between lg:h-full xl:py-[100px] ${horizontalPaddingStyle}`}
         >
           {screenWidth >= 768 && (
             <div className="absolute bottom-[5vh] left-[36px] flex flex-col items-center animate-bounce gap-9 lg:gap-11 lg:right-[51%] lg:left-auto xl:gap-14">
@@ -44,7 +44,7 @@ export default function VisualSection({ sectionStyle }: VisualSectionProps) {
             경계를 넘는 경험과 더 나은 완성도를 추구하고 있습니다.
           </p>
         </div>
-        <div className="w-full h-1/2 relative md:h-full lg:w-1/2">
+        <div className="w-full h-full relative md:h-full lg:w-1/2">
           <Image
             src="/images/img-visual.jpg"
             alt="비주얼 이미지"
