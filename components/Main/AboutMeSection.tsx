@@ -54,7 +54,7 @@ export default function AboutMeSection({ sectionStyle }: AboutMeSectionProps) {
             </span>
             T
           </span>
-          <div className="w-28 h-14 md:w-36 md:h-[72px] lg:w-[200px] lg:h-[94px] relative xl:w-[240px] xl:h-[120px]">
+          <div className="w-28 h-[52px] md:w-36 md:h-[68px] lg:w-[200px] lg:h-[94px] relative xl:w-[240px] xl:h-[120px]">
             <Image
               src="/images/img-about-me.jpg"
               alt="ABOUT ME 이미지"
