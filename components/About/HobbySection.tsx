@@ -9,13 +9,14 @@ type HobbySectionProps = {
     baseStyle: string;
     tagStyle: string;
     containerStyle: string;
+    gapStyle: string;
   };
 };
 
 export default function HobbySection({ sectionStyle }: HobbySectionProps) {
   const screenWidth = useScreenWidth();
 
-  const hobbyIconSize = screenWidth > 1400 ? 80 : screenWidth > 768 ? 60 : 48;
+  const hobbyIconSize = screenWidth >= 1400 ? 80 : screenWidth >= 768 ? 60 : 48;
 
   const hobbyList = [
     {
@@ -56,20 +57,24 @@ export default function HobbySection({ sectionStyle }: HobbySectionProps) {
   ];
 
   return (
-    <div className={`${sectionStyle.baseStyle} text-black mt-36`}>
+    <div
+      className={`${sectionStyle.baseStyle} text-black ${sectionStyle.gapStyle}`}
+    >
       <span
         className={`${sectionStyle.tagStyle} bg-yellow-green lg:left-[620px] xl:left-[680px]`}
       >
         IN DAILY LIFE
       </span>
       <div
-        className={`${sectionStyle.containerStyle} bg-yellow-green flex flex-col gap-24 md:gap-36 lg:gap-44`}
+        className={`${sectionStyle.containerStyle} bg-yellow-green flex flex-col`}
       >
         <h1 className="aboutSectionTitle text-center font-bold">
           <span className="text-black/20">DAILY </span>
           <span>HOBBY</span>
         </h1>
-        <div className="flex flex-col gap-20">
+        <div
+          className={`flex flex-col gap-16 md:gap-28 ${sectionStyle.gapStyle}`}
+        >
           {hobbyList.map((hobby, index) => (
             <div
               key={index}

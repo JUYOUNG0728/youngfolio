@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import Scene from "@/components/About/Model/Scene";
 import Characteristics from "@/components/About/Characteristics";
 
@@ -8,6 +6,7 @@ type PersonalitySectionProps = {
     baseStyle: string;
     tagStyle: string;
     containerStyle: string;
+    gapStyle: string;
   };
 };
 
@@ -62,7 +61,7 @@ export default function PersonalitySection({
   ];
 
   return (
-    <div className={`${baseStyle} mt-36`}>
+    <div className={`${baseStyle} ${sectionStyle.gapStyle}`}>
       <span
         className={`${tagStyle} bg-light-blue lg:left-[390px] xl:left-[420px]`}
       >
@@ -73,10 +72,12 @@ export default function PersonalitySection({
           <span className="text-white/20">MBTI IS? </span>
           <span>INTP</span>
         </h1>
-        <div className="absolute w-screen h-[64vh] left-0 right-0 mx-auto top-0 md:top-24 lg:top-36 lg:w-[60vw] lg:h-[60vh]">
+        <div className="absolute w-[80vw] h-[40vh] left-0 right-0 mx-auto top-4 md:w-[90vh] md:h-[70vh] lg:top-44 lg:w-[44vw] lg:h-[44vh] xl:top-52">
           <Scene />
         </div>
-        <div className="grid grid-cols-1 gap-8 relative z-10 mt-36 md:mt-48 lg:grid-cols-3 xl:mt-64">
+        <div
+          className={`grid grid-cols-1 gap-8 relative z-10 ${sectionStyle.gapStyle} lg:grid-cols-3`}
+        >
           {strengths.map((strength, index) => (
             <Characteristics key={index} strength={strength} index={index} />
           ))}

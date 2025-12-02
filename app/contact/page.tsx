@@ -77,7 +77,7 @@ export default function ContactPage() {
   }, [userUid]);
 
   return (
-    <div className="w-full h-full bg-black text-white px-[30px] md:px-[140px]">
+    <div className="w-full h-full bg-black text-white px-[30px] md:px-[140px] pb-24 md:pb-36 lg:pb-44 xl:pb-56">
       <SubHeader page="Contact" />
       <div className="relative flex flex-col gap-[16vw] w-full lg:flex-row lg:gap-0 lg:justify-between">
         <ContactInfoSection />

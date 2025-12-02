@@ -14,7 +14,7 @@ export default function SnsItems() {
     },
     {
       label: "Behance",
-      href: "https://www.behance.net",
+      href: "https://www.behance.net/6d39cccf",
     },
     {
       label: "Mail",

@@ -6,6 +6,7 @@ type IntroduceSectionProps = {
     baseStyle: string;
     tagStyle: string;
     containerStyle: string;
+    gapStyle: string;
   };
 };
 

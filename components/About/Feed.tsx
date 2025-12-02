@@ -17,7 +17,7 @@ type FeedProps = {
 export default function Feed({ hobby }: FeedProps) {
   const screenWidth = useScreenWidth();
 
-  const snsIconSize = screenWidth > 1920 ? 28 : screenWidth > 1280 ? 24 : 20;
+  const snsIconSize = screenWidth >= 1920 ? 28 : screenWidth >= 1280 ? 24 : 20;
 
   return (
     <div className="bg-white rounded-3xl p-4 flex flex-col gap-4 md:p-8 lg:p-12 xl:gap-5">
