@@ -152,7 +152,7 @@ export default function IntroduceSection({
                       style={{
                         color: item.color,
                         backgroundColor: item.color
-                          ? `${item.color}25`
+                          ? `${item.color}30`
                           : "transparent",
                         width: `${0.08 * screenWidth - 1.6}px`,
                       }}
