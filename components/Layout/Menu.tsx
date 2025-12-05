@@ -43,7 +43,7 @@ export default function Menu({
           className={`${
             screenWidth >= 1680
               ? "w-full gap-[9vw]"
-              : "w-[calc(100%-1200px)] gap-[16vw] md:gap-[9vw] lg:gap-[7vw]"
+              : "w-[calc(100%-1200px)] gap-[11vh] lg:gap-[7vw]"
           } flex justify-center flex-wrap`}
         >
           {menuItems.map((item, index) => (
