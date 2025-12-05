@@ -49,7 +49,7 @@ export default function Menu({
           {menuItems.map((item, index) => (
             <div key={item.id}>
               <div
-                className="flex cursor-pointer gap-4 xl:gap-6"
+                className="flex items-center cursor-pointer gap-4 lg:gap-5 xl:gap-7"
                 onClick={() => handleNavigate(item.href)}
               >
                 <p
@@ -59,7 +59,7 @@ export default function Menu({
                   {item.id}
                 </p>
                 <h1
-                  className="menu text-nowrap relative fade-up top-[-10px] xl:top-[-12px]"
+                  className="menu text-nowrap relative fade-up"
                   style={{
                     animationDelay: `${0.6 + index * 0.15}s`,
                   }}
