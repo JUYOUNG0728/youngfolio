@@ -13,6 +13,9 @@ type AboutMeSectionProps = {
 export default function AboutMeSection({ sectionStyle }: AboutMeSectionProps) {
   const { horizontalPaddingStyle, verticalPaddingStyle } = sectionStyle;
 
+  const unHoveredTextStyle = "text-gray-20 group-hover:text-black";
+  const transitionStyle = { transition: "0.5s" };
+
   return (
     <section
       className={`w-full bg-gray-10 text-black ${verticalPaddingStyle} ${horizontalPaddingStyle}`}
@@ -20,41 +23,29 @@ export default function AboutMeSection({ sectionStyle }: AboutMeSectionProps) {
       <h1 className="w-fit group h1 !font-normal text-center flex flex-col mx-auto">
         <span>
           W
-          <span
-            className="text-gray-20 group-hover:text-black"
-            style={{ transition: "0.5s" }}
-          >
+          <span className={unHoveredTextStyle} style={transitionStyle}>
             OULD YOU LIK
           </span>
           E
         </span>
         <span>
-          <span
-            className="text-gray-20 group-hover:text-black"
-            style={{ transition: "0.5s" }}
-          >
+          <span className={unHoveredTextStyle} style={transitionStyle}>
             TO KNOW{" "}
           </span>
           M
-          <span
-            className="text-gray-20 group-hover:text-black"
-            style={{ transition: "0.5s" }}
-          >
+          <span className={unHoveredTextStyle} style={transitionStyle}>
             OR
           </span>
           E
         </span>
-        <span className="flex items-center justify-center gap-4 md:gap-6 lg:gap-8">
+        <span className="flex items-center justify-center gap-4 md:gap-6 lg:gap-8 xl:gap-10">
           <span>
-            <span
-              className="text-gray-20 group-hover:text-black"
-              style={{ transition: "0.5s" }}
-            >
+            <span className={unHoveredTextStyle} style={transitionStyle}>
               ABOU
             </span>
             T
           </span>
-          <div className="bottom-1 w-28 h-14 md:bottom-0 md:w-36 md:h-[72px] lg:w-[200px] lg:h-[94px] relative xl:w-[240px] xl:h-[120px]">
+          <div className="w-20 h-[46px] md:w-32 md:h-[68px] lg:w-[170px] lg:h-[94px] relative xl:w-[232px] xl:h-[116px]">
             <Image
               src="/images/img-about-me.jpg"
               alt="ABOUT ME 이미지"
@@ -65,7 +56,7 @@ export default function AboutMeSection({ sectionStyle }: AboutMeSectionProps) {
           ?
         </span>
       </h1>
-      <p className="body3 text-center mt-10 xl:mt-12">
+      <p className="body3 text-center mt-10 md:mt-12 xl:mt-14">
         저에 대해 더 자세히 알려드릴게요!
       </p>
       <Button
