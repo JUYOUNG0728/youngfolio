@@ -45,7 +45,7 @@ export default function AboutMeSection({ sectionStyle }: AboutMeSectionProps) {
             </span>
             T
           </span>
-          <div className="w-20 h-[46px] md:w-32 md:h-[68px] lg:w-[170px] lg:h-[94px] relative xl:w-[232px] xl:h-[116px]">
+          <div className="inline-block w-20 h-[46px] md:w-32 md:h-[68px] lg:w-[170px] lg:h-[94px] relative xl:w-[232px] xl:h-[116px]">
             <Image
               src="/images/img-about-me.jpg"
               alt="ABOUT ME 이미지"
