@@ -144,15 +144,15 @@ export default function IntroduceSection({
                 <h2 className={`${titleStyle} mb-7`}>
                   {content.listName.toUpperCase()}
                 </h2>
-                <ul className="body4 font-medium text-gray-30 w-fit grid grid-cols-3 gap-4">
+                <ul className="body4 font-medium text-gray-30 w-fit grid grid-cols-3 gap-3 md:gap-4">
                   {content.items.map((item: any, index: number) => (
                     <li
                       key={index}
-                      className="py-3 rounded-full text-center min-w-[120px]"
+                      className="py-3 rounded-full text-center min-w-[110px] md:min-w-[120px]"
                       style={{
                         color: item.color,
                         backgroundColor: item.color
-                          ? `${item.color}30`
+                          ? `${item.color}40`
                           : "transparent",
                         width: `${0.08 * screenWidth - 1.6}px`,
                       }}
