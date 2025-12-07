@@ -6,6 +6,7 @@ import Image from "next/image";
 import useScreenWidth from "@/utils/useScreenWidth";
 import Plus from "@/components/Common/Plus";
 import Send from "@/components/Common/Send";
+import Close from "@/components/Common/Close";
 
 type InquiryInputProps = {
   handleSend: ({
@@ -88,12 +89,7 @@ export default function InquiryInput({ handleSend }: InquiryInputProps) {
             className="absolute top-2 right-2 bg-black w-7 h-7 rounded-full flex justify-center items-center"
             onClick={handleRemoveImage}
           >
-            <Image
-              src="/images/icon-close.png"
-              alt="close"
-              width={14}
-              height={14}
-            />
+            <Close width={14} height={14} fill="#ffffff" />
           </button>
         </div>
       )}
