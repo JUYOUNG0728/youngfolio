@@ -1,12 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import AdminChatDashboard from "@/components/Admin/AdminChatDashboard";
 import Button from "@/components/Common/Button";
+import { executeRecaptcha } from "@/lib/executeRecaptcha";
 
 export default function AdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
   const [inputPw, setInputPw] = useState("");
+  const [verified, setVerified] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const verify = async () => {
+      const result = await executeRecaptcha("admin");
+      setVerified(result?.success ?? false);
+    };
+    verify();
+  }, []);
+
+  if (verified === null) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center bg-black text-white">
+        Loading…
+      </div>
+    );
+  }
+
+  if (!verified) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center bg-black text-white">
+        접근이 제한되었습니다.
+      </div>
+    );
+  }
 
   const handleLogin = () => {
     if (inputPw === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
