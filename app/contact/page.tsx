@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { fetchMessages, postMessage, postImage } from "@/utils/messageApi";
 import { Message, HandleSendParams } from "@/types/inquiry";
-import { executeRecaptcha } from "@/lib/executeRecaptcha";
 
 import SubHeader from "@/components/Common/SubHeader";
 import ContactInfoSection from "@/components/Contact/ContactInfoSection";
@@ -22,12 +21,6 @@ export default function ContactPage() {
       alert(
         "새로고침 후 다시 시도해주시고, 계속해서 문제 발생 시 다른 방법으로 문의해주세요."
       );
-      return;
-    }
-
-    const result = await executeRecaptcha("contact");
-
-    if (!result?.success) {
       return;
     }
 
