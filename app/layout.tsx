@@ -6,6 +6,7 @@ import Footer from "@/components/Layout/Footer";
 import { LenisProvider } from "@/lib/LenisProvider";
 import FollowCursor from "@/components/Common/FollowCursor";
 import Reload from "@/lib/Reload";
+import GoogleAnalytics from "@/lib/GoogleAnalytics";
 
 const WEBSITE_HOST_URL = "https://youngfolio.vercel.app";
 
@@ -44,6 +45,12 @@ export default function RootLayout({
           {children}
           <Footer />
         </LenisProvider>
+
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+          <GoogleAnalytics
+            googleAnalyticsId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}
+          />
+        ) : null}
       </body>
     </html>
   );
