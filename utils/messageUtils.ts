@@ -50,15 +50,17 @@ function messageDisplayMeta({
   const showDate =
     index === 0 ||
     !isSameDay(new Date(msg.timestamp), new Date(prev.timestamp));
+
   const showTime =
     !next ||
     !isSameMinute(new Date(msg.timestamp), new Date(next.timestamp)) ||
     msg.sender !== next.sender;
+
   const showProfile =
-    msg.sender === "admin" &&
-    (!prev ||
-      prev.sender !== "admin" ||
-      !isSameMinute(new Date(msg.timestamp), new Date(prev.timestamp)));
+    !prev ||
+    prev.sender !== msg.sender ||
+    !isSameMinute(new Date(msg.timestamp), new Date(prev.timestamp));
+
   return { showDate, showTime, showProfile };
 }
 
