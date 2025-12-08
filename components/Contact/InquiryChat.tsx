@@ -34,7 +34,7 @@ export default function InquiryChat({
         ref={scrollContainerRef}
       >
         {messages.map((msg, index) => {
-          const { showDate, showTime } = messageDisplayMeta({
+          const { showDate, showTime, showProfile } = messageDisplayMeta({
             msg,
             messages,
             index,
@@ -51,6 +51,7 @@ export default function InquiryChat({
                 {...msg}
                 showTime={showTime}
                 isAdminPage={isAdminPage}
+                showProfile={showProfile}
               />
             </div>
           );

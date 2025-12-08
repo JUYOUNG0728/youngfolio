@@ -7,6 +7,7 @@ type MessageBubbleProps = {
   timestamp: string;
   showTime: boolean;
   isAdminPage: boolean;
+  showProfile: boolean;
 };
 
 export default function MessageBubble({
@@ -16,6 +17,7 @@ export default function MessageBubble({
   timestamp,
   showTime,
   isAdminPage,
+  showProfile,
 }: MessageBubbleProps) {
   const isAdmin = sender === "admin";
   const isOnlyImageWithTimeStamp = !text && image_url && showTime;
@@ -33,7 +35,7 @@ export default function MessageBubble({
   const bubbleStyle =
     "break-words py-3 px-5 rounded-3xl max-w-[200px] block text-base md:max-w-[400px] lg:max-w-[600px] xl:text-lg xl:px-6 xl:max-w-[840px] xl:rounded-[30px]";
   const imageStyle =
-    "min-w-[100px] min-h-[100px] max-w-[200px] max-h-[200px] mt-8 rounded-lg object-contain md:max-w-[400px] lg:max-w-[600px]";
+    "min-w-[100px] min-h-[100px] max-w-[200px] max-h-[200px] rounded-lg object-contain md:max-w-[400px] lg:max-w-[600px]";
   const timestampStyle = "text-gray-30 body6";
 
   const isSendMessage = isAdminPage ? !isAdmin : isAdmin;
@@ -43,7 +45,7 @@ export default function MessageBubble({
       <div
         className={`${isSendMessage ? "flex flex-col" : "flex justify-end"}`}
       >
-        {isSendMessage && (
+        {isSendMessage && showProfile && (
           <div className="flex items-center gap-2 my-4">
             <div className="w-3 h-3 rounded-full bg-gray-10 xl:w-[14px] xl:h-[14px]" />
             <span className="text-gray-10 body4 font-semibold">
