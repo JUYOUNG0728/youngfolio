@@ -108,7 +108,7 @@ export default function IntroduceSection({
               현재는 프론트엔드 개발까지 배워 올인원 인재로 성장하고 있습니다.
             </p>
           </div>
-          <h1 className="aboutSectionTitle font-bold text-white/10 absolute right-0 leading-[-3]">
+          <h1 className="hidden aboutSectionTitle font-bold text-white/10 absolute right-0 leading-[-3] md:inline-block">
             I'M YOUNG
           </h1>
         </div>
@@ -121,7 +121,7 @@ export default function IntroduceSection({
               className="w-full h-full object-cover object-[0%_30%] lg:object-center"
             />
           </div>
-          <div className="flex flex-col gap-12 mt-12 md:mt-16 md:gap-16 lg:mt-0 lg:gap-32">
+          <div className="flex flex-col gap-12 mt-12 md:mt-0 md:gap-16 lg:gap-32">
             {contents.slice(0, 3).map((content, contentIndex) => (
               <div key={contentIndex}>
                 <h2 className={`${titleStyle} mb-5 lg:mb-7`}>
@@ -158,7 +158,7 @@ export default function IntroduceSection({
                         width: `${0.03 * screenWidth}px`,
                         height: `${0.03 * screenWidth}px`,
                       }}
-                      className="relative min-w-8 min-h-8"
+                      className="relative min-w-9 min-h-9"
                     >
                       <Image src={item.src} alt={item.name} fill />
                     </li>
