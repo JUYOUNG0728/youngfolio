@@ -43,35 +43,40 @@ export default function IntroduceSection({
     "코드잇 스프린트 프론트엔드 11기 수료",
   ];
 
-  const skills = [
-    { name: "Figma", color: "#F24E1E" },
-    { name: "XD", color: "#FF61F6" },
-    { name: "PS", color: "#31A8FF" },
-    { name: "AI", color: "#FF9A00" },
-    { name: "HTML/CSS", color: "#1572B6" },
-    { name: "JS", color: "#F7DF1E" },
-    { name: "TS", color: "#3178C6" },
-    { name: "React", color: "#61DAFB" },
-    { name: "Next.js", color: "#CCCCCC" },
-    { name: "GSAP", color: "#88CE02" },
-    { name: "Three.js", color: "#AAAAAA" },
+  const designSkills = [
+    { name: "Figma", src: "/images/skills/figma.png" },
+    { name: "XD", src: "/images/skills/xd.png" },
+    { name: "PS", src: "/images/skills/ps.png" },
+    { name: "AI", src: "/images/skills/ai.png" },
+  ];
+
+  const codingSkills = [
+    { name: "HTML", src: "/images/skills/html.png" },
+    { name: "CSS", src: "/images/skills/css.png" },
+    { name: "JS", src: "/images/skills/js.png" },
+    { name: "TS", src: "/images/skills/ts.png" },
+    { name: "React", src: "/images/skills/react.png" },
+    { name: "Next.js", src: "/images/skills/next.js.png" },
+    { name: "GSAP", src: "/images/skills/gsap.png" },
+    { name: "Three.js", src: "/images/skills/three.js.png" },
   ];
 
   const aiTools = [
-    { name: "ChatGPT", color: "#10A37F" },
-    { name: "Google Bard", color: "#4285F4" },
-    { name: "Ruiten AI", color: "#6C5DD3" },
-    { name: "Claude AI", color: "#008080" },
-    { name: "Adobe Firefly", color: "#FF6200" },
-    { name: "Meshy AI", color: "#C5F955" },
-    { name: "Flamel", color: "#7F56D9" },
+    { name: "ChatGPT", src: "/images/skills/chatGPT.png" },
+    { name: "Google Gemini", src: "/images/skills/gemini.png" },
+    { name: "Ruiten AI", src: "/images/skills/wrtn.png" },
+    { name: "Claude AI", src: "/images/skills/claude.png" },
+    { name: "Adobe Firefly", src: "/images/skills/firefly.png" },
+    { name: "Meshy AI", src: "/images/skills/meshy.png" },
+    { name: "Flamel", src: "/images/skills/flamel.png" },
   ];
 
   const contents = [
     { listName: "Experience", items: experience },
     { listName: "Education", items: education },
     { listName: "Certificate", items: certificate },
-    { listName: "Skills", items: skills },
+    { listName: "Design", items: designSkills },
+    { listName: "Coding", items: codingSkills },
     { listName: "AI Tools", items: aiTools },
   ];
 
@@ -98,10 +103,9 @@ export default function IntroduceSection({
               학창 시절 UI/UX 디자인을 접한 뒤 자연스럽게 흥미를 갖게
               되었습니다.
               <br />
-              첫 직장이었던 디자인 에이전시에서는 기획부터 디자인까지
-              경험하였으며,
+              디자인 에이전시에서 기획-디자인-이관의 전 과정을 경험하였으며,
               <br />
-              현재는 프론트엔드 개발까지 배우며 올인원 인재로 성장하고 있습니다.
+              현재는 프론트엔드 개발까지 배워 올인원 인재로 성장하고 있습니다.
             </p>
           </div>
           <h1 className="aboutSectionTitle font-bold text-white/10 absolute right-0 leading-[-3]">
@@ -129,8 +133,8 @@ export default function IntroduceSection({
                       {content.listName === "Experience"
                         ? `${item.company} ${item.role}`
                         : content.listName === "Education"
-                        ? `${item.school} ${item.major}`
-                        : item}
+                          ? `${item.school} ${item.major}`
+                          : item}
                     </li>
                   ))}
                 </ul>
@@ -138,26 +142,25 @@ export default function IntroduceSection({
             ))}
           </div>
 
-          <div className="flex flex-col mt-12 gap-12 md:flex-row md:gap-20 md:flex-wrap md:mt-16 lg:flex-nowrap lg:flex-col lg:mt-0 lg:gap-32">
+          <div className="flex flex-col mt-12 gap-12 md:flex-row md:gap-20 md:flex-wrap md:mt-28 lg:flex-nowrap lg:flex-col lg:mt-0 lg:gap-32">
             {contents.slice(3).map((content, contentIndex) => (
               <div key={contentIndex}>
                 <h2 className={`${titleStyle} mb-7`}>
                   {content.listName.toUpperCase()}
                 </h2>
-                <ul className="body4 font-medium text-gray-30 w-fit grid grid-cols-3 gap-3 md:gap-4">
+                <ul
+                  className={`${content.items.length >= 6 ? " grid-cols-6" : "grid-cols-4"} body4 font-medium text-gray-30 w-fit grid gap-3 md:gap-4`}
+                >
                   {content.items.map((item: any, index: number) => (
                     <li
                       key={index}
-                      className="py-3 rounded-full text-center min-w-[110px] md:min-w-[120px]"
                       style={{
-                        color: item.color,
-                        backgroundColor: item.color
-                          ? `${item.color}40`
-                          : "transparent",
-                        width: `${0.08 * screenWidth - 1.6}px`,
+                        width: `${0.03 * screenWidth}px`,
+                        height: `${0.03 * screenWidth}px`,
                       }}
+                      className="relative min-w-8 min-h-8"
                     >
-                      {item.name}
+                      <Image src={item.src} alt={item.name} fill />
                     </li>
                   ))}
                 </ul>
