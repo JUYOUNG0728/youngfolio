@@ -112,7 +112,7 @@ export default function IntroduceSection({
             I'M YOUNG
           </h1>
         </div>
-        <div className="mt-20 flex flex-col lg:mt-40 md:flex-row md:gap-x-20 md:flex-wrap lg:flex-nowrap lg:gap-0 lg:justify-between xl:mr-8">
+        <div className="mt-12 flex flex-col md:mt-20 lg:mt-40 md:flex-row md:gap-x-20 md:flex-wrap lg:flex-nowrap lg:gap-0 lg:justify-between xl:mr-8">
           <div className="w-full h-[30vh] bg-white relative rounded-xl overflow-hidden md:h-[70vh] md:w-[40vw] lg:w-[24vw] xl:h-[60vh]">
             <Image
               src="/images/img-about-me.jpg"
