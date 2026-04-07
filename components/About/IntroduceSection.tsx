@@ -149,14 +149,14 @@ export default function IntroduceSection({
                   {content.listName.toUpperCase()}
                 </h2>
                 <ul
-                  className={`${content.items.length >= 6 ? " grid-cols-6" : "grid-cols-4"} body4 font-medium text-gray-30 w-fit grid gap-3 md:gap-4`}
+                  className={`body4 font-medium text-gray-30 w-fit flex gap-3 md:gap-4`}
                 >
                   {content.items.map((item: any, index: number) => (
                     <li
                       key={index}
                       style={{
-                        width: `${0.03 * screenWidth}px`,
-                        height: `${0.03 * screenWidth}px`,
+                        width: `${0.025 * screenWidth}px`,
+                        height: `${0.025 * screenWidth}px`,
                       }}
                       className="relative min-w-9 min-h-9"
                     >
