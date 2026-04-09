@@ -19,7 +19,7 @@ export default function ContactPage() {
   const handleSendMessage = async ({ text, imageFile }: HandleSendParams) => {
     if (!userUid) {
       alert(
-        "새로고침 후 다시 시도해주시고, 계속해서 문제 발생 시 다른 방법으로 문의해주세요."
+        "새로고침 후 다시 시도해주시고, 계속해서 문제 발생 시 다른 방법으로 문의해주세요.",
       );
       return;
     }
@@ -67,7 +67,7 @@ export default function ContactPage() {
         (payload) => {
           const newMessage = payload.new as Message;
           setMessages((prev) => [...prev, newMessage]);
-        }
+        },
       )
       .subscribe();
 
@@ -77,7 +77,7 @@ export default function ContactPage() {
   }, [userUid]);
 
   return (
-    <div className="w-full h-full bg-black text-white pb-24 px-[30px] md:px-[60px] lg:px-[140px] md:pb-36 lg:pb-44 xl:pb-56">
+    <div className="w-full h-full bg-black text-white pb-24 px-[16px] md:px-[30px] lg:px-[140px] md:pb-36 lg:pb-44 xl:pb-56">
       <SubHeader page="Contact" />
       <div className="relative flex flex-col gap-[16vw] w-full lg:flex-row lg:gap-0 lg:justify-between">
         <ContactInfoSection />
