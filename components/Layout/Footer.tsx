@@ -30,7 +30,7 @@ export default function Footer() {
   };
 
   return (
-    <div className="bg-black w-full max-h-[440px] h-[230px] relative z-30 border-t border-gray-40 px-[30px] py-[50px] md:px-[60px] md:py-[70px] md:h-[36vh] lg:px-[140px]">
+    <div className="bg-black w-full max-h-[440px] h-[230px] relative z-30 border-t border-gray-40 px-[16px] py-[36px] md:px-[30px] md:py-[48px] md:h-[36vh] lg:py-[70px] lg:px-[70px] xl:px-[140px]">
       <div className="flex w-full h-full relative flex-col gap-1 pr-20 md:flex-row md:gap-[12vw]">
         <div className={footerSectionDivStyle}>
           <div className="body2 flex flex-col text-gray-20">

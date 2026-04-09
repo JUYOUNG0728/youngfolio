@@ -19,7 +19,7 @@ type ProjectSectionProps = {
 
 export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
   const [projectHover, setProjectHover] = useState<boolean[]>(
-    Array(5).fill(false)
+    Array(5).fill(false),
   );
   const [projectProgress, setProjectProgress] = useState<number>(0);
 
@@ -37,13 +37,13 @@ export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
 
   const handleProjectHover = (index: number) => {
     setProjectHover((prev) =>
-      prev.map((item, i) => (i === index ? true : item))
+      prev.map((item, i) => (i === index ? true : item)),
     );
   };
 
   const handleProjectUnHover = (index: number) => {
     setProjectHover((prev) =>
-      prev.map((item, i) => (i === index ? false : item))
+      prev.map((item, i) => (i === index ? false : item)),
     );
   };
 
@@ -104,7 +104,7 @@ export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
         {projectList.map((project, index) => (
           <div
             key={project.id}
-            className="w-full h-[80vh] bg-white flex-shrink-0 relative cursor-pointer lg:w-[30vw] lg:h-[76vh]"
+            className="w-full h-[50vh] bg-white flex-shrink-0 relative cursor-pointer lg:w-[30vw] lg:h-[76vh]"
             onMouseOver={() => handleProjectHover(index)}
             onMouseOut={() => handleProjectUnHover(index)}
             onClick={() => (window.location.href = project.link)}

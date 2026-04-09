@@ -40,7 +40,7 @@ export default function Header() {
 
   return (
     <div>
-      <div className="absolute z-50 top-0 px-[30px] w-full pointer-events-none h-[120px] md:px-[70px] xl:h-[140px]">
+      <div className="absolute z-50 top-0 px-[16px] w-full pointer-events-none h-20 md:h-[100px] md:px-[30px] lg:px-[70px] lg:h-[120px] xl:h-[140px]">
         <div className="flex items-center justify-between w-full h-full pointer-events-auto">
           <Logo
             onClick={handleLogoClick}
@@ -50,7 +50,7 @@ export default function Header() {
             height={logoSize.height}
           />
           <button
-            className="bg-white rounded-full p-4 flex justify-center items-center fixed top-7 right-[30px] md:right-[70px] md:p-5 xl:p-6"
+            className="bg-white rounded-full p-4 flex justify-center items-center fixed right-[16px] md:right-[30px] md:p-5 lg:right-[70px] xl:p-6"
             onClick={toggleMenu}
           >
             {!isMenuOpen ? (
