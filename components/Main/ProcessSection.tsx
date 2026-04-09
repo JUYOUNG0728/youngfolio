@@ -78,7 +78,7 @@ export default function ProcessSection({ sectionStyle }: ProcessSectionProps) {
       />
       <div className="w-full flex flex-col gap-[8vw] items-center justify-center md:gap-[6vw] lg:flex-row lg:gap-[12vw]">
         <TextCircle />
-        <div className="flex flex-col gap-10 text-center text-wrap px-[30px] md:gap-14 lg:text-left lg:px-0 lg:gap-16">
+        <div className="flex flex-col gap-10 text-center text-wrap px-[16px] md:px-[30px] md:gap-14 lg:text-left lg:px-0 lg:gap-16">
           <h1 className="body1 font-medium">
             Experiences beyond technology,
             <br />
@@ -94,7 +94,7 @@ export default function ProcessSection({ sectionStyle }: ProcessSectionProps) {
       </div>
       <p
         ref={processRef}
-        className="body1 text-center mt-[12vh] px-[30px] md:px-[60px] md:mt-[16vh] lg::px-[140px]"
+        className={`body1 text-center mt-[12vh] md:mt-[16vh] ${horizontalPaddingStyle}`}
       >
         <span
           style={{

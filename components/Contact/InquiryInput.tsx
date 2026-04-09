@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Image from "next/image";
 
 import useScreenWidth from "@/utils/useScreenWidth";
 import Plus from "@/components/Common/Plus";
