@@ -94,7 +94,7 @@ export default function InquiryInput({ handleSend }: InquiryInputProps) {
       )}
       <div className="flex items-center justify-center gap-4 relative">
         <input
-          className="w-full bg-gray-10 rounded-full placeholder-gray-50 body4 pl-7 pr-40 py-3 text-black xl:pl-[38px] xl:pr-[200px] focus:outline-none xl:py-4"
+          className="w-full bg-gray-10 rounded-full placeholder-gray-50 body4 pl-6 pr-40 py-3 text-black lg:pl-8 xl:pl-10 xl:pr-[200px] focus:outline-none xl:py-4"
           placeholder="메시지를 입력해주세요."
           value={message}
           onChange={(e) => setMessage(e.target.value)}

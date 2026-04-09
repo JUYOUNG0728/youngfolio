@@ -17,7 +17,7 @@ export default function SearchBar({
   return (
     <div className="relative">
       <input
-        className="min-w-[300px] w-full h-[50px] bg-gray-10 rounded-full mb-4 px-8 text-black body4 placeholder-gray-40 md:w-[24vw] lg:h-14 focus:outline-none xl:h-16 xl:px-10"
+        className="min-w-[300px] w-full h-[50px] bg-gray-10 rounded-full mb-4 px-6 text-black body4 placeholder-gray-40 md:w-[24vw] lg:px-8 lg:h-14 focus:outline-none xl:h-16 xl:px-10"
         placeholder="프로젝트를 검색해보세요."
         value={searchTerm}
         onChange={handleSearch}
@@ -27,7 +27,7 @@ export default function SearchBar({
         alt="검색 아이콘"
         width={iconSize}
         height={iconSize}
-        className="absolute right-8 top-3.5 lg:top-[18px]"
+        className="absolute right-6 top-3.5 lg:top-[18px] lg:right-8 xl:right-10"
       />
     </div>
   );
