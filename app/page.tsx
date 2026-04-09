@@ -12,8 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
   const sectionStyle = {
-    horizontalPaddingStyle:
-      "px-[16px] md:px-[30px] lg:px-[120px] xl:px-[140px]",
+    horizontalPaddingStyle: "px-[16px] md:px-[30px] lg:px-[140px]",
     verticalPaddingStyle: "py-24 md:py-36 lg:py-44 xl:py-56",
   };
 

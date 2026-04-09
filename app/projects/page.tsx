@@ -20,14 +20,14 @@ export default function ProjectsPage() {
     return projects.filter(
       (project) =>
         project.title.toUpperCase().includes(searchTerm.toUpperCase()) ||
-        project.description.toUpperCase().includes(searchTerm.toUpperCase())
+        project.description.toUpperCase().includes(searchTerm.toUpperCase()),
     );
   }, [searchTerm, projects]);
 
   const startIndex = (activePage - 1) * itemsPerPage;
   const filteredCurrentProjects = filteredProjects.slice(
     startIndex,
-    startIndex + itemsPerPage
+    startIndex + itemsPerPage,
   );
 
   const handlePageChange = (pageNumber: number) => {
@@ -42,7 +42,7 @@ export default function ProjectsPage() {
   return (
     <div className="w-full text-white pb-24 md:pb-36 lg:pb-44 xl:pb-56">
       <ProjectsHeader searchTerm={searchTerm} handleSearch={handleSearch} />
-      <div className="w-full px-[30px] gap-y-12 gap-x-12 grid grid-cols-1 mb-16 md:gap-y-16 md:mb-24 md:grid-cols-2 md:px-[60px] lg:grid-cols-3 lg:gap-y-20 lg:px-[140px] lg:mb-36">
+      <div className="w-full px-[16px] gap-y-12 gap-x-12 grid grid-cols-1 mb-16 md:gap-y-16 md:mb-24 md:grid-cols-2 md:px-[30px] lg:grid-cols-3 lg:gap-y-20 lg:px-[140px] lg:mb-36">
         {filteredCurrentProjects.length > 0 ? (
           filteredCurrentProjects.map((project) => (
             <div key={project.id}>
