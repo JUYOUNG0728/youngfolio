@@ -61,12 +61,12 @@ export default function HobbySection({ sectionStyle }: HobbySectionProps) {
       className={`${sectionStyle.baseStyle} text-black ${sectionStyle.gapStyle}`}
     >
       <span
-        className={`${sectionStyle.tagStyle} bg-yellow-green lg:left-[620px] xl:left-[680px]`}
+        className={`${sectionStyle.tagStyle} bg-light-green lg:left-[620px] xl:left-[680px]`}
       >
         IN DAILY LIFE
       </span>
       <div
-        className={`${sectionStyle.containerStyle} bg-yellow-green flex flex-col`}
+        className={`${sectionStyle.containerStyle} bg-light-green flex flex-col`}
       >
         <h1 className="aboutSectionTitle text-center font-bold">
           <span className="text-black/20">DAILY </span>
