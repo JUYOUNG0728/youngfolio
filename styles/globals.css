@@ -19,7 +19,7 @@
   --marine-blue: #002bc7;
   --navy-blue: #032291;
 
-  --yellow-green: #c6ff00;
+  --light-green: #c6ff00;
   --green: #0c6800;
 
   /* Shadow, Glow */
@@ -362,8 +362,8 @@
   .text-navy-blue {
     color: var(--navy-blue);
   }
-  .text-yellow-green {
-    color: var(--yellow-green);
+  .text-light-green {
+    color: var(--light-green);
   }
   .text-green {
     color: var(--green);
@@ -403,8 +403,8 @@
   .bg-navy-blue {
     background-color: var(--navy-blue);
   }
-  .bg-yellow-green {
-    background-color: var(--yellow-green);
+  .bg-light-green {
+    background-color: var(--light-green);
   }
   .bg-green {
     background-color: var(--green);
@@ -444,8 +444,8 @@
   .border-navy-blue {
     border-color: var(--navy-blue);
   }
-  .border-yellow-green {
-    border-color: var(--yellow-green);
+  .border-light-green {
+    border-color: var(--light-green);
   }
   .border-green {
     border-color: var(--green);
@@ -485,8 +485,8 @@
   .placeholder-navy-blue::placeholder {
     color: var(--navy-blue);
   }
-  .placeholder-yellow-green::placeholder {
-    color: var(--yellow-green);
+  .placeholder-light-green::placeholder {
+    color: var(--light-green);
   }
   .placeholder-green::placeholder {
     color: var(--green);
