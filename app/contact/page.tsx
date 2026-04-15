@@ -54,25 +54,76 @@ export default function ContactPage() {
 
   /* 실시간 메시지 수신 */
   useEffect(() => {
-    const channel = supabase
-      .channel("realtime:messages")
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "messages",
-          filter: `uid=eq.${userUid}`,
-        },
-        (payload) => {
-          const newMessage = payload.new as Message;
-          setMessages((prev) => [...prev, newMessage]);
-        },
-      )
-      .subscribe();
+    if (!userUid) return;
+
+    let channel: any = null;
+    let reconnectTimeout: any = null;
+
+    const subscribe = () => {
+      console.log("Subscribing to realtime...");
+
+      channel = supabase
+        .channel("realtime:messages")
+        .on(
+          "postgres_changes",
+          {
+            event: "*",
+            schema: "public",
+            table: "messages",
+            filter: `uid=eq.${userUid}`,
+          },
+          (payload) => {
+            const newMessage = payload.new as Message;
+
+            setMessages((prev) => {
+              if (prev.some((msg) => msg.id === newMessage.id)) {
+                return prev;
+              }
+              return [...prev, newMessage];
+            });
+          },
+        )
+        .subscribe((status) => {
+          console.log("Realtime status:", status);
+
+          if (status === "SUBSCRIBED" && reconnectTimeout) {
+            clearTimeout(reconnectTimeout);
+            reconnectTimeout = null;
+          }
+
+          if (status === "CHANNEL_ERROR" || status === "CLOSED") {
+            reconnect();
+          }
+        });
+    };
+
+    const reconnect = () => {
+      if (reconnectTimeout) return;
+
+      reconnectTimeout = setTimeout(() => {
+        reconnectTimeout = null;
+
+        if (channel) {
+          supabase.removeChannel(channel);
+          channel = null;
+        }
+
+        subscribe();
+      }, 3000);
+    };
+
+    subscribe();
 
     return () => {
-      supabase.removeChannel(channel);
+      if (channel) {
+        supabase.removeChannel(channel);
+        channel = null;
+      }
+
+      if (reconnectTimeout) {
+        clearTimeout(reconnectTimeout);
+        reconnectTimeout = null;
+      }
     };
   }, [userUid]);
 
