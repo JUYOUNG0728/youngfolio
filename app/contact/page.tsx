@@ -75,11 +75,6 @@ export default function ContactPage() {
         .subscribe(async (status) => {
           console.log("Realtime status:", status);
 
-          if (status === "SUBSCRIBED") {
-            const data = await fetchMessages({ uid: userUid });
-            if (data) setMessages(data);
-          }
-
           if (
             status === "CLOSED" ||
             status === "CHANNEL_ERROR" ||
