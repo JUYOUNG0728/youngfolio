@@ -56,13 +56,8 @@ export default function ContactPage() {
   useEffect(() => {
     if (!userUid) return;
 
-    let channel: any = null;
-    let reconnectTimeout: any = null;
-
     const subscribe = () => {
-      console.log("Subscribing to realtime...");
-
-      channel = supabase
+      supabase
         .channel("realtime:messages")
         .on(
           "postgres_changes",
@@ -74,57 +69,28 @@ export default function ContactPage() {
           },
           (payload) => {
             const newMessage = payload.new as Message;
-
-            setMessages((prev) => {
-              if (prev.some((msg) => msg.id === newMessage.id)) {
-                return prev;
-              }
-              return [...prev, newMessage];
-            });
+            setMessages((prev) => [...prev, newMessage]);
           },
         )
-        .subscribe((status) => {
+        .subscribe(async (status) => {
           console.log("Realtime status:", status);
 
-          if (status === "SUBSCRIBED" && reconnectTimeout) {
-            clearTimeout(reconnectTimeout);
-            reconnectTimeout = null;
+          if (status === "SUBSCRIBED") {
+            const data = await fetchMessages({ uid: userUid });
+            if (data) setMessages(data);
           }
 
-          if (status === "CHANNEL_ERROR" || status === "CLOSED") {
-            reconnect();
+          if (
+            status === "CLOSED" ||
+            status === "CHANNEL_ERROR" ||
+            status === "TIMED_OUT"
+          ) {
+            console.log("연결 중");
           }
         });
     };
 
-    const reconnect = () => {
-      if (reconnectTimeout) return;
-
-      reconnectTimeout = setTimeout(() => {
-        reconnectTimeout = null;
-
-        if (channel) {
-          supabase.removeChannel(channel);
-          channel = null;
-        }
-
-        subscribe();
-      }, 3000);
-    };
-
     subscribe();
-
-    return () => {
-      if (channel) {
-        supabase.removeChannel(channel);
-        channel = null;
-      }
-
-      if (reconnectTimeout) {
-        clearTimeout(reconnectTimeout);
-        reconnectTimeout = null;
-      }
-    };
   }, [userUid]);
 
   return (
