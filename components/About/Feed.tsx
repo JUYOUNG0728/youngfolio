@@ -33,8 +33,11 @@ export default function Feed({ hobby }: FeedProps) {
         <span className="body3 font-semibold">undojinx</span>
       </div>
       <div className="flex flex-col gap-2 lg:flex-row">
-        {hobby.links.map((link) => (
-          <div className="relative w-full h-[50vh] md:h-[70vh] lg:h-[50vh] lg:w-[24vw]">
+        {hobby.links.map((link, index) => (
+          <div
+            key={index}
+            className="relative w-full h-[50vh] md:h-[70vh] lg:h-[50vh] lg:w-[24vw]"
+          >
             {hobby.video ? (
               <video
                 src={link}
