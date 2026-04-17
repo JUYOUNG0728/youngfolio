@@ -56,9 +56,12 @@ export default function ContactPage() {
   useEffect(() => {
     if (!userUid) return;
 
-    const subscribe = () => {
-      supabase
-        .channel("realtime:messages")
+    let channel: any;
+    let retryTimer: NodeJS.Timeout;
+
+    const connect = () => {
+      channel = supabase
+        .channel(`realtime:messages:${userUid}`)
         .on(
           "postgres_changes",
           {
@@ -72,7 +75,7 @@ export default function ContactPage() {
             setMessages((prev) => [...prev, newMessage]);
           },
         )
-        .subscribe(async (status) => {
+        .subscribe((status) => {
           console.log("Realtime status:", status);
 
           if (
@@ -80,12 +83,20 @@ export default function ContactPage() {
             status === "CHANNEL_ERROR" ||
             status === "TIMED_OUT"
           ) {
-            console.log("연결 중");
+            retryTimer = setTimeout(() => {
+              supabase.removeChannel(channel);
+              connect();
+            }, 3000);
           }
         });
     };
 
-    subscribe();
+    connect();
+
+    return () => {
+      clearTimeout(retryTimer);
+      supabase.removeChannel(channel);
+    };
   }, [userUid]);
 
   return (

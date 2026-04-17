@@ -41,7 +41,7 @@ export default function InquiryChat({
           });
 
           return (
-            <div key={msg.id} className="flex flex-col mt-4">
+            <div key={index} className="flex flex-col mt-4">
               {showDate && (
                 <div className="messageBubble">
                   {formatDateHeader(new Date(msg.timestamp))}

@@ -26,14 +26,14 @@ export default function Close({
       <path
         d="M4.95801 5.22229L22.9998 23.264"
         stroke={fill}
-        stroke-width="2.5"
-        stroke-linecap="square"
+        strokeWidth="2.5"
+        strokeLinecap="square"
       />
       <path
         d="M4.95801 23.0131L22.9998 4.97132"
         stroke={fill}
-        stroke-width="2.5"
-        stroke-linecap="square"
+        strokeWidth="2.5"
+        strokeLinecap="square"
       />
     </svg>
   );
