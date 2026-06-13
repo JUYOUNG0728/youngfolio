@@ -33,7 +33,7 @@ export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
     (screenWidth / 2 - screenWidth * 0.15 - (screenWidth >= 768 ? 140 : 30)) *
     2;
 
-  const projectList = projects.slice(0, 5);
+  const projectList = projects.slice(1, 5);
 
   const handleProjectHover = (index: number) => {
     setProjectHover((prev) =>
