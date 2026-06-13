@@ -63,11 +63,11 @@ export default function PersonalitySection({
   return (
     <div className={`${baseStyle} ${sectionStyle.gapStyle}`}>
       <span
-        className={`${tagStyle} bg-light-blue lg:left-[390px] xl:left-[420px]`}
+        className={`${tagStyle} bg-blue-10 lg:left-[390px] xl:left-[420px]`}
       >
         PERSONALITY
       </span>
-      <div className={`${containerStyle} bg-light-blue`}>
+      <div className={`${containerStyle} bg-blue-10`}>
         <h1 className="aboutSectionTitle text-center font-semibold">
           <span className="text-white/20">MBTI IS? </span>
           <span>INTP</span>
