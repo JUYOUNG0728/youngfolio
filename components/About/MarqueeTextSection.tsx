@@ -59,7 +59,7 @@ export default function MarqueeTextSection() {
   return (
     <div>
       <span
-        className={`w-screen bg-white text-navy-blue ${containerStyle}`}
+        className={`w-screen bg-white text-blue-30 ${containerStyle}`}
         ref={marquee1Ref}
       >
         <ul className={marqueeTextStyle}>
@@ -74,7 +74,7 @@ export default function MarqueeTextSection() {
         </ul>
       </span>
       <span
-        className={`w-screen bg-navy-blue text-white ${containerStyle}`}
+        className={`w-screen bg-blue-30 text-white ${containerStyle}`}
         ref={marquee2Ref}
       >
         <ul className={marqueeTextStyle}>

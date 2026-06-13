@@ -76,8 +76,6 @@ export default function ContactPage() {
           },
         )
         .subscribe((status) => {
-          console.log("Realtime status:", status);
-
           if (
             status === "CLOSED" ||
             status === "CHANNEL_ERROR" ||

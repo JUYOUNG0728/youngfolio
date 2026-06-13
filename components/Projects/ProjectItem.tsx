@@ -10,14 +10,10 @@ type ProjectItemProps = {
 };
 
 export default function ProjectItem({ project }: ProjectItemProps) {
-  const handleClick = (link: string) => {
-    window.open(`https://${link}`, "_blank");
-  };
-
   return (
     <div
       className="flex flex-col cursor-pointer gap-8 lg:gap-11"
-      onClick={() => handleClick(project.link)}
+      onClick={() => window.open(project.link, "_blank")}
     >
       <div className="w-full h-[40vh] relative">
         <Image

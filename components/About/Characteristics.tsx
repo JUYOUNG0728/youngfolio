@@ -11,7 +11,7 @@ export default function Characteristics({
 }: CharacteristicsProps) {
   return (
     <div
-      className="group bg-white rounded-xl flex w-full items-center gap-8 relative p-6 lg:px-10 lg:py-9 xl:gap-12 xl:px-12 xl:py-10 hover:scale-105 hover:bg-marine-blue hover:glow-1"
+      className="group bg-white rounded-xl flex w-full items-center gap-8 relative p-6 lg:px-10 lg:py-9 xl:gap-12 xl:px-12 xl:py-10 hover:scale-105 hover:bg-blue-20 hover:glow-1"
       style={{ transition: "transform 0.3s ease" }}
     >
       {index < 2 && (

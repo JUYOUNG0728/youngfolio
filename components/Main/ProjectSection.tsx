@@ -104,10 +104,10 @@ export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
         {projectList.map((project, index) => (
           <div
             key={project.id}
-            className="w-full h-[50vh] bg-white flex-shrink-0 relative cursor-pointer lg:w-[30vw] lg:h-[76vh]"
+            className="w-full h-[50vh] rounded-xl overflow-hidden bg-white flex-shrink-0 relative cursor-pointer lg:w-[30vw] lg:h-[76vh]"
             onMouseOver={() => handleProjectHover(index)}
             onMouseOut={() => handleProjectUnHover(index)}
-            onClick={() => (window.location.href = project.link)}
+            onClick={() => window.open(project.link, "_blank")}
           >
             <Image
               src={project.posterSrc}
@@ -122,12 +122,12 @@ export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
               </span>
             </div>
             <div
-              className={`absolute inset-0  bg-opacity-50 flex flex-col justify-center items-center text-center px-4 bg-black/20 pointer-events-none select-none ${
+              className={`absolute inset-0 bg-opacity-50 flex flex-col justify-center items-center text-center px-4 bg-black/20 pointer-events-none select-none ${
                 projectHover[index] ? "opacity-100" : "opacity-0"
               }`}
               style={{ backdropFilter: "blur(10px)", transition: "0.5s" }}
             >
-              <div className="relative w-[70vw] h-[44vw] md:w-[60vw] md:h-[36vw] lg:w-[22vw] lg:h-[14vw]">
+              <div className="relative rounded-md overflow-hidden w-[70vw] h-[44vw] md:w-[60vw] md:h-[36vw] lg:w-[22vw] lg:h-[14vw]">
                 <Image
                   src={project.imageSrc}
                   alt={`${project.title} 프로젝트 썸네일`}

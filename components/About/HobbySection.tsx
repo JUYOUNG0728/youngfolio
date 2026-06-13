@@ -61,12 +61,12 @@ export default function HobbySection({ sectionStyle }: HobbySectionProps) {
       className={`${sectionStyle.baseStyle} text-black ${sectionStyle.gapStyle}`}
     >
       <span
-        className={`${sectionStyle.tagStyle} bg-light-green lg:left-[620px] xl:left-[680px]`}
+        className={`${sectionStyle.tagStyle} bg-green-10 lg:left-[620px] xl:left-[680px]`}
       >
         IN DAILY LIFE
       </span>
       <div
-        className={`${sectionStyle.containerStyle} bg-light-green flex flex-col`}
+        className={`${sectionStyle.containerStyle} bg-green-10 flex flex-col`}
       >
         <h1 className="aboutSectionTitle text-center font-bold">
           <span className="text-black/20">DAILY </span>
@@ -82,7 +82,7 @@ export default function HobbySection({ sectionStyle }: HobbySectionProps) {
             >
               <div className="flex flex-col gap-6 md:gap-8 lg:gap-12 xl:gap-14">
                 <div className="flex flex-col gap-2 md:gap-4 lg:gap-6">
-                  <span className="h3 text-green">#{index + 1}</span>
+                  <span className="h3 text-green-20">#{index + 1}</span>
                   <div className="flex gap-3 items-center md:gap-4 lg:gap-6">
                     <h2 className="h2 text-nowrap">{hobby.name}</h2>
                     <Image
