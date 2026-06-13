@@ -13,7 +13,7 @@ export const projects = [
     description: "Mobile-Focused Portal Service",
     imageSrc: "/images/project/thumbnail/img-project-thumbnail-kakaoweb.png",
     posterSrc: "/images/project/poster/img-poster-kakaoweb.png",
-    link: "https://drive.google.com/file/d/1gwtDuenzu8D2NiGge_KKOAaScRVzp6BD/view?usp=sharing",
+    link: "https://drive.google.com/file/d/1WAx9htcOw3PVl604eygcwSznVyFf3ap5/view?usp=sharing",
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ export const projects = [
     description: "Beauty Brand Clio Website Renewal",
     imageSrc: "/images/project/thumbnail/img-project-thumbnail-clio.png",
     posterSrc: "/images/project/poster/img-poster-clio.png",
-    link: "https://drive.google.com/file/d/1hZnAL1ThrD4M4_8n3YDCc_LRDBXM_rbO/view?usp=drive_link",
+    link: "https://drive.google.com/file/d/1jluMhKPI_CfCDAf1VQbMW7uvUqj-u8Pd/view?usp=sharing",
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ export const projects = [
     description: "Learning Competition App",
     imageSrc: "/images/project/thumbnail/img-project-thumbnail-onstudy.png",
     posterSrc: "/images/project/poster/img-poster-onstudy.png",
-    link: "https://drive.google.com/file/d/1So_elZKSVhmvoxk_HnBcDHrBwM0QeJvW/view?usp=sharing",
+    link: "https://drive.google.com/file/d/1N9jvywHUKxmgtg3MOjy6ua-OwRjZLsZY/view?usp=sharing",
   },
   {
     id: 5,
