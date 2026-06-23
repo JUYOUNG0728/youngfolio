@@ -75,7 +75,12 @@ export default function ContactPage() {
             setMessages((prev) => [...prev, newMessage]);
           },
         )
-        .subscribe((status) => {
+        .subscribe(async (status) => {
+          if (status === "SUBSCRIBED") {
+            const data = await fetchMessages({ uid: userUid });
+            setMessages(data);
+          }
+
           if (
             status === "CLOSED" ||
             status === "CHANNEL_ERROR" ||
