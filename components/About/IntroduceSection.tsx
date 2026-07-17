@@ -39,7 +39,8 @@ export default function IntroduceSection({
 
   const certificate = [
     "GTQ그래픽기술자격 1급",
-    "컴퓨터그래픽기능사",
+    "컴퓨터그래픽스운용기능사",
+    "Google Analytics Certification (GA4)",
     "코드잇 스프린트 프론트엔드 11기 수료",
   ];
 
