@@ -13,7 +13,7 @@ export const projects = [
     description: "Mobile-Focused Portal Service",
     imageSrc: "/images/project/thumbnail/img-project-thumbnail-kakaoweb.png",
     posterSrc: "/images/project/poster/img-poster-kakaoweb.png",
-    link: "https://drive.google.com/file/d/1MyZnX6fQIZHBvRD07j220cIeX3Ci-E6M/view?usp=sharing",
+    link: "https://drive.google.com/file/d/1eQus0urQHvwqHkZ2ec6mwZfKeF-CSg8d/view?usp=sharing",
   },
   {
     id: 3,
