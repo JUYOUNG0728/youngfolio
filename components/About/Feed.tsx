@@ -24,13 +24,13 @@ export default function Feed({ hobby }: FeedProps) {
       <div className="flex gap-3 items-center ml-2">
         <div className="w-10 h-10 rounded-full relative">
           <Image
-            src="/images/img-about-me.jpg"
+            src="/images/img-about-me-3.png"
             alt="프로필 이미지"
             fill
             className="rounded-full object-cover"
           />
         </div>
-        <span className="body3 font-semibold">undojinx</span>
+        <span className="body3 font-semibold">Juyoung</span>
       </div>
       <div className="flex flex-col gap-2 lg:flex-row">
         {hobby.links.map((link, index) => (
