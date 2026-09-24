@@ -116,7 +116,7 @@ export default function IntroduceSection({
         <div className="mt-12 flex flex-col md:mt-20 lg:mt-40 md:flex-row md:gap-x-20 md:flex-wrap lg:flex-nowrap lg:gap-0 lg:justify-between xl:mr-8">
           <div className="w-full h-[30vh] bg-white relative rounded-xl overflow-hidden md:h-[70vh] md:w-[40vw] lg:w-[24vw] xl:h-[60vh]">
             <Image
-              src="/images/img-about-me.jpg"
+              src="/images/img-about-me-2.jpg"
               alt="프로필 사진"
               fill
               className="w-full h-full object-cover object-[0%_30%] lg:object-center"

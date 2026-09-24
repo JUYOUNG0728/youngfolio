@@ -47,7 +47,7 @@ export default function AboutMeSection({ sectionStyle }: AboutMeSectionProps) {
           </span>
           <div className="inline-block w-20 h-[46px] md:w-32 md:h-[68px] lg:w-[170px] lg:h-[94px] relative xl:w-[232px] xl:h-[116px]">
             <Image
-              src="/images/img-about-me.jpg"
+              src="/images/img-about-me-1.jpg"
               alt="ABOUT ME 이미지"
               fill
               className="object-cover object-[50%_30%]"
