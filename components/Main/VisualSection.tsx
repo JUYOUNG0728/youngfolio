@@ -20,7 +20,7 @@ export default function VisualSection(_props: VisualSectionProps) {
   return (
     <section
       ref={heroRef}
-      className="relative h-screen w-full overflow-hidden bg-[#111] text-white"
+      className="relative h-screen w-full overflow-hidden bg-black text-white"
     >
       <div className="pointer-events-none absolute inset-0 z-[1]">
         <h2
@@ -32,7 +32,7 @@ export default function VisualSection(_props: VisualSectionProps) {
               data-hero-refract-text
               className="block whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,160px)]"
             >
-              EVERYDAY
+              BEYOND
             </span>
           </span>
           <span className="block" data-hero-refract>
@@ -40,36 +40,36 @@ export default function VisualSection(_props: VisualSectionProps) {
               data-hero-refract-text
               className="block whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,160px)]"
             >
-              OBJECTS
+              ORDINARY
             </span>
           </span>
         </h2>
 
-        <div className="absolute bottom-5 right-5 flex max-w-[min(858px,52vw)] flex-col items-end gap-4 text-right md:bottom-6 md:right-[30px] lg:right-5">
+        <div className="absolute bottom-5 right-5 flex flex-col items-end gap-4 text-right md:bottom-6 md:right-[30px] lg:right-5">
           <p
-            className="max-w-[376px] text-[clamp(12px,0.94vw,18px)] font-normal leading-[1.4]"
+            className="text-[clamp(12px,0.94vw,18px)] font-normal leading-[1.4]"
             aria-label="A collective of Makers creating categories the world has never seen"
           >
             <span className="block" data-hero-refract>
               <span data-hero-refract-text className="block whitespace-nowrap">
-                A COLLECTIVE OF MAKERS CREATING
+                WITH EVERY STEP FORWARD,
               </span>
             </span>
             <span className="block" data-hero-refract>
               <span data-hero-refract-text className="block whitespace-nowrap">
-                CATEGORIES THE WORLD HAS NEVER SEEN
+                I EVOLVE, INNOVATE, AND CREATE SOMETHING NEW.
               </span>
             </span>
           </p>
           <div className="whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,160px)]">
             <span className="block" data-hero-refract>
               <span data-hero-refract-text className="block">
-                REDEFINED
+                DARE TO
               </span>
             </span>
             <span className="block" data-hero-refract>
               <span data-hero-refract-text className="block">
-                BY MAKERS
+                EVOLVE
               </span>
             </span>
           </div>
@@ -83,7 +83,7 @@ export default function VisualSection(_props: VisualSectionProps) {
         className="absolute bottom-5 left-5 z-[3] text-white md:bottom-8 md:left-[30px] lg:left-5"
         aria-label="Scroll down"
         onClick={() => {
-          heroRef.current?.parentElement?.nextElementSibling?.scrollIntoView({
+          heroRef.current?.nextElementSibling?.scrollIntoView({
             behavior: "smooth",
           });
         }}
