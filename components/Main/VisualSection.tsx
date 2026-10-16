@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import dynamic from "next/dynamic";
 
-const HeroGlassY = dynamic(() => import("@/components/Main/HeroGlassY"), {
+const HeroGlass = dynamic(() => import("@/components/Main/HeroGlass"), {
   ssr: false,
 });
 
@@ -30,7 +30,7 @@ export default function VisualSection(_props: VisualSectionProps) {
           <span className="block" data-hero-refract>
             <span
               data-hero-refract-text
-              className="block whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,160px)]"
+              className="block whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,180px)]"
             >
               BEYOND
             </span>
@@ -38,7 +38,7 @@ export default function VisualSection(_props: VisualSectionProps) {
           <span className="block" data-hero-refract>
             <span
               data-hero-refract-text
-              className="block whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,160px)]"
+              className="block whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,180px)]"
             >
               ORDINARY
             </span>
@@ -46,6 +46,21 @@ export default function VisualSection(_props: VisualSectionProps) {
         </h2>
 
         <div className="absolute bottom-5 right-5 flex flex-col items-end gap-4 text-right md:bottom-6 md:right-[30px] lg:right-5">
+          <div className="relative z-[3] text-white pb-4 md:pb-8 lg:pb-12">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="100"
+              height="100"
+              viewBox="0 0 100 100"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M54.9998 80.86L85.3548 50.505L92.4248 57.575L49.9998 100L46.4648 96.465L7.57481 57.575L14.6448 50.505L44.9998 80.86L44.9998 6.5036e-06L54.9998 7.37783e-06L54.9998 80.86Z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
           <p
             className="text-[clamp(12px,0.94vw,18px)] font-normal leading-[1.4]"
             aria-label="A collective of Makers creating categories the world has never seen"
@@ -61,7 +76,7 @@ export default function VisualSection(_props: VisualSectionProps) {
               </span>
             </span>
           </p>
-          <div className="whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,160px)]">
+          <div className="whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,180px)]">
             <span className="block" data-hero-refract>
               <span data-hero-refract-text className="block">
                 DARE TO
@@ -76,32 +91,16 @@ export default function VisualSection(_props: VisualSectionProps) {
         </div>
       </div>
 
-      <HeroGlassY heroRef={heroRef} />
+      <HeroGlass heroRef={heroRef} />
 
-      <button
-        type="button"
-        className="absolute bottom-5 left-5 z-[3] text-white md:bottom-8 md:left-[30px] lg:left-5"
-        aria-label="Scroll down"
-        onClick={() => {
-          heroRef.current?.nextElementSibling?.scrollIntoView({
-            behavior: "smooth",
-          });
-        }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="100"
-          height="100"
-          viewBox="0 0 100 100"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M54.9998 80.86L85.3548 50.505L92.4248 57.575L49.9998 100L46.4648 96.465L7.57481 57.575L14.6448 50.505L44.9998 80.86L44.9998 6.5036e-06L54.9998 7.37783e-06L54.9998 80.86Z"
-            fill="currentColor"
-          />
-        </svg>
-      </button>
+      <div className="text-[clamp(16px,0.94vw,20px)] hidden gap-3 absolute bottom-5 left-5 z-[3] text-white md:grid md:grid-cols-2 md:bottom-8 md:left-[30px] lg:left-5">
+        <span className="border border-white px-6 py-4 rounded-full">
+          DESIGNER JUYOUNG
+        </span>
+        <span className="border border-white px-6 py-4 rounded-full">
+          PORTFOLIO WEBSITE
+        </span>
+      </div>
     </section>
   );
 }

@@ -86,7 +86,7 @@ export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
 
   return (
     <section
-      className={`relative bg-black/20 backdrop-blur-xl flex flex-col justify-between py-24 text-white overflow-x-hidden md:py-36 lg:h-screen lg:py-[7vh] ${horizontalPaddingStyle}`}
+      className={`relative bg-black/20 backdrop-blur-lg flex flex-col justify-between py-24 text-white overflow-x-hidden md:py-36 lg:h-screen lg:py-[7vh] ${horizontalPaddingStyle}`}
     >
       <h1 className="h7 !font-medium text-center lg:text-left">
         (SOME PROJECTS)

@@ -18,7 +18,7 @@ const BLOB_RADIUS = 0.5;
 const IDLE_AMPLITUDE = { x: 0.04, y: 0.14, z: 0.016 };
 const BASE_ROTATION = { x: -0.12, y: 0.2, z: 0.015 };
 
-type HeroGlassYProps = {
+type HeroGlassProps = {
   heroRef: React.RefObject<HTMLElement | null>;
 };
 
@@ -237,7 +237,7 @@ function getFittedScale(
   );
 }
 
-function HeroScene({ heroRef }: HeroGlassYProps) {
+function HeroScene({ heroRef }: HeroGlassProps) {
   const { gl, scene, camera, size } = useThree();
   const groupRef = useRef<THREE.Group>(null);
   const backdropRef = useRef<THREE.Mesh>(null);
@@ -597,7 +597,7 @@ function HeroScene({ heroRef }: HeroGlassYProps) {
   );
 }
 
-export default function HeroGlassY({ heroRef }: HeroGlassYProps) {
+export default function HeroGlassY({ heroRef }: HeroGlassProps) {
   return (
     <Canvas
       className="pointer-events-none absolute inset-0 z-[2] h-full w-full"
