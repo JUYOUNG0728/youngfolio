@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-const HERO_BACKGROUND = "#111111";
+const HERO_BACKGROUND = "#000000";
 const CAMERA_FOV = 38;
 const CAMERA_Z = 5.4;
 const BACKDROP_DISTANCE = 2.6;
@@ -12,10 +12,9 @@ const ROTATION_EASING = 0.075;
 const OBJECT_REVEAL_DURATION = 1.2;
 const OBJECT_REVEAL_OVERSHOOT = 1.035;
 const OBJECT_REVEAL_EXPAND_END = 0.76;
-const OBJECT_DEPTH_RATIO = 0.135;
-const OBJECT_BEVEL_RATIO = 0.032;
-const GLASS_THICKNESS = 0.2;
+const GLASS_THICKNESS = 0.55;
 const IDLE_CYCLE_SECONDS = 18;
+const BLOB_RADIUS = 0.5;
 const IDLE_AMPLITUDE = { x: 0.04, y: 0.14, z: 0.016 };
 const BASE_ROTATION = { x: -0.12, y: 0.2, z: 0.015 };
 
@@ -58,87 +57,133 @@ function getObjectRevealScale(progress: number) {
   );
 }
 
-function createYShape() {
-  const shape = new THREE.Shape();
-  const width = 1680;
-  const height = 2270;
-  const thickness = 430;
-
-  const points: Array<[number, number]> = [
-    [0, 0],
-    [thickness, 0],
-    [width / 2, height * 0.4],
-    [width - thickness, 0],
-    [width, 0],
-    [width / 2 + thickness * 0.52, height * 0.5],
-    [width / 2 + thickness * 0.52, height],
-    [width / 2 - thickness * 0.52, height],
-    [width / 2 - thickness * 0.52, height * 0.5],
-  ];
-
-  shape.moveTo(points[0][0], -points[0][1]);
-  for (let index = 1; index < points.length; index += 1) {
-    shape.lineTo(points[index][0], -points[index][1]);
-  }
-  shape.closePath();
-  return shape;
+const BLOB_VERTEX_GLSL = /* glsl */ `
+vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
+vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
+vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+float snoise(vec3 v){
+  const vec2 C=vec2(1.0/6.0,1.0/3.0);
+  const vec4 D=vec4(0.0,0.5,1.0,2.0);
+  vec3 i=floor(v+dot(v,C.yyy));
+  vec3 x0=v-i+dot(i,C.xxx);
+  vec3 g=step(x0.yzx,x0.xyz);
+  vec3 l=1.0-g;
+  vec3 i1=min(g.xyz,l.zxy);
+  vec3 i2=max(g.xyz,l.zxy);
+  vec3 x1=x0-i1+C.xxx;
+  vec3 x2=x0-i2+C.yyy;
+  vec3 x3=x0-D.yyy;
+  i=mod289(i);
+  vec4 p=permute(permute(permute(
+    i.z+vec4(0.0,i1.z,i2.z,1.0))
+    +i.y+vec4(0.0,i1.y,i2.y,1.0))
+    +i.x+vec4(0.0,i1.x,i2.x,1.0));
+  float n_=0.142857142857;
+  vec3 ns=n_*D.wyz-D.xzx;
+  vec4 j=p-49.0*floor(p*ns.z*ns.z);
+  vec4 x_=floor(j*ns.z);
+  vec4 y_=floor(j-7.0*x_);
+  vec4 x=x_*ns.x+ns.yyyy;
+  vec4 y=y_*ns.x+ns.yyyy;
+  vec4 h=1.0-abs(x)-abs(y);
+  vec4 b0=vec4(x.xy,y.xy);
+  vec4 b1=vec4(x.zw,y.zw);
+  vec4 s0=floor(b0)*2.0+1.0;
+  vec4 s1=floor(b1)*2.0+1.0;
+  vec4 sh=-step(h,vec4(0.0));
+  vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;
+  vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+  vec3 p0=vec3(a0.xy,h.x);
+  vec3 p1=vec3(a0.zw,h.y);
+  vec3 p2=vec3(a1.xy,h.z);
+  vec3 p3=vec3(a1.zw,h.w);
+  vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+  p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
+  vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);
+  m=m*m;
+  return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
 }
 
-function createYGeometry() {
-  const shape = createYShape();
-  const shapeBounds = new THREE.Box2().setFromPoints(shape.getPoints(8));
-  const sourceWidth = shapeBounds.max.x - shapeBounds.min.x;
-  const bevel = sourceWidth * OBJECT_BEVEL_RATIO;
-  const geometry = new THREE.ExtrudeGeometry(shape, {
-    depth: sourceWidth * OBJECT_DEPTH_RATIO,
-    curveSegments: 40,
-    bevelEnabled: true,
-    bevelThickness: bevel * 0.9,
-    bevelSize: bevel,
-    bevelOffset: -bevel,
-    bevelSegments: 3,
-  });
+float blobHeight(vec3 n, float t){
+  float spin=t*0.14;
+  float cs=cos(spin);
+  float sn=sin(spin);
+  vec3 spun=normalize(vec3(cs*n.x+sn*n.z,n.y,-sn*n.x+cs*n.z));
+  vec3 warp=vec3(
+    snoise(spun*0.82+vec3(t*0.18,0.35,0.0)),
+    snoise(spun*0.82+vec3(2.1,t*0.14,0.55)),
+    snoise(spun*0.82+vec3(0.3,2.7,t*0.12))
+  );
+  vec3 p=spun*0.8+warp*0.34;
+ float large = snoise(p + vec3(t*0.13, t*0.08, -t*0.1));
+float mid = snoise(p * 1.2 + vec3(-t*0.1, t*0.06, t*0.04));
 
-  geometry.center();
+return large * 0.05 + mid * 0.004;
+}
+
+vec3 blobPoint(vec3 samplePoint, float t){
+  float radius=max(length(samplePoint),1e-4);
+  vec3 n=samplePoint/radius;
+  return n*(radius+blobHeight(n,t));
+}
+
+vec3 blobNormal(vec3 samplePoint, float t){
+  vec3 n=normalize(samplePoint);
+  vec3 helper=abs(n.y)>0.98?vec3(1.0,0.0,0.0):vec3(0.0,1.0,0.0);
+  vec3 tangent=normalize(cross(helper,n));
+  vec3 bitangent=cross(n,tangent);
+  float eps=0.018;
+  vec3 p0=blobPoint(n,t);
+  vec3 p1=blobPoint(normalize(n+tangent*eps),t);
+  vec3 p2=blobPoint(normalize(n+bitangent*eps),t);
+  return normalize(cross(p1-p0,p2-p0));
+}
+`;
+
+function createBlobGeometry() {
+  const geometry = new THREE.SphereGeometry(BLOB_RADIUS, 192, 144);
   geometry.computeBoundingBox();
 
   const geometrySize = new THREE.Vector3();
   geometry.boundingBox?.getSize(geometrySize);
-  const normalizationScale = 1 / Math.max(geometrySize.x, geometrySize.y, 1);
-  geometry.scale(normalizationScale, normalizationScale, normalizationScale);
-  geometry.computeBoundingBox();
-  geometry.boundingBox?.getSize(geometrySize);
+  geometrySize.multiplyScalar(1.14);
 
   return { geometry, geometrySize };
 }
 
 function createGlassEnvironment(renderer: THREE.WebGLRenderer) {
-  const environmentWidth = 64;
-  const environmentHeight = 256;
+  const environmentWidth = 128;
+  const environmentHeight = 128;
   const environmentData = new Uint16Array(
     environmentWidth * environmentHeight * 4,
   );
-  const environmentStrips = [
-    { center: 0.09, width: 0.075, intensity: 44 },
-    { center: 0.26, width: 0.028, intensity: 26 },
-    { center: 0.42, width: 0.016, intensity: 17 },
-    { center: 0.64, width: 0.038, intensity: 10 },
-    { center: 0.9, width: 0.075, intensity: 4 },
+  const environmentLights = [
+    { u: 0.18, v: 0.22, su: 0.11, sv: 0.16, intensity: 14 },
+    { u: 0.52, v: 0.16, su: 0.08, sv: 0.12, intensity: 22 },
+    { u: 0.78, v: 0.36, su: 0.07, sv: 0.18, intensity: 11 },
+    { u: 0.34, v: 0.62, su: 0.16, sv: 0.07, intensity: 7 },
   ];
 
-  const getEnvironmentLuminance = (value: number) => {
-    let luminance = 0.16;
-    for (const strip of environmentStrips) {
-      const distance = Math.abs(value - strip.center) / strip.width;
-      if (distance < 1)
-        luminance += strip.intensity * (1 - distance * distance);
+  const getEnvironmentLuminance = (u: number, v: number) => {
+    let luminance = 0.012;
+    const horizonDistance = (v - 0.46) / 0.1;
+    const horizon = Math.exp(-(horizonDistance * horizonDistance));
+    luminance += horizon * 3.6;
+    for (const light of environmentLights) {
+      let du = Math.abs(u - light.u);
+      du = Math.min(du, 1 - du);
+      const dx = du / light.su;
+      const dy = (v - light.v) / light.sv;
+      luminance += light.intensity * Math.exp(-(dx * dx + dy * dy) * 2.4);
     }
     return luminance;
   };
 
   for (let y = 0; y < environmentHeight; y += 1) {
-    const luminance = getEnvironmentLuminance(1 - y / (environmentHeight - 1));
+    const v = y / (environmentHeight - 1);
     for (let x = 0; x < environmentWidth; x += 1) {
+      const luminance = getEnvironmentLuminance(x / (environmentWidth - 1), v);
       const dataIndex = (y * environmentWidth + x) * 4;
       const halfFloatLuminance = THREE.DataUtils.toHalfFloat(luminance);
       environmentData[dataIndex] = halfFloatLuminance;
@@ -207,31 +252,48 @@ function HeroScene({ heroRef }: HeroGlassYProps) {
   const backdropTextureRef = useRef<THREE.CanvasTexture | null>(null);
   const lastBackdropSize = useRef({ width: 0, height: 0 });
 
-  const { geometry, geometrySize } = useMemo(() => createYGeometry(), []);
+  const { geometry, geometrySize } = useMemo(() => createBlobGeometry(), []);
   geometrySizeRef.current = geometrySize;
+  const blobUniforms = useMemo(() => ({ uTime: { value: 0 } }), []);
 
-  const material = useMemo(
-    () =>
-      new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color("#ffffff"),
-        metalness: 0,
-        reflectivity: 1,
-        iridescence: 0.22,
-        iridescenceIOR: 1.22,
-        iridescenceThicknessRange: [200, 380],
-        transmission: 1,
-        roughness: 0.02,
-        thickness: GLASS_THICKNESS,
-        ior: 1.5,
-        clearcoat: 0.25,
-        clearcoatRoughness: 0.02,
-        attenuationColor: new THREE.Color("#ffffff"),
-        attenuationDistance: 1e4,
-        envMapIntensity: 1.45,
-        specularIntensity: 1,
-      }),
-    [],
-  );
+  const material = useMemo(() => {
+    const glass = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color("#ffffff"),
+      metalness: 0,
+      roughness: 0.35,
+      transmission: 1,
+      thickness: GLASS_THICKNESS,
+      ior: 1.5,
+      clearcoat: 0.1,
+      clearcoatRoughness: 0.08,
+      attenuationColor: new THREE.Color("#ffffff"),
+      attenuationDistance: 1e6,
+      envMapIntensity: 1.15,
+      specularIntensity: 1,
+      transparent: true,
+      opacity: 0.8,
+    });
+
+    glass.customProgramCacheKey = () => "hero-liquid-blob-v4";
+    glass.onBeforeCompile = (shader) => {
+      shader.uniforms.uTime = blobUniforms.uTime;
+      shader.vertexShader = shader.vertexShader
+        .replace(
+          "#include <common>",
+          `#include <common>\n${BLOB_VERTEX_GLSL}\nuniform float uTime;\n`,
+        )
+        .replace(
+          "#include <beginnormal_vertex>",
+          `vec3 objectNormal = blobNormal(position, uTime);\n#ifdef USE_TANGENT\n\tvec3 objectTangent = vec3( tangent.xyz );\n#endif`,
+        )
+        .replace(
+          "#include <begin_vertex>",
+          "vec3 transformed = blobPoint(position, uTime);",
+        );
+    };
+
+    return glass;
+  }, [blobUniforms]);
 
   useEffect(() => {
     const environmentRenderTarget = createGlassEnvironment(gl);
@@ -434,6 +496,7 @@ function HeroScene({ heroRef }: HeroGlassYProps) {
       "(hover: hover) and (pointer: fine)",
     ).matches;
     const deltaSeconds = Math.min(Math.max(state.clock.getDelta(), 0), 0.05);
+    blobUniforms.uTime.value = reducedMotion ? 1.15 : state.clock.elapsedTime;
 
     if (reducedMotion) {
       currentRotation.current = { ...BASE_ROTATION };
@@ -507,6 +570,8 @@ function HeroScene({ heroRef }: HeroGlassYProps) {
 
   return (
     <>
+      <directionalLight position={[4.2, 3.4, 6]} intensity={0.9} />
+      <directionalLight position={[-4.5, -1.2, 3.5]} intensity={0.22} />
       <mesh
         ref={backdropRef}
         position={[0, 0, -BACKDROP_DISTANCE]}
