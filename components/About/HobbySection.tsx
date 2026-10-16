@@ -42,11 +42,11 @@ const hobbyList = [
     name: "BICYCLE",
     tags: [
       "카카오바이크 같은 전기자전거를 타요.",
-      "가볍게 바람 쐬러 나갈 때 집 앞에 있는 탄천에서 타요.",
-      "예전에 출퇴근할 때도 항상 타고 다녔어요.",
+      "가볍게 바람 쐬러 나갈 때나 어디 다녀올 때 종종 타요.",
+      "봄에는 자전거를 타고 꽃 사진을 찍으러 다녀요.",
     ],
     video: false,
-    links: ["/images/img-bicycle1.png", "/images/img-bicycle2.png"],
+    links: ["/images/img-bicycle1.png", "/images/img-bicycle2.jpg"],
   },
 ];
 

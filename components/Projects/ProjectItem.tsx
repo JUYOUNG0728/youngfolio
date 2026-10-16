@@ -12,7 +12,7 @@ type ProjectItemProps = {
 export default function ProjectItem({ project }: ProjectItemProps) {
   return (
     <div
-      className="flex flex-col cursor-pointer gap-8 lg:gap-11"
+      className="flex flex-col cursor-pointer gap-6 lg:gap-8"
       onClick={() => window.open(project.link, "_blank")}
     >
       <div className="w-full h-[40vh] relative">
@@ -23,9 +23,9 @@ export default function ProjectItem({ project }: ProjectItemProps) {
           className="object-cover border border-gray-40 rounded-xl"
         />
       </div>
-      <div className="flex flex-col gap-4 lg:gap-5">
-        <h2 className="h5">{project.title}</h2>
-        <p className="body5">{project.description}</p>
+      <div className="flex flex-col gap-3 lg:gap-4">
+        <h2 className="h6">{project.title}</h2>
+        <p className="text-sm">{project.description}</p>
       </div>
     </div>
   );

@@ -86,14 +86,8 @@ export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
 
   return (
     <section
-      className={`relative bg-black flex flex-col justify-between py-24 text-white overflow-x-hidden md:py-36 lg:h-screen lg:py-[7vh] ${horizontalPaddingStyle}`}
+      className={`relative bg-black/20 backdrop-blur-xl flex flex-col justify-between py-24 text-white overflow-x-hidden md:py-36 lg:h-screen lg:py-[7vh] ${horizontalPaddingStyle}`}
     >
-      <Image
-        src="/images/img-project-background.jpg"
-        alt="배경 이미지"
-        fill
-        className="object-cover opacity-50 z-[-1]"
-      />
       <h1 className="h7 !font-medium text-center lg:text-left">
         (SOME PROJECTS)
       </h1>
