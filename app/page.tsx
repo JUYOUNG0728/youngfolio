@@ -17,11 +17,15 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full">
-      <VisualSection sectionStyle={sectionStyle} />
-      <ProcessSection sectionStyle={sectionStyle} />
-      <ProjectSection sectionStyle={sectionStyle} />
-      <AboutMeSection sectionStyle={sectionStyle} />
+    <div className="relative w-full">
+      <div className="sticky top-0 z-0">
+        <VisualSection sectionStyle={sectionStyle} />
+      </div>
+      <div className="relative z-10">
+        <ProcessSection sectionStyle={sectionStyle} />
+        <ProjectSection sectionStyle={sectionStyle} />
+        <AboutMeSection sectionStyle={sectionStyle} />
+      </div>
     </div>
   );
 }

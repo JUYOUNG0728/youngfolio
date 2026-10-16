@@ -86,7 +86,7 @@ export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
 
   return (
     <section
-      className={`relative flex flex-col justify-between py-24 text-white overflow-x-hidden md:py-36 lg:h-screen lg:py-[7vh] ${horizontalPaddingStyle}`}
+      className={`relative bg-black flex flex-col justify-between py-24 text-white overflow-x-hidden md:py-36 lg:h-screen lg:py-[7vh] ${horizontalPaddingStyle}`}
     >
       <Image
         src="/images/img-project-background.jpg"

@@ -68,14 +68,8 @@ export default function ProcessSection({ sectionStyle }: ProcessSectionProps) {
 
   return (
     <section
-      className={`w-full relative text-white ${verticalPaddingStyle} ${horizontalPaddingStyle}`}
+      className={`w-full relative bg-black/20 backdrop-blur-lg text-white ${verticalPaddingStyle} ${horizontalPaddingStyle}`}
     >
-      <Image
-        src="/images/img-process-background.jpg"
-        alt="배경 이미지"
-        fill
-        className="object-cover opacity-20 z-[-1]"
-      />
       <div className="w-full flex flex-col gap-[8vw] items-center justify-center md:gap-[6vw] lg:flex-row lg:gap-[12vw]">
         <TextCircle />
         <div className="flex flex-col gap-10 text-center text-wrap px-[16px] md:px-[30px] md:gap-14 lg:text-left lg:px-0 lg:gap-16">

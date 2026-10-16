@@ -36,8 +36,6 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const whiteMode = pathname === "/";
-
   return (
     <div>
       <div className="absolute z-50 top-0 px-[16px] w-full pointer-events-none h-20 md:h-[100px] md:px-[30px] lg:px-[70px] lg:h-[120px] xl:h-[140px]">
@@ -45,7 +43,7 @@ export default function Header() {
           <Logo
             onClick={handleLogoClick}
             className="cursor-pointer"
-            fill={whiteMode ? "#000000" : "#ffffff"}
+            fill="#ffffff"
             width={logoSize.width}
             height={logoSize.height}
           />
