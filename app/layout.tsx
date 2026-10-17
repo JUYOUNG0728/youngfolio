@@ -7,6 +7,7 @@ import { LenisProvider } from "@/lib/LenisProvider";
 import FollowCursor from "@/components/Common/FollowCursor";
 import Reload from "@/lib/Reload";
 import GoogleAnalytics from "@/lib/GoogleAnalytics";
+import { HOME_INTRO_BOOT_SCRIPT } from "@/components/Main/homeIntroBoot";
 
 const WEBSITE_HOST_URL = "https://youngfolio.vercel.app";
 
@@ -36,8 +37,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body>
+        <script
+          id="youngfolio-home-intro"
+          dangerouslySetInnerHTML={{ __html: HOME_INTRO_BOOT_SCRIPT }}
+        />
         <LenisProvider>
           <Reload />
           <FollowCursor />

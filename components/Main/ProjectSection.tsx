@@ -33,7 +33,7 @@ export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
     (screenWidth / 2 - screenWidth * 0.15 - (screenWidth >= 768 ? 140 : 30)) *
     2;
 
-  const projectList = projects.slice(1, 5);
+  const projectList = projects.slice(0, 4);
 
   const handleProjectHover = (index: number) => {
     setProjectHover((prev) =>
@@ -86,14 +86,8 @@ export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
 
   return (
     <section
-      className={`relative flex flex-col justify-between py-24 text-white overflow-x-hidden md:py-36 lg:h-screen lg:py-[7vh] ${horizontalPaddingStyle}`}
+      className={`relative bg-black/20 backdrop-blur-lg flex flex-col justify-between py-24 text-white overflow-x-hidden md:py-36 lg:h-screen lg:py-[7vh] ${horizontalPaddingStyle}`}
     >
-      <Image
-        src="/images/img-project-background.jpg"
-        alt="배경 이미지"
-        fill
-        className="object-cover opacity-50 z-[-1]"
-      />
       <h1 className="h7 !font-medium text-center lg:text-left">
         (SOME PROJECTS)
       </h1>
@@ -116,7 +110,7 @@ export default function ProjectSection({ sectionStyle }: ProjectSectionProps) {
               className="object-cover"
             />
             <div className="absolute bottom-6 left-6 text-nowrap flex flex-col gap-3.5">
-              <h2 className="h5 !font-medium text-white">{project.title}</h2>
+              <h2 className="h6 !font-medium text-white">{project.title}</h2>
               <span className="body5 !leading-none text-gray-20">
                 {project.description}
               </span>

@@ -1,110 +1,95 @@
-import Image from "next/image";
-
-import useScreenWidth from "@/utils/useScreenWidth";
 import Feed from "@/components/About/Feed";
 import Tag from "@/components/About/Tag";
 
-type HobbySectionProps = {
-  sectionStyle: {
-    baseStyle: string;
-    tagStyle: string;
-    containerStyle: string;
-    gapStyle: string;
-  };
-};
+const hobbyList = [
+  {
+    name: "PIANO",
+    tags: [
+      "듣는 걸 제일 좋아하고, 직접 연주하는 것도 좋아해요.",
+      "게임이나 애니메이션 OST부터 클래식까지 다양하게 들어요.",
+      "지금은 Deemo-Oceanus 라는 곡을 연습해보고 있어요.",
+    ],
+    video: true,
+    links: [
+      "https://www.youtube.com/watch?v=bTtZ600zer0",
+      "https://www.youtube.com/watch?v=Wp7Pa_v0BJM",
+    ],
+  },
+  {
+    name: "BOOKS",
+    tags: [
+      "제가 제일 좋아하는 책은 인터랙티브 디벨로퍼예요.",
+      "평소에 자주 읽진 않지만, 꾸준히 읽으려고 노력해요.",
+      "에세이나 인문학 책을 즐겨 읽어요.",
+    ],
+    video: false,
+    links: ["/images/img-book1.jpg", "/images/img-book2.jpg"],
+  },
+  {
+    name: "GAMES",
+    tags: [
+      "포켓몬스터나 로스트아크를 주로 해요.",
+      "가끔 증바람이나 배그 같은 게임도 해요.",
+      "제일 좋아하는 포켓몬은 딜리버드예요.",
+    ],
+    video: true,
+    links: [
+      "/images/img-game1.png",
+      "https://moygiia7bzcdvhjq.public.blob.vercel-storage.com/video-game1.mp4",
+    ],
+  },
+  {
+    name: "BICYCLE",
+    tags: [
+      "카카오바이크 같은 전기자전거를 타요.",
+      "가볍게 바람 쐬러 나갈 때나 어디 다녀올 때 종종 타요.",
+      "봄에는 자전거를 타고 꽃 사진을 찍으러 다녀요.",
+    ],
+    video: false,
+    links: ["/images/img-bicycle1.png", "/images/img-bicycle2.jpg"],
+  },
+];
 
-export default function HobbySection({ sectionStyle }: HobbySectionProps) {
-  const screenWidth = useScreenWidth();
-
-  const hobbyIconSize = screenWidth >= 1400 ? 80 : screenWidth >= 768 ? 60 : 48;
-
-  const hobbyList = [
-    {
-      name: "PIANO",
-      icon: "icon-piano.png",
-      iconAlt: "피아노 아이콘",
-      tags: ["Spring", "Kiki's Delivery Service", "MapleStory", "Crazy Arcade"],
-      video: true,
-      links: [
-        "https://moygiia7bzcdvhjq.public.blob.vercel-storage.com/video-spring.mp4",
-        "https://moygiia7bzcdvhjq.public.blob.vercel-storage.com/video-kiki.mp4",
-      ],
-    },
-    {
-      name: "BOOKS",
-      icon: "icon-book.png",
-      iconAlt: "책 아이콘",
-      tags: [
-        "Book Newbie",
-        "Interactive Developer",
-        "Nexus",
-        "On Not Draining Myself",
-      ],
-      video: false,
-      links: ["/images/img-book1.jpg", "/images/img-book2.jpg"],
-    },
-    {
-      name: "GAMES",
-      icon: "icon-game.png",
-      iconAlt: "게임 아이콘",
-      tags: ["League of Legends", "Lost Ark", "Pocket Monsters"],
-      video: true,
-      links: [
-        "https://moygiia7bzcdvhjq.public.blob.vercel-storage.com/video-game1.mp4",
-        "https://moygiia7bzcdvhjq.public.blob.vercel-storage.com/video-game2.mp4",
-      ],
-    },
-  ];
-
+export default function HobbySection() {
   return (
-    <div
-      className={`${sectionStyle.baseStyle} text-black ${sectionStyle.gapStyle}`}
-    >
-      <span
-        className={`${sectionStyle.tagStyle} bg-green-10 lg:left-[620px] xl:left-[680px]`}
-      >
-        IN DAILY LIFE
-      </span>
-      <div
-        className={`${sectionStyle.containerStyle} bg-green-10 flex flex-col`}
-      >
-        <h1 className="aboutSectionTitle text-center font-bold">
+    <section className="bg-gray-10 px-[16px] py-20 text-black md:px-[30px] md:py-28 lg:px-[140px] lg:py-36">
+      <header className="max-w-[18rem] md:max-w-none">
+        <p className="text-xs font-medium tracking-[0.22em] text-gray-50 md:text-sm">
+          IN DAILY LIFE
+        </p>
+        <h2 className="mt-5 text-[2.25rem] font-semibold leading-[0.95] tracking-[-0.04em] md:mt-6 md:text-[3rem] lg:text-[3.75rem]">
           <span className="text-black/20">DAILY </span>
           <span>HOBBY</span>
-        </h1>
-        <div
-          className={`flex flex-col gap-16 md:gap-28 ${sectionStyle.gapStyle}`}
-        >
-          {hobbyList.map((hobby, index) => (
-            <div
-              key={index}
-              className="flex flex-col gap-12 lg:gap-16 lg:flex-row justify-between"
-            >
-              <div className="flex flex-col gap-6 md:gap-8 lg:gap-12 xl:gap-14">
-                <div className="flex flex-col gap-2 md:gap-4 lg:gap-6">
-                  <span className="h3 text-green-20">#{index + 1}</span>
-                  <div className="flex gap-3 items-center md:gap-4 lg:gap-6">
-                    <h2 className="h2 text-nowrap">{hobby.name}</h2>
-                    <Image
-                      src={`/images/${hobby.icon}`}
-                      alt={hobby.iconAlt}
-                      width={hobbyIconSize}
-                      height={hobbyIconSize}
-                      className="rounded-xl object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-3 lg:gap-4 lg:w-[20vw]">
-                  {hobby.tags.map((tag) => (
-                    <Tag key={tag} tag={tag} />
-                  ))}
-                </div>
+        </h2>
+      </header>
+
+      <div className="mt-12 border-t border-black/10 md:mt-16 lg:mt-20">
+        {hobbyList.map((hobby, index) => (
+          <article
+            key={hobby.name}
+            className="grid items-start gap-10 border-b border-black/10 py-12 md:gap-12 md:py-16 lg:grid-cols-12 lg:gap-16 lg:py-20"
+          >
+            <div className="flex flex-col gap-6 md:gap-8 lg:col-span-4">
+              <div className="flex flex-col gap-3 md:gap-4">
+                <span className="text-lg font-medium tracking-[-0.03em] text-black md:text-xl">
+                  #{index + 1}
+                </span>
+                <h3 className="text-[2.25rem] font-semibold leading-none tracking-[-0.04em] md:text-[3rem] lg:text-[3.5rem]">
+                  {hobby.name}
+                </h3>
               </div>
+              <div className="flex flex-col gap-2">
+                {hobby.tags.map((tag) => (
+                  <Tag key={tag} tag={tag} />
+                ))}
+              </div>
+            </div>
+            <div className="lg:col-span-8">
               <Feed hobby={hobby} />
             </div>
-          ))}
-        </div>
+          </article>
+        ))}
       </div>
-    </div>
+    </section>
   );
 }

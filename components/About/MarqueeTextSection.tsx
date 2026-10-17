@@ -9,20 +9,21 @@ import useScreenWidth from "@/utils/useScreenWidth";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function MarqueeTextSection() {
-  const marquee1Ref = useRef<HTMLHeadingElement>(null);
-  const marquee2Ref = useRef<HTMLHeadingElement>(null);
+  const marquee1Ref = useRef<HTMLDivElement>(null);
+  const marquee2Ref = useRef<HTMLDivElement>(null);
 
   const screenWidth = useScreenWidth();
 
   const marqueeText1 = Array(4).fill("GROWTH MINDSET 🚀");
   const marqueeText2 = Array(4).fill("A COMPLETE CREATOR ✨");
 
-  const marqueeTextStyle = "flex gap-12 whitespace-nowrap marquee";
-  const containerStyle =
-    "overflow-x-hidden relative h2 !font-medium flex gap-12 py-8";
+  const marqueeTextStyle = "flex shrink-0 gap-12 whitespace-nowrap";
+  const lineStyle =
+    "flex items-center gap-12 overflow-hidden text-[1.35rem] font-medium leading-none tracking-[-0.03em] md:text-[1.85rem] lg:text-[2.5rem] xl:text-[3rem]";
 
   useEffect(() => {
     if (!marquee1Ref.current) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const marqueeText = marquee1Ref.current.querySelectorAll(".marquee");
 
@@ -40,6 +41,7 @@ export default function MarqueeTextSection() {
 
   useEffect(() => {
     if (!marquee2Ref.current) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const marqueeText = marquee2Ref.current.querySelectorAll(".marquee");
 
@@ -57,37 +59,37 @@ export default function MarqueeTextSection() {
   }, [screenWidth]);
 
   return (
-    <div>
-      <span
-        className={`w-screen bg-white text-blue-30 ${containerStyle}`}
+    <div className="border-y border-white/15">
+      <div
+        className={`bg-black py-5 text-white md:py-6 ${lineStyle}`}
         ref={marquee1Ref}
       >
-        <ul className={marqueeTextStyle}>
+        <ul className={`marquee ${marqueeTextStyle}`}>
           {marqueeText1.map((text, index) => (
             <li key={index}>{text}</li>
           ))}
         </ul>
-        <ul aria-hidden="true" className={marqueeTextStyle}>
+        <ul aria-hidden="true" className={`marquee ${marqueeTextStyle}`}>
           {marqueeText1.map((text, index) => (
             <li key={index}>{text}</li>
           ))}
         </ul>
-      </span>
-      <span
-        className={`w-screen bg-blue-30 text-white ${containerStyle}`}
+      </div>
+      <div
+        className={`bg-white py-5 text-black md:py-6 ${lineStyle}`}
         ref={marquee2Ref}
       >
-        <ul className={marqueeTextStyle}>
+        <ul className={`marquee ${marqueeTextStyle}`}>
           {marqueeText2.map((text, index) => (
             <li key={index}>{text}</li>
           ))}
         </ul>
-        <ul aria-hidden="true" className={marqueeTextStyle}>
+        <ul aria-hidden="true" className={`marquee ${marqueeTextStyle}`}>
           {marqueeText2.map((text, index) => (
             <li key={index}>{text}</li>
           ))}
         </ul>
-      </span>
+      </div>
     </div>
   );
 }

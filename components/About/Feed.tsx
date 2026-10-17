@@ -1,13 +1,8 @@
 import Image from "next/image";
 
-import useScreenWidth from "@/utils/useScreenWidth";
-import Send from "@/components/Common/Send";
-
 type FeedProps = {
   hobby: {
     name: string;
-    icon: string;
-    iconAlt: string;
     tags: string[];
     video: boolean;
     links: string[];
@@ -15,60 +10,40 @@ type FeedProps = {
 };
 
 export default function Feed({ hobby }: FeedProps) {
-  const screenWidth = useScreenWidth();
-
-  const snsIconSize = screenWidth >= 1920 ? 28 : screenWidth >= 1280 ? 24 : 20;
-
   return (
-    <div className="bg-white rounded-3xl p-4 flex flex-col gap-4 md:p-8 lg:p-12 xl:gap-5">
-      <div className="flex gap-3 items-center ml-2">
-        <div className="w-10 h-10 rounded-full relative">
-          <Image
-            src="/images/img-about-me-3.png"
-            alt="프로필 이미지"
-            fill
-            className="rounded-full object-cover"
-          />
-        </div>
-        <span className="body3 font-semibold">Juyoung</span>
-      </div>
-      <div className="flex flex-col gap-2 lg:flex-row">
-        {hobby.links.map((link, index) => (
+    <div className="flex flex-col gap-4 md:gap-5">
+      <div className="grid-cols-2 grid gap-3 md:gap-4">
+        {hobby.links.map((link) => (
           <div
-            key={index}
-            className="relative w-full h-[50vh] md:h-[70vh] lg:h-[50vh] lg:w-[24vw]"
+            key={link}
+            className="relative w-full overflow-hidden bg-black aspect-[4/4] rounded-3xl"
           >
-            {hobby.video ? (
+            {hobby.video && link.includes("youtube.com") ? (
+              <iframe
+                src={`https://www.youtube.com/embed/${new URL(link).searchParams.get("v")}`}
+                title={`${hobby.name} video`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="absolute inset-0 h-full w-full"
+              />
+            ) : hobby.video && link.endsWith(".mp4") ? (
               <video
                 src={link}
-                className="w-full h-full object-cover"
                 controls
+                playsInline
+                className="absolute inset-0 h-full w-full object-cover"
               />
             ) : (
               <Image
                 src={link}
                 alt={`${hobby.name} link`}
                 fill
+                sizes="(min-width: 1280px) 28vw, (min-width: 768px) 45vw, 100vw"
                 className="object-cover"
               />
             )}
           </div>
         ))}
-      </div>
-      <div className="flex items-center ml-2 gap-4 xl:gap-5">
-        <Image
-          src="/images/icon-heart.png"
-          alt="하트 아이콘"
-          width={snsIconSize}
-          height={snsIconSize}
-        />
-        <Image
-          src="/images/icon-bubble.png"
-          alt="말풍선 아이콘"
-          width={snsIconSize}
-          height={snsIconSize}
-        />
-        <Send width={snsIconSize} height={snsIconSize} fill="#000000" />
       </div>
     </div>
   );

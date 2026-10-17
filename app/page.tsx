@@ -7,6 +7,7 @@ import VisualSection from "@/components/Main/VisualSection";
 import ProcessSection from "@/components/Main/ProcessSection";
 import ProjectSection from "@/components/Main/ProjectSection";
 import AboutMeSection from "@/components/Main/AboutMeSection";
+import HomeIntro from "@/components/Main/HomeIntro";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,11 +18,18 @@ export default function Page() {
   };
 
   return (
-    <div className="w-full">
-      <VisualSection sectionStyle={sectionStyle} />
-      <ProcessSection sectionStyle={sectionStyle} />
-      <ProjectSection sectionStyle={sectionStyle} />
-      <AboutMeSection sectionStyle={sectionStyle} />
-    </div>
+    <>
+      <HomeIntro />
+      <div className="relative w-full">
+        <div className="sticky top-0 z-0">
+          <VisualSection sectionStyle={sectionStyle} />
+        </div>
+        <div className="relative z-10">
+          <ProcessSection sectionStyle={sectionStyle} />
+          <ProjectSection sectionStyle={sectionStyle} />
+          <AboutMeSection sectionStyle={sectionStyle} />
+        </div>
+      </div>
+    </>
   );
 }

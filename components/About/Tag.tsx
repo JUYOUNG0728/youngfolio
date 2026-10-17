@@ -3,9 +3,5 @@ type TagProps = {
 };
 
 export default function Tag({ tag }: TagProps) {
-  return (
-    <span className="rounded-full bg-black text-white body4 font-medium w-fit px-5 py-2 xl:px-6">
-      # {tag}
-    </span>
-  );
+  return <span className="body4 w-fit font-medium text-black/75"># {tag}</span>;
 }

@@ -1,5 +1,11 @@
-import Image from "next/image";
-import useScreenWidth from "@/utils/useScreenWidth";
+"use client";
+
+import { useRef } from "react";
+import dynamic from "next/dynamic";
+
+const HeroGlass = dynamic(() => import("@/components/Main/HeroGlass"), {
+  ssr: false,
+});
 
 type VisualSectionProps = {
   sectionStyle: {
@@ -8,50 +14,92 @@ type VisualSectionProps = {
   };
 };
 
-export default function VisualSection({ sectionStyle }: VisualSectionProps) {
-  const { horizontalPaddingStyle } = sectionStyle;
-
-  const screenWidth = useScreenWidth();
+export default function VisualSection(_props: VisualSectionProps) {
+  const heroRef = useRef<HTMLElement>(null);
 
   return (
-    <section className="w-full h-screen text-black bg-white pt-20 md:pt-[100px] lg:pt-[120px] xl:pt-[140px]">
-      <div className="h-full flex flex-col relative border-t border-gray-30 lg:flex-row">
-        <div
-          className={`w-full flex flex-col gap-10 py-[48px] md:gap-14 md:py-[60px] lg:w-1/2 lg:justify-between lg:py-[80px] lg:h-full xl:py-[100px] ${horizontalPaddingStyle}`}
+    <section
+      ref={heroRef}
+      className="relative h-screen w-full overflow-hidden bg-black text-white"
+    >
+      <div className="pointer-events-none absolute inset-0 z-[1]">
+        <h2
+          className="absolute left-5 top-20 md:left-[30px] md:top-[100px] lg:left-5 lg:top-[120px]"
+          aria-label="Everyday objects redefined by Makers"
         >
-          {screenWidth >= 1024 && (
-            <div className="absolute bottom-[5vh] left-[36px] flex flex-col items-center animate-bounce gap-9 lg:gap-11 lg:right-[51%] lg:left-auto xl:gap-14">
-              <div className="-rotate-90">
-                <span className="font-semibold body5">SCROLL TO</span>
-              </div>
-              <Image
-                src="/images/icon-mouse-scroll.png"
-                alt="마우스 스크롤"
-                width={16}
-                height={16}
+          <span className="block" data-hero-refract>
+            <span
+              data-hero-refract-text
+              className="block whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,180px)]"
+            >
+              BEYOND
+            </span>
+          </span>
+          <span className="block" data-hero-refract>
+            <span
+              data-hero-refract-text
+              className="block whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,180px)]"
+            >
+              ORDINARY
+            </span>
+          </span>
+        </h2>
+
+        <div className="absolute bottom-5 right-5 flex flex-col items-end gap-4 text-right md:bottom-6 md:right-[30px] lg:right-5">
+          <div className="relative z-[3] text-white pb-4 md:pb-8 lg:pb-12">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="100"
+              height="100"
+              viewBox="0 0 100 100"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M54.9998 80.86L85.3548 50.505L92.4248 57.575L49.9998 100L46.4648 96.465L7.57481 57.575L14.6448 50.505L44.9998 80.86L44.9998 6.5036e-06L54.9998 7.37783e-06L54.9998 80.86Z"
+                fill="currentColor"
               />
-            </div>
-          )}
-          <h1 className="h1 leading-[0.9] flex flex-col gap-2 md:gap-4 lg:gap-6">
-            <span>BEYOND</span>
-            <span>LIMITS</span>
-          </h1>
-          <p className="body3">
-            한계를 넘는 디자이너 최주영입니다.
-            <br />
-            디자이너의 감각, 개발자의 논리, 기획자의 구조를 함께 다루며,
-            <br />
-            경계를 넘는 경험과 더 나은 완성도를 추구하고 있습니다.
+            </svg>
+          </div>
+          <p
+            className="text-[clamp(12px,0.94vw,18px)] font-normal leading-[1.4]"
+            aria-label="A collective of Makers creating categories the world has never seen"
+          >
+            <span className="block" data-hero-refract>
+              <span data-hero-refract-text className="block whitespace-nowrap">
+                WITH EVERY STEP FORWARD,
+              </span>
+            </span>
+            <span className="block" data-hero-refract>
+              <span data-hero-refract-text className="block whitespace-nowrap">
+                I EVOLVE, INNOVATE, AND CREATE SOMETHING NEW.
+              </span>
+            </span>
           </p>
+          <div className="whitespace-nowrap font-normal leading-[0.9] tracking-[-0.03em] text-[clamp(48px,8.33vw,180px)]">
+            <span className="block" data-hero-refract>
+              <span data-hero-refract-text className="block">
+                DARE TO
+              </span>
+            </span>
+            <span className="block" data-hero-refract>
+              <span data-hero-refract-text className="block">
+                EVOLVE
+              </span>
+            </span>
+          </div>
         </div>
-        <div className="w-full h-full relative lg:w-1/2">
-          <Image
-            src="/images/img-visual.jpg"
-            alt="비주얼 이미지"
-            fill
-            className="object-cover"
-          />
-        </div>
+      </div>
+
+      <HeroGlass heroRef={heroRef} />
+
+      <div className="text-[clamp(16px,0.94vw,20px)] hidden gap-3 absolute bottom-5 left-5 z-[3] text-white md:grid md:grid-cols-2 md:bottom-8 md:left-[30px] lg:left-5">
+        <span className="border border-white px-6 py-4 rounded-full">
+          DESIGNER JUYOUNG
+        </span>
+        <span className="border border-white px-6 py-4 rounded-full">
+          PORTFOLIO WEBSITE
+        </span>
       </div>
     </section>
   );
