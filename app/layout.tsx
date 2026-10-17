@@ -13,9 +13,6 @@ const WEBSITE_HOST_URL = "https://youngfolio.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(WEBSITE_HOST_URL),
-  alternates: {
-    canonical: "/",
-  },
   title: "YOUNGFOLIO",
   description: "YOUNGFOLIO | Juyoung's Space",
   icons: {
@@ -24,12 +21,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "YOUNGFOLIO",
     description: "YOUNGFOLIO | Juyoung's Space",
-    images: ["/images/project/thumbnail/img-project-thumbnail-youngfolio.png"],
   },
   twitter: {
     title: "YOUNGFOLIO",
     description: "YOUNGFOLIO | Juyoung's Space",
-    images: ["/images/project/thumbnail/img-project-thumbnail-youngfolio.png"],
     card: "summary_large_image",
   },
 };

@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  trailingSlash: false,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
