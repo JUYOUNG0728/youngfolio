@@ -269,7 +269,7 @@ function HeroScene({ heroRef }: HeroGlassProps) {
       attenuationColor: new THREE.Color("#ffffff"),
       attenuationDistance: 1e6,
       envMapIntensity: 1.15,
-      specularIntensity: 1,
+      specularIntensity: 0.3,
       transparent: true,
       opacity: 0.8,
     });

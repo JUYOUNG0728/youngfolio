@@ -798,7 +798,8 @@
 .home-intro__loading-dot {
   display: inline-block;
   opacity: 0;
-  animation: home-intro-loading-dot 1.45s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+  animation: home-intro-loading-dot 1.45s cubic-bezier(0.45, 0, 0.25, 1)
+    infinite;
 }
 
 .home-intro__loading-dot:nth-child(2) {

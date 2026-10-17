@@ -24,7 +24,7 @@ export default function ProjectItem({ project }: ProjectItemProps) {
         />
       </div>
       <div className="flex flex-col gap-3 lg:gap-4">
-        <h2 className="h6">{project.title}</h2>
+        <h2 className="h6 !font-medium">{project.title}</h2>
         <p className="text-sm">{project.description}</p>
       </div>
     </div>
