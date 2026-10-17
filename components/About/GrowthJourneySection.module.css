@@ -82,8 +82,8 @@
 
 .poster {
   position: absolute;
-  width: 20.5rem;
-  max-width: 60vw;
+  width: min(20.5rem, 62vw, 44dvh);
+  max-width: calc(100vw - 2.5rem);
   aspect-ratio: 328 / 500;
   transform-origin: 50% center;
   opacity: 0;
@@ -161,6 +161,7 @@
   font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 .description {
@@ -170,6 +171,7 @@
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .staticSection {
@@ -186,13 +188,15 @@
 
 .staticTitle {
   position: relative;
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   color: #fff;
   font-size: clamp(3.75rem, 9.375vw, 11.25rem);
   font-weight: 600;
   letter-spacing: clamp(-0.113rem, -0.375vw, -0.45rem);
   line-height: 1;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .staticGrid {
@@ -205,8 +209,8 @@
 
 .staticPoster {
   position: relative;
-  width: 20.5rem;
-  max-width: 60vw;
+  width: min(20.5rem, 62vw, 44dvh);
+  max-width: calc(100vw - 2.5rem);
   aspect-ratio: 328 / 500;
   opacity: 1;
 }
@@ -224,6 +228,16 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .title {
+    top: clamp(6.5rem, 16vh, 150px);
+  }
+
+  .staticHeader {
+    padding: 6.5rem 1.5rem 0;
+  }
+}
+
 @media (max-width: 768px) {
   .bubble {
     top: -32px;
@@ -232,10 +246,52 @@
     line-height: 130%;
   }
 
-  .title,
+  .title {
+    top: 6.25rem;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 1.25rem;
+    box-sizing: border-box;
+    white-space: normal;
+    transform: none;
+    text-align: center;
+  }
+
   .staticTitle {
-    font-size: clamp(3.75rem, 13vw, 6.25rem);
-    letter-spacing: clamp(-0.113rem, -0.390625vw, -0.188rem);
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 0;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .poster,
+  .staticPoster {
+    width: min(15.75rem, 64vw, 40dvh);
+    max-width: calc(100vw - 2.5rem);
+  }
+
+  .copy {
+    gap: 0.2rem;
+    padding: 2rem 0.9rem 0.85rem;
+  }
+
+  .posterTitle {
+    font-size: 1.125rem;
+  }
+
+  .description {
+    font-size: 0.8125rem;
+  }
+
+  .staticHeader {
+    padding: 5.5rem 1rem 0;
+  }
+
+  .staticGrid {
+    gap: 1rem;
+    padding: 2.5rem 1rem 4rem;
   }
 
   .accent {

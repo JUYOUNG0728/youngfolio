@@ -33,29 +33,81 @@ function lerp(from: number, to: number, amount: number) {
   return from + (to - from) * amount;
 }
 
+function smoothstep(edge0: number, edge1: number, value: number) {
+  const amount = clamp01((value - edge0) / (edge1 - edge0));
+  return amount * amount * (3 - 2 * amount);
+}
+
 function sampleKeys(keys: readonly number[], amount: number) {
   const scaled = amount * 3;
   const index = Math.min(Math.floor(scaled), keys.length - 2);
   return lerp(keys[index], keys[index + 1], scaled - index);
 }
 
-function getMotion(width: number) {
+type Motion = {
+  mobile: boolean;
+  speed: number;
+  tail: number;
+  span: number;
+  spread: number;
+  peek: number;
+  exitGap: number;
+  yScale: number;
+  rotationScale: number;
+};
+
+function getMotion(width: number, count: number): Motion {
   const mobile = width < 768;
-  const speed = mobile ? 1.6 : 2;
-  const boost = mobile ? 0.2 : 0;
-  const tail = mobile ? 0.125 : 0.05;
-  const span = 1 / speed - boost + STAGGER * (growthPosters.length - 1) + tail;
+  const speed = mobile ? 0.92 : 2;
+  const tail = mobile ? 0.38 : 0.3;
+  const span = 1 / speed + STAGGER * Math.max(count - 1, 0) + tail;
 
   return {
     mobile,
     speed,
-    boost,
+    tail,
     span,
-    startScale: mobile ? 3 : 0.7,
-    endScale: mobile ? -1.5 : -1,
     spread: mobile ? 3 : 0.08,
-    distanceBase: mobile ? width : 1300,
+    peek: mobile ? 0.55 : 0.38,
+    exitGap: mobile ? 28 : 72,
+    yScale: mobile ? 0.42 : 1.15,
+    rotationScale: mobile ? 0.7 : 1,
   };
+}
+
+function spreadOf(spread: number, index: number) {
+  return 100 * spread * (index - 2);
+}
+
+function trackFor(
+  poster: HTMLElement,
+  index: number,
+  count: number,
+  width: number,
+  motion: Motion,
+) {
+  const posterWidth = poster.offsetWidth;
+  const posterHeight = poster.offsetHeight;
+  const rightEdge = (width + posterWidth) / 2;
+  const centerX = (width - posterWidth) / 2 - poster.offsetLeft;
+  const spread = spreadOf(motion.spread, index);
+  const peek = posterWidth * motion.peek;
+  const startX = rightEdge - peek + spread - spreadOf(motion.spread, 0);
+  const previous = Math.max(count - 2, 0);
+  const exitShift = Math.max(0, spreadOf(motion.spread, previous));
+  const clearance = Math.max(posterWidth, posterHeight) * 0.55;
+  const endX =
+    index === count - 1
+      ? centerX
+      : -rightEdge - motion.exitGap - exitShift - clearance + spread;
+
+  return { startX, endX, centerX, rightEdge, posterWidth };
+}
+
+function entranceOpacity(x: number, rightEdge: number, posterWidth: number) {
+  const hiddenAt = rightEdge + posterWidth * 0.4;
+  const shownAt = rightEdge - posterWidth * 0.5;
+  return clamp01((hiddenAt - x) / Math.max(hiddenAt - shownAt, 1));
 }
 
 function Parenthesis({ flipped = false }: { flipped?: boolean }) {
@@ -138,37 +190,40 @@ export default function GrowthJourneySection() {
     if (posters.length === 0) return;
 
     const update = (progress: number) => {
-      const motion = getMotion(window.innerWidth);
+      const width = section.clientWidth || window.innerWidth;
+      const motion = getMotion(width, posters.length);
       const timeline = progress * motion.span;
 
-      posters.forEach((poster, index) => {
-        const keys = MOTION_KEYS[index % MOTION_KEYS.length];
-        const local = clamp01(
-          (timeline + motion.boost - STAGGER * index) * motion.speed,
-        );
-        const spread = 100 * motion.spread * (index - 2);
-        const startX = motion.distanceBase * motion.startScale + spread;
-        const endX = motion.distanceBase * motion.endScale + spread;
+      const lastIndex = posters.length - 1;
 
-        if (local <= 0) {
-          gsap.set(poster, {
-            x: startX,
-            yPercent: 1.15 * keys.y[0],
-            rotation: keys.rotation[0],
-            opacity: 0,
-          });
-          poster.classList.remove(styles.isCenter);
-          return;
+      posters.forEach((poster, index) => {
+        if (poster.offsetWidth < 1) return;
+
+        const keys = MOTION_KEYS[index % MOTION_KEYS.length];
+        const local = clamp01((timeline - STAGGER * index) * motion.speed);
+        const { startX, endX, rightEdge, posterWidth } = trackFor(
+          poster,
+          index,
+          posters.length,
+          width,
+          motion,
+        );
+        const x = local >= 1 ? endX : lerp(startX, endX, local);
+        const isLast = index === lastIndex;
+        let yPercent = motion.yScale * sampleKeys(keys.y, local);
+        let rotation = motion.rotationScale * sampleKeys(keys.rotation, local);
+
+        if (isLast) {
+          const settle = smoothstep(0.78, 1, local);
+          yPercent = lerp(yPercent, 0, settle);
+          rotation = local >= 1 ? 0 : lerp(rotation, 0, settle);
         }
 
-        const x = lerp(startX, endX, local);
-        gsap.set(poster, {
-          x,
-          yPercent: 1.15 * sampleKeys(keys.y, local),
-          rotation: sampleKeys(keys.rotation, local),
-          opacity: 1,
-        });
-        poster.classList.toggle(styles.isCenter, x <= 120);
+        const revealed = index === 0 ? 1 : smoothstep(0, 0.03, local);
+        const opacity = entranceOpacity(x, rightEdge, posterWidth) * revealed;
+
+        gsap.set(poster, { x, yPercent, rotation, opacity });
+        poster.classList.toggle(styles.isCenter, isLast && local >= 1);
       });
     };
 
@@ -176,8 +231,12 @@ export default function GrowthJourneySection() {
       const trigger = ScrollTrigger.create({
         trigger: section,
         start: "top top",
-        end: () =>
-          `+=${section.offsetHeight * 3 * getMotion(window.innerWidth).span}`,
+        end: () => {
+          const width = section.clientWidth || window.innerWidth;
+          const span = getMotion(width, posters.length).span;
+          const distance = Math.max(section.offsetHeight, window.innerHeight);
+          return `+=${distance * 3 * span}`;
+        },
         pin: true,
         pinSpacing: true,
         anticipatePin: 1,
@@ -206,7 +265,13 @@ export default function GrowthJourneySection() {
       update(trigger.progress);
     }, section);
 
-    return () => ctx.revert();
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("orientationchange", refresh);
+
+    return () => {
+      window.removeEventListener("orientationchange", refresh);
+      ctx.revert();
+    };
   }, [reduceMotion]);
 
   const heading = (
@@ -214,7 +279,7 @@ export default function GrowthJourneySection() {
       <p className="text-xs font-medium tracking-[0.22em] text-gray-30 md:text-sm">
         STILL BECOMING
       </p>
-      <h2 className="flex gap-2 mt-5 text-[2.25rem] font-semibold leading-[0.95] tracking-[-0.04em] md:mt-6 md:text-[3rem] md:gap-4 lg:text-[3.75rem]">
+      <h2 className="mt-4 flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[clamp(1.65rem,7.2vw,2.25rem)] font-semibold leading-[0.95] tracking-[-0.04em] md:mt-6 md:flex-nowrap md:gap-x-4 md:text-[3rem] lg:text-[3.75rem]">
         <span className="text-gray-40">MY GROWTH</span>
         <span className="text-white">JOURNEY</span>
       </h2>
