@@ -20,7 +20,7 @@ export default function ProjectItem({ project }: ProjectItemProps) {
           src={project.imageSrc}
           alt={`${project.title} 썸네일`}
           fill
-          className="object-cover border border-gray-40 rounded-xl"
+          className="object-cover border border-gray-50 rounded-xl"
         />
       </div>
       <div className="flex flex-col gap-3 lg:gap-4">
