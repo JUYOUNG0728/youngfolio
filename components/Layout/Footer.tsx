@@ -34,11 +34,11 @@ export default function Footer() {
       <div className="flex w-full h-full relative flex-col gap-1 pr-20 md:flex-row md:gap-[12vw]">
         <div className={footerSectionDivStyle}>
           <div className="body2 flex flex-col text-gray-20">
-            <span>2025 : IMAGINE BEYOND</span>
+            <span>2026 : IMAGINE BEYOND</span>
             <span className="font-bold">YOUNGFOLIO</span>
           </div>
           <span className="body4 text-gray-40">
-            © 2025 YOUNGFOLIO. All rights reserved.
+            © 2026 YOUNGFOLIO. All rights reserved.
           </span>
         </div>
         <div className={footerSectionDivStyle}>

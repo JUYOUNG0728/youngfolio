@@ -9,7 +9,7 @@
 
 .title {
   position: absolute;
-  top: 14vh;
+  top: 12vh;
   left: 50%;
   z-index: 1;
   margin: 0;
@@ -78,7 +78,7 @@
   z-index: 3;
   display: grid;
   place-items: center;
-  top: 20vh;
+  top: 15vh;
 }
 
 .poster {

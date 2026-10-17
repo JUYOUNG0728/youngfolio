@@ -45,10 +45,11 @@ const codingSkills = [
 ];
 
 const aiTools = [
+  { name: "Cursor", src: "/images/skills/cursor.png" },
+  { name: "Claude AI", src: "/images/skills/claude.png" },
   { name: "ChatGPT", src: "/images/skills/chatGPT.png" },
   { name: "Google Gemini", src: "/images/skills/gemini.png" },
   { name: "Ruiten AI", src: "/images/skills/wrtn.png" },
-  { name: "Claude AI", src: "/images/skills/claude.png" },
   { name: "Adobe Firefly", src: "/images/skills/firefly.png" },
   { name: "Meshy AI", src: "/images/skills/meshy.png" },
   { name: "Flamel", src: "/images/skills/flamel.png" },
