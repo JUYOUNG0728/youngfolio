@@ -3,6 +3,7 @@ import SubHeader from "@/components/Common/SubHeader";
 import IntroduceSection from "@/components/About/IntroduceSection";
 import MarqueeTextSection from "@/components/About/MarqueeTextSection";
 import HobbySection from "@/components/About/HobbySection";
+import GrowthJourneySection from "@/components/About/GrowthJourneySection";
 
 export default function AboutPage() {
   return (
@@ -13,6 +14,7 @@ export default function AboutPage() {
       <IntroduceSection />
       <MarqueeTextSection />
       <HobbySection />
+      <GrowthJourneySection />
     </div>
   );
 }
