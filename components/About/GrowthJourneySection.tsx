@@ -70,7 +70,7 @@ function getMotion(width: number, count: number): Motion {
     spread: mobile ? 3 : 0.08,
     peek: mobile ? 0.55 : 0.38,
     exitGap: mobile ? 28 : 72,
-    yScale: mobile ? 0.42 : 1.15,
+    yScale: mobile ? 0.42 : 0.4,
     rotationScale: mobile ? 0.7 : 1,
   };
 }
@@ -108,27 +108,6 @@ function entranceOpacity(x: number, rightEdge: number, posterWidth: number) {
   const hiddenAt = rightEdge + posterWidth * 0.4;
   const shownAt = rightEdge - posterWidth * 0.5;
   return clamp01((hiddenAt - x) / Math.max(hiddenAt - shownAt, 1));
-}
-
-function Parenthesis({ flipped = false }: { flipped?: boolean }) {
-  return (
-    <svg
-      className={
-        flipped ? `${styles.paren} ${styles.parenRight}` : styles.paren
-      }
-      xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="134"
-      viewBox="0 0 22 134"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M19.871 134C7.94839 117.891 0 91.3766 0 67C0 42.6234 7.94839 16.1085 19.871 0H22C10.0774 16.1085 2.12903 42.6234 2.12903 67C2.12903 91.3766 10.0774 117.891 22 134H19.871Z"
-        fill="#333333"
-      />
-    </svg>
-  );
 }
 
 function PosterFace({ poster }: { poster: GrowthPoster }) {

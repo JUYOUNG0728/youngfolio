@@ -9,7 +9,7 @@
 
 .title {
   position: absolute;
-  top: 150px;
+  top: 14vh;
   left: 50%;
   z-index: 1;
   margin: 0;
@@ -78,11 +78,12 @@
   z-index: 3;
   display: grid;
   place-items: center;
+  top: 20vh;
 }
 
 .poster {
   position: absolute;
-  width: min(20.5rem, 62vw, 44dvh);
+  width: min(28.5rem, 18vw, 44dvh);
   max-width: calc(100vw - 2.5rem);
   aspect-ratio: 328 / 500;
   transform-origin: 50% center;
@@ -218,86 +219,26 @@
 @media (max-width: 1400px) {
   .title,
   .staticTitle {
+    top: 112px;
     font-size: clamp(3.75rem, 10.7vw, 9.375rem);
     letter-spacing: clamp(-0.113rem, -0.321429vw, -0.281rem);
   }
 
-  .accent {
-    font-size: clamp(3.5rem, 10vw, 8.75rem);
-    letter-spacing: clamp(-0.07rem, -0.300571vw, -0.263rem);
-  }
-}
-
-@media (max-width: 1024px) {
-  .title {
-    top: clamp(6.5rem, 16vh, 150px);
+  .poster {
+    width: min(18rem, 55vw, 35dvh);
   }
 
-  .staticHeader {
-    padding: 6.5rem 1.5rem 0;
+  .cards {
+    top: 10vh;
   }
 }
 
 @media (max-width: 768px) {
-  .bubble {
-    top: -32px;
-    font-size: 0.875rem;
-    letter-spacing: 0;
-    line-height: 130%;
-  }
-
-  .title {
-    top: 6.25rem;
-    left: 0;
-    width: 100%;
-    max-width: 100%;
-    padding-inline: 1.25rem;
-    box-sizing: border-box;
-    white-space: normal;
-    transform: none;
-    text-align: center;
-  }
-
+  .title,
   .staticTitle {
-    width: 100%;
-    max-width: 100%;
-    padding-inline: 0;
-    white-space: normal;
-    text-align: center;
-  }
-
-  .poster,
-  .staticPoster {
-    width: min(15.75rem, 64vw, 40dvh);
-    max-width: calc(100vw - 2.5rem);
-  }
-
-  .copy {
-    gap: 0.2rem;
-    padding: 2rem 0.9rem 0.85rem;
-  }
-
-  .posterTitle {
-    font-size: 1.125rem;
-  }
-
-  .description {
-    font-size: 0.8125rem;
-  }
-
-  .staticHeader {
-    padding: 5.5rem 1rem 0;
-  }
-
-  .staticGrid {
-    gap: 1rem;
-    padding: 2.5rem 1rem 4rem;
-  }
-
-  .accent {
-    padding-right: 0.6rem;
-    font-size: clamp(3.5rem, 11.7vw, 5.625rem);
-    letter-spacing: clamp(-0.07rem, -0.234375vw, -0.113rem);
+    font-size: clamp(3.75rem, 13vw, 6.25rem);
+    letter-spacing: clamp(-0.113rem, -0.390625vw, -0.188rem);
+    top: 80px;
   }
 
   .listText {

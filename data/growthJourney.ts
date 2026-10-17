@@ -94,7 +94,7 @@ export const growthPosters: GrowthPoster[] = [
     year: "2022년",
     description: "열심히 밤을 새서 세탁 앱을 만들고 있어요.",
     imageSrc: "/images/journey/img-journey-11.png",
-    imageAlt: "비대면 수업",
+    imageAlt: "끝없던 과제",
   },
   {
     id: "growth-12",
