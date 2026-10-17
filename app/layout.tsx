@@ -21,12 +21,16 @@ export const metadata: Metadata = {
   openGraph: {
     title: "YOUNGFOLIO",
     description: "YOUNGFOLIO | Juyoung's Space",
-    images: ["/images/img-project-thumbnail-youngfolio.png?v=2"],
+    images: [
+      "/images/project/thumbnail/img-project-thumbnail-youngfolio.png?v=1",
+    ],
   },
   twitter: {
     title: "YOUNGFOLIO",
     description: "YOUNGFOLIO | Juyoung's Space",
-    images: ["/images/img-project-thumbnail-youngfolio.png?v=2"],
+    images: [
+      "/images/project/thumbnail/img-project-thumbnail-youngfolio.png?v=1",
+    ],
     card: "summary_large_image",
   },
 };
