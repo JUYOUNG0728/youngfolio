@@ -13,6 +13,9 @@ const WEBSITE_HOST_URL = "https://youngfolio.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(WEBSITE_HOST_URL),
+  alternates: {
+    canonical: "/",
+  },
   title: "YOUNGFOLIO",
   description: "YOUNGFOLIO | Juyoung's Space",
   icons: {
