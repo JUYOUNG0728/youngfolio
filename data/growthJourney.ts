@@ -51,7 +51,7 @@ export const growthPosters: GrowthPoster[] = [
   {
     id: "growth-06",
     title: "중학교 졸업사진",
-    year: "2016년",
+    year: "2017년",
     description: "왜 저러고 찍었는지 아직도 모르겠어요.",
     imageSrc: "/images/journey/img-journey-6.jpg",
     imageAlt: "중학교 졸업사진",
