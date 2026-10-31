@@ -1,0 +1,151 @@
+/*
+  YOUNGFOLIO design tokens.
+
+  Values are extracted from the current site. Semantic names point at those
+  values; they do not introduce a new palette. Components still consume the
+  original variables and Tailwind classes, so this file does not restyle pages.
+*/
+
+:root {
+  /* Raw palette */
+  --gray-10: #f0f0f0;
+  --gray-20: #ddd;
+  --gray-30: #aaa;
+  --gray-40: #777;
+  --gray-50: #555;
+
+  --cool-gray: #6a6f78;
+
+  --white: #fff;
+  --black: #101010;
+
+  --blue-10: #1e40ff;
+  --blue-20: #002bc7;
+  --blue-30: #032291;
+
+  --green-10: #c6ff00;
+  --green-20: #0c6800;
+
+  /* Semantic colors. Primary is black, matching Button variant="primary". */
+  --color-background: var(--black);
+  --color-foreground: var(--white);
+  --color-primary: var(--black);
+  --color-on-primary: var(--white);
+  --color-secondary: var(--white);
+  --color-on-secondary: var(--black);
+  --color-surface: var(--gray-10);
+  --color-muted: var(--gray-30);
+  --color-subtle: var(--gray-40);
+  --color-faint: var(--gray-50);
+  --color-border: var(--gray-40);
+  --color-border-strong: var(--gray-50);
+
+  /* Defined in the palette, not applied by any current component. */
+  --color-accent-blue: var(--blue-10);
+  --color-accent-blue-pressed: var(--blue-20);
+  --color-accent-blue-deep: var(--blue-30);
+  --color-accent-lime: var(--green-10);
+  --color-accent-green: var(--green-20);
+
+  /* Overlays used as Tailwind alpha utilities. */
+  --overlay-white-10: rgb(255 255 255 / 0.1);
+  --overlay-white-15: rgb(255 255 255 / 0.15);
+  --overlay-white-20: rgb(255 255 255 / 0.2);
+  --overlay-white-30: rgb(255 255 255 / 0.3);
+  --overlay-black-10: rgb(16 16 16 / 0.1);
+  --overlay-black-20: rgb(0 0 0 / 0.2);
+  --overlay-black-80: rgb(0 0 0 / 0.8);
+
+  /* Typography */
+  --font-family: "Pretendard", sans-serif;
+  --font-size-base: 16px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-base: 1;
+  --letter-spacing-base: -0.3px;
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-tighter: -0.04em;
+  --letter-spacing-display: -0.06em;
+  --letter-spacing-eyebrow: 0.22em;
+  --line-height-display: 0.9;
+  --line-height-body: 1.7;
+
+  /*
+    The responsive type scale (h1–h7, body1–body6) lives in styles/globals.css.
+    Those classes are desktop-first (max-width). Tailwind breakpoints below are
+    mobile-first (min-width). Do not treat them as the same step.
+  */
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  --page-x-sm: 16px;
+  --page-x-md: 30px;
+  --page-x-header-lg: 70px;
+  --page-x-content-lg: 140px;
+
+  --section-y-about-sm: 80px;
+  --section-y-about-md: 112px;
+  --section-y-about-lg: 144px;
+  --section-y-home-sm: 96px;
+  --section-y-home-md: 144px;
+  --section-y-home-lg: 176px;
+  --section-y-home-xl: 224px;
+
+  --header-height-sm: 80px;
+  --header-height-md: 100px;
+  --header-height-lg: 120px;
+  --header-height-xl: 140px;
+  --subheader-offset: 240px;
+
+  /* Radius. Matches Tailwind defaults already used in the UI, plus the 30px bubble. */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-bubble: 30px;
+  --radius-full: 9999px;
+
+  /* Border */
+  --border-width: 1px;
+  --border-width-strong: 2px;
+
+  /* Shadow, glow, blur. shadow-1 and glow-1 are not used by a component yet. */
+  --shadow-1: 0px 0px 20px 0px #00000040;
+  --glow-1: 0px 0px 40px 10px #ffffff40;
+  --blur-1: blur(100px);
+  --blur-2: blur(300px);
+  --blur-overlay: blur(10px);
+
+  /* Breakpoints. Tailwind theme uses min-width. Documented for reference. */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1280px;
+  --breakpoint-xl: 1920px;
+
+  /* Z-index */
+  --z-base: 0;
+  --z-hero: 1;
+  --z-hero-glass: 2;
+  --z-hero-front: 3;
+  --z-page: 10;
+  --z-footer: 30;
+  --z-overlay: 40;
+  --z-header: 50;
+  --z-cursor: 9999;
+  --z-intro: 10000;
+}

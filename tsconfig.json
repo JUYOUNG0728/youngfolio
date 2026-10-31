@@ -28,5 +28,5 @@
     ".next/types/**/*.ts",
     "public/images/img-logo.jsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "storybook-static"]
 }
