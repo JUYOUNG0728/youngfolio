@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@/styles/tokens.css";
 import "@/styles/globals.css";
 
 import Header from "@/components/Layout/Header";

@@ -2,34 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Colors */
-  --gray-10: #f0f0f0;
-  --gray-20: #ddd;
-  --gray-30: #aaa;
-  --gray-40: #777;
-  --gray-50: #555;
-
-  --cool-gray: #6a6f78;
-
-  --white: #fff;
-  --black: #101010;
-
-  --blue-10: #1e40ff;
-  --blue-20: #002bc7;
-  --blue-30: #032291;
-
-  --green-10: #c6ff00;
-  --green-20: #0c6800;
-
-  /* Shadow, Glow */
-  --shadow-1: 0px 0px 20px 0px #00000040;
-  --glow-1: 0px 0px 40px 10px #ffffff40;
-
-  /* Blur */
-  --blur-1: blur(100px);
-  --blur-2: blur(300px);
-}
+/* Design tokens live in styles/tokens.css.
+   app/layout.tsx and Storybook preview import that file. */
 
 @layer base {
   * {
@@ -547,7 +521,7 @@
   }
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
-    background: var(--cool-gray-20);
+    background: var(--cool-gray);
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     background-clip: content-box;
