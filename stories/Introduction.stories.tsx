@@ -39,10 +39,9 @@ export const Overview: Story = {
 
       <GuideTitle>토큰</GuideTitle>
       <GuideText>
-        Primary는 파랑이 아닙니다. Button variant primary가 검정 면 / 흰
-        글자이므로 primary는 #101010입니다. blue, green, shadow-1, glow-1은
-        변수로만 있고 컴포넌트에서는 쓰이지 않습니다. 에러, 성공, 경고용 시맨틱
-        색은 없습니다.
+        Button variant primary가 검정 면 / 흰 글자이므로 primary는
+        #101010입니다. blue, green, shadow-1, glow-1은 변수로만 있고
+        컴포넌트에서는 쓰이지 않습니다. 에러, 성공, 경고용 시맨틱 색은 없습니다.
       </GuideText>
       <SpecTable
         headers={["항목", "기준"]}
