@@ -74,7 +74,7 @@ export const growthPosters: GrowthPoster[] = [
   },
   {
     id: "growth-09",
-    title: "학교 대표로 나간 대회",
+    title: "처음으로 나간 대회",
     year: "2020년",
     description: "학교 대표로 그래픽 디자인 대회에 나갔어요.",
     imageSrc: "/images/journey/img-journey-9.jpg",
